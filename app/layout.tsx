@@ -5,17 +5,17 @@ import { ACTUALIZADO } from "@/lib/datos";
 import { formatearFecha } from "@/components/Fuentes";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://minegociosigue.co"),
+  metadataBase: new URL("https://negociosquelaten.org"),
   title: {
-    default: "Mi Negocio Sigue — ayudas para negocios afectados por el terremoto",
-    template: "%s | Mi Negocio Sigue",
+    default: "Negocios que Laten — ayudas para negocios afectados por el terremoto",
+    template: "%s | Negocios que Laten",
   },
   description:
     "Guía clara para comerciantes afectados por el terremoto del 10 de agosto en Colombia: cómo censarte, qué alivios existen y cómo pedirlos. Cali, Pereira, Manizales, Armenia y Quibdó.",
   openGraph: {
     type: "website",
     locale: "es_CO",
-    siteName: "Mi Negocio Sigue",
+    siteName: "Negocios que Laten",
   },
   robots: { index: true, follow: true },
 };
@@ -29,7 +29,7 @@ export default function RootLayout({
         <header className="border-b border-neutral-300">
           <div className="mx-auto flex max-w-2xl items-center justify-between px-4 py-3">
             <Link href="/" className="text-lg font-bold text-acento">
-              Mi Negocio Sigue
+              Negocios que Laten
             </Link>
             <Link href="/censo" className="text-sm font-semibold underline">
               Censarme

@@ -14,6 +14,9 @@ export default function Home() {
         {formatearFecha(SISMO.fecha)}. Qué tienes que hacer primero, qué alivios
         existen y cómo pedirlos, sin letra pequeña.
       </p>
+      <p className="mt-3 border-l-4 border-acento pl-3 text-neutral-700 italic">
+        Cuando un negocio vuelve a latir, también vuelve a latir su comunidad.
+      </p>
 
       <Link
         href="/censo"
