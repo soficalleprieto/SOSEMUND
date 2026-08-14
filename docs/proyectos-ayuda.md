@@ -6,14 +6,17 @@
 
 ## Resumen ejecutivo
 
-Se revisaron los **11 sitios** del listado inicial. Estado actual: **10 activos**, **1 caído**
-(ayudaspereira.com) y **1 con errata en el dominio** ya corregida (unidosporpereira.com, no
-«unidorporpereira»).
+Se revisaron los **11 sitios** del listado inicial. Estado actual: **los 11 están activos** y **1 tenía
+errata en el dominio**, ya corregida (unidosporpereira.com, no «unidorporpereira»).
+
+> **Corrección del 13/08/2026, tarde:** ayudaspereira.com figuraba como caído en la primera revisión —no
+> respondía ni en HTTP ni en HTTPS— pero se trataba de una caída temporal. Ya funciona y resulta ser
+> **la iniciativa más desarrollada de todo el listado**. Ficha actualizada más abajo.
 
 Las iniciativas se reparten en cuatro categorías:
 
 - **Búsqueda de personas desaparecidas** — encontrados.co, colombiatebusca.com
-- **Coordinación de ayuda humanitaria inmediata** — redsismo.com, acopio-ayuda, unidosporpereira.com, redayudamanizales.com, nexbio.pro, sos.terremoto.loscreativos.co
+- **Coordinación de ayuda humanitaria inmediata** — redsismo.com, ayudaspereira.com, acopio-ayuda, unidosporpereira.com, redayudamanizales.com, nexbio.pro, sos.terremoto.loscreativos.co
 - **Mapas de daños estructurales** — terremotocolombia.com
 - **Mascotas** — qrartepets.com
 
@@ -45,12 +48,38 @@ y herramientas de coordinación para equipos de rescate.
 emergencia anterior y ahora agrega datos de ambos países. El contenido es útil, pero conviene tenerlo en
 cuenta antes de citarlo como fuente de confianza.
 
-### 3. ayudaspereira.com — centros de apoyo en Pereira
-**Estado:** ❌ Caído · **Contacto anotado:** gestionorganico@gmail.com
+### 3. ayudaspereira.com — «Acopio Pereira»
+**Estado:** ✅ Activo · **Público:** donantes, voluntarios, transportistas y centros de acopio
+**Contacto anotado:** gestionorganico@gmail.com
+**La iniciativa más desarrollada del listado en términos operativos.**
 
-Según la anotación original, estaba enfocada en centros de apoyo. **A 13 de agosto de 2026 no responde:**
-el dominio conserva registro DNS, pero el servidor rechaza la conexión tanto en HTTP como en HTTPS. Es el
-ejemplo más claro de la fragilidad de estos proyectos improvisados.
+Pese al nombre, **ya no es solo de Pereira**: coordina centros de acopio en 17 ciudades de Risaralda,
+Caldas, Quindío, Valle del Cauca, Tolima y Bogotá, con 57 centros registrados y 21 ciudades más en lista de
+espera. Su promesa es un emparejamiento de oferta y demanda: «elige tu ciudad para ver qué falta y dónde
+sobra».
+
+**Estado de Pereira en el momento de la consulta:** 38 centros activos, 33 urgencias abiertas, 31
+donaciones ofrecidas, 1 transporte en ruta y un inventario agregado de la ciudad con 9 categorías.
+
+Entra por cuatro roles bien definidos, que es un acierto de diseño:
+
+- **Tengo algo para donar** — «mira qué falta y ofrécelo; si no tienes cómo llevarlo, alguien lo recoge».
+- **Quiero ser voluntario** — clasificar, cargar, cocinar, atender.
+- **Tengo carro y puedo transportar** — encargos esperando quien los recoja.
+- **Trabajo en un centro de acopio** — registrarlo o pedir unirse a uno existente.
+
+Gestiona **logística real, no solo listados**: las rutas de transporte muestran origen, destino, contenido
+de la carga («3 cajas de agua, 3 cajas de cobijas y colchonetas, 2 cajas de pañales y bebés»), hora y
+responsable.
+
+**Buenas prácticas que conviene copiar:** los teléfonos están protegidos tras inicio de sesión («entrar
+para llamar»), lo que evita el spam y la suplantación; y tiene política de tratamiento de datos y aviso de
+cookies visibles.
+
+**Debilidad crítica —y es nuestra oportunidad:** es una SPA que **no tiene ni un solo enlace `<a>`**. Toda
+la navegación ocurre por JavaScript y la URL nunca cambia: no hay páginas por ciudad, así que Google no
+puede rastrear ni indexar nada más allá de la portada. Los botones tampoco tienen nombre accesible.
+Operativamente es excelente y en buscadores es **invisible**.
 
 ### 4. unidosporpereira.com — coordinación ciudadana en Pereira
 **Estado:** ✅ Activo · **Público:** residentes, voluntarios y organizaciones
@@ -107,6 +136,10 @@ y datos de contacto. La información se coteja con fuentes oficiales como gobern
 **Nota técnica:** alojado en un subdominio gratuito de Railway, lo que penaliza tanto la confianza como
 cualquier posibilidad de posicionamiento.
 
+**Solapamiento:** hace lo mismo que ayudaspereira.com («Acopio Pereira»), que está bastante más
+desarrollado —57 centros en 17 ciudades, con logística de transporte— y también cubre Pereira. Dos
+proyectos compitiendo en el mismo nicho y ninguno de los dos indexable.
+
 ### 10. redayudamanizales.com — «Red de Ayuda»
 **Estado:** ✅ Activo · **Público:** mixto · **Enfoque:** Manizales
 
@@ -141,10 +174,19 @@ unas 270.000 empresas, de las cuales 250.628 son microempresas (el 93 %), y 1,4 
 en riesgo. El censo de la Cámara de Comercio registró 1.552 unidades comerciales solo en la zona del Parque
 de la Libertad de Pereira, y en Cali van 1.219 unidades productivas censadas. Nadie les está hablando a ellos.
 
-### Estos proyectos son frágiles
-Uno de los once ya está caído a tres días del terremoto, y varios se apoyan en subdominios gratuitos o
-dominios recién registrados sin ninguna autoridad. Son proyectos de fin de semana sin nadie que los mantenga.
-Un sitio que siga en pie dentro de tres meses, actualizado y bien posicionado, es un diferencial enorme.
+### Son fuertes operando y ciegos en buscadores
+La primera lectura fue que estos proyectos eran frágiles y desaparecerían solos. **Hay que matizarla**: el
+único que parecía caído resultó ser una caída temporal, y al volver se reveló como el más avanzado de
+todos. No conviene contar con que se apaguen.
+
+La debilidad real es otra, y es más estable: **son productos operativos, no productos indexables.**
+ayudaspereira.com no tiene un solo enlace rastreable; acopio-ayuda vive en un subdominio gratuito de
+Railway; varios usan dominios recién registrados sin autoridad; y ninguno tiene páginas por ciudad ni por
+tema que un buscador pueda entender. Resuelven muy bien la logística de quien ya está dentro, pero no
+existen para quien busca en Google.
+
+Ese es exactamente el reverso de lo que nosotras sabemos hacer, y por eso la complementariedad es real y no
+un eufemismo: ellos coordinan, nosotras hacemos encontrable.
 
 ### No son competencia, son aliados y enlaces
 Sirven a públicos distintos al nuestro, así que enlazarse mutuamente beneficia a todos. Además, varias ya
@@ -180,7 +222,7 @@ al Banco Mundial.
 |---|---|---|---|
 | redsismo.com | Ayuda humanitaria | Personas | Activo |
 | terremotocolombia.com | Mapa de daños | Rescatistas | Activo (redirige) |
-| ayudaspereira.com | Centros de apoyo | Personas | **Caído** |
+| ayudaspereira.com | Centros de acopio (17 ciudades) | Donantes y voluntarios | Activo (**el más avanzado**) |
 | unidosporpereira.com | Ayuda humanitaria | Personas | Activo |
 | encontrados.co | Desaparecidos | Familias | Activo |
 | colombiatebusca.com | Desaparecidos | Familias | Activo |
