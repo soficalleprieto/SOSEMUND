@@ -42,8 +42,10 @@
   --aviso-fondo: #fcf6e8;
   --whatsapp: #0f7038;
 
-  --ancho: 48rem;
-  --ancho-amplio: 64rem;
+  /* Medida de lectura del texto corrido: unos 68 caracteres por línea. */
+  --ancho-texto: 40rem;
+  /* Ancho de la página. Todo comparte este borde izquierdo. */
+  --ancho-amplio: 60rem;
 
   --serif: "Source Serif 4 Variable", Georgia, "Times New Roman", serif;
   --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
@@ -191,15 +193,30 @@ strong {
 
 /* --- Estructura --- */
 
+/*
+ * Una sola rejilla. Cabecera, contenido y pie comparten el mismo borde
+ * izquierdo: dos anchos distintos hacían que la marca y el texto empezaran en
+ * sitios diferentes, y eso se lee como un fallo aunque no sepas por qué.
+ *
+ * El contenedor es ancho; lo que se limita es el texto corrido, que se queda en
+ * su medida de lectura pero alineado a la izquierda, no centrado dentro del
+ * contenedor. Así las cajas, rejillas e imágenes respiran y la columna de texto
+ * sigue siendo cómoda.
+ */
 .contenedor {
-  max-width: var(--ancho);
+  max-width: var(--ancho-amplio);
   margin: 0 auto;
-  padding: 0 1.25rem;
+  padding: 0 1.5rem;
 }
 
-.cabecera .contenedor,
-.pie .contenedor {
-  max-width: var(--ancho-amplio);
+main h1,
+main h2,
+main h3,
+main > .contenedor > p,
+main .entradilla,
+main .pilares p,
+main .pilares h3 {
+  max-width: var(--ancho-texto);
 }
 
 .cabecera {
@@ -377,6 +394,7 @@ main {
   list-style: none;
   padding: 0;
   margin: 1.5rem 0;
+  max-width: 44rem;
 }
 .pasos li {
   display: flex;
@@ -510,10 +528,9 @@ main {
   line-height: 1.35;
   font-style: italic;
   color: var(--acento);
-  text-align: center;
   text-wrap: balance;
-  margin: 2.5rem auto;
-  max-width: 32ch;
+  margin: 2.5rem 0;
+  max-width: 26ch;
 }
 
 .meta {
@@ -577,6 +594,11 @@ main {
 
 .figura {
   margin: 1.5rem 0;
+  max-width: 34rem;
+}
+/* Dentro del bloque de emergencia la figura llena su columna. */
+.emergencia-activa .figura {
+  max-width: none;
 }
 .figura img {
   width: 100%;
@@ -689,9 +711,7 @@ main {
 
 /* El latido como firma recurrente: cabecera, lema, bloque de emergencia y pie. */
 .marca-lema {
-  display: flex;
-  justify-content: center;
-  margin-top: 2.25rem;
+  margin: 2.25rem 0;
 }
 .pie .latido {
   margin: 0 0 0.9rem;
