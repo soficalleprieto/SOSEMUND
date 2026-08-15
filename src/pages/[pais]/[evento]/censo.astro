@@ -23,7 +23,7 @@ const { registro } = evento;
 
 <Base
   titulo="Cómo censar tu negocio afectado"
-  descripcion={`Si tu negocio resultó afectado por ${evento.nombre} y no te censas, quedas fuera de las ayudas que vengan después. Paso a paso y ciudad por ciudad.`}
+  descripcion={`Si tu negocio resultó afectado por ${evento.nombre} y no te censas, quedas fuera de las ayudas que vengan después. Paso a paso y localidad por localidad.`}
   ruta={`${base}/censo`}
 >
   <nav class="migas">
@@ -79,9 +79,9 @@ const { registro } = evento;
     )
   }
 
-  <h2>Cómo censar tu negocio, ciudad por ciudad</h2>
+  <h2>Cómo censar tu negocio, localidad por localidad</h2>
   {
-    evento.ciudades.map((c) => (
+    evento.localidades.map((c) => (
       <section class="caja">
         <h3>{c.nombre}</h3>
         <p class="meta">{c.division}</p>

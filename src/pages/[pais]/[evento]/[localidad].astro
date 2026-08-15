@@ -2,25 +2,25 @@
 import Base from "../../../layouts/Base.astro";
 import CompartirWhatsApp from "../../../components/CompartirWhatsApp.astro";
 import Fuentes from "../../../components/Fuentes.astro";
-import { todasLasCiudades } from "../../../data/paises";
-import type { Ciudad, Evento, Pais } from "../../../data/tipos";
+import { todasLasLocalidades } from "../../../data/paises";
+import type { Localidad, Evento, Pais } from "../../../data/tipos";
 
-// Una plantilla, todas las ciudades de todas las emergencias.
+// Una plantilla, todas las localidades de todas las emergencias.
 export function getStaticPaths() {
-  return todasLasCiudades().map(({ pais, evento, ciudad }) => ({
-    params: { pais: pais.slug, evento: evento.slug, ciudad: ciudad.slug },
-    props: { pais, evento, ciudad },
+  return todasLasLocalidades().map(({ pais, evento, localidad }) => ({
+    params: { pais: pais.slug, evento: evento.slug, localidad: localidad.slug },
+    props: { pais, evento, localidad },
   }));
 }
 
 interface Props {
   pais: Pais;
   evento: Evento;
-  ciudad: Ciudad;
+  localidad: Localidad;
 }
-const { pais, evento, ciudad: c } = Astro.props;
+const { pais, evento, localidad: c } = Astro.props;
 const base = `/${pais.slug}/${evento.slug}`;
-const otras = evento.ciudades.filter((o) => o.slug !== c.slug);
+const otras = evento.localidades.filter((o) => o.slug !== c.slug);
 ---
 
 <Base
@@ -83,8 +83,8 @@ const otras = evento.ciudades.filter((o) => o.slug !== c.slug);
     ))
   }
 
-  <h2>Otras ciudades</h2>
-  <ul class="enlaces-ciudades">
+  <h2>Otras localidades</h2>
+  <ul class="enlaces-localidades">
     {otras.map((o) => (
       <li>
         <a href={`${base}/${o.slug}`}>{o.nombre}</a>

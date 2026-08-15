@@ -208,7 +208,7 @@ main {
 
 /* --- Rejilla de ciudades --- */
 
-.ciudades {
+.localidades {
   list-style: none;
   padding: 0;
   margin: 0.75rem 0;
@@ -216,7 +216,7 @@ main {
   grid-template-columns: 1fr 1fr;
   gap: 0.75rem;
 }
-.ciudades a {
+.localidades a {
   display: block;
   border: 2px solid var(--borde);
   border-radius: 0.5rem;
@@ -225,21 +225,21 @@ main {
   text-decoration: none;
   color: var(--texto);
 }
-.ciudades .depto {
+.localidades .depto {
   display: block;
   font-weight: 400;
   font-size: 0.78rem;
   color: var(--texto-suave);
 }
 
-.enlaces-ciudades {
+.enlaces-localidades {
   list-style: none;
   padding: 0;
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
 }
-.enlaces-ciudades a {
+.enlaces-localidades a {
   display: inline-block;
   border: 2px solid var(--borde);
   border-radius: 0.5rem;

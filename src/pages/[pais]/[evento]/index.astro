@@ -48,10 +48,10 @@ const n = (x: number) => x.toLocaleString("es-CO");
     </span>
   </a>
 
-  <h2>Busca por tu ciudad</h2>
-  <ul class="ciudades">
+  <h2>Busca por tu localidad</h2>
+  <ul class="localidades">
     {
-      evento.ciudades.map((c) => (
+      evento.localidades.map((c) => (
         <li>
           <a href={`${base}/${c.slug}`}>
             {c.nombre}

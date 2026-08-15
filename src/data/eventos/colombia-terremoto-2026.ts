@@ -110,9 +110,10 @@ export const colombiaTerremoto2026: Evento = {
   ],
   puntosRegistro:
     "Hay Puestos de Mando Unificado (PMU) regionales en Quibdó, Cali, Armenia y Bogotá, y módulos de registro habilitados en alcaldías y coliseos municipales, incluyendo Buenaventura, Pereira y Manizales.",
-  ciudades: [
+  localidades: [
     {
       slug: "cali",
+      tipo: "capital",
       nombre: "Cali",
       division: "Valle del Cauca",
       alertaMaxima: true,
@@ -127,6 +128,7 @@ export const colombiaTerremoto2026: Evento = {
     },
     {
       slug: "pereira",
+      tipo: "capital",
       nombre: "Pereira",
       division: "Risaralda",
       alertaMaxima: true,
@@ -140,6 +142,7 @@ export const colombiaTerremoto2026: Evento = {
     },
     {
       slug: "manizales",
+      tipo: "capital",
       nombre: "Manizales",
       division: "Caldas",
       alertaMaxima: true,
@@ -147,6 +150,7 @@ export const colombiaTerremoto2026: Evento = {
     },
     {
       slug: "armenia",
+      tipo: "capital",
       nombre: "Armenia",
       division: "Quindío",
       alertaMaxima: true,
@@ -158,6 +162,7 @@ export const colombiaTerremoto2026: Evento = {
     },
     {
       slug: "quibdo",
+      tipo: "capital",
       nombre: "Quibdó",
       division: "Chocó",
       alertaMaxima: true,
@@ -168,7 +173,99 @@ export const colombiaTerremoto2026: Evento = {
           "Quibdó cuenta con un Puesto de Mando Unificado (PMU) regional, además de los módulos de registro en la alcaldía y el coliseo municipal. Estamos verificando el canal específico para negocios.",
       },
     },
+
+    /* Municipios pequeños. Las capitales salen en la prensa; estos no, y aquí
+       está buena parte del tejido de microempresas. */
+
+    {
+      slug: "san-jose-del-palmar",
+      tipo: "municipio",
+      nombre: "San José del Palmar",
+      division: "Chocó",
+      alertaMaxima: true,
+      contexto:
+        "Es el epicentro del sismo. Un municipio de unos 5.800 habitantes que quedó aislado por completo: derrumbes en las vías, cortes prolongados de luz, el acueducto colapsado y más de 400 viviendas dañadas, con al menos 20 edificaciones destruidas.",
+      fuente: {
+        medio: "Infobae",
+        titulo:
+          "Este es San José del Palmar, el aislado pueblo del Chocó que fue el epicentro del terremoto de 7,4 en Colombia",
+        url: "https://www.infobae.com/colombia/2026/08/13/este-es-san-jose-del-palmar-el-aislado-pueblo-del-choco-que-fue-el-epicentro-del-terremoto-de-74-en-colombia/",
+        fecha: "2026-08-13",
+      },
+      censo: { verificado: false, detalle: PENDIENTE },
+    },
+    {
+      slug: "sipi",
+      tipo: "municipio",
+      nombre: "Sipí",
+      division: "Chocó",
+      contexto:
+        "Reportado como uno de los dos municipios más afectados del Chocó, junto con San José del Palmar.",
+      fuente: {
+        medio: "Wikipedia",
+        titulo: "Terremoto de Colombia de 2026",
+        url: "https://es.wikipedia.org/wiki/Terremoto_de_Colombia_de_2026",
+        fecha: "2026-08-13",
+      },
+      censo: { verificado: false, detalle: PENDIENTE },
+    },
+    {
+      slug: "dosquebradas",
+      tipo: "municipio",
+      nombre: "Dosquebradas",
+      division: "Risaralda",
+      contexto:
+        "El municipio está evaluando daños en sus centros educativos: una institución sufrió el colapso de muros y cubierta.",
+      fuente: {
+        medio: "El Diario",
+        titulo: "Dosquebradas evalúa daños en colegios por sismo",
+        url: "https://www.eldiario.com.co/actualidad/755331/",
+        fecha: "2026-08-13",
+      },
+      censo: { verificado: false, detalle: PENDIENTE },
+    },
+    {
+      slug: "santa-rosa-de-cabal",
+      tipo: "municipio",
+      nombre: "Santa Rosa de Cabal",
+      division: "Risaralda",
+      contexto:
+        "Cerca de 1.900 personas resultaron desplazadas y al menos 20 edificaciones están en riesgo de demolición por posibles colapsos.",
+      fuente: {
+        medio: "Wikipedia",
+        titulo: "Terremoto de Colombia de 2026",
+        url: "https://es.wikipedia.org/wiki/Terremoto_de_Colombia_de_2026",
+        fecha: "2026-08-13",
+      },
+      censo: { verificado: false, detalle: PENDIENTE },
+    },
+    {
+      slug: "quimbaya",
+      tipo: "municipio",
+      nombre: "Quimbaya",
+      division: "Quindío",
+      contexto:
+        "Registró la mayor proporción de daño en vivienda de todo el departamento del Quindío.",
+      fuente: {
+        medio: "Wikipedia",
+        titulo: "Terremoto de Colombia de 2026",
+        url: "https://es.wikipedia.org/wiki/Terremoto_de_Colombia_de_2026",
+        fecha: "2026-08-13",
+      },
+      censo: { verificado: false, detalle: PENDIENTE },
+    },
+    {
+      slug: "buenaventura",
+      tipo: "municipio",
+      nombre: "Buenaventura",
+      division: "Valle del Cauca",
+      contexto:
+        "Tiene módulos de registro de damnificados habilitados, según la guía oficial para afectados.",
+      fuente: GUIA_GOB,
+      censo: { verificado: false, detalle: PENDIENTE },
+    },
   ],
+  negocios: [],
   ayudas: [
     {
       slug: "alivios-bancarios",

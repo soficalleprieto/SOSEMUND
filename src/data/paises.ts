@@ -24,10 +24,10 @@ export function todosLosEventos() {
   return PAISES.flatMap((pais) => pais.eventos.map((evento) => ({ pais, evento })));
 }
 
-/** Todas las combinaciones país+evento+ciudad, para generar rutas. */
-export function todasLasCiudades() {
+/** Todas las combinaciones país+evento+localidad, para generar rutas. */
+export function todasLasLocalidades() {
   return todosLosEventos().flatMap(({ pais, evento }) =>
-    evento.ciudades.map((ciudad) => ({ pais, evento, ciudad })),
+    evento.localidades.map((localidad) => ({ pais, evento, localidad })),
   );
 }
 
