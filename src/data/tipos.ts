@@ -57,6 +57,35 @@ export type Ayuda = {
 
 export type Paso = { titulo: string; texto: string };
 
+export type CategoriaIniciativa =
+  | "acopio"
+  | "desaparecidos"
+  | "urgente"
+  | "danos"
+  | "mascotas";
+
+/**
+ * Otra iniciativa ciudadana a la que derivamos. No copiamos sus datos: los
+ * centros de acopio cambian cada hora y ellos los mantienen. Lo que les falta
+ * es que se les encuentre.
+ */
+export type Iniciativa = {
+  nombre: string;
+  url: string;
+  categoria: CategoriaIniciativa;
+  /** Qué hace, en concreto. */
+  que: string;
+  /** A quién sirve. */
+  para: string;
+  /** Cobertura o cifras, si las tenemos verificadas. */
+  alcance?: string;
+  /** Observación honesta nuestra, incluidas las pegas. */
+  nota?: string;
+};
+
+/** Medio de verificación que ha desmentido bulos de esta emergencia. */
+export type Verificador = { nombre: string; url: string };
+
 /* ------------------------------------------------------------------ *
  * Fichas de negocio
  * ------------------------------------------------------------------ */
@@ -160,6 +189,10 @@ export type Evento = {
   puntosRegistro?: string;
   localidades: Localidad[];
   ayudas: Ayuda[];
+  /** Otras iniciativas ciudadanas a las que derivamos. */
+  iniciativas: Iniciativa[];
+  /** Verificadores que han desmentido bulos de esta emergencia. */
+  verificadores: Verificador[];
   /** Fichas publicadas. Vacío hasta que lleguen negocios reales y revisados. */
   negocios: Negocio[];
 };

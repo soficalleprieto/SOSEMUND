@@ -1,4 +1,8 @@
 import type { Evento, Fuente } from "../tipos";
+import {
+  iniciativasColombia2026,
+  verificadoresColombia2026,
+} from "./colombia-terremoto-2026-iniciativas";
 
 const CENSO_CALI: Fuente = {
   medio: "Semana",
@@ -265,6 +269,8 @@ export const colombiaTerremoto2026: Evento = {
       censo: { verificado: false, detalle: PENDIENTE },
     },
   ],
+  iniciativas: iniciativasColombia2026,
+  verificadores: verificadoresColombia2026,
   negocios: [],
   ayudas: [
     {

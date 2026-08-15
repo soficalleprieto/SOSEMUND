@@ -1,0 +1,168 @@
+---
+import Base from "../../../layouts/Base.astro";
+import CompartirWhatsApp from "../../../components/CompartirWhatsApp.astro";
+import { todosLosEventos } from "../../../data/paises";
+import type { CategoriaIniciativa, Evento, Pais } from "../../../data/tipos";
+
+export function getStaticPaths() {
+  return todosLosEventos().map(({ pais, evento }) => ({
+    params: { pais: pais.slug, evento: evento.slug },
+    props: { pais, evento },
+  }));
+}
+
+interface Props {
+  pais: Pais;
+  evento: Evento;
+}
+const { pais, evento } = Astro.props;
+const base = `/${pais.slug}/${evento.slug}`;
+
+const SECCIONES: {
+  categoria: CategoriaIniciativa;
+  titulo: string;
+  entradilla: string;
+}[] = [
+  {
+    categoria: "acopio",
+    titulo: "Centros de acopio: dónde llevar o pedir donaciones",
+    entradilla:
+      "Qué necesita cada punto cambia varias veces al día. Por eso no copiamos aquí sus listas: te llevamos a quien las mantiene al minuto.",
+  },
+  {
+    categoria: "urgente",
+    titulo: "Necesito algo urgente hoy",
+    entradilla: "Agua, comida, medicinas o un techo, ahora mismo.",
+  },
+  {
+    categoria: "desaparecidos",
+    titulo: "Buscar a una persona",
+    entradilla:
+      "Ninguna de estas plataformas reemplaza a la Policía, la Fiscalía, Medicina Legal ni a los equipos de rescate. Son un complemento ciudadano.",
+  },
+  {
+    categoria: "danos",
+    titulo: "Reportar daños en edificios",
+    entradilla: "",
+  },
+  {
+    categoria: "mascotas",
+    titulo: "Mascotas perdidas",
+    entradilla: "",
+  },
+];
+---
+
+<Base
+  titulo="Dónde encontrar ayuda ahora mismo"
+  descripcion={`Centros de acopio, búsqueda de personas y ayuda urgente tras ${evento.nombre}: las iniciativas ciudadanas que funcionan, revisadas una por una.`}
+  ruta={`${base}/iniciativas`}
+  censoRuta={`${base}/censo`}
+>
+  <nav class="migas">
+    <a href="/">Inicio</a> › <a href={`/${pais.slug}`}>{pais.nombre}</a> ›{" "}
+    <a href={base}>{evento.nombreCorto}</a> › Dónde encontrar ayuda
+  </nav>
+
+  <h1>Dónde encontrar ayuda ahora mismo</h1>
+
+  <p class="entradilla">
+    Este sitio va de negocios, pero detrás de cada negocio hay personas. Y no se
+    puede empezar a reconstruir un local mientras sigues buscando a alguien o
+    durmiendo en un albergue.
+  </p>
+
+  <p>
+    Estas son las iniciativas ciudadanas que surgieron tras {evento.nombre}. Las
+    revisamos una por una y contamos qué hace cada una, para quién sirve y
+    también sus pegas. <strong>No copiamos sus datos:</strong> los centros de
+    acopio cambian cada hora y ellos los mantienen bien. Lo que les faltaba era
+    que se les encontrara.
+  </p>
+
+  {
+    SECCIONES.map((seccion) => {
+      const grupo = evento.iniciativas.filter(
+        (i) => i.categoria === seccion.categoria,
+      );
+      return grupo.length > 0 ? (
+        <section>
+          <h2>{seccion.titulo}</h2>
+          {seccion.entradilla && <p>{seccion.entradilla}</p>}
+          {grupo.map((i) => (
+            <article class="caja">
+              <h3>
+                <a href={i.url} target="_blank" rel="noopener">
+                  {i.nombre}
+                </a>
+              </h3>
+              <p>{i.que}</p>
+              <p class="meta">
+                <strong>Para:</strong> {i.para}
+                {i.alcance && (
+                  <>
+                    <br />
+                    <strong>Alcance:</strong> {i.alcance}
+                  </>
+                )}
+              </p>
+              {i.nota && (
+                <p class="caja-pendiente">
+                  <strong>Nuestra observación.</strong> {i.nota}
+                </p>
+              )}
+            </article>
+          ))}
+        </section>
+      ) : null;
+    })
+  }
+
+  <h2>Cuidado con los bulos</h2>
+  <p>
+    Tras el sismo circularon imágenes generadas con inteligencia artificial
+    —entre ellas una del Monumento a la Resistencia de Cali destruido—, vídeos
+    de terremotos de Filipinas y Guatemala presentados como si fueran Colombia,
+    y cadenas de WhatsApp anunciando nuevos temblores.
+  </p>
+  <div class="caja caja-alerta">
+    <p class="titulo-alerta">Nadie puede predecir un terremoto</p>
+    <p>
+      No existe forma científica de saber cuándo se van a reacomodar las placas.
+      Cualquier mensaje que anuncie un sismo para una fecha concreta es falso,
+      venga de quien venga.
+    </p>
+  </div>
+  <p>
+    Antes de reenviar algo, míralo en quien verifica con método publicado:
+    {
+      evento.verificadores.map((v, i) => (
+        <>
+          {i > 0 && (i === evento.verificadores.length - 1 ? " y " : ", ")}
+          <a href={v.url} target="_blank" rel="noopener">
+            {v.nombre}
+          </a>
+        </>
+      ))
+    }.
+  </p>
+  <p class="meta">
+    No publicamos listas de quién informa bien y quién no: no nos corresponde
+    certificar a nadie. Preferimos remitirte a quien verifica y explica cómo lo
+    hace.
+  </p>
+
+  <div class="caja caja-gris">
+    <p><strong>Y lo primero de todo</strong></p>
+    <p>
+      Ante una emergencia, la línea <strong>123</strong>. Para buscar a un
+      familiar, la Cruz Roja Colombiana activó Restablecimiento de Contactos
+      Familiares. Ninguna web sustituye eso.
+    </p>
+  </div>
+
+  <CompartirWhatsApp
+    ruta={`${base}/iniciativas`}
+    texto="Dónde encontrar ayuda tras el terremoto: centros de acopio, búsqueda de personas y ayuda urgente, todo en un sitio."
+  />
+</Base>

@@ -422,3 +422,21 @@ main {
   font-weight: 600;
   white-space: nowrap;
 }
+
+/* --- Llamada secundaria --- */
+
+.cta-secundaria {
+  display: block;
+  border: 2px solid var(--borde);
+  border-radius: 0.5rem;
+  padding: 0.9rem 1rem;
+  margin: 1.25rem 0;
+  text-decoration: none;
+  color: var(--texto);
+}
+.cta-secundaria span {
+  display: block;
+  font-size: 0.92rem;
+  color: var(--texto-suave);
+  margin-top: 0.2rem;
+}
