@@ -1,0 +1,308 @@
+/*
+ * CSS plano, sin framework. El sitio se lee en la calle, con sol, en teléfonos
+ * baratos y con datos contados: tema claro de alto contraste, sin modo oscuro
+ * a propósito, y nada que no haga falta.
+ */
+
+:root {
+  --fondo: #ffffff;
+  --texto: #14181f;
+  --texto-suave: #4b5563;
+  --borde: #d1d5db;
+  --gris-fondo: #f7f7f8;
+  --acento: #0b5c3f;
+  --acento-fondo: #ecfdf5;
+  --alerta: #9b1c1c;
+  --alerta-fondo: #fef2f2;
+  --aviso: #a86500;
+  --aviso-fondo: #fffbeb;
+  --whatsapp: #25d366;
+  --ancho: 42rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--fondo);
+  color: var(--texto);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+h1 {
+  font-size: 1.9rem;
+  line-height: 1.2;
+  margin: 0 0 0.5rem;
+}
+h2 {
+  font-size: 1.4rem;
+  line-height: 1.3;
+  margin: 2rem 0 0.5rem;
+}
+h3 {
+  font-size: 1.2rem;
+  margin: 0 0 0.25rem;
+}
+p {
+  margin: 0 0 0.9rem;
+}
+
+a {
+  color: var(--acento);
+  touch-action: manipulation;
+}
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--acento);
+  outline-offset: 2px;
+}
+
+/* --- Estructura --- */
+
+.contenedor {
+  max-width: var(--ancho);
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.cabecera {
+  border-bottom: 1px solid var(--borde);
+}
+.cabecera .contenedor {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 0.75rem;
+}
+.marca {
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-decoration: none;
+}
+
+main {
+  padding-block: 1.5rem 2rem;
+}
+
+.pie {
+  margin-top: 3rem;
+  border-top: 1px solid var(--borde);
+  background: var(--gris-fondo);
+  font-size: 0.9rem;
+  color: var(--texto-suave);
+}
+.pie .contenedor {
+  padding-block: 1.5rem;
+}
+.pie strong {
+  color: var(--texto);
+}
+
+/* --- Bloques destacados --- */
+
+.caja {
+  border: 1px solid var(--borde);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+.caja > :last-child {
+  margin-bottom: 0;
+}
+
+.caja-acento {
+  border: 2px solid var(--acento);
+  background: var(--acento-fondo);
+}
+.caja-alerta {
+  border: 2px solid var(--alerta);
+  background: var(--alerta-fondo);
+}
+.caja-pendiente {
+  border: 1px solid var(--aviso);
+  background: var(--aviso-fondo);
+  font-size: 0.92rem;
+  padding: 0.6rem 0.8rem;
+}
+.caja-gris {
+  background: var(--gris-fondo);
+}
+
+.titulo-alerta {
+  color: var(--alerta);
+  font-weight: 700;
+}
+
+/* --- Llamada a la acción principal --- */
+
+.cta {
+  display: block;
+  background: var(--acento);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  margin: 1.5rem 0;
+}
+.cta .cta-eyebrow {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  opacity: 0.9;
+}
+.cta .cta-titulo {
+  display: block;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-top: 0.15rem;
+}
+.cta .cta-texto {
+  display: block;
+  font-size: 0.92rem;
+  margin-top: 0.35rem;
+}
+
+/* --- Pasos numerados --- */
+
+.pasos {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+.pasos li {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+.pasos .numero {
+  flex: 0 0 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--acento);
+  color: #fff;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pasos .paso-titulo {
+  font-weight: 600;
+  margin: 0;
+}
+.pasos p {
+  margin: 0;
+}
+
+/* --- Rejilla de ciudades --- */
+
+.ciudades {
+  list-style: none;
+  padding: 0;
+  margin: 0.75rem 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+.ciudades a {
+  display: block;
+  border: 2px solid var(--borde);
+  border-radius: 0.5rem;
+  padding: 0.7rem 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--texto);
+}
+.ciudades .depto {
+  display: block;
+  font-weight: 400;
+  font-size: 0.78rem;
+  color: var(--texto-suave);
+}
+
+.enlaces-ciudades {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.enlaces-ciudades a {
+  display: inline-block;
+  border: 2px solid var(--borde);
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--texto);
+}
+
+/* --- Botón de WhatsApp: es un enlace normal, sin JavaScript --- */
+
+.wa {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: var(--whatsapp);
+  color: #000;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-top: 1.5rem;
+}
+
+/* --- Fuentes --- */
+
+.fuentes {
+  border: 1px solid var(--borde);
+  background: var(--gris-fondo);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+}
+.fuentes ul {
+  margin: 0.5rem 0;
+  padding-left: 1.1rem;
+}
+.fuentes li {
+  margin-bottom: 0.4rem;
+}
+.fuentes .fecha {
+  color: var(--texto-suave);
+}
+.fuentes .aviso-verificar {
+  margin: 0.75rem 0 0;
+  color: var(--texto-suave);
+}
+
+.lema {
+  border-left: 4px solid var(--acento);
+  padding-left: 0.75rem;
+  font-style: italic;
+  color: var(--texto-suave);
+}
+
+.meta {
+  color: var(--texto-suave);
+  font-size: 0.9rem;
+}
+
+.telefono {
+  font-weight: 600;
+  white-space: nowrap;
+}

@@ -1,0 +1,63 @@
+---
+import "../styles/global.css";
+import { ACTUALIZADO } from "../data/datos";
+import { formatearFecha } from "../utils/fecha";
+
+interface Props {
+  titulo: string;
+  descripcion: string;
+  /** Ruta canónica, p. ej. "/censo". */
+  ruta: string;
+}
+
+const { titulo, descripcion, ruta } = Astro.props;
+const canonica = new URL(ruta, Astro.site).href;
+const tituloCompleto =
+  ruta === "/" ? titulo : `${titulo} | Negocios que Laten`;
+---
+
+<!doctype html>
+<html lang="es-CO">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{tituloCompleto}</title>
+    <meta name="description" content={descripcion} />
+    <link rel="canonical" href={canonica} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Negocios que Laten" />
+    <meta property="og:locale" content="es_CO" />
+    <meta property="og:title" content={tituloCompleto} />
+    <meta property="og:description" content={descripcion} />
+    <meta property="og:url" content={canonica} />
+  </head>
+
+  <body>
+    <header class="cabecera">
+      <div class="contenedor">
+        <a class="marca" href="/">Negocios que Laten</a>
+        <a href="/censo"><strong>Censarme</strong></a>
+      </div>
+    </header>
+
+    <main>
+      <div class="contenedor">
+        <slot />
+      </div>
+    </main>
+
+    <footer class="pie">
+      <div class="contenedor">
+        <p><strong>Esto no es un canal oficial.</strong></p>
+        <p>
+          Somos una iniciativa ciudadana independiente. No recogemos datos
+          personales, no gestionamos ayudas y no recaudamos dinero. Organizamos
+          información pública y te enviamos al canal oficial que corresponde. En
+          una emergencia, llama al <strong>123</strong>.
+        </p>
+        <p>Última actualización: {formatearFecha(ACTUALIZADO)}.</p>
+      </div>
+    </footer>
+  </body>
+</html>

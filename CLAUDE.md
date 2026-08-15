@@ -44,14 +44,20 @@ censo de Pereira, Manizales, Armenia y Quibdó** (solo Cali está verificado); g
 larga; pilar 1 entero; dominio sin comprar (`negociosquelaten.org/.com/.co` estaban libres el
 13/08/2026, con el `.org` como preferido).
 
-## Decisión abierta: migrar a Astro
+## Stack: Astro y CSS plano, cero JavaScript
 
-**Sin resolver a 13/08/2026.** El sitio está en Next.js, pero medimos la página del censo: 7,5 KB
-de HTML frente a **173 KB de JavaScript**. Veintitrés veces más código que contenido, en un sitio
-que es texto con un botón, para un público con mala conectividad. Contradice la regla de ligereza.
-Astro daría el mismo resultado con 0 KB de JS. Migrar cuesta menos de una hora ahora y mucho más
-cuando existan las fichas de negocio. **Preguntar a Sofía antes de escribir contenido nuevo en
-volumen.**
+**Decidido el 13/08/2026.** El sitio empezó en Next.js y se migró a Astro. Motivo: la página del
+censo pesaba 7,5 KB de HTML y **173 KB de JavaScript**, veintitrés veces más código que contenido,
+en un sitio que es texto con un botón y para un público con mala conectividad. Tras migrar, esa
+misma página pesa **5,1 KB** y el sitio entero 29 KB, con **cero archivos JavaScript**.
+
+Reglas que se derivan de eso y hay que mantener:
+
+- **No añadir JavaScript de cliente** salvo que una página lo necesite de verdad, y entonces solo
+  en esa página. El botón de WhatsApp, por ejemplo, es un `<a>` con la URL ya montada en tiempo de
+  compilación, no un `onclick`.
+- **Sin framework de CSS.** Todo en `src/styles/global.css`, con clases semánticas en español.
+- Antes de dar por buena una optimización, **medir**: `npm run build` y mirar el peso de `dist/`.
 
 ## Al trabajar aquí
 

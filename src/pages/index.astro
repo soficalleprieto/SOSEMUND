@@ -1,0 +1,78 @@
+---
+import Base from "../layouts/Base.astro";
+import CompartirWhatsApp from "../components/CompartirWhatsApp.astro";
+import { CIUDADES, CIFRAS, IMPACTO_EMPRESARIAL, SISMO } from "../data/datos";
+import { formatearFecha } from "../utils/fecha";
+
+const n = (x: number) => x.toLocaleString("es-CO");
+---
+
+<Base
+  titulo="Negocios que Laten — ayudas para negocios afectados por el terremoto"
+  descripcion="Guía clara para comerciantes afectados por el terremoto del 10 de agosto en Colombia: cómo censarte, qué alivios existen y cómo pedirlos. Cali, Pereira, Manizales, Armenia y Quibdó."
+  ruta="/"
+>
+  <h1>Tu negocio no tiene que cerrar</h1>
+  <p>
+    Guía clara para comerciantes afectados por el terremoto del {formatearFecha(SISMO.fecha)}.
+    Qué tienes que hacer primero, qué alivios existen y cómo pedirlos, sin letra
+    pequeña.
+  </p>
+  <p class="lema">
+    Cuando un negocio vuelve a latir, también vuelve a latir su comunidad.
+  </p>
+
+  <a class="cta" href="/censo">
+    <span class="cta-eyebrow">Empieza por aquí</span>
+    <span class="cta-titulo">Censa tu negocio →</span>
+    <span class="cta-texto">
+      Si no apareces en el censo, quedas fuera de todas las ayudas que vengan
+      después. Es lo más urgente.
+    </span>
+  </a>
+
+  <h2>Busca por tu ciudad</h2>
+  <ul class="ciudades">
+    {
+      CIUDADES.map((c) => (
+        <li>
+          <a href={`/ayudas/${c.slug}`}>
+            {c.nombre}
+            <span class="depto">{c.departamento}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+
+  <h2>Por qué existe este sitio</h2>
+  <p>
+    El terremoto de magnitud {SISMO.magnitud} del {formatearFecha(SISMO.fecha)}, con
+    epicentro en {SISMO.epicentro}, golpeó a <strong>{n(IMPACTO_EMPRESARIAL.empresas)} empresas</strong>
+    en {IMPACTO_EMPRESARIAL.municipios} municipios. De ellas, {n(IMPACTO_EMPRESARIAL.microempresas)}
+    son microempresas: el 93 %. Son {n(IMPACTO_EMPRESARIAL.empleos)} empleos formales
+    en riesgo.
+  </p>
+  <p>
+    Las ayudas existen y son muchas: alivios bancarios, alivios tributarios,
+    líneas de crédito, subsidios. El problema es que están repartidas en
+    comunicados de prensa, PDFs y noticias que caducan en dos días. Una
+    panadería, un taller o un local de ropa no tienen abogado ni contador que
+    les rastree a qué pueden acceder. Eso es lo que hacemos aquí.
+  </p>
+
+  <div class="caja caja-gris">
+    <p><strong>Cifras oficiales</strong></p>
+    <p>
+      A {formatearFecha(CIFRAS.fecha)}: {n(CIFRAS.fallecidos)} fallecidos, {n(CIFRAS.heridos)}
+      heridos, {n(CIFRAS.desaparecidos)} desaparecidos y {n(CIFRAS.familiasAfectadas)}
+      familias afectadas. Fuente: {CIFRAS.fuente}. Las cifras cambian a diario;
+      verifica siempre el parte vigente de la UNGRD.
+    </p>
+  </div>
+
+  <CompartirWhatsApp
+    ruta="/"
+    texto="Si tu negocio resultó afectado por el terremoto, aquí está la guía de qué hacer y qué ayudas puedes pedir:"
+  />
+</Base>

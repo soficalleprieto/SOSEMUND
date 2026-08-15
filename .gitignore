@@ -38,7 +38,8 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
-next-env.d.ts
 
 # Documentos de trabajo bloqueados por LibreOffice
 .~lock.*
+dist/
+.astro/

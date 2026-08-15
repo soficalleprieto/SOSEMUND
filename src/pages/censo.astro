@@ -1,0 +1,140 @@
+---
+import Base from "../layouts/Base.astro";
+import CompartirWhatsApp from "../components/CompartirWhatsApp.astro";
+import Fuentes from "../components/Fuentes.astro";
+import {
+  CIUDADES,
+  PASOS_RUD,
+  FUENTES_RUD,
+  FUENTE_CENSO_CALI,
+  FUENTE_CCC,
+} from "../data/datos";
+---
+
+<Base
+  titulo="Cómo censar tu negocio afectado por el terremoto"
+  descripcion="Si tu negocio resultó afectado por el terremoto y no te censas, quedas fuera de las ayudas que vengan después. Te explicamos cómo hacerlo, paso a paso y por ciudad."
+  ruta="/censo"
+>
+  <h1>Cómo censar tu negocio afectado por el terremoto</h1>
+
+  <div class="caja caja-acento">
+    <p><strong>Si no te censas, quedas fuera.</strong></p>
+    <p>
+      Los alivios, créditos y subsidios que se anuncien en las próximas semanas
+      se van a repartir a partir de los censos que se están levantando <strong
+        >ahora mismo</strong
+      >. Un negocio que no aparezca en el registro tendrá muy difícil acceder
+      después, por mucho que haya perdido. Es el trámite más urgente que tienes.
+    </p>
+  </div>
+
+  <div class="caja caja-alerta">
+    <p class="titulo-alerta">
+      Cuidado con las estafas: no existe un enlace para censarte como
+      damnificado en Cali
+    </p>
+    <p>
+      El alcalde de Cali, Alejandro Eder, anunció que el censo a las familias
+      afectadas se hace <strong
+        >en persona, casa por casa y en formatos físicos</strong
+      >, con personal debidamente identificado de la Alcaldía y en jornadas
+      anunciadas previamente. <strong
+        >No hay códigos QR, ni líneas telefónicas, ni plataformas digitales para
+        ese censo.</strong
+      > Si te llega un enlace, un QR o una llamada pidiéndote datos para «registrarte
+      como damnificado», desconfía.
+    </p>
+    <p class="meta">
+      Ojo al matiz: eso aplica al censo de <em>familias</em>. Para los <em
+        >negocios</em
+      >, la Cámara de Comercio de Cali sí habilitó una herramienta digital y unas
+      líneas telefónicas, que verás más abajo.
+    </p>
+  </div>
+
+  <h2>Paso a paso: el Registro Único de Damnificados (RUD)</h2>
+  <p>
+    Es el mecanismo nacional. Estos son los pasos según la guía publicada para
+    damnificados:
+  </p>
+  <ol class="pasos">
+    {
+      PASOS_RUD.map((paso, i) => (
+        <li>
+          <span class="numero">{i + 1}</span>
+          <div>
+            <p class="paso-titulo">{paso.titulo}</p>
+            <p>{paso.texto}</p>
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+
+  <div class="caja caja-gris">
+    <p><strong>Dónde están los puntos de registro</strong></p>
+    <p>
+      Hay Puestos de Mando Unificado (PMU) regionales en <strong
+        >Quibdó, Cali, Armenia y Bogotá</strong
+      >, y módulos de registro habilitados en alcaldías y coliseos municipales,
+      incluyendo <strong>Buenaventura, Pereira y Manizales</strong>.
+    </p>
+  </div>
+
+  <h2>Cómo censar tu negocio, ciudad por ciudad</h2>
+  {
+    CIUDADES.map((c) => (
+      <section class="caja">
+        <h3>{c.nombre}</h3>
+        <p class="meta">{c.departamento}</p>
+        {c.contexto && <p class="meta">{c.contexto}</p>}
+        <p>{c.censoNegocios.detalle}</p>
+
+        {c.censoNegocios.telefonos && (
+          <p>
+            <strong>Líneas de atención: </strong>
+            {c.censoNegocios.telefonos.map((t, i) => (
+              <>
+                {i > 0 && " · "}
+                <a class="telefono" href={`tel:${t.replace(/\s/g, "")}`}>
+                  {t}
+                </a>
+              </>
+            ))}
+          </p>
+        )}
+
+        {!c.censoNegocios.verificado && (
+          <p class="caja-pendiente">
+            <strong>Dato por confirmar.</strong> Estamos verificando el canal
+            oficial para negocios en {c.nombre}. Si lo conoces, escríbenos y lo
+            publicamos citando la fuente.
+          </p>
+        )}
+
+        <p>
+          <a href={`/ayudas/${c.slug}`}>
+            <strong>Ver todas las ayudas en {c.nombre} →</strong>
+          </a>
+        </p>
+      </section>
+    ))
+  }
+
+  <h2>Consejo: documenta todo hoy</h2>
+  <p>
+    Antes de limpiar, reparar o mover nada, toma fotos y videos de cómo quedó el
+    local, el inventario y los equipos, con fecha visible si puedes. Guarda
+    facturas de compra, contratos de arriendo y extractos. Ese material es lo
+    que después sostiene tanto el censo como cualquier reclamación al seguro. Lo
+    que no documentes ahora, no lo vas a poder demostrar en dos meses.
+  </p>
+
+  <Fuentes fuentes={[...FUENTES_RUD, FUENTE_CENSO_CALI, FUENTE_CCC]} />
+
+  <CompartirWhatsApp
+    ruta="/censo"
+    texto="Si tu negocio resultó afectado por el terremoto, CÉNSATE. Si no apareces en el censo, quedas fuera de las ayudas. Aquí está el paso a paso por ciudad:"
+  />
+</Base>

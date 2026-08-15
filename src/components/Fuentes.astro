@@ -1,0 +1,36 @@
+---
+/*
+ * Toda afirmación del sitio lleva fuente y fecha. Es contenido sensible: un
+ * comerciante puede tomar una decisión financiera con lo que lea aquí.
+ */
+import type { Fuente } from "../data/datos";
+import { formatearFecha } from "../utils/fecha";
+
+interface Props {
+  fuentes: Fuente[];
+}
+
+const { fuentes } = Astro.props;
+---
+
+{
+  fuentes.length > 0 && (
+    <div class="fuentes">
+      <p><strong>Fuentes de esta información</strong></p>
+      <ul>
+        {fuentes.map((f) => (
+          <li>
+            <a href={f.url} target="_blank" rel="noopener noreferrer">
+              {f.medio}: {f.titulo}
+            </a>{" "}
+            <span class="fecha">— publicado el {formatearFecha(f.fecha)}</span>
+          </li>
+        ))}
+      </ul>
+      <p class="aviso-verificar">
+        Verifica siempre en el canal oficial antes de tomar una decisión. Las
+        condiciones y los plazos cambian a diario.
+      </p>
+    </div>
+  )
+}

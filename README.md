@@ -51,7 +51,12 @@ npm install
 npm run dev
 ```
 
-Producción: `npm run build`. Todo el sitio se genera estático.
+Producción: `npm run build`, que deja el sitio estático en `dist/`.
+
+**Stack:** [Astro](https://astro.build) y CSS plano. Sin framework de CSS y **sin JavaScript de
+cliente**: el build genera cero archivos `.js`. El sitio entero pesa 29 KB comprimido, y la página
+más pesada, la del censo, 5,1 KB. Eso no es un detalle de rendimiento, es la regla 6 en la
+práctica: parte del público lee esto en Chocó, con mala cobertura y datos contados.
 
 ## Documentación
 
