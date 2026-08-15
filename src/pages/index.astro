@@ -6,10 +6,13 @@
  */
 import Base from "../layouts/Base.astro";
 import CompartirWhatsApp from "../components/CompartirWhatsApp.astro";
+import Imagen from "../components/Imagen.astro";
 import { todosLosEventos } from "../data/paises";
+import { IMG_COLOMBIA } from "../data/imagenes";
 import { formatearFecha } from "../utils/fecha";
 
 const eventos = todosLosEventos();
+const activo = eventos[0];
 const n = (x: number) => x.toLocaleString("es-CO");
 ---
 
@@ -18,6 +21,30 @@ const n = (x: number) => x.toLocaleString("es-CO");
   descripcion="Cuando una catástrofe golpea, los negocios de barrio mueren en silencio. Reunimos las ayudas que existen, les damos visibilidad y conectamos a cada negocio con quien quiere sostenerlo."
   ruta="/"
 >
+  {/* La emergencia activa va lo primero: quien llega buscando ayuda hoy no
+      debería tener que leerse la historia del proyecto para encontrarla. */}
+  {
+    activo && (
+      <section class="emergencia-activa">
+        <p class="etiqueta-viva">
+          <span class="punto" aria-hidden="true"></span>
+          Emergencia activa · {activo.pais.nombre}
+        </p>
+        <h2 class="titulo-activo">{activo.evento.nombreCorto}</h2>
+        <p>{activo.evento.resumen}</p>
+        <Imagen credito={IMG_COLOMBIA} prioritaria={true} />
+        <a class="cta" href={`/${activo.pais.slug}/${activo.evento.slug}`}>
+          <span class="cta-eyebrow">Si tu negocio resultó afectado</span>
+          <span class="cta-titulo">Mira qué puedes pedir →</span>
+          <span class="cta-texto">
+            Cómo censarte —que es lo más urgente—, qué alivios existen y cómo
+            solicitarlos, localidad por localidad.
+          </span>
+        </a>
+      </section>
+    )
+  }
+
   <h1>Una catástrofe no termina cuando se apagan las sirenas</h1>
 
   <p class="entradilla">

@@ -1,0 +1,40 @@
+---
+/*
+ * Imagen con su crédito. El crédito no es decorativo: las licencias CC lo
+ * exigen, y además le dice al lector de dónde sale lo que está viendo.
+ *
+ * Astro optimiza a WebP en tiempo de compilación y no envía JavaScript.
+ * `loading="lazy"` salvo en la primera imagen de la página, para no penalizar
+ * a quien entra con mala conexión.
+ */
+import { Image } from "astro:assets";
+import type { Credito } from "../data/imagenes";
+
+interface Props {
+  credito: Credito;
+  /** true en la imagen principal de la página; el resto van en carga diferida. */
+  prioritaria?: boolean;
+  ancho?: number;
+}
+
+const { credito, prioritaria = false, ancho = 640 } = Astro.props;
+---
+
+<figure class="figura">
+  <Image
+    src={credito.src}
+    alt={credito.alt}
+    width={ancho}
+    format="webp"
+    quality={52}
+    loading={prioritaria ? "eager" : "lazy"}
+    decoding={prioritaria ? "auto" : "async"}
+  />
+  <figcaption>
+    {credito.pie}{" "}
+    <span class="credito">
+      Foto: <a href={credito.origenUrl} target="_blank" rel="noopener">{credito.autor}</a>,
+      <a href={credito.licenciaUrl} target="_blank" rel="noopener">{credito.licencia}</a>.
+    </span>
+  </figcaption>
+</figure>

@@ -1,7 +1,9 @@
 ---
 import Base from "../../../layouts/Base.astro";
 import CompartirWhatsApp from "../../../components/CompartirWhatsApp.astro";
+import Imagen from "../../../components/Imagen.astro";
 import { todosLosEventos } from "../../../data/paises";
+import { IMG_MAPA } from "../../../data/imagenes";
 import type { Evento, Pais } from "../../../data/tipos";
 import { formatearFecha } from "../../../utils/fecha";
 
@@ -64,6 +66,7 @@ const n = (x: number) => x.toLocaleString("es-CO");
 
   <h2>Qué pasó</h2>
   <p>{evento.resumen}</p>
+  <Imagen credito={IMG_MAPA} ancho={520} />
   <ul class="datos-evento">
     <li><strong>Fecha:</strong> {formatearFecha(evento.fecha)}</li>
     {evento.detalles.map((d) => (

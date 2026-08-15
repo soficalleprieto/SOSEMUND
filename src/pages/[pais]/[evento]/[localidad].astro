@@ -2,7 +2,9 @@
 import Base from "../../../layouts/Base.astro";
 import CompartirWhatsApp from "../../../components/CompartirWhatsApp.astro";
 import Fuentes from "../../../components/Fuentes.astro";
+import Imagen from "../../../components/Imagen.astro";
 import { todasLasLocalidades } from "../../../data/paises";
+import { IMAGEN_POR_LOCALIDAD } from "../../../data/imagenes";
 import type { Localidad, Evento, Pais } from "../../../data/tipos";
 
 // Una plantilla, todas las localidades de todas las emergencias.
@@ -21,6 +23,8 @@ interface Props {
 const { pais, evento, localidad: c } = Astro.props;
 const base = `/${pais.slug}/${evento.slug}`;
 const otras = evento.localidades.filter((o) => o.slug !== c.slug);
+// Solo si existe una foto libre DE ESTA localidad. Nunca una genérica.
+const foto = IMAGEN_POR_LOCALIDAD[c.slug];
 ---
 
 <Base
@@ -39,6 +43,17 @@ const otras = evento.localidades.filter((o) => o.slug !== c.slug);
     {c.division}{c.alertaMaxima && " · Estuvo en alerta máxima tras la emergencia"}
   </p>
   {c.contexto && <p>{c.contexto}</p>}
+  {foto && <Imagen credito={foto} prioritaria={true} />}
+  {
+    c.fuente && (
+      <p class="meta">
+        Fuente:{" "}
+        <a href={c.fuente.url} target="_blank" rel="noopener">
+          {c.fuente.medio}, {c.fuente.titulo}
+        </a>
+      </p>
+    )
+  }
 
   {/* El censo va primero en todas las páginas: es lo que desbloquea el resto. */}
   <section class="caja caja-acento">

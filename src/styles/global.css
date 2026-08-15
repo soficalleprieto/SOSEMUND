@@ -346,6 +346,61 @@ main {
   color: var(--acento);
 }
 
+/* --- Imágenes con crédito --- */
+
+.figura {
+  margin: 1.25rem 0;
+}
+.figura img {
+  width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  display: block;
+}
+.figura figcaption {
+  font-size: 0.82rem;
+  color: var(--texto-suave);
+  margin-top: 0.4rem;
+  line-height: 1.45;
+}
+.figura .credito a {
+  color: var(--texto-suave);
+}
+
+/* --- Emergencia activa en portada --- */
+
+.emergencia-activa {
+  border: 2px solid var(--acento);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 2rem;
+}
+.emergencia-activa > :last-child {
+  margin-bottom: 0;
+}
+.titulo-activo {
+  margin-top: 0.2rem;
+  font-size: 1.5rem;
+}
+.etiqueta-viva {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--alerta);
+}
+.etiqueta-viva .punto {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--alerta);
+  flex: none;
+}
+
 /* --- Migas de pan --- */
 
 .migas {
