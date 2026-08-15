@@ -17,7 +17,14 @@
   --aviso: #a86500;
   --aviso-fondo: #fffbeb;
   --whatsapp: #25d366;
-  --ancho: 42rem;
+  /*
+   * Dos anchos. El texto corrido se queda en una medida de lectura cómoda
+   * (unos 70 caracteres por línea); lo que no es texto —rejillas, imágenes,
+   * cabecera y pie— puede ocupar más y evita que la página parezca flotando
+   * en el vacío en un portátil.
+   */
+  --ancho: 48rem;
+  --ancho-amplio: 64rem;
 }
 
 *,
@@ -73,6 +80,12 @@ button:focus-visible {
   max-width: var(--ancho);
   margin: 0 auto;
   padding: 0 1rem;
+}
+
+/* Cabecera y pie acompañan al ancho amplio para no quedar descolgados. */
+.cabecera .contenedor,
+.pie .contenedor {
+  max-width: var(--ancho-amplio);
 }
 
 .cabecera {
@@ -213,7 +226,8 @@ main {
   padding: 0;
   margin: 0.75rem 0;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  /* Dos columnas en móvil, tres o cuatro según quepan en pantallas grandes. */
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
   gap: 0.75rem;
 }
 .localidades a {
@@ -374,6 +388,36 @@ main {
   border-radius: 0.5rem;
   padding: 1rem;
   margin-bottom: 2rem;
+}
+
+/*
+ * En pantallas anchas la emergencia activa pasa a dos columnas: la foto al
+ * lado del texto en vez de debajo. Deja de haber una imagen gigante que
+ * empuja el resto de la página hacia abajo.
+ */
+@media (min-width: 46rem) {
+  .emergencia-activa {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 1.5rem;
+    align-items: start;
+    padding: 1.25rem;
+  }
+  .emergencia-activa .etiqueta-viva,
+  .emergencia-activa .titulo-activo,
+  .emergencia-activa > p,
+  .emergencia-activa .cta {
+    grid-column: 1;
+  }
+  .emergencia-activa .figura {
+    grid-column: 2;
+    grid-row: 1 / span 4;
+    margin: 0;
+    align-self: stretch;
+  }
+  .emergencia-activa .cta {
+    align-self: end;
+  }
 }
 .emergencia-activa > :last-child {
   margin-bottom: 0;
