@@ -1,0 +1,139 @@
+---
+import Base from "../../../layouts/Base.astro";
+import CompartirWhatsApp from "../../../components/CompartirWhatsApp.astro";
+import Fuentes from "../../../components/Fuentes.astro";
+import { todosLosEventos } from "../../../data/paises";
+import type { Evento, Pais } from "../../../data/tipos";
+
+export function getStaticPaths() {
+  return todosLosEventos().map(({ pais, evento }) => ({
+    params: { pais: pais.slug, evento: evento.slug },
+    props: { pais, evento },
+  }));
+}
+
+interface Props {
+  pais: Pais;
+  evento: Evento;
+}
+const { pais, evento } = Astro.props;
+const base = `/${pais.slug}/${evento.slug}`;
+const { registro } = evento;
+---
+
+<Base
+  titulo="Cómo censar tu negocio afectado"
+  descripcion={`Si tu negocio resultó afectado por ${evento.nombre} y no te censas, quedas fuera de las ayudas que vengan después. Paso a paso y ciudad por ciudad.`}
+  ruta={`${base}/censo`}
+>
+  <nav class="migas">
+    <a href="/">Inicio</a> › <a href={`/${pais.slug}`}>{pais.nombre}</a> ›{" "}
+    <a href={base}>{evento.nombreCorto}</a> › Censo
+  </nav>
+
+  <h1>Cómo censar tu negocio afectado</h1>
+
+  <div class="caja caja-acento">
+    <p><strong>Si no te censas, quedas fuera.</strong></p>
+    <p>
+      Los alivios, créditos y subsidios que se anuncien en las próximas semanas
+      se van a repartir a partir de los censos que se están levantando <strong
+        >ahora mismo</strong
+      >. Un negocio que no aparezca en el registro tendrá muy difícil acceder
+      después, por mucho que haya perdido. Es el trámite más urgente que tienes.
+    </p>
+  </div>
+
+  {
+    evento.alertas.map((a) => (
+      <div class="caja caja-alerta">
+        <p class="titulo-alerta">{a.titulo}</p>
+        <p>{a.cuerpo}</p>
+        {a.matiz && <p class="meta">{a.matiz}</p>}
+      </div>
+    ))
+  }
+
+  <h2>Paso a paso: el {registro.nombre} ({registro.siglas})</h2>
+  <p>Es el mecanismo nacional. Estos son los pasos según la guía publicada:</p>
+  <ol class="pasos">
+    {
+      registro.pasos.map((paso, i) => (
+        <li>
+          <span class="numero">{i + 1}</span>
+          <div>
+            <p class="paso-titulo">{paso.titulo}</p>
+            <p>{paso.texto}</p>
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+
+  {
+    evento.puntosRegistro && (
+      <div class="caja caja-gris">
+        <p><strong>Dónde están los puntos de registro</strong></p>
+        <p>{evento.puntosRegistro}</p>
+      </div>
+    )
+  }
+
+  <h2>Cómo censar tu negocio, ciudad por ciudad</h2>
+  {
+    evento.ciudades.map((c) => (
+      <section class="caja">
+        <h3>{c.nombre}</h3>
+        <p class="meta">{c.division}</p>
+        {c.contexto && <p class="meta">{c.contexto}</p>}
+        <p>{c.censo.detalle}</p>
+
+        {c.censo.telefonos && (
+          <p>
+            <strong>Líneas de atención: </strong>
+            {c.censo.telefonos.map((t, i) => (
+              <>
+                {i > 0 && " · "}
+                <a class="telefono" href={`tel:${t.replace(/\s/g, "")}`}>
+                  {t}
+                </a>
+              </>
+            ))}
+          </p>
+        )}
+
+        {!c.censo.verificado && (
+          <p class="caja-pendiente">
+            <strong>Dato por confirmar.</strong> Estamos verificando el canal
+            oficial para negocios en {c.nombre}. Si lo conoces, escríbenos y lo
+            publicamos citando la fuente.
+          </p>
+        )}
+
+        <p>
+          <a href={`${base}/${c.slug}`}>
+            <strong>Ver todas las ayudas en {c.nombre} →</strong>
+          </a>
+        </p>
+      </section>
+    ))
+  }
+
+  <h2>Consejo: documenta todo hoy</h2>
+  <p>
+    Antes de limpiar, reparar o mover nada, toma fotos y videos de cómo quedó el
+    local, el inventario y los equipos, con fecha visible si puedes. Guarda
+    facturas de compra, contratos de arriendo y extractos. Ese material es lo
+    que después sostiene tanto el censo como cualquier reclamación al seguro. Lo
+    que no documentes ahora, no lo vas a poder demostrar en dos meses.
+  </p>
+
+  <Fuentes
+    fuentes={[...registro.fuentes, ...evento.alertas.flatMap((a) => a.fuentes)]}
+  />
+
+  <CompartirWhatsApp
+    ruta={`${base}/censo`}
+    texto="Si tu negocio resultó afectado, CÉNSATE. Si no apareces en el censo, quedas fuera de las ayudas. Aquí está el paso a paso por ciudad:"
+  />
+</Base>

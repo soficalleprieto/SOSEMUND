@@ -1,0 +1,105 @@
+---
+import Base from "../../../layouts/Base.astro";
+import CompartirWhatsApp from "../../../components/CompartirWhatsApp.astro";
+import { todosLosEventos } from "../../../data/paises";
+import type { Evento, Pais } from "../../../data/tipos";
+import { formatearFecha } from "../../../utils/fecha";
+
+export function getStaticPaths() {
+  return todosLosEventos().map(({ pais, evento }) => ({
+    params: { pais: pais.slug, evento: evento.slug },
+    props: { pais, evento },
+  }));
+}
+
+interface Props {
+  pais: Pais;
+  evento: Evento;
+}
+const { pais, evento } = Astro.props;
+const base = `/${pais.slug}/${evento.slug}`;
+const n = (x: number) => x.toLocaleString("es-CO");
+---
+
+<Base
+  titulo={`Ayudas para negocios tras ${evento.nombre} en ${pais.nombre}`}
+  descripcion={`Guía para comerciantes afectados por ${evento.nombre} en ${pais.nombre}: cómo censar tu negocio, qué alivios existen y cómo pedirlos.`}
+  ruta={base}
+  censoRuta={`${base}/censo`}
+>
+  <nav class="migas">
+    <a href="/">Inicio</a> › <a href={`/${pais.slug}`}>{pais.nombre}</a> ›{" "}
+    {evento.nombreCorto}
+  </nav>
+
+  <h1>Tu negocio no tiene que cerrar</h1>
+  <p class="entradilla">
+    Guía para comerciantes afectados por {evento.nombre} en {pais.nombre}. Qué
+    tienes que hacer primero, qué alivios existen y cómo pedirlos, sin letra
+    pequeña.
+  </p>
+
+  <a class="cta" href={`${base}/censo`}>
+    <span class="cta-eyebrow">Empieza por aquí</span>
+    <span class="cta-titulo">Censa tu negocio →</span>
+    <span class="cta-texto">
+      Si no apareces en el censo, quedas fuera de todas las ayudas que vengan
+      después. Es lo más urgente.
+    </span>
+  </a>
+
+  <h2>Busca por tu ciudad</h2>
+  <ul class="ciudades">
+    {
+      evento.ciudades.map((c) => (
+        <li>
+          <a href={`${base}/${c.slug}`}>
+            {c.nombre}
+            <span class="depto">{c.division}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+
+  <h2>Qué pasó</h2>
+  <p>{evento.resumen}</p>
+  <ul class="datos-evento">
+    <li><strong>Fecha:</strong> {formatearFecha(evento.fecha)}</li>
+    {evento.detalles.map((d) => (
+      <li><strong>{d.etiqueta}:</strong> {d.valor}</li>
+    ))}
+  </ul>
+
+  <h2>Por qué esto va de negocios</h2>
+  <p>
+    Golpeó a <strong>{n(evento.impacto.empresas)} empresas</strong> en {evento.impacto.ambito}.
+    De ellas, {n(evento.impacto.microempresas)} son microempresas: el{" "}
+    {Math.round((evento.impacto.microempresas / evento.impacto.empresas) * 100)} %.
+    Son {n(evento.impacto.empleos)} empleos formales en riesgo.
+  </p>
+  <p>
+    Ese perfil de negocio no tiene abogado ni contador que le rastree a qué
+    puede acceder. Por eso existe esta guía.
+  </p>
+
+  {
+    evento.cifras && (
+      <div class="caja caja-gris">
+        <p><strong>Cifras oficiales</strong></p>
+        <p>
+          A {formatearFecha(evento.cifras.fecha)}:{" "}
+          {evento.cifras.lineas
+            .map((l) => `${n(l.valor)} ${l.etiqueta}`)
+            .join(", ")}
+          . Fuente: {evento.cifras.fuente}. {evento.cifras.aviso}
+        </p>
+      </div>
+    )
+  }
+
+  <CompartirWhatsApp
+    ruta={base}
+    texto={`Si tu negocio resultó afectado por ${evento.nombre}, aquí está la guía de qué hacer y qué ayudas puedes pedir:`}
+  />
+</Base>

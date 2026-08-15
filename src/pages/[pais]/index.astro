@@ -1,0 +1,41 @@
+---
+import Base from "../../layouts/Base.astro";
+import { PAISES } from "../../data/paises";
+import type { Pais } from "../../data/tipos";
+import { formatearFecha } from "../../utils/fecha";
+
+export function getStaticPaths() {
+  return PAISES.map((pais) => ({ params: { pais: pais.slug }, props: { pais } }));
+}
+
+interface Props {
+  pais: Pais;
+}
+const { pais } = Astro.props;
+const n = (x: number) => x.toLocaleString("es-CO");
+---
+
+<Base
+  titulo={`Ayudas para negocios afectados por catástrofes en ${pais.nombre}`}
+  descripcion={`Emergencias cubiertas en ${pais.nombre}: qué ayudas existen para los negocios afectados, cómo censarse y cómo pedirlas.`}
+  ruta={`/${pais.slug}`}
+>
+  <nav class="migas"><a href="/">Inicio</a> › {pais.nombre}</nav>
+
+  <h1>{pais.nombre}</h1>
+  <p class="entradilla">
+    Estas son las emergencias que cubrimos en {pais.nombre}.
+  </p>
+
+  {
+    pais.eventos.map((evento) => (
+      <a class="cta" href={`/${pais.slug}/${evento.slug}`}>
+        <span class="cta-eyebrow">{formatearFecha(evento.fecha)}</span>
+        <span class="cta-titulo">{evento.nombreCorto} →</span>
+        <span class="cta-texto">
+          {evento.resumen} {n(evento.impacto.empresas)} empresas afectadas.
+        </span>
+      </a>
+    ))
+  }
+</Base>

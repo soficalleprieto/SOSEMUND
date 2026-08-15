@@ -302,6 +302,67 @@ main {
   font-size: 0.9rem;
 }
 
+/* --- Portada narrativa --- */
+
+.entradilla {
+  font-size: 1.15rem;
+  color: var(--texto-suave);
+}
+
+.pilares {
+  list-style: none;
+  counter-reset: pilar;
+  padding: 0;
+  margin: 1rem 0;
+}
+.pilares li {
+  counter-increment: pilar;
+  border-left: 4px solid var(--acento);
+  padding: 0.1rem 0 0.1rem 1rem;
+  margin-bottom: 1.5rem;
+}
+.pilares h3::before {
+  content: counter(pilar) ". ";
+  color: var(--acento);
+}
+.pilares p:last-child {
+  margin-bottom: 0;
+}
+
+.estado {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border: 1px solid var(--borde);
+  border-radius: 999px;
+  padding: 0.1rem 0.6rem;
+  color: var(--texto-suave);
+}
+.estado-activo {
+  border-color: var(--acento);
+  background: var(--acento-fondo);
+  color: var(--acento);
+}
+
+/* --- Migas de pan --- */
+
+.migas {
+  font-size: 0.85rem;
+  color: var(--texto-suave);
+  margin-bottom: 1rem;
+}
+
+.datos-evento {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+}
+.datos-evento li {
+  margin-bottom: 0.2rem;
+}
+
 .telefono {
   font-weight: 600;
   white-space: nowrap;

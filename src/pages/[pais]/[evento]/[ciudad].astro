@@ -1,0 +1,99 @@
+---
+import Base from "../../../layouts/Base.astro";
+import CompartirWhatsApp from "../../../components/CompartirWhatsApp.astro";
+import Fuentes from "../../../components/Fuentes.astro";
+import { todasLasCiudades } from "../../../data/paises";
+import type { Ciudad, Evento, Pais } from "../../../data/tipos";
+
+// Una plantilla, todas las ciudades de todas las emergencias.
+export function getStaticPaths() {
+  return todasLasCiudades().map(({ pais, evento, ciudad }) => ({
+    params: { pais: pais.slug, evento: evento.slug, ciudad: ciudad.slug },
+    props: { pais, evento, ciudad },
+  }));
+}
+
+interface Props {
+  pais: Pais;
+  evento: Evento;
+  ciudad: Ciudad;
+}
+const { pais, evento, ciudad: c } = Astro.props;
+const base = `/${pais.slug}/${evento.slug}`;
+const otras = evento.ciudades.filter((o) => o.slug !== c.slug);
+---
+
+<Base
+  titulo={`Ayudas para negocios en ${c.nombre}`}
+  descripcion={`Qué puede pedir un comerciante de ${c.nombre} tras ${evento.nombre}: cómo censarse, alivios bancarios, alivios tributarios y líneas de crédito. Con fuente y fecha.`}
+  ruta={`${base}/${c.slug}`}
+  censoRuta={`${base}/censo`}
+>
+  <nav class="migas">
+    <a href="/">Inicio</a> › <a href={`/${pais.slug}`}>{pais.nombre}</a> ›{" "}
+    <a href={base}>{evento.nombreCorto}</a> › {c.nombre}
+  </nav>
+
+  <h1>Ayudas para negocios en {c.nombre}</h1>
+  <p class="meta">
+    {c.division}{c.alertaMaxima && " · Estuvo en alerta máxima tras la emergencia"}
+  </p>
+  {c.contexto && <p>{c.contexto}</p>}
+
+  {/* El censo va primero en todas las páginas: es lo que desbloquea el resto. */}
+  <section class="caja caja-acento">
+    <h2 style="margin-top:0">Primero: cénsate</h2>
+    <p>{c.censo.detalle}</p>
+    {
+      c.censo.telefonos && (
+        <p>
+          <strong>Líneas de atención: </strong>
+          {c.censo.telefonos.map((t, i) => (
+            <>
+              {i > 0 && " · "}
+              <a class="telefono" href={`tel:${t.replace(/\s/g, "")}`}>
+                {t}
+              </a>
+            </>
+          ))}
+        </p>
+      )
+    }
+    <p>
+      <a href={`${base}/censo`}>
+        <strong>Ver el paso a paso completo del censo →</strong>
+      </a>
+    </p>
+  </section>
+
+  <h2>Qué puedes pedir</h2>
+  {
+    evento.ayudas.map((a) => (
+      <section class="caja">
+        <h3>{a.titulo}</h3>
+        <p><strong>{a.resumen}</strong></p>
+        <p>{a.detalle}</p>
+        {a.pendiente && (
+          <p class="caja-pendiente">
+            <strong>En verificación.</strong> {a.pendiente}
+          </p>
+        )}
+        <Fuentes fuentes={a.fuentes} />
+      </section>
+    ))
+  }
+
+  <h2>Otras ciudades</h2>
+  <ul class="enlaces-ciudades">
+    {otras.map((o) => (
+      <li>
+        <a href={`${base}/${o.slug}`}>{o.nombre}</a>
+      </li>
+    ))}
+  </ul>
+
+  <CompartirWhatsApp
+    ruta={`${base}/${c.slug}`}
+    texto={`Ayudas para negocios afectados en ${c.nombre}: cómo censarte y qué puedes pedir.`}
+  />
+</Base>

@@ -1,23 +1,28 @@
 ---
 import "../styles/global.css";
-import { ACTUALIZADO } from "../data/datos";
+import { ACTUALIZADO } from "../data/paises";
 import { formatearFecha } from "../utils/fecha";
 
 interface Props {
   titulo: string;
   descripcion: string;
-  /** Ruta canónica, p. ej. "/censo". */
+  /** Ruta canónica, p. ej. "/colombia/terremoto-2026/censo". */
   ruta: string;
+  /**
+   * Ruta al censo de la emergencia en la que está el lector. Las páginas de un
+   * evento la pasan; la portada y los hubs de país no, porque un «censarme»
+   * global no significaría nada cuando haya varias emergencias.
+   */
+  censoRuta?: string;
 }
 
-const { titulo, descripcion, ruta } = Astro.props;
+const { titulo, descripcion, ruta, censoRuta } = Astro.props;
 const canonica = new URL(ruta, Astro.site).href;
-const tituloCompleto =
-  ruta === "/" ? titulo : `${titulo} | Negocios que Laten`;
+const tituloCompleto = ruta === "/" ? titulo : `${titulo} | Negocios que Laten`;
 ---
 
 <!doctype html>
-<html lang="es-CO">
+<html lang="es">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -27,7 +32,7 @@ const tituloCompleto =
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Negocios que Laten" />
-    <meta property="og:locale" content="es_CO" />
+    <meta property="og:locale" content="es_ES" />
     <meta property="og:title" content={tituloCompleto} />
     <meta property="og:description" content={descripcion} />
     <meta property="og:url" content={canonica} />
@@ -37,7 +42,7 @@ const tituloCompleto =
     <header class="cabecera">
       <div class="contenedor">
         <a class="marca" href="/">Negocios que Laten</a>
-        <a href="/censo"><strong>Censarme</strong></a>
+        {censoRuta && <a href={censoRuta}><strong>Censarme</strong></a>}
       </div>
     </header>
 
@@ -53,8 +58,8 @@ const tituloCompleto =
         <p>
           Somos una iniciativa ciudadana independiente. No recogemos datos
           personales, no gestionamos ayudas y no recaudamos dinero. Organizamos
-          información pública y te enviamos al canal oficial que corresponde. En
-          una emergencia, llama al <strong>123</strong>.
+          información pública y te enviamos al canal oficial que corresponde.
+          Ante una emergencia, llama siempre al número de emergencias de tu país.
         </p>
         <p>Última actualización: {formatearFecha(ACTUALIZADO)}.</p>
       </div>

@@ -16,6 +16,26 @@ verificado se marca como pendiente en vez de rellenarse; cero datos personales; 
 no publicamos locales vacíos (hubo saqueos); móvil primero y muy ligero; WhatsApp en todas las
 páginas.
 
+## El proyecto es internacional, no colombiano
+
+**Decidido el 13/08/2026 y es una restricción de diseño, no una aspiración.** Arrancamos con el
+terremoto de Colombia porque es la emergencia viva, pero el destino del proyecto es **cualquier
+negocio afectado por una catástrofe, en cualquier país**. En cuanto la versión de Colombia esté
+estable, se abre a más emergencias.
+
+Consecuencias prácticas que hay que respetar siempre:
+
+- **La portada no habla del terremoto de Colombia.** Cuenta la historia universal: una catástrofe
+  golpea, los negocios mueren en silencio, y con ellos muere el barrio. Colombia aparece como la
+  emergencia activa, no como el tema del sitio.
+- **Nada específico de una emergencia se escribe en las plantillas**, solo en los datos. Si un
+  texto dice «terremoto» dentro de un `.astro`, está mal puesto.
+- El nombre y el lema ya son agnósticos a propósito: *Negocios que Laten*, «cuando un negocio
+  vuelve a latir, también vuelve a latir su comunidad». Otras frases del mismo registro: «ayúdales
+  a seguir latiendo», «cada compra mantiene un negocio latiendo».
+- **Idiomas:** por ahora todo en español en la raíz. Cuando toque, el inglés va en `/en/` sin
+  mover lo existente, así que no hace falta prefijo de idioma todavía.
+
 ## Por qué existe (no perder esto de vista)
 
 Revisamos las 11 iniciativas ciudadanas que surgieron tras el terremoto. Todas operan en **fase de
@@ -33,6 +53,23 @@ ventaja es que sabemos hacer encontrable lo que ellos no.
    Es el motor de tráfico y alimenta al pilar 1.
 3. **Apoyo económico directo, sin pasarela de pago** — se publican los datos de cobro del propio
    negocio (Nequi, Daviplata, Bre-B) y el dinero va directo. Nosotros no intermediamos nunca.
+
+## Estructura de URLs: país → evento → ciudad
+
+**Decidido el 13/08/2026 por Sofía.** Todo cuelga de país y evento, para que una segunda
+emergencia no canibalice a la primera y para que el inglés pueda ir luego en `/en/`.
+
+```
+/                                   portada: la historia, agnóstica de emergencia
+/colombia                           hub del país
+/colombia/terremoto-2026            hub del evento
+/colombia/terremoto-2026/censo      el censo
+/colombia/terremoto-2026/cali       una ciudad
+```
+
+Añadir una emergencia nueva es crear un archivo en `src/data/eventos/` y referenciarlo en
+`src/data/paises.ts`. **Ninguna plantilla debe tocarse para eso**: si hay que editar un `.astro`
+para añadir un evento, es que algo específico se coló donde no debía.
 
 ## Estado
 
