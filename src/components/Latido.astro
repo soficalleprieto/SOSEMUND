@@ -1,0 +1,33 @@
+---
+/*
+ * La línea de latido: el motivo gráfico del sitio.
+ *
+ * Es SVG en línea, así que pesa unos bytes y no pide un archivo más. No se
+ * anima: esto es una web sobre una catástrofe con cientos de muertos y un
+ * corazón parpadeando junto a esas cifras sería una falta de respeto. La
+ * quietud también comunica.
+ */
+interface Props {
+  ancho?: number;
+  clase?: string;
+}
+const { ancho = 44, clase = "" } = Astro.props;
+---
+
+<svg
+  class={`latido ${clase}`}
+  width={ancho}
+  height={ancho * 0.32}
+  viewBox="0 0 100 32"
+  fill="none"
+  aria-hidden="true"
+  focusable="false"
+>
+  <path
+    d="M0 16h22l5-11 8 22 7-15 5 8h11l4-6 6 12 5-10h21"
+    stroke="currentColor"
+    stroke-width="3.2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  ></path>
+</svg>

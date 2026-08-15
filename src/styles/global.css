@@ -1,30 +1,55 @@
 /*
- * CSS plano, sin framework. El sitio se lee en la calle, con sol, en teléfonos
- * baratos y con datos contados: tema claro de alto contraste, sin modo oscuro
- * a propósito, y nada que no haga falta.
+ * Negocios que Laten — sistema visual.
+ *
+ * Criterio: esto se lee en la calle, con sol, en teléfonos baratos y con datos
+ * contados, por alguien que acaba de perder su negocio. Así que la identidad
+ * busca parecerse a un buen informe o a un reportaje serio, no a una landing
+ * de producto: neutros muy claros teñidos hacia el verde de marca, una serif
+ * editorial en los titulares, el arcilla como único color con voz, mucho aire
+ * y ningún adorno que no signifique algo.
+ *
+ * CSS plano, sin framework, y sin JavaScript.
  */
 
+/* La serif solo se usa en titulares; el cuerpo va con la fuente del sistema,
+   que se pinta al instante y no cuesta ni un byte. */
+@import "@fontsource-variable/source-serif-4/index.css";
+
 :root {
-  --fondo: #ffffff;
-  --texto: #14181f;
-  --texto-suave: #4b5563;
-  --borde: #d1d5db;
-  --gris-fondo: #f7f7f8;
-  --acento: #0b5c3f;
-  --acento-fondo: #ecfdf5;
-  --alerta: #9b1c1c;
-  --alerta-fondo: #fef2f2;
-  --aviso: #a86500;
-  --aviso-fondo: #fffbeb;
-  --whatsapp: #25d366;
   /*
-   * Dos anchos. El texto corrido se queda en una medida de lectura cómoda
-   * (unos 70 caracteres por línea); lo que no es texto —rejillas, imágenes,
-   * cabecera y pie— puede ocupar más y evita que la página parezca flotando
-   * en el vacío en un portátil.
+   * Neutros teñidos hacia el verde de marca, no hacia el crema. El fondo color
+   * papel es el reflejo automático de cualquier diseño "cálido" y se reconoce a
+   * la legua; aquí la calidez la llevan la serif de los titulares y el color
+   * arcilla, que es donde tiene que estar.
    */
+  --fondo: #fcfdfc;
+  --fondo-hundido: #f1f5f3;
+  --texto: #131a17;
+  --texto-suave: #4d5a54;
+  --borde: #dde4e0;
+  --borde-fuerte: #c2ccc7;
+
+  /* Verde profundo, del color de lo que vuelve a crecer. */
+  --acento: #0e5643;
+  --acento-claro: #e7f0ec;
+  /* Arcilla: ladrillo, tierra, reconstrucción. Aquí vive el calor del sitio. */
+  --arcilla: #a34a26;
+  --arcilla-claro: #fbf1ec;
+
+  --alerta: #93211d;
+  --alerta-fondo: #fdf1f0;
+  --aviso: #7d5100;
+  --aviso-fondo: #fcf6e8;
+  --whatsapp: #0f7038;
+
   --ancho: 48rem;
   --ancho-amplio: 64rem;
+
+  --serif: "Source Serif 4 Variable", Georgia, "Times New Roman", serif;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --radio: 10px;
+  --sombra: 0 1px 2px rgba(26, 23, 20, 0.04), 0 4px 14px rgba(26, 23, 20, 0.05);
 }
 
 *,
@@ -41,37 +66,127 @@ body {
   margin: 0;
   background: var(--fondo);
   color: var(--texto);
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-family: var(--sans);
   font-size: 17px;
-  line-height: 1.6;
+  line-height: 1.65;
+  text-rendering: optimizeLegibility;
+}
+
+/* --- Tipografía --- */
+
+h1,
+h2,
+h3,
+.marca,
+.titulo-activo,
+.cta-titulo {
+  font-family: var(--serif);
+  font-weight: 600;
+  letter-spacing: -0.011em;
+  color: var(--texto);
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
 }
 
 h1 {
-  font-size: 1.9rem;
-  line-height: 1.2;
-  margin: 0 0 0.5rem;
+  font-size: clamp(2rem, 1.5rem + 2.2vw, 2.9rem);
+  line-height: 1.12;
+  margin: 0 0 0.75rem;
 }
 h2 {
-  font-size: 1.4rem;
-  line-height: 1.3;
-  margin: 2rem 0 0.5rem;
+  font-size: clamp(1.4rem, 1.2rem + 0.9vw, 1.75rem);
+  line-height: 1.2;
+  margin: 2.75rem 0 0.75rem;
 }
 h3 {
-  font-size: 1.2rem;
-  margin: 0 0 0.25rem;
+  font-size: 1.22rem;
+  line-height: 1.3;
+  margin: 0 0 0.35rem;
+}
+p,
+li {
+  text-wrap: pretty;
 }
 p {
-  margin: 0 0 0.9rem;
+  margin: 0 0 1rem;
 }
 
 a {
   color: var(--acento);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.16em;
   touch-action: manipulation;
+}
+/* El hover solo en punteros reales: en táctil se dispara al tocar y deja el
+   estado pegado. */
+@media (hover: hover) and (pointer: fine) {
+  a:hover {
+    text-decoration-thickness: 2px;
+  }
 }
 a:focus-visible,
 button:focus-visible {
-  outline: 3px solid var(--acento);
-  outline-offset: 2px;
+  outline: 2px solid var(--acento);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+/* Respuesta al pulsar, que en móvil es la única realimentación que hay. */
+.cta:active,
+.cta-secundaria:active,
+.wa:active,
+.localidades a:active,
+.enlaces-localidades a:active,
+.enlace-censo:active {
+  transform: scale(0.985);
+}
+.cta,
+.cta-secundaria,
+.wa,
+.localidades a,
+.enlaces-localidades a,
+.enlace-censo {
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    transform 100ms ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+strong {
+  font-weight: 650;
+}
+
+/* --- El latido: motivo gráfico del sitio --- */
+
+.latido {
+  display: block;
+  color: var(--arcilla);
+  overflow: visible;
+}
+
+/* Separador entre bloques largos. */
+.separador {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 3rem 0 2rem;
+  color: var(--borde-fuerte);
+}
+.separador::before,
+.separador::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--borde);
 }
 
 /* --- Estructura --- */
@@ -79,10 +194,9 @@ button:focus-visible {
 .contenedor {
   max-width: var(--ancho);
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 0 1.25rem;
 }
 
-/* Cabecera y pie acompañan al ancho amplio para no quedar descolgados. */
 .cabecera .contenedor,
 .pie .contenedor {
   max-width: var(--ancho-amplio);
@@ -90,66 +204,104 @@ button:focus-visible {
 
 .cabecera {
   border-bottom: 1px solid var(--borde);
+  background: var(--fondo);
 }
 .cabecera .contenedor {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding-block: 0.75rem;
+  padding-block: 0.9rem;
 }
 .marca {
-  font-weight: 700;
-  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 1.15rem;
+  font-weight: 600;
   text-decoration: none;
+  color: var(--acento);
+}
+.marca .latido {
+  color: var(--arcilla);
+  flex: none;
+}
+.enlace-censo {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-family: var(--sans);
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid var(--borde-fuerte);
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+  white-space: nowrap;
+}
+@media (hover: hover) and (pointer: fine) {
+  .enlace-censo:hover {
+    border-color: var(--acento);
+    background: var(--acento-claro);
+  }
 }
 
 main {
-  padding-block: 1.5rem 2rem;
+  padding-block: 2rem 3rem;
 }
 
 .pie {
-  margin-top: 3rem;
+  margin-top: 4rem;
   border-top: 1px solid var(--borde);
-  background: var(--gris-fondo);
-  font-size: 0.9rem;
+  background: var(--fondo-hundido);
+  font-size: 0.92rem;
   color: var(--texto-suave);
 }
 .pie .contenedor {
-  padding-block: 1.5rem;
+  padding-block: 2rem;
 }
 .pie strong {
   color: var(--texto);
 }
 
-/* --- Bloques destacados --- */
+/* --- Bloques --- */
 
 .caja {
   border: 1px solid var(--borde);
-  border-radius: 0.5rem;
-  padding: 1rem;
-  margin: 1rem 0;
+  border-radius: var(--radio);
+  background: var(--fondo);
+  padding: 1.25rem;
+  margin: 1.25rem 0;
+  box-shadow: var(--sombra);
 }
 .caja > :last-child {
   margin-bottom: 0;
 }
 
+/* Bordes completos y tinte de fondo, nunca una franja lateral de color: es el
+   recurso más manido para señalar un aviso y se nota. */
 .caja-acento {
-  border: 2px solid var(--acento);
-  background: var(--acento-fondo);
+  border: 1px solid var(--acento);
+  background: var(--acento-claro);
+  box-shadow: none;
 }
 .caja-alerta {
-  border: 2px solid var(--alerta);
+  border: 1px solid var(--alerta);
   background: var(--alerta-fondo);
+  box-shadow: none;
 }
 .caja-pendiente {
-  border: 1px solid var(--aviso);
+  border: 1px solid #d8bd7a;
+  border-radius: 6px;
   background: var(--aviso-fondo);
-  font-size: 0.92rem;
-  padding: 0.6rem 0.8rem;
+  font-size: 0.93rem;
+  padding: 0.75rem 0.9rem;
+  box-shadow: none;
 }
 .caja-gris {
-  background: var(--gris-fondo);
+  background: var(--fondo-hundido);
+  border-color: var(--borde);
+  box-shadow: none;
 }
 
 .titulo-alerta {
@@ -157,35 +309,66 @@ main {
   font-weight: 700;
 }
 
-/* --- Llamada a la acción principal --- */
+/* --- Llamadas a la acción --- */
 
 .cta {
   display: block;
   background: var(--acento);
   color: #fff;
   text-decoration: none;
-  border-radius: 0.5rem;
-  padding: 1.25rem;
-  margin: 1.5rem 0;
+  border-radius: var(--radio);
+  padding: 1.35rem;
+  margin: 1.75rem 0;
+  box-shadow: var(--sombra);
+}
+@media (hover: hover) and (pointer: fine) {
+  .cta:hover {
+    background: #0b4636;
+  }
 }
 .cta .cta-eyebrow {
   display: block;
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-family: var(--sans);
+  font-size: 0.76rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  opacity: 0.9;
+  letter-spacing: 0.08em;
+  opacity: 0.85;
 }
 .cta .cta-titulo {
   display: block;
-  font-size: 1.3rem;
-  font-weight: 700;
-  margin-top: 0.15rem;
+  font-size: 1.4rem;
+  color: #fff;
+  margin-top: 0.3rem;
 }
 .cta .cta-texto {
   display: block;
-  font-size: 0.92rem;
-  margin-top: 0.35rem;
+  font-size: 0.94rem;
+  margin-top: 0.45rem;
+  opacity: 0.94;
+}
+
+.cta-secundaria {
+  display: block;
+  border: 1px solid var(--borde-fuerte);
+  border-radius: var(--radio);
+  padding: 1rem 1.15rem;
+  margin: 1.5rem 0;
+  text-decoration: none;
+  color: var(--texto);
+  background: var(--fondo);
+}
+@media (hover: hover) and (pointer: fine) {
+  .cta-secundaria:hover {
+    border-color: var(--acento);
+    background: var(--acento-claro);
+  }
+}
+.cta-secundaria span {
+  display: block;
+  font-size: 0.93rem;
+  color: var(--texto-suave);
+  margin-top: 0.25rem;
 }
 
 /* --- Pasos numerados --- */
@@ -193,57 +376,66 @@ main {
 .pasos {
   list-style: none;
   padding: 0;
-  margin: 1rem 0;
+  margin: 1.5rem 0;
 }
 .pasos li {
   display: flex;
-  gap: 0.75rem;
-  margin-bottom: 1rem;
+  gap: 1rem;
+  margin-bottom: 1.4rem;
 }
 .pasos .numero {
-  flex: 0 0 2rem;
-  height: 2rem;
+  flex: 0 0 2.1rem;
+  height: 2.1rem;
   border-radius: 50%;
   background: var(--acento);
   color: #fff;
-  font-weight: 700;
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  font-weight: 600;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .pasos .paso-titulo {
-  font-weight: 600;
-  margin: 0;
+  font-weight: 650;
+  margin: 0 0 0.1rem;
 }
 .pasos p {
   margin: 0;
 }
 
-/* --- Rejilla de ciudades --- */
+/* --- Localidades --- */
 
 .localidades {
   list-style: none;
   padding: 0;
-  margin: 0.75rem 0;
+  margin: 1rem 0;
   display: grid;
-  /* Dos columnas en móvil, tres o cuatro según quepan en pantallas grandes. */
   grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
   gap: 0.75rem;
 }
 .localidades a {
   display: block;
-  border: 2px solid var(--borde);
-  border-radius: 0.5rem;
-  padding: 0.7rem 1rem;
-  font-weight: 600;
+  border: 1px solid var(--borde-fuerte);
+  border-radius: var(--radio);
+  padding: 0.8rem 1rem;
+  font-weight: 650;
   text-decoration: none;
   color: var(--texto);
+  background: var(--fondo);
+}
+@media (hover: hover) and (pointer: fine) {
+  .localidades a:hover {
+    border-color: var(--acento);
+    background: var(--acento-claro);
+  }
 }
 .localidades .depto {
   display: block;
   font-weight: 400;
-  font-size: 0.78rem;
+  font-size: 0.79rem;
   color: var(--texto-suave);
+  margin-top: 0.1rem;
 }
 
 .enlaces-localidades {
@@ -255,39 +447,50 @@ main {
 }
 .enlaces-localidades a {
   display: inline-block;
-  border: 2px solid var(--borde);
-  border-radius: 0.5rem;
-  padding: 0.5rem 1rem;
+  border: 1px solid var(--borde-fuerte);
+  border-radius: 999px;
+  padding: 0.4rem 0.95rem;
+  font-size: 0.94rem;
   font-weight: 600;
   text-decoration: none;
   color: var(--texto);
 }
+@media (hover: hover) and (pointer: fine) {
+  .enlaces-localidades a:hover {
+    border-color: var(--acento);
+    background: var(--acento-claro);
+  }
+}
 
-/* --- Botón de WhatsApp: es un enlace normal, sin JavaScript --- */
+/* --- WhatsApp: es un enlace normal, sin JavaScript --- */
 
 .wa {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 0.55rem;
   background: var(--whatsapp);
-  color: #000;
-  font-weight: 600;
+  color: #fff;
+  font-weight: 650;
   text-decoration: none;
-  border-radius: 0.5rem;
+  border-radius: var(--radio);
   padding: 1rem;
-  margin-top: 1.5rem;
+  margin-top: 2rem;
+}
+@media (hover: hover) and (pointer: fine) {
+  .wa:hover {
+    background: #0b5a2c;
+  }
 }
 
 /* --- Fuentes --- */
 
 .fuentes {
-  border: 1px solid var(--borde);
-  background: var(--gris-fondo);
-  border-radius: 0.5rem;
-  padding: 1rem;
+  border-top: 1px solid var(--borde);
+  padding-top: 0.9rem;
   margin-top: 1.5rem;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
+  color: var(--texto-suave);
 }
 .fuentes ul {
   margin: 0.5rem 0;
@@ -296,48 +499,58 @@ main {
 .fuentes li {
   margin-bottom: 0.4rem;
 }
-.fuentes .fecha {
-  color: var(--texto-suave);
-}
 .fuentes .aviso-verificar {
   margin: 0.75rem 0 0;
-  color: var(--texto-suave);
 }
 
+/* El lema se distingue por tipografía y aire, no por una franja de color. */
 .lema {
-  border-left: 4px solid var(--acento);
-  padding-left: 0.75rem;
+  font-family: var(--serif);
+  font-size: clamp(1.35rem, 1.1rem + 1vw, 1.7rem);
+  line-height: 1.35;
   font-style: italic;
-  color: var(--texto-suave);
+  color: var(--acento);
+  text-align: center;
+  text-wrap: balance;
+  margin: 2.5rem auto;
+  max-width: 32ch;
 }
 
 .meta {
   color: var(--texto-suave);
-  font-size: 0.9rem;
+  font-size: 0.92rem;
 }
-
-/* --- Portada narrativa --- */
 
 .entradilla {
-  font-size: 1.15rem;
+  font-size: 1.18rem;
+  line-height: 1.55;
   color: var(--texto-suave);
 }
+
+/* --- Pilares --- */
 
 .pilares {
   list-style: none;
   counter-reset: pilar;
   padding: 0;
-  margin: 1rem 0;
+  margin: 1.5rem 0;
 }
 .pilares li {
   counter-increment: pilar;
-  border-left: 4px solid var(--acento);
-  padding: 0.1rem 0 0.1rem 1rem;
-  margin-bottom: 1.5rem;
+  border-top: 1px solid var(--borde);
+  padding-top: 1.25rem;
+  margin-bottom: 1.75rem;
+}
+.pilares h3 {
+  display: flex;
+  gap: 0.6rem;
 }
 .pilares h3::before {
-  content: counter(pilar) ". ";
-  color: var(--acento);
+  content: counter(pilar);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--arcilla);
+  padding-top: 0.28rem;
 }
 .pilares p:last-child {
   margin-bottom: 0;
@@ -345,63 +558,87 @@ main {
 
 .estado {
   display: inline-block;
-  font-size: 0.78rem;
-  font-weight: 600;
+  font-size: 0.72rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  border: 1px solid var(--borde);
+  letter-spacing: 0.07em;
+  border: 1px solid var(--borde-fuerte);
   border-radius: 999px;
-  padding: 0.1rem 0.6rem;
+  padding: 0.12rem 0.7rem;
   color: var(--texto-suave);
 }
 .estado-activo {
   border-color: var(--acento);
-  background: var(--acento-fondo);
+  background: var(--acento-claro);
   color: var(--acento);
 }
 
-/* --- Imágenes con crédito --- */
+/* --- Imágenes --- */
 
 .figura {
-  margin: 1.25rem 0;
+  margin: 1.5rem 0;
 }
 .figura img {
   width: 100%;
   height: auto;
-  border-radius: 0.5rem;
+  border-radius: var(--radio);
   display: block;
+  background: var(--fondo-hundido);
 }
 .figura figcaption {
   font-size: 0.82rem;
   color: var(--texto-suave);
-  margin-top: 0.4rem;
+  margin-top: 0.55rem;
   line-height: 1.45;
+  text-wrap: pretty;
 }
 .figura .credito a {
   color: var(--texto-suave);
 }
 
-/* --- Emergencia activa en portada --- */
+/* --- Emergencia activa --- */
 
 .emergencia-activa {
-  border: 2px solid var(--acento);
-  border-radius: 0.5rem;
-  padding: 1rem;
-  margin-bottom: 2rem;
+  border: 1px solid var(--borde-fuerte);
+  border-radius: var(--radio);
+  background: var(--fondo);
+  padding: 1.25rem;
+  margin-bottom: 2.5rem;
+  box-shadow: var(--sombra);
+}
+.emergencia-activa > :last-child {
+  margin-bottom: 0;
+}
+.titulo-activo {
+  margin: 0.35rem 0 0.5rem;
+  font-size: clamp(1.5rem, 1.2rem + 1.2vw, 1.9rem);
+}
+.etiqueta-viva {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--arcilla);
+}
+.etiqueta-viva .punto {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--arcilla);
+  flex: none;
 }
 
-/*
- * En pantallas anchas la emergencia activa pasa a dos columnas: la foto al
- * lado del texto en vez de debajo. Deja de haber una imagen gigante que
- * empuja el resto de la página hacia abajo.
- */
 @media (min-width: 46rem) {
   .emergencia-activa {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0 1.5rem;
+    gap: 0 1.75rem;
     align-items: start;
-    padding: 1.25rem;
+    padding: 1.5rem;
   }
   .emergencia-activa .etiqueta-viva,
   .emergencia-activa .titulo-activo,
@@ -413,74 +650,53 @@ main {
     grid-column: 2;
     grid-row: 1 / span 4;
     margin: 0;
-    align-self: stretch;
   }
   .emergencia-activa .cta {
     align-self: end;
+    margin-bottom: 0;
   }
 }
-.emergencia-activa > :last-child {
-  margin-bottom: 0;
-}
-.titulo-activo {
-  margin-top: 0.2rem;
-  font-size: 1.5rem;
-}
-.etiqueta-viva {
-  display: flex;
-  align-items: center;
-  gap: 0.45rem;
-  margin: 0;
-  font-size: 0.8rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--alerta);
-}
-.etiqueta-viva .punto {
-  width: 0.55rem;
-  height: 0.55rem;
-  border-radius: 50%;
-  background: var(--alerta);
-  flex: none;
-}
 
-/* --- Migas de pan --- */
+/* --- Migas --- */
 
 .migas {
-  font-size: 0.85rem;
+  font-size: 0.84rem;
   color: var(--texto-suave);
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
+}
+.migas a {
+  color: var(--texto-suave);
 }
 
 .datos-evento {
   list-style: none;
   padding: 0;
-  margin: 0 0 1rem;
+  margin: 0 0 1.25rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  gap: 0.75rem;
 }
 .datos-evento li {
-  margin-bottom: 0.2rem;
+  font-size: 0.94rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--borde);
 }
 
 .telefono {
-  font-weight: 600;
+  font-weight: 650;
   white-space: nowrap;
 }
 
-/* --- Llamada secundaria --- */
-
-.cta-secundaria {
-  display: block;
-  border: 2px solid var(--borde);
-  border-radius: 0.5rem;
-  padding: 0.9rem 1rem;
-  margin: 1.25rem 0;
-  text-decoration: none;
-  color: var(--texto);
+/* El latido como firma recurrente: cabecera, lema, bloque de emergencia y pie. */
+.marca-lema {
+  display: flex;
+  justify-content: center;
+  margin-top: 2.25rem;
 }
-.cta-secundaria span {
-  display: block;
-  font-size: 0.92rem;
-  color: var(--texto-suave);
-  margin-top: 0.2rem;
+.pie .latido {
+  margin: 0 0 0.9rem;
+  opacity: 0.75;
+}
+.emergencia-activa .etiqueta-viva .latido {
+  color: var(--arcilla);
 }

@@ -7,6 +7,7 @@
 import Base from "../layouts/Base.astro";
 import CompartirWhatsApp from "../components/CompartirWhatsApp.astro";
 import Imagen from "../components/Imagen.astro";
+import Latido from "../components/Latido.astro";
 import { todosLosEventos } from "../data/paises";
 import { IMG_COLOMBIA } from "../data/imagenes";
 import { formatearFecha } from "../utils/fecha";
@@ -62,6 +63,7 @@ const n = (x: number) => x.toLocaleString("es-CO");
   <p class="lema">
     Cuando un negocio vuelve a latir, también vuelve a latir su comunidad.
   </p>
+  <div class="marca-lema"><Latido ancho={64} /></div>
 
   <h2>El problema no es que no haya ayudas</h2>
   <p>

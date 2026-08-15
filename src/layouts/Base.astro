@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import { ACTUALIZADO } from "../data/paises";
 import { formatearFecha } from "../utils/fecha";
+import Latido from "../components/Latido.astro";
 
 interface Props {
   titulo: string;
@@ -41,8 +42,11 @@ const tituloCompleto = ruta === "/" ? titulo : `${titulo} | Negocios que Laten`;
   <body>
     <header class="cabecera">
       <div class="contenedor">
-        <a class="marca" href="/">Negocios que Laten</a>
-        {censoRuta && <a href={censoRuta}><strong>Censarme</strong></a>}
+        <a class="marca" href="/">
+          <Latido ancho={30} />
+          Negocios que Laten
+        </a>
+        {censoRuta && <a class="enlace-censo" href={censoRuta}>Censar mi negocio</a>}
       </div>
     </header>
 
@@ -54,6 +58,7 @@ const tituloCompleto = ruta === "/" ? titulo : `${titulo} | Negocios que Laten`;
 
     <footer class="pie">
       <div class="contenedor">
+        <Latido ancho={40} />
         <p><strong>Esto no es un canal oficial.</strong></p>
         <p>
           Somos una iniciativa ciudadana independiente. No recogemos datos
