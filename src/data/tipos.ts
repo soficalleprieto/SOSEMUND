@@ -1,7 +1,7 @@
 /**
  * Modelo de datos del sitio.
  *
- * Negocios que Laten no es un sitio sobre el terremoto de Colombia: es un sitio
+ * S.O.S.EMUND no es un sitio sobre el terremoto de Colombia: es un sitio
  * sobre negocios afectados por catástrofes, que ahora mismo cubre el terremoto
  * de Colombia. Por eso todo cuelga de País → Evento → Localidad, y NADA
  * específico de una emergencia se escribe en las plantillas: solo aquí.

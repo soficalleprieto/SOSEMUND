@@ -44,7 +44,6 @@ const enlaces = REDES.filter(([k]) => n.contacto[k]);
       : `${n.actividad} en ${localidad?.nombre}. Cómo quedó tras ${evento.nombre}, qué necesita y cómo apoyarlo.`
   }
   ruta={`${base}/negocios/${n.slug}`}
-  censoRuta={`${base}/censo`}
   noIndexar={n.esEjemplo}
 >
   <nav class="migas">
@@ -180,7 +179,7 @@ const enlaces = REDES.filter(([k]) => n.contacto[k]);
     ruta={`${base}/negocios/${n.slug}`}
     texto={
       n.esEjemplo
-        ? "Así se ve la ficha de un negocio en Negocios que Laten:"
+        ? "Así se ve la ficha de un negocio en S.O.S.EMUND:"
         : `${n.nombre} resultó afectado por el terremoto y sigue adelante. Mira qué necesita:`
     }
   />

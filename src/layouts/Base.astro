@@ -1,27 +1,44 @@
 ---
+import { Image } from "astro:assets";
 import "../styles/global.css";
-import { ACTUALIZADO } from "../data/paises";
+import { ACTUALIZADO, todosLosEventos } from "../data/paises";
 import { formatearFecha } from "../utils/fecha";
-import Latido from "../components/Latido.astro";
+import isotipo from "../assets/sosemund-isotipo.png";
+import { MARCA } from "../data/marca";
 
 interface Props {
   titulo: string;
   descripcion: string;
   /** Ruta canónica, p. ej. "/colombia/terremoto-2026/censo". */
   ruta: string;
-  /**
-   * Ruta al censo de la emergencia en la que está el lector. Las páginas de un
-   * evento la pasan; la portada y los hubs de país no, porque un «censarme»
-   * global no significaría nada cuando haya varias emergencias.
-   */
-  censoRuta?: string;
   /** Para páginas que no deben salir en buscadores, como la ficha de ejemplo. */
   noIndexar?: boolean;
 }
 
-const { titulo, descripcion, ruta, censoRuta, noIndexar } = Astro.props;
+const { titulo, descripcion, ruta, noIndexar } = Astro.props;
 const canonica = new URL(ruta, Astro.site).href;
-const tituloCompleto = ruta === "/" ? titulo : `${titulo} | Negocios que Laten`;
+const tituloCompleto = ruta === "/" ? titulo : `${titulo} | ${MARCA.nombre}`;
+
+/*
+ * El menú se construye desde la emergencia activa: mientras solo haya una, lo
+ * útil es llevar directo a lo que se busca y no obligar a navegar país a país.
+ * Cuando haya varias, aquí es donde habrá que replantearlo.
+ */
+const activa = todosLosEventos()[0];
+const base = activa ? `/${activa.pais.slug}/${activa.evento.slug}` : "";
+const MENU = activa
+  ? [
+      { texto: "Censar mi negocio", href: `${base}/censo`, destacado: true },
+      { texto: "Ayudas", href: base },
+      { texto: "Negocios", href: `${base}/negocios` },
+      { texto: "Dónde hay ayuda", href: `${base}/iniciativas` },
+      { texto: "Quién lo cuenta", href: `${base}/cuentas` },
+      { texto: "Sobre", href: "/sobre" },
+    ]
+  : [{ texto: "Sobre", href: "/sobre" }];
+
+const aqui = Astro.url.pathname.replace(/(.)\/$/, "$1");
+const esActual = (href: string) => aqui === href.replace(/(.)\/$/, "$1");
 ---
 
 <!doctype html>
@@ -35,7 +52,7 @@ const tituloCompleto = ruta === "/" ? titulo : `${titulo} | Negocios que Laten`;
     {noIndexar && <meta name="robots" content="noindex, follow" />}
 
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Negocios que Laten" />
+    <meta property="og:site_name" content={MARCA.nombre} />
     <meta property="og:locale" content="es_ES" />
     <meta property="og:title" content={tituloCompleto} />
     <meta property="og:description" content={descripcion} />
@@ -43,17 +60,46 @@ const tituloCompleto = ruta === "/" ? titulo : `${titulo} | Negocios que Laten`;
   </head>
 
   <body>
+    <a class="saltar" href="#contenido">Saltar al contenido</a>
+
     <header class="cabecera">
       <div class="contenedor">
         <a class="marca" href="/">
-          <Latido ancho={30} />
-          Negocios que Laten
+          <Image
+            src={isotipo}
+            alt=""
+            width={46}
+            densities={[1, 2]}
+            loading="eager"
+          />
+          <span class="marca-texto">
+            <span class="marca-nombre">{MARCA.nombre}</span>
+            <span class="marca-descriptor">{MARCA.descriptor}</span>
+          </span>
         </a>
-        {censoRuta && <a class="enlace-censo" href={censoRuta}>Censar mi negocio</a>}
       </div>
+
+      <nav class="menu" aria-label="Secciones">
+        <div class="contenedor">
+          {
+            MENU.map((m) => (
+              <a
+                href={m.href}
+                class:list={[
+                  { destacado: m.destacado },
+                  { actual: esActual(m.href) },
+                ]}
+                aria-current={esActual(m.href) ? "page" : undefined}
+              >
+                {m.texto}
+              </a>
+            ))
+          }
+        </div>
+      </nav>
     </header>
 
-    <main>
+    <main id="contenido">
       <div class="contenedor">
         <slot />
       </div>
@@ -61,13 +107,13 @@ const tituloCompleto = ruta === "/" ? titulo : `${titulo} | Negocios que Laten`;
 
     <footer class="pie">
       <div class="contenedor">
-        <Latido ancho={40} />
+        <p class="pie-lema">{MARCA.lema}</p>
         <p><strong>Esto no es un canal oficial.</strong></p>
         <p>
-          Somos una iniciativa ciudadana independiente. No recogemos datos
-          personales, no gestionamos ayudas y no recaudamos dinero. Organizamos
-          información pública y te enviamos al canal oficial que corresponde.
-          Ante una emergencia, llama siempre al número de emergencias de tu país.
+          Somos una iniciativa ciudadana independiente. No gestionamos ayudas y
+          no recaudamos dinero. Organizamos información pública y te enviamos al
+          canal oficial que corresponde. Ante una emergencia, llama siempre al
+          número de emergencias de tu país.
         </p>
         <p>
           <a href="/sobre">Quién está detrás de esto</a> ·{" "}

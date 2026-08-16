@@ -1,12 +1,14 @@
 /*
- * Negocios que Laten — sistema visual.
+ * S.O.S.EMUND — S.O.S. para Emprendedores del Mundo.
+ * «Sostener el tesón de quienes deciden seguir»
+ *
+ * Sistema visual derivado del logo: azul petróleo profundo y naranja. El azul
+ * lleva la estructura y el peso; el naranja es la única voz de color y se
+ * reserva para lo que de verdad reclama atención.
  *
  * Criterio: esto se lee en la calle, con sol, en teléfonos baratos y con datos
- * contados, por alguien que acaba de perder su negocio. Así que la identidad
- * busca parecerse a un buen informe o a un reportaje serio, no a una landing
- * de producto: neutros muy claros teñidos hacia el verde de marca, una serif
- * editorial en los titulares, el arcilla como único color con voz, mucho aire
- * y ningún adorno que no signifique algo.
+ * contados, por alguien que acaba de perder su negocio. Se parece a un buen
+ * informe, no a una landing de producto.
  *
  * CSS plano, sin framework, y sin JavaScript.
  */
@@ -17,29 +19,33 @@
 
 :root {
   /*
-   * Neutros teñidos hacia el verde de marca, no hacia el crema. El fondo color
-   * papel es el reflejo automático de cualquier diseño "cálido" y se reconoce a
-   * la legua; aquí la calidez la llevan la serif de los titulares y el color
-   * arcilla, que es donde tiene que estar.
+   * Neutros teñidos hacia el azul de marca. El naranja del logo es el único
+   * color con voz: si se usa para todo deja de significar nada.
    */
-  --fondo: #fcfdfc;
-  --fondo-hundido: #f1f5f3;
-  --texto: #131a17;
-  --texto-suave: #4d5a54;
-  --borde: #dde4e0;
-  --borde-fuerte: #c2ccc7;
+  --fondo: #fcfdfd;
+  --fondo-hundido: #eef3f5;
+  --texto: #0b1c26;
+  --texto-suave: #4a5e69;
+  --borde: #dbe4e8;
+  --borde-fuerte: #b9c7ce;
 
-  /* Verde profundo, del color de lo que vuelve a crecer. */
-  --acento: #0e5643;
-  --acento-claro: #e7f0ec;
-  /* Arcilla: ladrillo, tierra, reconstrucción. Aquí vive el calor del sitio. */
-  --arcilla: #a34a26;
-  --arcilla-claro: #fbf1ec;
+  /* Azul petróleo del logo. Estructura, peso, confianza. */
+  --acento: #012a3c;
+  --acento-claro: #e7eef1;
+  /*
+   * Naranja del logo, la única voz de color. En dos tonos por accesibilidad:
+   * el literal del logo (#f3940d) solo alcanza 2,3:1 sobre el fondo, así que
+   * queda para grafismo —puntos, bordes, rellenos— y el texto usa el oscuro,
+   * que es el más claro que pasa WCAG AA en los tres fondos del sitio.
+   */
+  --arcilla: #a55803;
+  --arcilla-viva: #f3940d;
+  --arcilla-claro: #fdf3e6;
 
-  --alerta: #93211d;
+  --alerta: #a3261f;
   --alerta-fondo: #fdf1f0;
-  --aviso: #7d5100;
-  --aviso-fondo: #fcf6e8;
+  --aviso: #8a5a00;
+  --aviso-fondo: #fdf6e8;
   --whatsapp: #0f7038;
 
   /* Medida de lectura del texto corrido: unos 68 caracteres por línea. */
@@ -150,12 +156,6 @@ button:focus-visible {
 .wa,
 .localidades a,
 .enlaces-localidades a,
-.enlace-censo {
-  transition:
-    background-color 150ms ease,
-    border-color 150ms ease,
-    transform 100ms ease;
-}
 @media (prefers-reduced-motion: reduce) {
   * {
     transition-duration: 0.01ms !important;
@@ -167,13 +167,6 @@ strong {
   font-weight: 650;
 }
 
-/* --- El latido: motivo gráfico del sitio --- */
-
-.latido {
-  display: block;
-  color: var(--arcilla);
-  overflow: visible;
-}
 
 /* Separador entre bloques largos. */
 .separador {
@@ -230,37 +223,108 @@ main .pilares h3 {
   gap: 1rem;
   padding-block: 0.9rem;
 }
+
+
+/* --- Marca y menú --- */
+
+.saltar {
+  position: absolute;
+  left: -9999px;
+  background: var(--acento);
+  color: #fff;
+  padding: 0.7rem 1rem;
+  z-index: 10;
+}
+.saltar:focus {
+  left: 1rem;
+  top: 0.5rem;
+}
+
 .marca {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 0.55rem;
-  font-size: 1.15rem;
-  font-weight: 600;
+  gap: 0.7rem;
   text-decoration: none;
   color: var(--acento);
 }
-.marca .latido {
-  color: var(--arcilla);
+.marca img {
   flex: none;
+  height: auto;
 }
-.enlace-censo {
+.marca-texto {
+  display: block;
+  line-height: 1.15;
+}
+.marca-nombre {
+  display: block;
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.marca-descriptor {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--texto-suave);
+  margin-top: 0.1rem;
+}
+
+.menu {
+  border-top: 1px solid var(--borde);
+  background: var(--fondo-hundido);
+  /* En móvil se desliza en horizontal en vez de apilarse o esconderse tras un
+     botón: sin JavaScript, y todo el menú sigue estando a un dedo. */
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.menu::-webkit-scrollbar {
+  display: none;
+}
+.menu .contenedor {
+  display: flex;
+  gap: 0.35rem;
+  padding-block: 0.4rem;
+}
+.menu a {
   display: inline-flex;
   align-items: center;
-  min-height: 44px;
-  font-family: var(--sans);
+  min-height: 40px;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
   font-size: 0.92rem;
   font-weight: 600;
   text-decoration: none;
-  border: 1px solid var(--borde-fuerte);
-  border-radius: 999px;
-  padding: 0.35rem 0.9rem;
+  color: var(--texto-suave);
   white-space: nowrap;
 }
+.menu a.actual {
+  background: var(--fondo);
+  color: var(--acento);
+  box-shadow: inset 0 0 0 1px var(--borde-fuerte);
+}
+.menu a.destacado {
+  color: var(--arcilla);
+}
+.menu a.destacado.actual {
+  color: var(--arcilla);
+  box-shadow: inset 0 0 0 1px var(--arcilla-viva);
+}
 @media (hover: hover) and (pointer: fine) {
-  .enlace-censo:hover {
-    border-color: var(--acento);
-    background: var(--acento-claro);
+  .menu a:hover {
+    color: var(--acento);
+    background: var(--fondo);
   }
+}
+
+.pie-lema {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  font-style: italic;
+  color: var(--acento);
+  margin-bottom: 1.25rem;
 }
 
 main {
@@ -710,17 +774,7 @@ main {
 }
 
 /* El latido como firma recurrente: cabecera, lema, bloque de emergencia y pie. */
-.marca-lema {
-  margin: 2.25rem 0;
-}
-.pie .latido {
-  margin: 0 0 0.9rem;
-  opacity: 0.75;
-}
-.emergencia-activa .etiqueta-viva .latido {
-  color: var(--arcilla);
-}
-
+.pie .emergencia-activa .etiqueta-viva 
 /* --- Fichas de negocio --- */
 
 .danos {

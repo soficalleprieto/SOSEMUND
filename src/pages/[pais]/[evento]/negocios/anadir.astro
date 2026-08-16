@@ -23,7 +23,7 @@ interface Props {
 const { pais, evento } = Astro.props;
 const base = `/${pais.slug}/${evento.slug}`;
 
-const mensaje = `Hola. Mi negocio resultó afectado por el terremoto y quiero publicar su ficha en Negocios que Laten.
+const mensaje = `Hola. Mi negocio resultó afectado por el terremoto y quiero publicar su ficha en S.O.S.EMUND.
 
 Se llama:
 A qué se dedica:
@@ -34,7 +34,6 @@ En qué localidad está:`;
   titulo="Publica tu negocio, es gratis"
   descripcion="Si tu negocio resultó afectado, publicamos su ficha gratis: qué era, cómo quedó, qué necesita y por dónde contactarte. Nos lo mandas por WhatsApp y nosotros lo montamos."
   ruta={`${base}/negocios/anadir`}
-  censoRuta={`${base}/censo`}
 >
   <nav class="migas">
     <a href="/">Inicio</a> › <a href={`/${pais.slug}`}>{pais.nombre}</a> ›{" "}

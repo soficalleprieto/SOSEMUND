@@ -1,6 +1,8 @@
-# Negocios que Laten
+# S.O.S.EMUND
 
-> Cuando un negocio vuelve a latir, también vuelve a latir su comunidad.
+> **S.O.S. para Emprendedores del Mundo**
+>
+> «Sostener el tesón de quienes deciden seguir»
 
 Guía para comerciantes afectados por el terremoto de magnitud 7,4 del **10 de agosto de 2026** en
 Colombia, con epicentro en San José del Palmar (Chocó).

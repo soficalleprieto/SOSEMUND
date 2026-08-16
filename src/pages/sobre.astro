@@ -5,11 +5,8 @@
  * decisiones con lo que lee aquí tiene derecho a saber quién lo escribe y por
  * qué.
  */
-import { Image } from "astro:assets";
 import Base from "../layouts/Base.astro";
 import CompartirWhatsApp from "../components/CompartirWhatsApp.astro";
-import Latido from "../components/Latido.astro";
-import retrato from "../assets/sofia.webp";
 import { WHATSAPP, enlaceWhatsApp } from "../data/contacto";
 ---
 
@@ -21,16 +18,6 @@ import { WHATSAPP, enlaceWhatsApp } from "../data/contacto";
   <nav class="migas"><a href="/">Inicio</a> › Sobre</nav>
 
   <h1>Sobre mí</h1>
-
-  <div class="retrato">
-    <Image
-      src={retrato}
-      alt="Sofía Calle"
-      width={360}
-      densities={[1, 2]}
-      loading="eager"
-    />
-  </div>
 
   <h2>Llevo más de 15 años viendo de cerca lo que cuesta sacar adelante un negocio</h2>
 
@@ -133,8 +120,6 @@ import { WHATSAPP, enlaceWhatsApp } from "../data/contacto";
     dejando de ser una idea para convertirse en algo que necesitaba poner en
     marcha.
   </p>
-
-  <div class="marca-lema"><Latido ancho={64} /></div>
 
   <h2>No puedo evitar una catástrofe. Pero sí puedo hacer algo después.</h2>
 

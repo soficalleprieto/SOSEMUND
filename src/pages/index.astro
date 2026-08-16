@@ -7,7 +7,6 @@
 import Base from "../layouts/Base.astro";
 import CompartirWhatsApp from "../components/CompartirWhatsApp.astro";
 import Imagen from "../components/Imagen.astro";
-import Latido from "../components/Latido.astro";
 import { todosLosEventos } from "../data/paises";
 import { IMG_COLOMBIA } from "../data/imagenes";
 import { formatearFecha } from "../utils/fecha";
@@ -18,7 +17,7 @@ const n = (x: number) => x.toLocaleString("es-CO");
 ---
 
 <Base
-  titulo="Negocios que Laten — ayuda para negocios afectados por catástrofes"
+  titulo="S.O.S.EMUND — ayuda para negocios afectados por catástrofes"
   descripcion="Cuando una catástrofe golpea, los negocios de barrio mueren en silencio. Reunimos las ayudas que existen, les damos visibilidad y conectamos a cada negocio con quien quiere sostenerlo."
   ruta="/"
 >
@@ -59,11 +58,14 @@ const n = (x: number) => x.toLocaleString("es-CO");
     encontraba por las mañanas y pierde una razón para volver. Un negocio que
     cierra se lleva un pedazo de comunidad con él.
   </p>
-
-  <p class="lema">
-    Cuando un negocio vuelve a latir, también vuelve a latir su comunidad.
+  <p>
+    Y sin embargo, casi siempre hay alguien que decide seguir. Que levanta la
+    persiana con el local a medias, o vende desde la casa de su hermana mientras
+    espera. Eso es <strong>tesón</strong>, y no se lo podemos poner nosotros.
+    Pero el <strong>sostén</strong> sí.
   </p>
-  <div class="marca-lema"><Latido ancho={64} /></div>
+
+  <p class="lema">Sostener el tesón de quienes deciden seguir.</p>
 
   <h2>El problema no es que no haya ayudas</h2>
   <p>
@@ -123,8 +125,9 @@ const n = (x: number) => x.toLocaleString("es-CO");
     ))
   }
   <p class="meta">
-    Empezamos por Colombia porque es la emergencia viva. El proyecto está
-    pensado para cualquier catástrofe, en cualquier país.
+    Empezamos por Colombia porque es la emergencia viva. Pero esto es un S.O.S.
+    para emprendedores <em>del mundo</em>: el proyecto está pensado para
+    cualquier catástrofe, en cualquier país.
   </p>
 
   <h2>Cómo trabajamos</h2>

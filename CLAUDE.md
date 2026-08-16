@@ -1,6 +1,6 @@
 
 
-# Negocios que Laten
+# S.O.S.EMUND
 
 Sitio para comerciantes afectados por el terremoto de magnitud 7,4 del **10 de agosto de 2026**
 en Colombia (epicentro: San José del Palmar, Chocó). Contexto completo y reglas del proyecto en
@@ -16,6 +16,27 @@ verificado se marca como pendiente en vez de rellenarse; cero datos personales; 
 no publicamos locales vacíos (hubo saqueos); móvil primero y muy ligero; WhatsApp en todas las
 páginas.
 
+## La marca: S.O.S.EMUND
+
+**Decidido el 16/08/2026.** El proyecto se llamó brevemente «Negocios que Laten» y ahora es
+**S.O.S.EMUND — S.O.S. para Emprendedores del Mundo**, con lema *«Sostener el tesón de quienes
+deciden seguir»*. Todo vive en `src/data/marca.ts`.
+
+El universo narrativo se apoya en dos palabras que salen del propio lema, y del cierre del texto
+de Sofía en `/sobre`:
+
+- **Tesón**: lo que pone quien lo ha perdido todo y aun así vuelve a abrir. No se lo damos
+  nosotros.
+- **Sostén**: lo que ponemos los demás para que ese tesón no se caiga solo. Eso sí es nuestro.
+
+**La metáfora del latido se retiró con el nombre viejo.** El motivo gráfico ahora es el isotipo:
+una mano que sostiene un mundo con gente dentro. No volver a meter corazones ni pulsos.
+
+Paleta tomada del logo: azul petróleo `#012a3c` para estructura y naranja como única voz de
+color. Ojo, el naranja va en dos tonos: el literal del logo (`--arcilla-viva`, `#f3940d`) solo
+para grafismo, porque sobre el fondo da 2,3:1; el texto naranja usa `--arcilla` (`#a55803`), que
+es el más claro que pasa WCAG AA.
+
 ## El proyecto es internacional, no colombiano
 
 **Decidido el 13/08/2026 y es una restricción de diseño, no una aspiración.** Arrancamos con el
@@ -30,7 +51,7 @@ Consecuencias prácticas que hay que respetar siempre:
   emergencia activa, no como el tema del sitio.
 - **Nada específico de una emergencia se escribe en las plantillas**, solo en los datos. Si un
   texto dice «terremoto» dentro de un `.astro`, está mal puesto.
-- El nombre y el lema ya son agnósticos a propósito: *Negocios que Laten*, «cuando un negocio
+- El nombre y el lema ya son agnósticos a propósito: *S.O.S.EMUND*, «cuando un negocio
   vuelve a latir, también vuelve a latir su comunidad». Otras frases del mismo registro: «ayúdales
   a seguir latiendo», «cada compra mantiene un negocio latiendo».
 - **Idiomas:** por ahora todo en español en la raíz. Cuando toque, el inglés va en `/en/` sin
