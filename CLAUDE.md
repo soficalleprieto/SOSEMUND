@@ -51,9 +51,8 @@ Consecuencias prácticas que hay que respetar siempre:
   emergencia activa, no como el tema del sitio.
 - **Nada específico de una emergencia se escribe en las plantillas**, solo en los datos. Si un
   texto dice «terremoto» dentro de un `.astro`, está mal puesto.
-- El nombre y el lema ya son agnósticos a propósito: *S.O.S.EMUND*, «cuando un negocio
-  vuelve a latir, también vuelve a latir su comunidad». Otras frases del mismo registro: «ayúdales
-  a seguir latiendo», «cada compra mantiene un negocio latiendo».
+- El nombre ya es agnóstico de nacimiento: *S.O.S. para Emprendedores **del Mundo***. Ese «del
+  mundo» hay que sostenerlo, no contradecirlo.
 - **Idiomas:** por ahora todo en español en la raíz. Cuando toque, el inglés va en `/en/` sin
   mover lo existente, así que no hace falta prefijo de idioma todavía.
 
@@ -94,13 +93,14 @@ para añadir un evento, es que algo específico se coló donde no debía.
 
 ## Estado
 
-Hecho: página del censo (`/censo`) y los cinco hubs de ciudad (`/ayudas/[ciudad]`) para Cali,
-Pereira, Manizales, Armenia y Quibdó.
+23 páginas. Hecho: censo, hubs de evento y país, 11 localidades, ayudas, iniciativas y bulos,
+cuentas, fichas de negocio con ejemplo y alta por WhatsApp, adopta un comercio, sobre y privacidad.
 
-Pendiente: alivios banco por banco; alivios tributarios municipales (ICA y predial); **canales de
-censo de Pereira, Manizales, Armenia y Quibdó** (solo Cali está verificado); guías de intención
-larga; pilar 1 entero; dominio sin comprar (`negociosquelaten.org/.com/.co` estaban libres el
-13/08/2026, con el `.org` como preferido).
+Pendiente: **el cron 2×/día con aprobación por Telegram**, que desbloquea el sello de «verificado
+hace X» y la página de situación humana por localidad; guías de intención larga (arriendo, seguro,
+nómina), que es lo que traería tráfico; alivios banco por banco y tributarios municipales; **10 de
+11 localidades sin canal de censo verificado**, solo Cali lo está; sitemap.xml; foto de Sofía para
+`/sobre`; y el dominio, que con el cambio de marca ya no es negociosquelaten sino sosemund.
 
 ## Stack: Astro y CSS plano, cero JavaScript
 
