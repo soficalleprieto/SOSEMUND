@@ -1,0 +1,218 @@
+---
+/*
+ * Página "Sobre". No es relleno: en un sitio de información sensible, saber
+ * quién está detrás es parte de poder fiarse. Un comerciante que va a tomar
+ * decisiones con lo que lee aquí tiene derecho a saber quién lo escribe y por
+ * qué.
+ */
+import { Image } from "astro:assets";
+import Base from "../layouts/Base.astro";
+import CompartirWhatsApp from "../components/CompartirWhatsApp.astro";
+import Latido from "../components/Latido.astro";
+import retrato from "../assets/sofia.webp";
+import { WHATSAPP, enlaceWhatsApp } from "../data/contacto";
+---
+
+<Base
+  titulo="Sobre S.O.S.EMUND y quién está detrás"
+  descripcion="Sofía Calle lleva más de 15 años trabajando con pequeños negocios. La pandemia y la DANA de Valencia le enseñaron que, cuando llega una catástrofe, encontrar ayuda no debería ser otro trabajo a tiempo completo."
+  ruta="/sobre"
+>
+  <nav class="migas"><a href="/">Inicio</a> › Sobre</nav>
+
+  <h1>Sobre mí</h1>
+
+  <div class="retrato">
+    <Image
+      src={retrato}
+      alt="Sofía Calle"
+      width={360}
+      densities={[1, 2]}
+      loading="eager"
+    />
+  </div>
+
+  <h2>Llevo más de 15 años viendo de cerca lo que cuesta sacar adelante un negocio</h2>
+
+  <p>
+    Soy <strong>Sofía Calle</strong> y llevo más de 15 años trabajando con
+    negocios.
+  </p>
+  <p>
+    Por mis manos han pasado cientos de pequeñas empresas: tiendas, comercios,
+    proyectos familiares y personas que cada mañana levantan la persiana sabiendo
+    que llegar a final de mes no siempre está garantizado.
+  </p>
+  <p>
+    He visto cuánto cuesta abrirse paso en mercados cada vez más saturados.
+    Cuánto trabajo hay detrás de un negocio pequeño. Cuántas veces su
+    propietario es, al mismo tiempo, quien vende, compra, atiende, hace cuentas,
+    responde mensajes, limpia, resuelve problemas y vuelve a empezar al día
+    siguiente.
+  </p>
+  <p>
+    Por eso sé que cuando uno de esos negocios desaparece, rara vez desaparece
+    solo una empresa.
+  </p>
+  <p class="lema">
+    Desaparece una fuente de ingresos. Un proyecto de vida. A veces, el sustento
+    de toda una familia.
+  </p>
+
+  <h2>La pandemia me enseñó lo fácil que es quedarse solo cuando más ayuda necesitas</h2>
+
+  <p>
+    Durante la pandemia vi morir muchos negocios que quizá podrían haber tenido
+    otra oportunidad.
+  </p>
+  <p>No siempre fue porque no existieran ayudas.</p>
+  <p>
+    A veces sus propietarios no sabían dónde encontrarlas, a quién recurrir o qué
+    podían pedir. La información estaba dispersa, cambiaba constantemente y
+    llegaba en un momento en el que bastante tenían ya con intentar sobrevivir
+    ellos mismos.
+  </p>
+  <p>
+    ¿Cómo te pones a buscar convocatorias, interpretar requisitos o pensar una
+    estrategia para salvar tu negocio cuando no sabes siquiera qué va a ocurrir
+    la semana siguiente?
+  </p>
+  <p>Aquello se me quedó dentro.</p>
+
+  <h2>Y después llegó la DANA de Valencia</h2>
+
+  <p>
+    Cuando vi lo ocurrido en Valencia, esa sensación volvió con mucha más fuerza.
+  </p>
+  <p>
+    Había personas agradecidas simplemente por seguir vivas, pero que, una vez
+    pasado el primer impacto, empezaban a hacerse otra pregunta:
+  </p>
+  <p class="lema">¿Y ahora cómo seguimos?</p>
+  <p>Muchas no habían perdido únicamente su negocio.</p>
+  <p>
+    Habían perdido su casa. Habían perdido vehículos, maquinaria, mercancía y
+    años de trabajo. Algunas habían perdido familiares o amigos.
+  </p>
+  <p>
+    Y además se encontraban con algo que llega después de la emergencia y de lo
+    que se habla mucho menos: <strong
+      >se habían quedado sin la forma de llevar el pan a casa.</strong
+    >
+  </p>
+  <p>
+    Ahí entendí que una catástrofe no termina cuando baja el agua, deja de
+    temblar la tierra o se apaga el fuego.
+  </p>
+  <p>Para muchos pequeños negocios, ahí empieza otra emergencia.</p>
+
+  <h2>Para mí esto también es personal</h2>
+
+  <p>Vengo de una familia emprendedora.</p>
+  <p>
+    Sé lo que significa que un negocio familiar no sea simplemente «una
+    empresa», sino el trabajo de años, la tranquilidad económica de una familia
+    y, muchas veces, una parte enorme de su identidad.
+  </p>
+  <p>
+    Y no puedo mirar a una persona intentando salvar su negocio después de una
+    catástrofe sin pensar en los míos.
+  </p>
+  <p>
+    En mis padres, que con más de 70 años tuvieron que mudarse y volver a empezar
+    de cero.
+  </p>
+  <p>En mi hermano intentando mantener en pie su negocio de comidas rápidas.</p>
+  <p>
+    En lo que sentiría si fueran ellos quienes hubieran perdido de un día para
+    otro aquello que les permite vivir.
+  </p>
+  <p>Pensarlo me duele.</p>
+  <p>
+    Y probablemente esa sea una de las razones por las que S.O.S.EMUND terminó
+    dejando de ser una idea para convertirse en algo que necesitaba poner en
+    marcha.
+  </p>
+
+  <div class="marca-lema"><Latido ancho={64} /></div>
+
+  <h2>No puedo evitar una catástrofe. Pero sí puedo hacer algo después.</h2>
+
+  <p>
+    Mi trabajo durante años ha consistido en ayudar a negocios a encontrar
+    oportunidades, hacerse visibles y llegar a las personas que los están
+    buscando.
+  </p>
+  <p>
+    Sé investigar. Sé ordenar información. Sé hacerla comprensible. Sé ayudar a
+    que un negocio sea encontrado.
+  </p>
+  <p>Y decidí empezar por ahí.</p>
+  <p>No tengo todas las respuestas y S.O.S.EMUND no pretende tenerlas.</p>
+  <p>
+    Pero sí creo que podemos conseguir que una persona que acaba de verlo todo
+    patas arriba tenga un lugar donde entender <strong
+      >qué ayudas existen, dónde solicitarlas, cómo volver a hacerse visible y
+      quién puede tenderle una mano</strong
+    >.
+  </p>
+  <p>
+    Porque cuando alguien ya está luchando por reconstruir su vida, encontrar
+    ayuda no debería convertirse en otro trabajo a tiempo completo.
+  </p>
+  <p>
+    Y porque detrás de cada negocio que consigue seguir hay algo más que una
+    persiana abierta.
+  </p>
+  <p>
+    Hay familias, empleos, proveedores, clientes, calles y barrios que también
+    continúan.
+  </p>
+  <p class="lema">Eso es lo que quiero ayudar a sostener.</p>
+
+  <h2>Y ojalá no tenga que hacerlo sola</h2>
+
+  <p>
+    S.O.S.EMUND empieza conmigo, pero no quiero que termine siendo un proyecto de
+    una sola persona.
+  </p>
+  <p>
+    Quiero que poco a poco se convierta en una red de personas dispuestas a
+    aportar lo que saben hacer: investigar una ayuda, verificar una información,
+    contar la historia de un negocio, compartirla, darle visibilidad, conectar a
+    alguien con quien puede ayudar o simplemente elegir comprarle cuando más lo
+    necesita.
+  </p>
+  <p>
+    No hace falta tener mucho tiempo, dinero ni una gran audiencia para aportar.
+  </p>
+  <p>
+    <strong
+      >Cada granito de arena cuenta cuando alguien está intentando volver a
+      levantar lo que una catástrofe derribó.</strong
+    >
+  </p>
+  <p>
+    Así que si algo de todo esto también te mueve, <strong
+      >hay un lugar para ti en S.O.S.EMUND</strong
+    >.
+  </p>
+  <p>
+    Porque podemos hacer mucho más cuando el tesón de quien decide seguir
+    encuentra el sostén de quienes deciden no mirar hacia otro lado.
+  </p>
+
+  <a class="cta" href={enlaceWhatsApp("Hola Sofía. He leído tu página y quiero echar una mano en S.O.S.EMUND.")} target="_blank" rel="noopener">
+    <span class="cta-eyebrow">¿Te mueve?</span>
+    <span class="cta-titulo">Escríbeme y échame una mano →</span>
+    <span class="cta-texto">
+      {WHATSAPP.visible} · Soy colombiana y vivo en España; por eso el prefijo
+      es +34. Mis papás y mi hermano están en Colombia.
+    </span>
+  </a>
+
+  <CompartirWhatsApp
+    ruta="/sobre"
+    texto="Una catástrofe no termina cuando bajan las aguas o deja de temblar. Para muchos negocios pequeños, ahí empieza otra emergencia. Esto es S.O.S.EMUND:"
+  />
+</Base>

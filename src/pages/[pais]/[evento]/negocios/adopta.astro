@@ -1,0 +1,160 @@
+---
+/*
+ * Apadrinamiento de comercios, al modo de «Adopta un Comercio» tras la DANA de
+ * Valencia.
+ *
+ * Deliberadamente NO es una lista de «creadores que informan bien». Certificar
+ * a personas por la calidad de su información es frágil: si una comparte un
+ * bulo mañana, la credibilidad que se cae es la nuestra. Adoptar un negocio, en
+ * cambio, es verificable: o lo has hecho o no.
+ */
+import Base from "../../../../layouts/Base.astro";
+import CompartirWhatsApp from "../../../../components/CompartirWhatsApp.astro";
+import { todosLosEventos } from "../../../../data/paises";
+import type { Evento, Pais } from "../../../../data/tipos";
+import { WHATSAPP, POR_QUE_ESPANA, enlaceWhatsApp } from "../../../../data/contacto";
+
+export function getStaticPaths() {
+  return todosLosEventos().map(({ pais, evento }) => ({
+    params: { pais: pais.slug, evento: evento.slug },
+    props: { pais, evento },
+  }));
+}
+
+interface Props {
+  pais: Pais;
+  evento: Evento;
+}
+const { pais, evento } = Astro.props;
+const base = `/${pais.slug}/${evento.slug}`;
+
+const mensaje = `Hola. Soy creador/a de contenido y quiero adoptar un negocio afectado.
+
+Dónde publico (Instagram, TikTok, YouTube…):
+Cuánta gente me sigue, más o menos:
+Qué tipo de contenido hago:`;
+---
+
+<Base
+  titulo="Adopta un comercio"
+  descripcion="Si creas contenido, adopta un negocio afectado por el terremoto: lo enseñas a tu audiencia y le devuelves clientes. Como «Adopta un Comercio» tras la DANA de Valencia."
+  ruta={`${base}/negocios/adopta`}
+  censoRuta={`${base}/censo`}
+>
+  <nav class="migas">
+    <a href="/">Inicio</a> › <a href={`/${pais.slug}`}>{pais.nombre}</a> ›{" "}
+    <a href={base}>{evento.nombreCorto}</a> ›{" "}
+    <a href={`${base}/negocios`}>Negocios</a> › Adoptar uno
+  </nav>
+
+  <h1>Adopta un comercio</h1>
+
+  <p class="entradilla">
+    Tú tienes lo que a estos negocios les falta: gente que te escucha. Adoptar
+    uno es enseñarlo a tu audiencia, con nombre y apellidos, hasta que vuelva a
+    levantar cabeza.
+  </p>
+
+  <h2>Ya funcionó una vez</h2>
+  <p>
+    Tras la DANA de Valencia de 2024, la iniciativa «Adopta un Comercio» juntó
+    <strong>880 negocios con 823 creadores en menos de una semana</strong>. Cada
+    negocio tenía su ficha con fotos de cómo había quedado, lo que necesitaba y
+    sus datos para comprarle directamente. Los creadores lo contaban a su gente.
+  </p>
+  <p>
+    No hizo falta dinero, ni una plataforma de pagos, ni una campaña. Hizo falta
+    que alguien con audiencia dijera «este negocio existe, mirad lo que le ha
+    pasado, y esto es lo que necesita».
+  </p>
+
+  <h2>Cómo funciona</h2>
+  <ol class="pasos">
+    <li>
+      <span class="numero">1</span>
+      <div>
+        <p class="paso-titulo">Nos escribes</p>
+        <p>Nos cuentas dónde publicas y qué tipo de contenido haces.</p>
+      </div>
+    </li>
+    <li>
+      <span class="numero">2</span>
+      <div>
+        <p class="paso-titulo">Te asignamos un negocio</p>
+        <p>
+          Uno concreto, con su historia, sus fotos y lo que necesita. Te ponemos
+          en contacto directo con quien lo regenta.
+        </p>
+      </div>
+    </li>
+    <li>
+      <span class="numero">3</span>
+      <div>
+        <p class="paso-titulo">Lo cuentas a tu manera</p>
+        <p>
+          Un vídeo, unas stories, un post. No te pedimos guion ni formato: sabes
+          hablarle a tu gente mejor que nosotros.
+        </p>
+      </div>
+    </li>
+    <li>
+      <span class="numero">4</span>
+      <div>
+        <p class="paso-titulo">Su ficha queda enlazada a ti</p>
+        <p>
+          Ponemos tu nombre y tu enlace en la ficha del negocio, para que quien
+          llegue por Google también vea tu contenido.
+        </p>
+      </div>
+    </li>
+  </ol>
+
+  <a class="cta" href={enlaceWhatsApp(mensaje)} target="_blank" rel="noopener">
+    <span class="cta-eyebrow">No hace falta tener una audiencia enorme</span>
+    <span class="cta-titulo">Quiero adoptar un negocio →</span>
+    <span class="cta-texto">{WHATSAPP.visible}</span>
+  </a>
+
+  <div class="caja caja-gris">
+    <p>{POR_QUE_ESPANA}</p>
+  </div>
+
+  <h2>Lo único que pedimos</h2>
+  <div class="caja caja-acento">
+    <p>
+      <strong>Que el protagonista sea el negocio, no la visita.</strong> Hubo
+      críticas duras y justas a creadores que fueron a las zonas afectadas a
+      grabar contenido. Un rescatista lo resumió preguntando si iban a ayudar o
+      a tomarse la foto. Adoptar un comercio es lo contrario: la cara es la de
+      quien perdió el local.
+    </p>
+    <p>
+      <strong>Que no estorbes.</strong> No hace falta que viajes ni que te
+      acerques a una zona de rescate. Se puede contar un negocio por videollamada
+      desde tu casa.
+    </p>
+    <p>
+      <strong>Que digas la verdad.</strong> Si el negocio ya reabrió, dilo. Si
+      solo necesita clientes y no donaciones, dilo. Exagerar para dar pena le
+      hace daño a él y a todos los demás.
+    </p>
+  </div>
+
+  <h2>¿Y si no tengo audiencia?</h2>
+  <p>
+    Igual sirves. Compartir la ficha de un negocio en tu grupo de WhatsApp del
+    barrio puede traerle más clientes que un vídeo con cien mil visitas de gente
+    que vive a mil kilómetros.
+  </p>
+
+  <p>
+    <a href={`${base}/negocios`}>
+      <strong>Ver los negocios publicados →</strong>
+    </a>
+  </p>
+
+  <CompartirWhatsApp
+    ruta={`${base}/negocios/adopta`}
+    texto="Si creas contenido, puedes adoptar un negocio afectado por el terremoto y devolverle clientes. Así funciona:"
+  />
+</Base>

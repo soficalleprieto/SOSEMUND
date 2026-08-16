@@ -793,3 +793,17 @@ main {
   color: var(--texto-suave);
   margin-top: 0.15rem;
 }
+
+/* --- Retrato de la página Sobre --- */
+
+.retrato {
+  margin: 1.5rem 0 2rem;
+  max-width: 18rem;
+}
+.retrato img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radio);
+  border: 1px solid var(--borde);
+}

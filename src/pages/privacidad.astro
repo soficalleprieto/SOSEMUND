@@ -1,0 +1,140 @@
+---
+/*
+ * Política de privacidad.
+ *
+ * Adaptada de la de sofiacalle.es, pero NO es la misma: aquel es un sitio de
+ * consultoría bajo RGPD español, y aquí publicamos datos de comerciantes
+ * colombianos, así que entra también la Ley 1581 de 2012. Redactada con
+ * criterio, no por un abogado: está pendiente de revisión legal y así lo dice
+ * la propia página.
+ */
+import Base from "../layouts/Base.astro";
+import { WHATSAPP, enlaceWhatsApp } from "../data/contacto";
+---
+
+<Base
+  titulo="Política de privacidad"
+  descripcion="Qué datos tratamos, para qué, durante cuánto tiempo y cómo pedir que los corrijamos o los borremos."
+  ruta="/privacidad"
+>
+  <nav class="migas"><a href="/">Inicio</a> › Privacidad</nav>
+
+  <h1>Política de privacidad</h1>
+
+  <p class="entradilla">
+    En resumen: no te pedimos datos para navegar, no usamos cookies de
+    seguimiento, y lo único que publicamos de ti es lo que tú nos mandes y nos
+    autorices. Y lo puedes retirar cuando quieras, sin dar explicaciones.
+  </p>
+
+  <div class="caja caja-pendiente">
+    <p>
+      <strong>Aviso honesto.</strong> Este texto está redactado con criterio pero
+      no por un abogado, y está pendiente de revisión legal. Si detectas algo mal
+      o quieres que corrijamos cualquier cosa sobre ti, escríbenos y lo
+      arreglamos de inmediato.
+    </p>
+  </div>
+
+  <h2>Quién es responsable</h2>
+  <p>
+    <strong>Sofía Calle Prieto</strong>, con domicilio en Alcalá de Henares
+    (España). Contacto:{" "}
+    <a href={enlaceWhatsApp("Hola. Escribo por un tema de protección de datos.")} target="_blank" rel="noopener">
+      {WHATSAPP.visible}
+    </a>.
+  </p>
+
+  <h2>Qué datos tratamos y para qué</h2>
+
+  <h3>Si solo lees la web</h3>
+  <p>
+    Ninguno. No hay formularios, ni registro, ni cookies de seguimiento, ni
+    perfilado publicitario. El sitio es estático y no te pide nada.
+  </p>
+
+  <h3>Si nos escribes por WhatsApp</h3>
+  <p>
+    Tratamos lo que decidas mandarnos: tu número, tu nombre, los datos de tu
+    negocio y el material que nos envíes. La finalidad es responderte y, si nos
+    lo pides, publicar la ficha de tu negocio.
+  </p>
+  <p>
+    La base legal es tu <strong>consentimiento</strong>, que das al escribirnos
+    con esa intención. Ten en cuenta que la conversación viaja por WhatsApp, que
+    es un servicio de Meta con sus propias condiciones.
+  </p>
+
+  <h3>Si publicamos la ficha de tu negocio</h3>
+  <p>
+    Publicamos únicamente lo que nos autorices: nombre del negocio, actividad,
+    localidad, su estado, qué necesita, las redes y el teléfono que quieras que
+    aparezcan, y tus datos de cobro si decides incluirlos. Todo esto pasa a ser
+    <strong>público y accesible en internet</strong>, y puede ser indexado por
+    buscadores o copiado por terceros: es justamente el objetivo, que te
+    encuentren.
+  </p>
+  <p>
+    Nunca publicamos la dirección de un local vacío ni tu documento de
+    identidad. Y una persona revisa cada ficha antes de que se publique.
+  </p>
+
+  <h2>Con quién se comparten</h2>
+  <p>
+    Con nadie, salvo los proveedores técnicos que hacen funcionar el sitio:
+    <strong>Vercel</strong> (alojamiento) y <strong>GitHub</strong> (donde vive
+    el código y el contenido). Las fichas publicadas quedan además en el
+    historial público del repositorio del proyecto.
+  </p>
+  <p>
+    No vendemos datos, no hacemos publicidad y no cedemos nada a terceros con
+    fines comerciales.
+  </p>
+
+  <h2>Cuánto tiempo los guardamos</h2>
+  <p>
+    La ficha de tu negocio, mientras quieras que siga publicada. Las
+    conversaciones de WhatsApp, mientras hagan falta para mantener la ficha al
+    día. Si nos pides que borremos, borramos.
+  </p>
+
+  <h2>Tus derechos</h2>
+  <p>
+    Puedes pedirnos <strong>acceder</strong> a tus datos,{" "}
+    <strong>rectificarlos</strong>, <strong>suprimirlos</strong>,{" "}
+    <strong>limitar</strong> u <strong>oponerte</strong> a su tratamiento,{" "}
+    <strong>portarlos</strong> y <strong>retirar tu consentimiento</strong> en
+    cualquier momento. Si estás en Colombia, la Ley 1581 de 2012 te reconoce
+    además el derecho a conocer, actualizar, rectificar y revocar la
+    autorización.
+  </p>
+  <p>
+    Para ejercerlos basta con escribirnos por WhatsApp. No te vamos a pedir
+    formularios ni explicaciones: si nos dices que quitemos tu ficha, la
+    quitamos.
+  </p>
+  <p>
+    Si crees que no lo hemos hecho bien, puedes reclamar ante la{" "}
+    <a href="https://www.aepd.es" target="_blank" rel="noopener">
+      Agencia Española de Protección de Datos
+    </a>{" "}
+    o ante la{" "}
+    <a href="https://www.sic.gov.co" target="_blank" rel="noopener">
+      Superintendencia de Industria y Comercio
+    </a>{" "}
+    de Colombia.
+  </p>
+
+  <h2>Datos de otras personas</h2>
+  <p>
+    Si nos mandas material donde aparecen terceros —fotos con empleados o
+    clientes, por ejemplo—, nos estás confirmando que tienes su permiso para
+    ello. Si tienes dudas, mejor mándanos material donde no salga nadie.
+  </p>
+
+  <h2>Cambios</h2>
+  <p>
+    Si esta política cambia de forma relevante, lo indicaremos aquí con su
+    fecha. Última revisión: 14 de agosto de 2026.
+  </p>
+</Base>
