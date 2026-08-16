@@ -1,0 +1,48 @@
+---
+/*
+ * Publicación de Instagram o TikTok incrustada, con carga al clic.
+ *
+ * Por qué no se incrusta directamente: los reproductores oficiales cargan
+ * JavaScript de Meta y de ByteDance que rastrea a quien visita la página,
+ * pesa más que todo nuestro sitio junto y deja cookies de terceros. Eso
+ * convertiría en falsa la frase «no usamos cookies de seguimiento» de nuestra
+ * política y obligaría a poner un banner de consentimiento.
+ *
+ * Con carga al clic, quien no pulsa no recibe nada: ni una cookie, ni una
+ * petición a Meta, ni un kilobyte de más. Y quien quiere ver el vídeo, lo ve.
+ */
+import type { Red } from "../data/tipos";
+
+interface Props {
+  url: string;
+  descripcion: string;
+  handle: string;
+  red: Red;
+}
+const { url, descripcion, handle, red } = Astro.props;
+
+const ETIQUETA: Partial<Record<Red, string>> = {
+  instagram: "Instagram",
+  tiktok: "TikTok",
+};
+const plataforma = ETIQUETA[red] ?? "la publicación";
+---
+
+<figure class="incrustado" data-url={url} data-red={red}>
+  <figcaption>
+    <strong>{descripcion}</strong>
+    <span class="depto">@{handle} · {plataforma}</span>
+  </figcaption>
+  <div class="incrustado-hueco">
+    <button type="button" class="incrustado-boton">
+      Ver el vídeo aquí
+    </button>
+    <a href={url} target="_blank" rel="noopener" class="incrustado-fuera">
+      o abrirlo en {plataforma} →
+    </a>
+    <p class="incrustado-aviso">
+      Al pulsar «ver aquí» se carga el reproductor de {plataforma}, que instala
+      sus propias cookies.
+    </p>
+  </div>
+</figure>

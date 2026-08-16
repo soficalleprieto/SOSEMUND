@@ -86,6 +86,25 @@ export type Iniciativa = {
 /** Medio de verificación que ha desmentido bulos de esta emergencia. */
 export type Verificador = { nombre: string; url: string };
 
+export type Red = "instagram" | "tiktok" | "youtube" | "x";
+
+/**
+ * Cuenta que está contando lo que pasa y moviendo ayuda.
+ *
+ * Enlazar no es certificar, y la página lo dice con todas las letras. No
+ * describimos qué publica cada una salvo que lo hayamos comprobado: escribir
+ * «informa con rigor» de una cuenta que no hemos auditado sería justo el tipo
+ * de afirmación sin fuente que este proyecto no se permite.
+ */
+export type Cuenta = {
+  handle: string;
+  red: Red;
+  /** Solo si sabemos algo concreto y verificable. */
+  nota?: string;
+  /** Publicaciones sueltas que merecen difusión. */
+  destacados?: { url: string; descripcion: string }[];
+};
+
 /* ------------------------------------------------------------------ *
  * Fichas de negocio
  * ------------------------------------------------------------------ */
@@ -200,6 +219,8 @@ export type Evento = {
   iniciativas: Iniciativa[];
   /** Verificadores que han desmentido bulos de esta emergencia. */
   verificadores: Verificador[];
+  /** Cuentas que están contando lo que pasa. */
+  cuentas: Cuenta[];
   /** Fichas publicadas. Vacío hasta que lleguen negocios reales y revisados. */
   negocios: Negocio[];
 };

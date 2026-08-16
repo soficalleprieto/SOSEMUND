@@ -1,0 +1,184 @@
+---
+/*
+ * Cuentas que están contando lo que pasa.
+ *
+ * Los vídeos se incrustan con carga al clic. Los reproductores de Instagram y
+ * TikTok traen JavaScript de Meta y ByteDance con rastreo y cookies de
+ * terceros, y este sitio promete en su política que no rastrea: cargarlos de
+ * entrada la volvería falsa y obligaría a poner banner de cookies. Así, quien
+ * no pulsa no recibe nada.
+ */
+import Base from "../../../layouts/Base.astro";
+import CompartirWhatsApp from "../../../components/CompartirWhatsApp.astro";
+import { todosLosEventos } from "../../../data/paises";
+import type { Evento, Pais, Red } from "../../../data/tipos";
+import { enlaceWhatsApp } from "../../../data/contacto";
+import Incrustado from "../../../components/Incrustado.astro";
+
+export function getStaticPaths() {
+  return todosLosEventos().map(({ pais, evento }) => ({
+    params: { pais: pais.slug, evento: evento.slug },
+    props: { pais, evento },
+  }));
+}
+
+interface Props {
+  pais: Pais;
+  evento: Evento;
+}
+const { pais, evento } = Astro.props;
+const base = `/${pais.slug}/${evento.slug}`;
+
+const URL_RED: Record<Red, (h: string) => string> = {
+  instagram: (h) => `https://instagram.com/${h}`,
+  tiktok: (h) => `https://tiktok.com/@${h}`,
+  youtube: (h) => `https://youtube.com/@${h}`,
+  x: (h) => `https://x.com/${h}`,
+};
+const ETIQUETA_RED: Record<Red, string> = {
+  instagram: "Instagram",
+  tiktok: "TikTok",
+  youtube: "YouTube",
+  x: "X",
+};
+
+const destacados = evento.cuentas.flatMap((c) =>
+  (c.destacados ?? []).map((d) => ({ ...d, cuenta: c })),
+);
+---
+
+<Base
+  titulo="Cuentas que están contando lo que pasa"
+  descripcion={`Creadores, medios y organizaciones que están informando y moviendo ayuda tras ${evento.nombre}. Enlazamos sus perfiles para que puedas seguirlos y compartir su trabajo.`}
+  ruta={`${base}/cuentas`}
+  censoRuta={`${base}/censo`}
+>
+  <nav class="migas">
+    <a href="/">Inicio</a> › <a href={`/${pais.slug}`}>{pais.nombre}</a> ›{" "}
+    <a href={base}>{evento.nombreCorto}</a> › Cuentas
+  </nav>
+
+  <h1>Cuentas que están contando lo que pasa</h1>
+
+  <p class="entradilla">
+    Gente que está usando su altavoz para mover ayuda, difundir búsquedas y
+    enseñar lo que de verdad está ocurriendo. Síguelas, y sobre todo comparte lo
+    que publican.
+  </p>
+
+  <div class="caja caja-pendiente">
+    <p>
+      <strong>Enlazar no es certificar.</strong> Esta es una lista curada a
+      mano: cuentas que estamos mirando nosotros porque han publicado algo útil.
+      No las hemos auditado una por una y no podemos garantizar todo lo que
+      publiquen a partir de ahora.
+    </p>
+    <p>
+      Antes de dar por buena una cifra o un aviso, contrástalo en la{" "}
+      <a href={`${base}/iniciativas`}>página de bulos y verificadores</a>. Y si
+      ves que alguna comparte algo falso, dínoslo y la quitamos.
+    </p>
+  </div>
+
+  {
+    destacados.length > 0 && (
+      <>
+        <h2>Publicaciones que merecen difusión</h2>
+        {destacados.map((d) => (
+          <Incrustado
+            url={d.url}
+            descripcion={d.descripcion}
+            handle={d.cuenta.handle}
+            red={d.cuenta.red}
+          />
+        ))}
+      </>
+    )
+  }
+
+  <h2>Perfiles</h2>
+  <ul class="cuentas">
+    {
+      evento.cuentas.map((c) => (
+        <li>
+          <a href={URL_RED[c.red](c.handle)} target="_blank" rel="noopener">
+            <strong>@{c.handle}</strong>
+            <span class="depto">
+              {c.nota ?? ETIQUETA_RED[c.red]}
+            </span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+
+  <h2>¿Conoces alguna más?</h2>
+  <p>
+    Si estás viendo a alguien haciendo un buen trabajo —contando lo que pasa,
+    moviendo donaciones, ayudando a encontrar gente— mándanoslo y lo añadimos.
+  </p>
+  <p>
+    <a
+      href={enlaceWhatsApp(
+        "Hola. Os propongo esta cuenta para la página de quién está contando lo que pasa:",
+      )}
+      target="_blank"
+      rel="noopener"
+    >
+      <strong>Proponer una cuenta →</strong>
+    </a>
+  </p>
+
+  <div class="caja caja-acento">
+    <p>
+      <strong>¿Y si eres tú quien tiene el altavoz?</strong> Puedes hacer algo
+      más directo que difundir: adoptar un negocio concreto y contarlo a tu
+      gente hasta que vuelva a levantar cabeza.
+    </p>
+    <p>
+      <a href={`${base}/negocios/adopta`}>
+        <strong>Adopta un comercio →</strong>
+      </a>
+    </p>
+  </div>
+
+  {destacados.length > 0 && (
+    <script>
+      {/* Carga al clic: hasta que alguien pulsa, no se pide nada a Meta ni a
+          ByteDance. Vanilla, sin dependencias, ~1 KB. */}
+      document.querySelectorAll(".incrustado").forEach((fig) => {
+        const boton = fig.querySelector(".incrustado-boton");
+        if (!boton) return;
+        boton.addEventListener("click", () => {
+          const url = fig.dataset.url;
+          const red = fig.dataset.red;
+          const hueco = fig.querySelector(".incrustado-hueco");
+          if (!url || !hueco) return;
+          hueco.innerHTML = "<p class='incrustado-aviso'>Cargando…</p>";
+          if (red === "instagram") {
+            hueco.innerHTML =
+              '<blockquote class="instagram-media" data-instgrm-permalink="' +
+              url +
+              '" data-instgrm-version="14"></blockquote>';
+            const s = document.createElement("script");
+            s.src = "https://www.instagram.com/embed.js";
+            s.async = true;
+            document.body.appendChild(s);
+          } else {
+            hueco.innerHTML =
+              '<blockquote class="tiktok-embed" cite="' + url + '"></blockquote>';
+            const s = document.createElement("script");
+            s.src = "https://www.tiktok.com/embed.v2.js";
+            s.async = true;
+            document.body.appendChild(s);
+          }
+        });
+      });
+    </script>
+  )}
+
+  <CompartirWhatsApp
+    ruta={`${base}/cuentas`}
+    texto="Estas cuentas están contando lo que pasa tras el terremoto y moviendo ayuda. Vale la pena seguirlas y compartir lo que publican:"
+  />
+</Base>
