@@ -3,6 +3,7 @@ import {
   iniciativasColombia2026,
   verificadoresColombia2026,
 } from "./colombia-terremoto-2026-iniciativas";
+import { negociosColombia2026 } from "./colombia-terremoto-2026-negocios";
 
 const CENSO_CALI: Fuente = {
   medio: "Semana",
@@ -271,7 +272,7 @@ export const colombiaTerremoto2026: Evento = {
   ],
   iniciativas: iniciativasColombia2026,
   verificadores: verificadoresColombia2026,
-  negocios: [],
+  negocios: negociosColombia2026,
   ayudas: [
     {
       slug: "alivios-bancarios",

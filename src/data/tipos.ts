@@ -114,6 +114,13 @@ export const ETIQUETA_DANO: Record<Dano, string> = {
  */
 export type Negocio = {
   slug: string;
+  /**
+   * Ficha de muestra, no un negocio real. Se rotula como ejemplo en la propia
+   * página, se excluye de los buscadores y no lleva datos de contacto que
+   * puedan resolver en una cuenta de alguien. Inventar un negocio afectado y
+   * presentarlo como real seria fabricar un registro sobre una catastrofe.
+   */
+  esEjemplo?: true;
   nombre: string;
   /** "Panadería", "Taller de motos", "Local de ropa"… */
   actividad: string;

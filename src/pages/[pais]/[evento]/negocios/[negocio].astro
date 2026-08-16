@@ -1,0 +1,187 @@
+---
+import Base from "../../../../layouts/Base.astro";
+import CompartirWhatsApp from "../../../../components/CompartirWhatsApp.astro";
+import { todosLosEventos } from "../../../../data/paises";
+import { ETIQUETA_DANO } from "../../../../data/tipos";
+import type { Evento, Negocio, Pais } from "../../../../data/tipos";
+import { formatearFecha } from "../../../../utils/fecha";
+
+export function getStaticPaths() {
+  return todosLosEventos().flatMap(({ pais, evento }) =>
+    evento.negocios.map((negocio) => ({
+      params: { pais: pais.slug, evento: evento.slug, negocio: negocio.slug },
+      props: { pais, evento, negocio },
+    })),
+  );
+}
+
+interface Props {
+  pais: Pais;
+  evento: Evento;
+  negocio: Negocio;
+}
+const { pais, evento, negocio: n } = Astro.props;
+const base = `/${pais.slug}/${evento.slug}`;
+const localidad = evento.localidades.find((l) => l.slug === n.localidad);
+
+const REDES: [keyof typeof n.contacto, string][] = [
+  ["whatsapp", "WhatsApp"],
+  ["instagram", "Instagram"],
+  ["facebook", "Facebook"],
+  ["tiktok", "TikTok"],
+  ["web", "Web"],
+  ["telefono", "Teléfono"],
+  ["correo", "Correo"],
+];
+const enlaces = REDES.filter(([k]) => n.contacto[k]);
+---
+
+<Base
+  titulo={n.esEjemplo ? "Así se ve la ficha de un negocio" : n.nombre}
+  descripcion={
+    n.esEjemplo
+      ? "Ficha de ejemplo para que veas cómo se publica un negocio afectado: cómo quedó, qué necesita y por dónde contactarlo."
+      : `${n.actividad} en ${localidad?.nombre}. Cómo quedó tras ${evento.nombre}, qué necesita y cómo apoyarlo.`
+  }
+  ruta={`${base}/negocios/${n.slug}`}
+  censoRuta={`${base}/censo`}
+  noIndexar={n.esEjemplo}
+>
+  <nav class="migas">
+    <a href="/">Inicio</a> › <a href={`/${pais.slug}`}>{pais.nombre}</a> ›{" "}
+    <a href={base}>{evento.nombreCorto}</a> ›{" "}
+    <a href={`${base}/negocios`}>Negocios</a> › {n.nombre}
+  </nav>
+
+  {
+    n.esEjemplo && (
+      <div class="caja caja-alerta">
+        <p class="titulo-alerta">Esto es un ejemplo. Este negocio no existe.</p>
+        <p>
+          Lo publicamos para que veas cómo queda una ficha antes de mandarnos la
+          tuya. No inventamos negocios afectados: en cuanto llegue el primero de
+          verdad, esta página deja de estar la primera.
+        </p>
+        <p class="meta">
+          Por eso tampoco lleva teléfono ni redes: no queremos que nadie escriba
+          a una cuenta que no es de nadie.
+        </p>
+      </div>
+    )
+  }
+
+  <h1>{n.nombre}</h1>
+  <p class="meta">
+    {n.actividad}
+    {localidad && <> · <a href={`${base}/${localidad.slug}`}>{localidad.nombre}</a></>}
+    {n.operando ? <> · <strong class="sigue-abierto">Sigue vendiendo</strong></> : null}
+  </p>
+
+  <p class="entradilla">{n.historia}</p>
+
+  <h2>Cómo quedó</h2>
+  <ul class="danos">
+    <li><span>Local</span> <strong>{ETIQUETA_DANO[n.estado.local]}</strong></li>
+    <li><span>Mercancía</span> <strong>{ETIQUETA_DANO[n.estado.mercancia]}</strong></li>
+    <li><span>Equipos</span> <strong>{ETIQUETA_DANO[n.estado.equipos]}</strong></li>
+  </ul>
+  {n.estado.detalle && <p>{n.estado.detalle}</p>}
+
+  {
+    n.dondeEstaAhora && (
+      <div class="caja caja-acento">
+        <p><strong>Dónde encontrarlo hoy</strong></p>
+        <p>{n.dondeEstaAhora}</p>
+      </div>
+    )
+  }
+
+  <h2>Qué necesita</h2>
+  <ul class="necesita">
+    {n.necesita.map((x) => <li>{x}</li>)}
+  </ul>
+
+  {
+    n.fotos && n.fotos.length > 0 && (
+      <>
+        <h2>Fotos</h2>
+        <div class="galeria">
+          {n.fotos.map((f) => (
+            <img src={f.src} alt={f.alt} loading="lazy" decoding="async" />
+          ))}
+        </div>
+      </>
+    )
+  }
+
+  {
+    n.video && (
+      <p>
+        <a href={n.video.url} target="_blank" rel="noopener">
+          Ver el vídeo: {n.video.descripcion} →
+        </a>
+      </p>
+    )
+  }
+
+  <h2>Cómo apoyarlo</h2>
+  {
+    enlaces.length > 0 ? (
+      <ul class="enlaces-localidades">
+        {enlaces.map(([k, etiqueta]) => (
+          <li>
+            <a href={n.contacto[k]} target="_blank" rel="noopener">
+              {etiqueta}
+            </a>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p class="caja-pendiente">
+        En una ficha real, aquí van sus redes y su WhatsApp para que le escribas
+        directamente.
+      </p>
+    )
+  }
+
+  {
+    n.cobro && n.cobro.length > 0 && (
+      <div class="caja caja-gris">
+        <p><strong>Si quieres comprarle o apoyarle con dinero</strong></p>
+        <ul>
+          {n.cobro.map((c) => (
+            <li>
+              {c.metodo}: <strong>{c.detalle}</strong>
+            </li>
+          ))}
+        </ul>
+        <p class="meta">
+          El pago va directo al negocio. Nosotros no recaudamos, no
+          intermediamos y no nos quedamos ninguna comisión.
+        </p>
+      </div>
+    )
+  }
+
+  <p class="meta">
+    Ficha revisada por una persona el {formatearFecha(n.revisadaEl)} y publicada
+    con permiso de quien regenta el negocio.
+  </p>
+
+  <a class="cta" href={`${base}/negocios/anadir`}>
+    <span class="cta-eyebrow">¿Tu negocio también resultó afectado?</span>
+    <span class="cta-titulo">Publica el tuyo, es gratis →</span>
+    <span class="cta-texto">
+      Nos mandas cuatro cosas por WhatsApp y nosotros montamos la ficha.
+    </span>
+  </a>
+
+  <CompartirWhatsApp
+    ruta={`${base}/negocios/${n.slug}`}
+    texto={
+      n.esEjemplo
+        ? "Así se ve la ficha de un negocio en Negocios que Laten:"
+        : `${n.nombre} resultó afectado por el terremoto y sigue adelante. Mira qué necesita:`
+    }
+  />
+</Base>

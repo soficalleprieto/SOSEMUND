@@ -1,0 +1,123 @@
+---
+import Base from "../../../../layouts/Base.astro";
+import { todosLosEventos } from "../../../../data/paises";
+import type { Evento, Pais } from "../../../../data/tipos";
+import {
+  WHATSAPP,
+  QUE_MANDAR,
+  POR_QUE_ESPANA,
+  enlaceWhatsApp,
+} from "../../../../data/contacto";
+
+export function getStaticPaths() {
+  return todosLosEventos().map(({ pais, evento }) => ({
+    params: { pais: pais.slug, evento: evento.slug },
+    props: { pais, evento },
+  }));
+}
+
+interface Props {
+  pais: Pais;
+  evento: Evento;
+}
+const { pais, evento } = Astro.props;
+const base = `/${pais.slug}/${evento.slug}`;
+
+const mensaje = `Hola. Mi negocio resultó afectado por el terremoto y quiero publicar su ficha en Negocios que Laten.
+
+Se llama:
+A qué se dedica:
+En qué localidad está:`;
+---
+
+<Base
+  titulo="Publica tu negocio, es gratis"
+  descripcion="Si tu negocio resultó afectado, publicamos su ficha gratis: qué era, cómo quedó, qué necesita y por dónde contactarte. Nos lo mandas por WhatsApp y nosotros lo montamos."
+  ruta={`${base}/negocios/anadir`}
+  censoRuta={`${base}/censo`}
+>
+  <nav class="migas">
+    <a href="/">Inicio</a> › <a href={`/${pais.slug}`}>{pais.nombre}</a> ›{" "}
+    <a href={base}>{evento.nombreCorto}</a> ›{" "}
+    <a href={`${base}/negocios`}>Negocios</a> › Publicar el mío
+  </nav>
+
+  <h1>Publica tu negocio, es gratis</h1>
+
+  <p class="entradilla">
+    Si tu negocio resultó afectado, le hacemos una página contando qué era, cómo
+    quedó y qué necesita. Para que puedas compartirla y para que quien quiera
+    ayudarte sepa exactamente cómo.
+  </p>
+
+  <p>
+    No hay formulario. Nos escribes por WhatsApp con lo que tengas —aunque sean
+    cuatro fotos mal hechas y un audio— y nosotros lo montamos. Si acabas de
+    perder tu local, lo último que necesitas es pelearte con un formulario.
+  </p>
+
+  <a class="cta" href={enlaceWhatsApp(mensaje)} target="_blank" rel="noopener">
+    <span class="cta-eyebrow">Escríbenos</span>
+    <span class="cta-titulo">Mandar mi negocio por WhatsApp →</span>
+    <span class="cta-texto">{WHATSAPP.visible}</span>
+  </a>
+
+  <div class="caja caja-gris">
+    <p>{POR_QUE_ESPANA}</p>
+  </div>
+
+  <h2>Qué mandarnos</h2>
+  <ol class="pasos">
+    {
+      QUE_MANDAR.map((paso, i) => (
+        <li>
+          <span class="numero">{i + 1}</span>
+          <div>
+            <p class="paso-titulo">{paso.titulo}</p>
+            <p>{paso.texto}</p>
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+
+  <h2>Cómo lo tratamos</h2>
+  <div class="caja caja-acento">
+    <p>
+      <strong>Lo revisa una persona antes de publicarse.</strong> Nada se
+      publica solo. Comprobamos que el negocio existe y que quien escribe es
+      quien lo regenta.
+    </p>
+    <p>
+      <strong>Publicamos dónde estás hoy, no dónde quedó tu local vacío.</strong>{" "}
+      Tras los derrumbes hubo saqueos. Si tu local está vacío, no damos su
+      dirección.
+    </p>
+    <p>
+      <strong>No tocamos tu dinero.</strong> Si quieres recibir pagos, publicamos
+      tu Nequi, tu Daviplata o tu Bre-B y el dinero te llega directo. No
+      recaudamos ni cobramos comisión.
+    </p>
+    <p>
+      <strong>Es tuyo y puedes retirarlo.</strong> Escribes al mismo WhatsApp y
+      quitamos o corregimos tu ficha. Sin explicaciones.
+    </p>
+    <p class="meta">
+      Publicamos solo lo que nos autorices. Puedes ver el detalle en la{" "}
+      <a href="/privacidad">política de privacidad</a>.
+    </p>
+  </div>
+
+  <h2>¿Y si no tengo fotos?</h2>
+  <p>
+    Da igual. Mándanos lo que puedas y montamos la ficha con eso. Una ficha sin
+    fotos sirve más que ninguna ficha. Y si luego consigues fotos, nos las mandas
+    y las añadimos.
+  </p>
+
+  <p>
+    <a href={`${base}/negocios/ejemplo`}>
+      <strong>Mira antes cómo queda una ficha →</strong>
+    </a>
+  </p>
+</Base>

@@ -1,0 +1,123 @@
+---
+import Base from "../../../../layouts/Base.astro";
+import CompartirWhatsApp from "../../../../components/CompartirWhatsApp.astro";
+import { todosLosEventos } from "../../../../data/paises";
+import type { Evento, Pais } from "../../../../data/tipos";
+
+export function getStaticPaths() {
+  return todosLosEventos().map(({ pais, evento }) => ({
+    params: { pais: pais.slug, evento: evento.slug },
+    props: { pais, evento },
+  }));
+}
+
+interface Props {
+  pais: Pais;
+  evento: Evento;
+}
+const { pais, evento } = Astro.props;
+const base = `/${pais.slug}/${evento.slug}`;
+
+const reales = evento.negocios.filter((n) => !n.esEjemplo);
+const ejemplos = evento.negocios.filter((n) => n.esEjemplo);
+---
+
+<Base
+  titulo="Negocios afectados que siguen adelante"
+  descripcion={`Negocios afectados por ${evento.nombre}: qué eran, cómo quedaron, qué necesitan y cómo apoyarlos. Publicar el tuyo es gratis.`}
+  ruta={`${base}/negocios`}
+  censoRuta={`${base}/censo`}
+>
+  <nav class="migas">
+    <a href="/">Inicio</a> › <a href={`/${pais.slug}`}>{pais.nombre}</a> ›{" "}
+    <a href={base}>{evento.nombreCorto}</a> › Negocios
+  </nav>
+
+  <h1>Negocios que siguen adelante</h1>
+
+  <p class="entradilla">
+    Cada uno con su cara, su historia y lo que necesita en concreto. Porque la
+    mejor manera de ayudar a un negocio es ser su cliente.
+  </p>
+
+  {
+    reales.length === 0 && (
+      <div class="caja caja-pendiente">
+        <p>
+          <strong>Todavía no hay ninguno publicado.</strong> Acabamos de abrir
+          esta sección y no vamos a inventarnos negocios para que parezca llena:
+          sería mentir sobre una catástrofe.
+        </p>
+        <p>
+          Abajo tienes una ficha de ejemplo para que veas cómo queda. Si tienes
+          un negocio afectado, el tuyo puede ser el primero.
+        </p>
+      </div>
+    )
+  }
+
+  <a class="cta" href={`${base}/negocios/anadir`}>
+    <span class="cta-eyebrow">Gratis y en cinco minutos</span>
+    <span class="cta-titulo">Publica tu negocio →</span>
+    <span class="cta-texto">
+      Nos mandas por WhatsApp qué vendías, cómo quedó y qué necesitas. Nosotros
+      montamos la ficha.
+    </span>
+  </a>
+
+  {
+    reales.length > 0 && (
+      <ul class="lista-negocios">
+        {reales.map((n) => {
+          const loc = evento.localidades.find((l) => l.slug === n.localidad);
+          return (
+            <li>
+              <a href={`${base}/negocios/${n.slug}`}>
+                <strong>{n.nombre}</strong>
+                <span class="depto">
+                  {n.actividad}
+                  {loc && ` · ${loc.nombre}`}
+                </span>
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    )
+  }
+
+  {
+    ejemplos.length > 0 && (
+      <>
+        <h2>Así queda una ficha</h2>
+        <ul class="lista-negocios">
+          {ejemplos.map((n) => (
+            <li>
+              <a href={`${base}/negocios/${n.slug}`}>
+                <strong>{n.nombre}</strong>
+                <span class="depto">Ficha de ejemplo · este negocio no existe</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </>
+    )
+  }
+
+  <h2>¿Eres creador de contenido?</h2>
+  <p>
+    Tras la DANA de Valencia, la iniciativa «Adopta un Comercio» juntó 880
+    negocios con 823 creadores en menos de una semana. Un vídeo tuyo enseñando
+    un negocio concreto vale más que cualquier campaña.
+  </p>
+  <p>
+    <a href={`${base}/negocios/anadir`}>
+      <strong>Escríbenos y te asignamos uno →</strong>
+    </a>
+  </p>
+
+  <CompartirWhatsApp
+    ruta={`${base}/negocios`}
+    texto="Si tu negocio resultó afectado por el terremoto, aquí puedes publicarlo gratis para que la gente sepa qué necesitas:"
+  />
+</Base>

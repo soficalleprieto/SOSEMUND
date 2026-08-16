@@ -15,9 +15,11 @@ interface Props {
    * global no significaría nada cuando haya varias emergencias.
    */
   censoRuta?: string;
+  /** Para páginas que no deben salir en buscadores, como la ficha de ejemplo. */
+  noIndexar?: boolean;
 }
 
-const { titulo, descripcion, ruta, censoRuta } = Astro.props;
+const { titulo, descripcion, ruta, censoRuta, noIndexar } = Astro.props;
 const canonica = new URL(ruta, Astro.site).href;
 const tituloCompleto = ruta === "/" ? titulo : `${titulo} | Negocios que Laten`;
 ---
@@ -30,6 +32,7 @@ const tituloCompleto = ruta === "/" ? titulo : `${titulo} | Negocios que Laten`;
     <title>{tituloCompleto}</title>
     <meta name="description" content={descripcion} />
     <link rel="canonical" href={canonica} />
+    {noIndexar && <meta name="robots" content="noindex, follow" />}
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Negocios que Laten" />
