@@ -975,3 +975,40 @@ main {
   color: var(--texto-suave);
   margin-top: 0.5rem;
 }
+
+/* --- Submenú contextual --- */
+
+.submenu {
+  border-top: 1px solid var(--borde);
+  background: var(--fondo);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.submenu::-webkit-scrollbar {
+  display: none;
+}
+.submenu .contenedor {
+  display: flex;
+  gap: 1.1rem;
+  padding-block: 0.5rem;
+}
+.submenu a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--texto-suave);
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+}
+.submenu a.actual {
+  color: var(--arcilla);
+  border-bottom-color: var(--arcilla-viva);
+}
+@media (hover: hover) and (pointer: fine) {
+  .submenu a:hover {
+    color: var(--acento);
+  }
+}

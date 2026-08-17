@@ -1,0 +1,152 @@
+---
+/*
+ * Proponer un negocio ajeno.
+ *
+ * Es probablemente la vía de entrada más realista que tenemos: quien acaba de
+ * perder su local no está buscando webs, pero su vecina, su clienta de toda la
+ * vida o su sobrino sí.
+ *
+ * El límite, que la página repite tres veces porque es el que importa:
+ * proponer NO es publicar. Nosotros contactamos, y decide quien regenta el
+ * negocio. Publicar la ficha de alguien sin su permiso sería exponer a una
+ * persona vulnerable sin que se haya enterado.
+ */
+import Base from "../../../../layouts/Base.astro";
+import CompartirWhatsApp from "../../../../components/CompartirWhatsApp.astro";
+import { todosLosEventos } from "../../../../data/paises";
+import type { Evento, Pais } from "../../../../data/tipos";
+import { WHATSAPP, enlaceWhatsApp } from "../../../../data/contacto";
+
+export function getStaticPaths() {
+  return todosLosEventos().map(({ pais, evento }) => ({
+    params: { pais: pais.slug, evento: evento.slug },
+    props: { pais, evento },
+  }));
+}
+
+interface Props {
+  pais: Pais;
+  evento: Evento;
+}
+const { pais, evento } = Astro.props;
+const base = `/${pais.slug}/${evento.slug}`;
+
+const mensaje = `Hola. Quiero proponer un negocio afectado que no es mío.
+
+Se llama:
+A qué se dedica:
+En qué localidad está:
+Lo que sé de cómo quedó:
+Cómo contactarlo (si lo sé):`;
+---
+
+<Base
+  titulo="Propón un negocio que no es tuyo"
+  descripcion="¿Conoces un negocio que lo perdió todo y no está en internet? Cuéntanoslo. Nosotros contactamos con quien lo regenta y, si acepta, le montamos su ficha gratis."
+  ruta={`${base}/negocios/proponer`}
+>
+  <nav class="migas">
+    <a href="/">Inicio</a> › <a href={`/${pais.slug}`}>{pais.nombre}</a> ›{" "}
+    <a href={base}>{evento.nombreCorto}</a> ›{" "}
+    <a href={`${base}/negocios`}>Negocios</a> › Proponer uno
+  </nav>
+
+  <h1>¿Conoces un negocio que lo perdió todo?</h1>
+
+  <p class="entradilla">
+    Quien acaba de quedarse sin local no está navegando por internet buscando
+    ayuda. Pero tú sí llegaste hasta aquí, y probablemente conozcas a alguien.
+  </p>
+
+  <p>
+    La panadería donde desayunabas. El taller que te arreglaba la moto. La
+    señora de la tienda de ropa que lleva veinte años en esa esquina. Mucha
+    gente que perdió su negocio no tiene redes, ni sabe que existen ayudas, ni
+    tiene la cabeza ahora mismo para ponerse a buscarlas.
+  </p>
+
+  <p>
+    <strong>Cuéntanoslo tú.</strong> Con que sepas el nombre y dónde estaba nos
+    vale para empezar.
+  </p>
+
+  <a class="cta" href={enlaceWhatsApp(mensaje)} target="_blank" rel="noopener">
+    <span class="cta-eyebrow">Solo necesitas saber cómo se llama</span>
+    <span class="cta-titulo">Proponer un negocio →</span>
+    <span class="cta-texto">{WHATSAPP.visible}</span>
+  </a>
+
+  <h2>Qué pasa después</h2>
+
+  <div class="caja caja-acento">
+    <p>
+      <strong>Proponer no es publicar.</strong> Nosotros buscamos a quien
+      regenta ese negocio y le preguntamos si quiere. Si dice que sí, le
+      montamos la ficha gratis. Si dice que no, o si no conseguimos hablar con
+      esa persona, <strong>no publicamos nada</strong>.
+    </p>
+    <p>
+      Nunca vamos a poner la historia de alguien en internet sin que lo sepa y
+      lo autorice. Bastante ha perdido ya como para enterarse por terceros de
+      que está en una web.
+    </p>
+  </div>
+
+  <ol class="pasos">
+    <li>
+      <span class="numero">1</span>
+      <div>
+        <p class="paso-titulo">Nos escribes lo que sepas</p>
+        <p>
+          El nombre, a qué se dedicaba y en qué localidad. Si tienes su teléfono
+          o su Instagram, mejor. Si no, con el nombre y la calle solemos poder
+          encontrarlo.
+        </p>
+      </div>
+    </li>
+    <li>
+      <span class="numero">2</span>
+      <div>
+        <p class="paso-titulo">Le buscamos y le preguntamos</p>
+        <p>
+          Le explicamos qué es esto, que es gratis y que puede retirarse cuando
+          quiera.
+        </p>
+      </div>
+    </li>
+    <li>
+      <span class="numero">3</span>
+      <div>
+        <p class="paso-titulo">Decide esa persona, no tú ni nosotros</p>
+        <p>
+          Si acepta, publicamos su ficha y te avisamos para que puedas
+          compartirla. Si no, ahí se queda.
+        </p>
+      </div>
+    </li>
+  </ol>
+
+  <h2>Si puedes, avísale tú antes</h2>
+  <p>
+    Lo más rápido y lo más respetuoso es que se lo cuentes tú, que te conoce.
+    Pásale directamente la página de alta y que decida:
+  </p>
+  <p>
+    <a href={`${base}/negocios/anadir`}>
+      <strong>Publica tu negocio, es gratis →</strong>
+    </a>
+  </p>
+
+  <div class="caja caja-gris">
+    <p>
+      <strong>Y si el negocio sigue abierto, hay algo aún mejor.</strong>{" "}
+      Cómprale. Un pedido esta semana le sirve más que cualquier formulario, y
+      no necesitas nuestro permiso para eso.
+    </p>
+  </div>
+
+  <CompartirWhatsApp
+    ruta={`${base}/negocios/proponer`}
+    texto="Si conoces un negocio que lo perdió todo con el terremoto y no está en internet, puedes proponerlo aquí para que le hagan su ficha gratis:"
+  />
+</Base>

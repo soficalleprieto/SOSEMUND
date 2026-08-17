@@ -33,7 +33,20 @@ const MENU = activa
   ? [
       { texto: "Censar mi negocio", href: `${base}/censo`, destacado: true },
       { texto: "Ayudas", href: base },
-      { texto: "Negocios", href: `${base}/negocios` },
+      {
+        texto: "Negocios que te necesitan",
+        href: `${base}/negocios`,
+        /*
+         * Submenú contextual: solo aparece cuando ya estás dentro de la
+         * sección. Sin JavaScript y sin desplegables por hover, que en una
+         * pantalla táctil no existen.
+         */
+        submenu: [
+          { texto: "Publica el tuyo", href: `${base}/negocios/anadir` },
+          { texto: "Apadrina uno", href: `${base}/negocios/adopta` },
+          { texto: "Propón uno que no es tuyo", href: `${base}/negocios/proponer` },
+        ],
+      },
       { texto: "Dónde hay ayuda", href: `${base}/iniciativas` },
       { texto: "Quién lo cuenta", href: `${base}/cuentas` },
       { texto: "Sobre", href: "/sobre" },
@@ -41,7 +54,14 @@ const MENU = activa
   : [{ texto: "Sobre", href: "/sobre" }];
 
 const aqui = Astro.url.pathname.replace(/(.)\/$/, "$1");
-const esActual = (href: string) => aqui === href.replace(/(.)\/$/, "$1");
+const limpia = (href: string) => href.replace(/(.)\/$/, "$1");
+const esActual = (href: string) => aqui === limpia(href);
+const estaDentro = (href: string) => aqui.startsWith(limpia(href));
+
+/* El submenú se despliega solo dentro de su sección. */
+const submenuAbierto = MENU.find(
+  (m) => "submenu" in m && m.submenu && estaDentro(m.href),
+);
 ---
 
 <!doctype html>
@@ -104,6 +124,24 @@ const esActual = (href: string) => aqui === href.replace(/(.)\/$/, "$1");
           }
         </div>
       </nav>
+
+      {
+        submenuAbierto?.submenu && (
+          <nav class="submenu" aria-label={submenuAbierto.texto}>
+            <div class="contenedor">
+              {submenuAbierto.submenu.map((s) => (
+                <a
+                  href={s.href}
+                  class:list={[{ actual: esActual(s.href) }]}
+                  aria-current={esActual(s.href) ? "page" : undefined}
+                >
+                  {s.texto}
+                </a>
+              ))}
+            </div>
+          </nav>
+        )
+      }
     </header>
 
     <main id="contenido">
