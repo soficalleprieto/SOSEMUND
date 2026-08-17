@@ -9,14 +9,17 @@ import { MARCA } from "../data/marca";
 interface Props {
   titulo: string;
   descripcion: string;
+  /** Imagen social propia. Si no se pasa, va el logo de marca. */
+  imagen?: string;
   /** Ruta canónica, p. ej. "/colombia/terremoto-2026/censo". */
   ruta: string;
   /** Para páginas que no deben salir en buscadores, como la ficha de ejemplo. */
   noIndexar?: boolean;
 }
 
-const { titulo, descripcion, ruta, noIndexar } = Astro.props;
+const { titulo, descripcion, ruta, noIndexar, imagen } = Astro.props;
 const canonica = new URL(ruta, Astro.site).href;
+const social = new URL(imagen ?? "/social.jpg", Astro.site).href;
 const tituloCompleto = ruta === "/" ? titulo : `${titulo} | ${MARCA.nombre}`;
 
 /*
@@ -57,6 +60,10 @@ const esActual = (href: string) => aqui === href.replace(/(.)\/$/, "$1");
     <meta property="og:title" content={tituloCompleto} />
     <meta property="og:description" content={descripcion} />
     <meta property="og:url" content={canonica} />
+    <meta property="og:image" content={social} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
   </head>
 
   <body>

@@ -5,9 +5,11 @@
  * decisiones con lo que lee aquí tiene derecho a saber quién lo escribe y por
  * qué.
  */
+import { Image } from "astro:assets";
 import Base from "../layouts/Base.astro";
 import CompartirWhatsApp from "../components/CompartirWhatsApp.astro";
 import { WHATSAPP, enlaceWhatsApp } from "../data/contacto";
+import retrato from "../assets/sofia-calle.jpg";
 ---
 
 <Base
@@ -18,6 +20,11 @@ import { WHATSAPP, enlaceWhatsApp } from "../data/contacto";
   <nav class="migas"><a href="/">Inicio</a> › Sobre</nav>
 
   <h1>Sobre mí</h1>
+
+  <figure class="retrato">
+    <Image src={retrato} alt="Sofía Calle" width={280} densities={[1, 2]} loading="eager" />
+    <figcaption>Sofía Calle, fundadora de S.O.S.EMUND</figcaption>
+  </figure>
 
   <h2>Llevo más de 15 años viendo de cerca lo que cuesta sacar adelante un negocio</h2>
 

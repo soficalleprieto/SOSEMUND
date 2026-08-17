@@ -148,7 +148,7 @@ button:focus-visible {
 .wa:active,
 .localidades a:active,
 .enlaces-localidades a:active,
-.enlace-censo:active {
+.menu a:active {
   transform: scale(0.985);
 }
 .cta,
@@ -156,6 +156,12 @@ button:focus-visible {
 .wa,
 .localidades a,
 .enlaces-localidades a,
+.menu a {
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    transform 100ms ease;
+}
 @media (prefers-reduced-motion: reduce) {
   * {
     transition-duration: 0.01ms !important;
@@ -950,4 +956,22 @@ main {
   margin: 0.75rem 0 0;
   font-size: 0.78rem;
   color: var(--texto-suave);
+}
+
+/* --- Retrato de la página Sobre --- */
+
+.retrato {
+  margin: 1.5rem 0 2rem;
+  max-width: 17rem;
+}
+.retrato img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radio);
+}
+.retrato figcaption {
+  font-size: 0.85rem;
+  color: var(--texto-suave);
+  margin-top: 0.5rem;
 }
