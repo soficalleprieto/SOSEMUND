@@ -31,7 +31,6 @@ const activa = todosLosEventos()[0];
 const base = activa ? `/${activa.pais.slug}/${activa.evento.slug}` : "";
 const MENU = activa
   ? [
-      { texto: "Censar mi negocio", href: `${base}/censo`, destacado: true },
       { texto: "Ayudas", href: base },
       {
         texto: "Negocios que te necesitan",
