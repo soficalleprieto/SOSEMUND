@@ -30,6 +30,62 @@ const GUIA_GOB: Fuente = {
   fecha: "2026-08-13",
 };
 
+const BANCOLOMBIA_2026: Fuente = {
+  medio: "La República",
+  titulo:
+    "Bancolombia anunció alivios, periodos de gracia y créditos a afectados por el terremoto",
+  url: "https://www.larepublica.co/especiales/congreso-empresarial-colombiano-2026/bancolombia-anuncio-alivios-periodos-de-gracia-y-creditos-a-afectados-por-el-terremoto-4458407",
+  fecha: "2026-08-13",
+};
+
+const BANCO_AGRARIO_2026: Fuente = {
+  medio: "Tintiando",
+  titulo:
+    "Banco Agrario reintegrará comisiones cobradas a clientes de oficinas afectadas por el sismo",
+  url: "https://www.tintiando.com/2026/08/14/banco-agrario-reintegrara-comisiones-cobradas-a-clientes-de-oficinas-afectadas-por-el-sismo/",
+  fecha: "2026-08-14",
+};
+
+const DIAN_2026: Fuente = {
+  medio: "El Tiempo",
+  titulo:
+    "Gobierno aplaza la declaración de renta a personas naturales y otros plazos tributarios en zonas afectadas por el terremoto de 7,4",
+  url: "https://www.eltiempo.com/economia/finanzas-personales/gobierno-aplaza-la-declaracion-de-renta-a-personas-naturales-y-otros-plazos-tributarios-en-zonas-afectadas-por-el-terremoto-de-7-4-esto-debe-saber-3577799",
+  fecha: "2026-08-12",
+};
+
+const BANCO_MUNDIAL_2026: Fuente = {
+  medio: "El Tiempo",
+  titulo:
+    "El Banco Mundial ya desembolsó los US$200 millones del crédito al que Colombia accedió para atender el terremoto",
+  url: "https://www.eltiempo.com/economia/sectores/el-banco-mundial-ya-desembolso-los-us-200-millones-del-credito-al-que-colombia-accedio-para-atender-el-terremoto-3578269",
+  fecha: "2026-08-13",
+};
+
+const STARLINK_2026: Fuente = {
+  medio: "Infobae",
+  titulo:
+    "Starlink gratis en Colombia tras el terremoto: hasta qué fecha aplica y cómo solicitarlo",
+  url: "https://www.infobae.com/tecno/2026/08/13/starlink-gratis-en-colombia-tras-el-terremoto-hasta-que-fecha-aplica-y-como-solicitarlo/",
+  fecha: "2026-08-13",
+};
+
+const CLARO_TIGO_2026: Fuente = {
+  medio: "Infobae",
+  titulo:
+    "Operadores móviles anunciaron minutos ilimitados y plan de datos gratis para usuarios en zonas afectadas por el terremoto en Colombia",
+  url: "https://www.infobae.com/colombia/2026/08/11/operadores-moviles-anunciaron-minutos-ilimitados-y-plan-de-datos-gratis-para-usuarios-en-zonas-afectadas-por-el-terremoto-en-colombia/",
+  fecha: "2026-08-11",
+};
+
+const ASEGURADORAS_2026: Fuente = {
+  medio: "El Tiempo",
+  titulo:
+    "Aseguradoras activan sus líneas de atención tras el terremoto: consulte aquí cómo reportar un siniestro",
+  url: "https://www.eltiempo.com/economia/finanzas-personales/aseguradoras-activan-sus-lineas-de-atencion-tras-el-terremoto-consulte-aqui-como-reportar-un-siniestro-3577951",
+  fecha: "2026-08-12",
+};
+
 /** Texto compartido por las ciudades cuyo canal para negocios aún no verificamos. */
 const PENDIENTE =
   "Hay módulos de registro habilitados en la alcaldía y el coliseo municipal. Estamos verificando el canal específico para negocios.";
@@ -49,6 +105,8 @@ export const colombiaTerremoto2026: Evento = {
   cifras: {
     fecha: "2026-08-12",
     fuente: "Declaración presidencial con datos de la UNGRD",
+    fuenteUrl:
+      "https://www.diariolibre.com/mundo/america-latina/2026/08/12/aumenta-la-cantidad-de-muertos-en-colombia-tras-terremoto/3627378",
     lineas: [
       { etiqueta: "fallecidos", valor: 265 },
       { etiqueta: "heridos", valor: 3494 },
@@ -152,7 +210,12 @@ export const colombiaTerremoto2026: Evento = {
       nombre: "Manizales",
       division: "Caldas",
       alertaMaxima: true,
-      censo: { verificado: false, detalle: PENDIENTE },
+      censo: {
+        verificado: true,
+        detalle:
+          "La Cámara de Comercio de Manizales por Caldas activó una ruta de apoyo para empresarios afectados por el sismo, que cubre Manizales y el resto de municipios de su jurisdicción (18 en total). Escríbeles por WhatsApp para resolver dudas y reportar tu situación.",
+        telefonos: ["323 942 1880"],
+      },
     },
     {
       slug: "armenia",
@@ -282,9 +345,9 @@ export const colombiaTerremoto2026: Evento = {
       resumen:
         "Los bancos anunciaron períodos de gracia, cambios en las condiciones de los créditos y suspensión temporal de los cobros.",
       detalle:
-        "El sector bancario anunció un paquete de alivios para personas y empresas de las zonas afectadas que podría beneficiar a cerca de 2,8 millones de usuarios. Las medidas incluyen períodos de gracia de hasta un año, modificación de las condiciones de los créditos y suspensión temporal de los procesos de cobro. No es automático: en general hay que solicitarlo al banco y acreditar que estás en la zona afectada.",
+        "El sector bancario anunció un paquete de alivios para personas y empresas de las zonas afectadas que podría beneficiar a cerca de 2,8 millones de usuarios: períodos de gracia de hasta un año, cambios en las condiciones de los créditos y suspensión temporal de los cobros. No suele ser automático: hay que pedirlo al banco.\n\nLo que ya está concretado banco por banco:\n\nBancolombia suspendió los cobros a sus clientes afectados y su presidente, Juan Carlos Mora, anunció períodos de gracia y créditos adicionales para reconstrucción en algunas regiones, pero todavía sin tasas, montos ni plazos publicados: dijo que se irán anunciando según avance la evaluación de cada caso.\n\nBanco Agrario devuelve las comisiones cobradas por retiros, depósitos y pago de cheques a los clientes cuya oficina habitual sigue cerrada por la emergencia, con efecto retroactivo desde el 10 de agosto; la devolución empezó el 18 de agosto.\n\nBanco de Bogotá, BBVA Colombia y Davivienda cerraron oficinas presenciales en las zonas más golpeadas y mantienen atención por teléfono, WhatsApp y banca virtual, pero no hemos encontrado un anuncio propio de alivios de crédito más allá del marco general del gremio.",
       pendiente:
-        "Cada banco tiene requisitos y plazos propios. Estamos verificando banco por banco para publicar el detalle y el canal de solicitud de cada uno.",
+        "No hemos encontrado el canal exacto de solicitud (línea, formulario, requisitos) en Bancolombia, Banco de Bogotá, BBVA, Davivienda, Banco Popular, Banco de Occidente, AV Villas ni Scotiabank Colpatria. La instrucción que dan todos, por ahora, es «contacta a tu banco por los canales habituales y pide que evalúen tu caso».",
       fuentes: [
         {
           medio: "Semana",
@@ -300,6 +363,8 @@ export const colombiaTerremoto2026: Evento = {
           url: "https://www.elpais.com.co/economia/bancos-en-colombia-ofrecen-alivios-a-los-damnificados-por-el-terremoto-como-solicitarlos-1344.html",
           fecha: "2026-08-12",
         },
+        BANCOLOMBIA_2026,
+        BANCO_AGRARIO_2026,
       ],
     },
     {
@@ -308,9 +373,9 @@ export const colombiaTerremoto2026: Evento = {
       resumen:
         "El Gobierno activó medidas tributarias para los afectados por el terremoto.",
       detalle:
-        "Tras declarar el desastre de carácter nacional, el Gobierno activó medidas tributarias junto con recursos del Fondo Nacional de Gestión del Riesgo de Desastres y subsidios de arrendamiento. Conserva toda la documentación de tus pérdidas: es lo que te van a pedir para acreditar la condición de afectado.",
+        "La DIAN confirmó aplazamientos de plazos —no condonación del impuesto— para personas y agentes con domicilio fiscal en las seccionales de Cali, Palmira, Tuluá, Buenaventura, Pereira, Armenia, Manizales, Quibdó y Popayán: la declaración de renta 2025 de personas naturales se corre a la ventana del 27 de octubre al 13 de noviembre de 2026 (según los dos últimos dígitos del NIT); la retención en la fuente de julio se puede presentar y pagar con los plazos de agosto, sin sanción ni interés moratorio; y los trámites aduaneros quedan suspendidos entre el 10 de agosto y el 10 de septiembre de 2026 en esas seccionales. Excluye a los grandes contribuyentes. Conserva toda la documentación de tus pérdidas: es lo que te van a pedir para acreditar la condición de afectado.",
       pendiente:
-        "Estamos verificando qué impuestos concretos se aplazan o condonan, con qué plazos, y qué corresponde a la DIAN frente a los impuestos municipales (ICA y predial) de cada ciudad.",
+        "No hemos encontrado ningún decreto de alcaldía que exonere o aplace el ICA o el predial en Cali, Pereira, Manizales, Armenia o Quibdó por este terremoto. Hay peticiones de gremios pidiendo ese alivio, pero no confirmamos que se haya aprobado. Lo seguimos verificando.",
       fuentes: [
         {
           medio: "El Colombiano",
@@ -319,6 +384,7 @@ export const colombiaTerremoto2026: Evento = {
           url: "https://www.elcolombiano.com/negocios/terremoto-colombia-alivios-bancarios-tributarios-MD39904697",
           fecha: "2026-08-13",
         },
+        DIAN_2026,
       ],
     },
     {
@@ -327,9 +393,9 @@ export const colombiaTerremoto2026: Evento = {
       resumen:
         "Fenalco, MinComercio y Bancóldex trabajan en un paquete para evitar el cierre definitivo de establecimientos.",
       detalle:
-        "Fenalco presentó al Gobierno una propuesta integral con medidas de atención inmediata, alivio financiero y reactivación económica, con el objetivo declarado de evitar el cierre definitivo de establecimientos, proteger los empleos y recuperar la actividad productiva. En la reunión participó el presidente de Bancóldex, Manuel Fernández Ariza. El Gobierno además solicitó un crédito de 450 millones de dólares al Banco Mundial.",
+        "Fenalco presentó al Gobierno una propuesta integral con medidas de atención inmediata, alivio financiero y reactivación económica, con el objetivo declarado de evitar el cierre definitivo de establecimientos, proteger los empleos y recuperar la actividad productiva. En la reunión participaron el presidente de Bancóldex, Manuel Fernández Ariza, el Fondo Nacional de Garantías e INNpulsa. El Banco Mundial ya desembolsó US$200 millones de una línea de crédito escalable que podría ampliarse hasta US$450 millones, destinada a la respuesta de emergencia y a sentar las bases de la reconstrucción.",
       pendiente:
-        "Todavía no hay líneas de crédito con condiciones publicadas. En cuanto Bancóldex abra una línea específica para afectados, publicamos requisitos y cómo solicitarla.",
+        "Todavía no hay una línea de crédito específica para negocios afectados con tasa, monto y requisitos publicados por Bancóldex, Finagro o el Fondo Nacional de Garantías. El Ministerio de Comercio anunció un «Plan de Reconstrucción y Reactivación Económica» que no se había publicado formalmente al cierre de esta verificación (17/08/2026). En cuanto haya algo concreto, lo publicamos.",
       fuentes: [
         {
           medio: "El Heraldo",
@@ -338,7 +404,19 @@ export const colombiaTerremoto2026: Evento = {
           url: "https://www.elheraldo.co/economia/2026/08/13/fenalco-articula-acciones-con-mincomercio-para-comerciantes-afectados-por-terremoto/",
           fecha: "2026-08-13",
         },
+        BANCO_MUNDIAL_2026,
       ],
+    },
+    {
+      slug: "beneficios-privados",
+      titulo: "Internet, datos móviles y seguros: lo que ofrecen las empresas privadas",
+      resumen:
+        "Starlink, Claro, Tigo y las aseguradoras activaron beneficios propios para los afectados, algunos automáticos y otros que hay que pedir.",
+      detalle:
+        "Starlink ofrece el servicio gratis hasta el 12 de septiembre de 2026 en Chocó, Valle del Cauca, Risaralda, Caldas y Quindío. Si ya tenías el servicio activo el día del sismo, el crédito se aplica solo, sin trámite. Si lo habías cancelado, contacta al soporte de Starlink para reactivarlo. Si eres nuevo, compra el kit (antena y router) en la web oficial o en un distribuidor autorizado, contrata un plan y luego contacta al soporte para pedir la activación gratuita antes de esa fecha. Si el sismo te dañó el equipo, también puedes pedir el reemplazo gratis por soporte técnico.\n\nClaro dio 2 GB de datos y minutos y SMS ilimitados durante 7 días a sus clientes prepago en Chocó, Valle del Cauca, Risaralda, Quindío y Caldas, activado automáticamente desde el 11 de agosto. Tigo dio 2 GB gratis durante 3 días a sus clientes prepago en las mismas cinco zonas, también automático, sin trámite.\n\nSi tienes seguro y tu negocio o vivienda sufrió daños, puedes reportarlo directamente: Seguros Bolívar por WhatsApp 322 332 2322 o la línea #322 (opción 0); Sura por WhatsApp 315 275 7888, la línea #888 o la emergencia 01 8000 415 215. Sura aclaró que los damnificados tienen dos años para reclamar, no 72 horas como se ha dicho por ahí.",
+      pendiente:
+        "No hemos confirmado el canal exacto de contacto de las demás aseguradoras desplegadas (Allianz, Axa Colpatria, Aseguradora Solidaria, BBVA Seguros, Colmena, Chubb, HDI, La Equidad, La Previsora, Mapfre, Seguros del Estado y Zurich), ni la cantidad y duración exacta del beneficio de datos gratis de WOM.",
+      fuentes: [STARLINK_2026, CLARO_TIGO_2026, ASEGURADORAS_2026],
     },
   ],
 };

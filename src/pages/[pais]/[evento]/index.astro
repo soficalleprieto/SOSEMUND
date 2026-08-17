@@ -101,7 +101,11 @@ const n = (x: number) => x.toLocaleString("es-CO");
           {evento.cifras.lineas
             .map((l) => `${n(l.valor)} ${l.etiqueta}`)
             .join(", ")}
-          . Fuente: {evento.cifras.fuente}. {evento.cifras.aviso}
+          . Fuente:{" "}
+          <a href={evento.cifras.fuenteUrl} target="_blank" rel="noopener">
+            {evento.cifras.fuente}
+          </a>
+          . {evento.cifras.aviso}
         </p>
       </div>
     )

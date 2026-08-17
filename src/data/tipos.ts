@@ -200,6 +200,8 @@ export type Evento = {
   cifras?: {
     fecha: string;
     fuente: string;
+    /** Enlace a la publicación de donde salen estas cifras. Sin enlace no se puede verificar. */
+    fuenteUrl: string;
     lineas: { etiqueta: string; valor: number }[];
     aviso: string;
   };
