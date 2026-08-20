@@ -54,7 +54,7 @@
   /* Medida de lectura del texto corrido: unos 68 caracteres por línea. */
   --ancho-texto: 40rem;
   /* Ancho de la página. Todo comparte este borde izquierdo. */
-  --ancho-amplio: 60rem;
+  --ancho-amplio: 68rem;
 
   --serif: "Source Serif 4 Variable", Georgia, "Times New Roman", serif;
   --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
