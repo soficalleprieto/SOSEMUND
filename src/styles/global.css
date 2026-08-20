@@ -1099,14 +1099,28 @@ main {
   padding: 0;
   margin: 1.25rem 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
-  gap: 0.6rem;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+@media (min-width: 36rem) {
+  .cuentas {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 54rem) {
+  .cuentas {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 .cuentas a {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.15rem;
   border: 1px solid var(--borde-fuerte);
   border-radius: var(--radio);
-  padding: 0.7rem 0.9rem;
+  padding: 1.1rem 0.9rem;
   text-decoration: none;
   color: var(--texto);
   background: var(--fondo);
@@ -1117,6 +1131,44 @@ main {
   font-size: 0.8rem;
   color: var(--texto-suave);
   margin-top: 0.1rem;
+}
+
+.cuenta-avatar {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  margin-bottom: 0.5rem;
+  object-fit: cover;
+  border: 1px solid var(--borde);
+}
+.cuenta-avatar-inicial {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.5rem;
+  border: none;
+}
+.avatar-azul {
+  background: var(--acento-claro);
+  color: var(--acento);
+}
+.avatar-naranja {
+  background: var(--arcilla-claro);
+  color: var(--arcilla);
+}
+.avatar-ambar {
+  background: var(--aviso-fondo);
+  color: var(--aviso);
+}
+.avatar-verde {
+  background: var(--positivo-fondo);
+  color: var(--positivo);
+}
+.avatar-rojo {
+  background: var(--alerta-fondo);
+  color: var(--alerta);
 }
 
 .destacados {

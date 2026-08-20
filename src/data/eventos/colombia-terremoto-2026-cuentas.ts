@@ -1,4 +1,6 @@
 import type { Cuenta } from "../tipos";
+import logoWck from "../../assets/cuentas/wckitchen.jpg";
+import logoMadrina from "../../assets/cuentas/fundacionmadrina.jpg";
 
 /**
  * Cuentas que están contando lo que pasa y moviendo ayuda.
@@ -50,6 +52,7 @@ export const cuentasColombia2026: Cuenta[] = [
     handle: "wckitchen",
     red: "instagram",
     nota: "World Central Kitchen. Las fotos libres que ilustran este sitio son suyas.",
+    logo: logoWck,
     destacados: [
       {
         url: "https://www.instagram.com/wckitchen/p/DcPBuwTgXtO/",
@@ -61,6 +64,7 @@ export const cuentasColombia2026: Cuenta[] = [
   {
     handle: "fundacionmadrina",
     red: "instagram",
+    logo: logoMadrina,
     destacados: [
       {
         url: "https://www.instagram.com/fundacionmadrina/p/DcOQQGsoFev/",

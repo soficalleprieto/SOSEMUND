@@ -8,12 +8,27 @@
  * entrada la volvería falsa y obligaría a poner banner de cookies. Así, quien
  * no pulsa no recibe nada.
  */
+import { Image } from "astro:assets";
 import Base from "../../../layouts/Base.astro";
 import CompartirWhatsApp from "../../../components/CompartirWhatsApp.astro";
 import { todosLosEventos } from "../../../data/paises";
 import type { Evento, Pais, Red } from "../../../data/tipos";
 import { enlaceWhatsApp } from "../../../data/contacto";
 import Incrustado from "../../../components/Incrustado.astro";
+
+/*
+ * Sin la foto de perfil de cada persona (no la tenemos con permiso, ver
+ * commit), el avatar de las cuentas personales es un círculo de color con su
+ * inicial. El color sale del propio handle -siempre el mismo para la misma
+ * cuenta- entre una paleta que ya usa el resto del sitio, para que no
+ * desentone.
+ */
+const PALETA_AVATAR = ["azul", "naranja", "ambar", "verde", "rojo"];
+function colorDeAvatar(handle: string) {
+  let hash = 0;
+  for (let i = 0; i < handle.length; i++) hash = (hash * 31 + handle.charCodeAt(i)) >>> 0;
+  return PALETA_AVATAR[hash % PALETA_AVATAR.length];
+}
 
 export function getStaticPaths() {
   return todosLosEventos().map(({ pais, evento }) => ({
@@ -101,10 +116,18 @@ const destacados = evento.cuentas.flatMap((c) =>
       evento.cuentas.map((c) => (
         <li>
           <a href={URL_RED[c.red](c.handle)} target="_blank" rel="noopener">
+            {c.logo ? (
+              <Image src={c.logo} alt="" width={96} loading="lazy" class="cuenta-avatar" />
+            ) : (
+              <span
+                class={`cuenta-avatar cuenta-avatar-inicial avatar-${colorDeAvatar(c.handle)}`}
+                aria-hidden="true"
+              >
+                {c.handle.charAt(0).toUpperCase()}
+              </span>
+            )}
             <strong>@{c.handle}</strong>
-            <span class="depto">
-              {c.nota ?? ETIQUETA_RED[c.red]}
-            </span>
+            <span class="depto">{c.nota ?? ETIQUETA_RED[c.red]}</span>
           </a>
         </li>
       ))

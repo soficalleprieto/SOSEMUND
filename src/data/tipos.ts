@@ -105,6 +105,12 @@ export type Cuenta = {
   nota?: string;
   /** Publicaciones sueltas que merecen difusión. */
   destacados?: { url: string; descripcion: string }[];
+  /**
+   * Logo propio de la cuenta, SOLO para organizaciones (su marca, no la cara
+   * de nadie). Para personas no se usa: la tarjeta muestra un avatar con su
+   * inicial en vez de su foto, que es suya y no la tenemos con permiso.
+   */
+  logo?: ImageMetadata;
 };
 
 /* ------------------------------------------------------------------ *
