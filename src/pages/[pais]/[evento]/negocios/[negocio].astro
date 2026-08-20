@@ -71,9 +71,37 @@ Qué tipo de contenido hago:`;
           verdad, esta página deja de estar la primera.
         </p>
         <p class="meta">
-          Por eso tampoco lleva teléfono ni redes: no queremos que nadie escriba
-          a una cuenta que no es de nadie.
+          El WhatsApp, las redes y las cuentas de cobro que ves más abajo
+          también están inventados, para que veas cómo queda esa parte de la
+          ficha: no escribas ni mandes dinero a ninguno.
         </p>
+      </div>
+    )
+  }
+
+  {
+    n.fotos?.antes && n.fotos?.despues && (
+      <div class="comparacion comparacion-hero">
+        <figure>
+          <Image
+            src={n.fotos.antes.src}
+            alt={n.fotos.antes.alt}
+            width={500}
+            densities={[1, 2]}
+            loading="eager"
+          />
+          <figcaption>Antes</figcaption>
+        </figure>
+        <figure>
+          <Image
+            src={n.fotos.despues.src}
+            alt={n.fotos.despues.alt}
+            width={500}
+            densities={[1, 2]}
+            loading="eager"
+          />
+          <figcaption>Después</figcaption>
+        </figure>
       </div>
     )
   }
@@ -120,44 +148,14 @@ Qué tipo de contenido hago:`;
   </ul>
 
   {
-    n.fotos && (
+    n.fotos?.otras && n.fotos.otras.length > 0 && (
       <>
-        <h2>Fotos</h2>
-        {
-          n.fotos.antes && n.fotos.despues && (
-            <div class="comparacion">
-              <figure>
-                <Image
-                  src={n.fotos.antes.src}
-                  alt={n.fotos.antes.alt}
-                  width={500}
-                  densities={[1, 2]}
-                  loading="lazy"
-                />
-                <figcaption>Antes</figcaption>
-              </figure>
-              <figure>
-                <Image
-                  src={n.fotos.despues.src}
-                  alt={n.fotos.despues.alt}
-                  width={500}
-                  densities={[1, 2]}
-                  loading="lazy"
-                />
-                <figcaption>Después</figcaption>
-              </figure>
-            </div>
-          )
-        }
-        {
-          n.fotos.otras && n.fotos.otras.length > 0 && (
-            <div class="galeria">
-              {n.fotos.otras.map((f) => (
-                <Image src={f.src} alt={f.alt} width={700} densities={[1, 2]} loading="lazy" />
-              ))}
-            </div>
-          )
-        }
+        <h2>Más fotos</h2>
+        <div class="galeria">
+          {n.fotos.otras.map((f) => (
+            <Image src={f.src} alt={f.alt} width={700} densities={[1, 2]} loading="lazy" />
+          ))}
+        </div>
       </>
     )
   }

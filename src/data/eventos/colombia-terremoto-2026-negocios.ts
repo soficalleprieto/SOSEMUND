@@ -13,8 +13,10 @@ import fotoAhora from "../../assets/negocios/ejemplo/ahora.jpg";
  *
  * El ejemplo usa un nombre arquetípico —el mismo que aparece en la portada— en
  * vez de uno plausible, precisamente para que no pueda confundirse con ningún
- * comercio real de Pereira. Y no lleva datos de contacto que puedan resolver en
- * la cuenta de nadie.
+ * comercio real de Pereira. Sí lleva contacto y cobro, para que se vea cómo
+ * queda esa parte de la ficha, pero con números y cuentas evidentemente falsos
+ * (todo ceros, dominios "ejemplo") para que no resuelvan en la cuenta de
+ * nadie, y con el aviso de que están inventados junto a ellos en la plantilla.
  */
 export const negociosColombia2026: Negocio[] = [
   {
@@ -41,7 +43,15 @@ export const negociosColombia2026: Negocio[] = [
       "Pedidos por encargo mientras el local no reabre",
       "Bandejas y moldes de panadería",
     ],
-    contacto: {},
+    contacto: {
+      whatsapp: "https://wa.me/573000000000",
+      instagram: "https://instagram.com/panaderiadelaesquina.ejemplo",
+      correo: "mailto:contacto@ejemplo.co",
+    },
+    cobro: [
+      { metodo: "Nequi", detalle: "300 000 0000" },
+      { metodo: "Daviplata", detalle: "300 000 0000" },
+    ],
     fotos: {
       antes: {
         src: fotoAntes,
