@@ -47,6 +47,9 @@
   --aviso: #8a5a00;
   --aviso-fondo: #fdf6e8;
   --whatsapp: #0f7038;
+  /* Mismo verde que el botón de WhatsApp, reutilizado para "buen estado" en etiquetas. */
+  --positivo: #0f7038;
+  --positivo-fondo: #eaf6ee;
 
   /* Medida de lectura del texto corrido: unos 68 caracteres por línea. */
   --ancho-texto: 40rem;
@@ -849,8 +852,18 @@ main {
   padding: 0;
   margin: 1.25rem 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(13rem, 15rem));
-  gap: 0.75rem;
+  grid-template-columns: 1fr;
+  gap: 0.9rem;
+}
+@media (min-width: 36rem) {
+  .lista-negocios {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 54rem) {
+  .lista-negocios {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 .lista-negocios a {
   display: block;
@@ -860,6 +873,7 @@ main {
   text-decoration: none;
   color: var(--texto);
   background: var(--fondo);
+  height: 100%;
 }
 .lista-negocios .texto-tarjeta {
   padding: 0.75rem 0.85rem;
@@ -881,6 +895,120 @@ main {
   font-size: 0.8rem;
   color: var(--arcilla);
   margin-top: 0.15rem;
+}
+
+/* Etiquetas de color: mismo semáforo que el resto del sitio (rojo/ámbar/verde). */
+.etiquetas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin: 0.5rem 0;
+}
+.etiqueta {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.18rem 0.55rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.etiqueta-mala {
+  color: var(--alerta);
+  background: var(--alerta-fondo);
+}
+.etiqueta-media {
+  color: var(--aviso);
+  background: var(--aviso-fondo);
+}
+.etiqueta-buena {
+  color: var(--positivo);
+  background: var(--positivo-fondo);
+}
+.etiqueta-acento {
+  color: var(--arcilla);
+  background: var(--arcilla-claro);
+}
+.etiqueta-neutra {
+  color: var(--texto-suave);
+  background: var(--fondo-hundido);
+}
+
+.lista-negocios .revisado {
+  display: block;
+  font-size: 0.76rem;
+  color: var(--texto-suave);
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--borde);
+}
+
+/* --- Accesos rápidos arriba de /negocios --- */
+
+.acciones-negocios {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+}
+@media (min-width: 36rem) {
+  .acciones-negocios {
+    grid-template-columns: 1fr 1fr;
+  }
+  .acciones-fila {
+    grid-column: 1 / -1;
+  }
+}
+.accion {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 1.1rem 1.25rem;
+  border-radius: var(--radio);
+  text-decoration: none;
+}
+.accion-principal {
+  background: var(--acento);
+  color: #fff;
+}
+.accion-secundaria {
+  background: var(--arcilla-claro);
+  color: var(--texto);
+  border: 1px solid var(--borde);
+}
+.accion-icono {
+  font-size: 1.3rem;
+  line-height: 1;
+  margin-bottom: 0.2rem;
+}
+.accion-titulo {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+.accion-principal .accion-texto {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.9rem;
+}
+.accion-secundaria .accion-texto {
+  color: var(--texto-suave);
+  font-size: 0.9rem;
+}
+.acciones-fila {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+.acciones-fila a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid var(--borde-fuerte);
+  border-radius: var(--radio);
+  text-decoration: none;
+  color: var(--texto);
+  font-weight: 600;
+  font-size: 0.9rem;
 }
 
 /* Miniaturas antes/después juntas, en las tarjetas del listado. */
