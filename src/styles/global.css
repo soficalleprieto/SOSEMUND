@@ -817,6 +817,20 @@ main {
   color: var(--acento);
 }
 
+.cartel-apadrinado {
+  display: inline-block;
+  background: var(--arcilla-claro);
+  color: var(--arcilla);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.3rem 0.7rem;
+  border-radius: var(--radio);
+  margin: 0.3rem 0 0.6rem;
+}
+.cartel-apadrinado a {
+  color: inherit;
+}
+
 .galeria {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));

@@ -1,4 +1,6 @@
 import type { Negocio } from "../tipos";
+import fotoAntes from "../../assets/negocios/ejemplo/antes.jpg";
+import fotoAhora from "../../assets/negocios/ejemplo/ahora.jpg";
 
 /**
  * Fichas de negocio publicadas.
@@ -40,6 +42,16 @@ export const negociosColombia2026: Negocio[] = [
       "Bandejas y moldes de panadería",
     ],
     contacto: {},
+    fotos: [
+      {
+        src: fotoAntes,
+        alt: "La panadería de la esquina antes del terremoto, con el mostrador lleno de pan y clientes atendidos por sus dueños.",
+      },
+      {
+        src: fotoAhora,
+        alt: "La panadería de la esquina tras el terremoto, con la pared agrietada, la vitrina rota y escombros sobre el mostrador.",
+      },
+    ],
     revisadaEl: "2026-08-14",
     consentimiento: true,
   },

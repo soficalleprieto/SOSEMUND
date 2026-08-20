@@ -10,6 +10,8 @@
  * marca como pendiente en vez de rellenarse a ojo.
  */
 
+import type { ImageMetadata } from "astro";
+
 export type Fuente = {
   medio: string;
   titulo: string;
@@ -177,7 +179,13 @@ export type Negocio = {
   /** Datos de cobro propios del negocio. El dinero va directo, sin pasar por aquí. */
   cobro?: { metodo: string; detalle: string }[];
 
-  fotos?: { src: string; alt: string }[];
+  /**
+   * Importadas con `import foto from "../assets/negocios/<slug>/x.jpg"`, nunca
+   * una ruta de texto: así Astro las sirve responsive y en el formato óptimo
+   * sin añadir JavaScript. Antes de importarlas, pasarlas por
+   * `scripts/comprimir-fotos.mjs` para no meter al repo un original de varios MB.
+   */
+  fotos?: { src: ImageMetadata; alt: string }[];
   /** Enlace al vídeo, no alojado por nosotros: pesa demasiado para 3G. */
   video?: { url: string; descripcion: string };
 
@@ -185,6 +193,20 @@ export type Negocio = {
   revisadaEl: string;
   /** Registro de que quien regenta el negocio dio permiso para publicarla. */
   consentimiento: true;
+
+  /**
+   * Quién apadrina este negocio, si alguien lo hace ya (ver
+   * `/negocios/adopta`). De aquí sale más adelante la página de negocios
+   * apadrinados y por quién.
+   */
+  apadrinado?: {
+    /** Nombre o @ del creador o creadora que lo apadrina. */
+    nombre: string;
+    /** Enlace a su perfil o canal. */
+    enlace: string;
+    /** Fecha desde la que lo apadrina. */
+    desde: string;
+  };
 };
 
 export type Evento = {

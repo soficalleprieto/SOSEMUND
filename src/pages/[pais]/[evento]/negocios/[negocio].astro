@@ -1,10 +1,12 @@
 ---
+import { Image } from "astro:assets";
 import Base from "../../../../layouts/Base.astro";
 import CompartirWhatsApp from "../../../../components/CompartirWhatsApp.astro";
 import { todosLosEventos } from "../../../../data/paises";
 import { ETIQUETA_DANO } from "../../../../data/tipos";
 import type { Evento, Negocio, Pais } from "../../../../data/tipos";
 import { formatearFecha } from "../../../../utils/fecha";
+import { enlaceWhatsApp } from "../../../../data/contacto";
 
 export function getStaticPaths() {
   return todosLosEventos().flatMap(({ pais, evento }) =>
@@ -34,6 +36,13 @@ const REDES: [keyof typeof n.contacto, string][] = [
   ["correo", "Correo"],
 ];
 const enlaces = REDES.filter(([k]) => n.contacto[k]);
+
+const urlFicha = new URL(`${base}/negocios/${n.slug}`, Astro.site).href;
+const mensajeApadrinar = `Hola. Quiero apadrinar este negocio: ${n.nombre} (${urlFicha}).
+
+Dónde publico (Instagram, TikTok, YouTube…):
+Cuánta gente me sigue, más o menos:
+Qué tipo de contenido hago:`;
 ---
 
 <Base
@@ -70,6 +79,16 @@ const enlaces = REDES.filter(([k]) => n.contacto[k]);
   }
 
   <h1>{n.nombre}</h1>
+  {
+    n.apadrinado && (
+      <p class="cartel-apadrinado">
+        Negocio apadrinado por{" "}
+        <a href={n.apadrinado.enlace} target="_blank" rel="noopener">
+          {n.apadrinado.nombre}
+        </a>
+      </p>
+    )
+  }
   <p class="meta">
     {n.actividad}
     {localidad && <> · <a href={`${base}/${localidad.slug}`}>{localidad.nombre}</a></>}
@@ -106,7 +125,7 @@ const enlaces = REDES.filter(([k]) => n.contacto[k]);
         <h2>Fotos</h2>
         <div class="galeria">
           {n.fotos.map((f) => (
-            <img src={f.src} alt={f.alt} loading="lazy" decoding="async" />
+            <Image src={f.src} alt={f.alt} width={700} densities={[1, 2]} loading="lazy" />
           ))}
         </div>
       </>
@@ -166,6 +185,19 @@ const enlaces = REDES.filter(([k]) => n.contacto[k]);
     Ficha revisada por una persona el {formatearFecha(n.revisadaEl)} y publicada
     con permiso de quien regenta el negocio.
   </p>
+
+  {
+    !n.esEjemplo && !n.apadrinado && (
+      <a class="cta" href={enlaceWhatsApp(mensajeApadrinar)} target="_blank" rel="noopener">
+        <span class="cta-eyebrow">¿Creas contenido?</span>
+        <span class="cta-titulo">Apadrinar este negocio →</span>
+        <span class="cta-texto">
+          Le das visibilidad gratis a tu manera: un vídeo, unas stories, un
+          post. Te ponemos en contacto directo con quien lo regenta.
+        </span>
+      </a>
+    )
+  }
 
   <a class="cta" href={`${base}/negocios/anadir`}>
     <span class="cta-eyebrow">¿Tu negocio también resultó afectado?</span>
