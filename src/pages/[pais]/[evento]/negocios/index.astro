@@ -81,7 +81,7 @@ const ejemplos = evento.negocios.filter((n) => n.esEjemplo);
             parezca llena: sería mentir sobre una catástrofe.
           </p>
           <p>
-            Abajo tienes una ficha de ejemplo para que veas cómo queda. Si
+            Abajo tienes unas fichas de ejemplo para que veas cómo quedan. Si
             tienes un negocio afectado, el tuyo puede ser el primero.
           </p>
         </div>
@@ -101,7 +101,7 @@ const ejemplos = evento.negocios.filter((n) => n.esEjemplo);
     {
       ejemplos.length > 0 && (
         <>
-          <h2>Así queda una ficha</h2>
+          <h2>Así quedan las fichas</h2>
           <ul class="lista-negocios">
             {ejemplos.map((n) => (
               <TarjetaNegocio negocio={n} evento={evento} base={base} />
