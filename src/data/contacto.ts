@@ -39,7 +39,7 @@ export const QUE_MANDAR = [
   {
     titulo: "Cómo quedó",
     texto:
-      "El local, la mercancía y los equipos. Con fotos o vídeos si los tienes, aunque estén mal hechos: valen más que una descripción.",
+      "El local, la mercancía y los equipos. Si tienes una foto de antes (aunque sea del celular, de una publicación vieja o de Google Maps) y una de ahora, mándanos las dos: se ve mucho mejor el contraste. Si eras un puesto callejero o algo que ya no existe para fotografiar, cuéntanoslo y ponemos esa descripción como el «ahora». Vale con fotos o vídeos mal hechos: valen más que una descripción.",
   },
   {
     titulo: "Qué necesitas exactamente",
