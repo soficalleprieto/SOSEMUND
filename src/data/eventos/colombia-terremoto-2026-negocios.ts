@@ -1,22 +1,28 @@
 import type { Negocio } from "../tipos";
-import fotoAntes from "../../assets/negocios/ejemplo/antes.jpg";
-import fotoAhora from "../../assets/negocios/ejemplo/ahora.jpg";
+import panaderiaAntes from "../../assets/negocios/ejemplo/antes.jpg";
+import panaderiaAhora from "../../assets/negocios/ejemplo/ahora.jpg";
+import restauranteAntes from "../../assets/negocios/ejemplo-restaurante/antes.jpg";
+import restauranteAhora from "../../assets/negocios/ejemplo-restaurante/ahora.jpg";
+import ropaAntes from "../../assets/negocios/ejemplo-ropa/antes.jpg";
+import ropaAhora from "../../assets/negocios/ejemplo-ropa/ahora.jpg";
 
 /**
  * Fichas de negocio publicadas.
  *
- * De momento solo hay una de ejemplo, rotulada como tal. No inventamos negocios
- * afectados: presentar un comercio ficticio como real, en una web sobre una
- * catástrofe con cientos de muertos, sería fabricar un registro. En cuanto
- * llegue el primer negocio real y revisado, esta ficha de ejemplo se queda al
- * final de la lista o desaparece.
+ * De momento solo hay tres, y las tres son de ejemplo, rotuladas como tal. No
+ * inventamos negocios afectados: presentar un comercio ficticio como real, en
+ * una web sobre una catástrofe con cientos de muertos, sería fabricar un
+ * registro. En cuanto lleguen negocios reales y revisados, estas fichas de
+ * ejemplo se quedan al final de la lista o desaparecen.
  *
- * El ejemplo usa un nombre arquetípico —el mismo que aparece en la portada— en
- * vez de uno plausible, precisamente para que no pueda confundirse con ningún
- * comercio real de Pereira. Sí lleva contacto y cobro, para que se vea cómo
- * queda esa parte de la ficha, pero con números y cuentas evidentemente falsos
- * (todo ceros, dominios "ejemplo") para que no resuelvan en la cuenta de
- * nadie, y con el aviso de que están inventados junto a ellos en la plantilla.
+ * Son tres justamente para que no parezca que hay uno solo repetido: tres
+ * actividades distintas (panadería, restaurante, tienda de ropa), tres
+ * localidades distintas, y nombres arquetípicos —genéricos a propósito— en
+ * vez de plausibles, para que no puedan confundirse con ningún comercio real.
+ * Todas llevan contacto y cobro, para que se vea cómo queda esa parte de la
+ * ficha, pero con números y cuentas evidentemente falsos (todo ceros,
+ * dominios "ejemplo") para que no resuelvan en la cuenta de nadie, y con el
+ * aviso de que están inventados junto a ellos en la plantilla.
  */
 export const negociosColombia2026: Negocio[] = [
   {
@@ -46,7 +52,7 @@ export const negociosColombia2026: Negocio[] = [
     contacto: {
       whatsapp: "https://wa.me/573000000000",
       instagram: "https://instagram.com/panaderiadelaesquina.ejemplo",
-      correo: "mailto:contacto@ejemplo.co",
+      correo: "mailto:panaderia@ejemplo.co",
     },
     cobro: [
       { metodo: "Nequi", detalle: "300 000 0000" },
@@ -54,15 +60,107 @@ export const negociosColombia2026: Negocio[] = [
     ],
     fotos: {
       antes: {
-        src: fotoAntes,
-        alt: "La panadería de la esquina antes del terremoto, con el mostrador lleno de pan y clientes atendidos por sus dueños.",
+        src: panaderiaAntes,
+        alt: "La panadería de la esquina antes del terremoto, con el local abierto y los estantes llenos de pan.",
       },
       despues: {
-        src: fotoAhora,
-        alt: "La panadería de la esquina tras el terremoto, con la pared agrietada, la vitrina rota y escombros sobre el mostrador.",
+        src: panaderiaAhora,
+        alt: "La panadería de la esquina tras el terremoto, con el techo caído y escombros cubriendo el local.",
       },
     },
-    revisadaEl: "2026-08-14",
+    revisadaEl: "2026-08-20",
+    consentimiento: true,
+  },
+  {
+    slug: "ejemplo-restaurante",
+    esEjemplo: true,
+    nombre: "El restaurante del barrio",
+    actividad: "Restaurante de comida corriente",
+    localidad: "manizales",
+    historia:
+      "Servía almuerzo ejecutivo de lunes a sábado, con mesas siempre llenas al mediodía de trabajadores y familias del sector. Once años dando de comer al barrio, con la misma sazón de siempre.",
+    estado: {
+      local: "grave",
+      mercancia: "grave",
+      equipos: "grave",
+      detalle:
+        "El techo se vino abajo sobre el comedor y las mesas quedaron volcadas entre los escombros. La cocina no se ha podido revisar todavía: no se sabe si la nevera y la estufa industrial sirven.",
+    },
+    operando: true,
+    dondeEstaAhora:
+      "Está cocinando desde la casa de un vecino y reparte almuerzos a domicilio en el barrio al mediodía.",
+    necesita: [
+      "Una estufa industrial",
+      "Mesas y sillas para volver a montar el comedor",
+      "Revisión técnica de la nevera y los equipos de cocina",
+      "Pedidos de almuerzo a domicilio mientras no reabre",
+    ],
+    contacto: {
+      whatsapp: "https://wa.me/573000000000",
+      instagram: "https://instagram.com/restaurantedelbarrio.ejemplo",
+      correo: "mailto:restaurante@ejemplo.co",
+    },
+    cobro: [
+      { metodo: "Nequi", detalle: "300 000 0000" },
+      { metodo: "Daviplata", detalle: "300 000 0000" },
+    ],
+    fotos: {
+      antes: {
+        src: restauranteAntes,
+        alt: "El restaurante del barrio antes del terremoto, con las mesas puestas y el menú del día en la pizarra.",
+      },
+      despues: {
+        src: restauranteAhora,
+        alt: "El restaurante del barrio tras el terremoto, con el techo derrumbado y las mesas y sillas entre los escombros.",
+      },
+    },
+    revisadaEl: "2026-08-20",
+    consentimiento: true,
+  },
+  {
+    slug: "ejemplo-tienda-de-ropa",
+    esEjemplo: true,
+    nombre: "La tienda de ropa del centro",
+    actividad: "Tienda de ropa",
+    localidad: "armenia",
+    historia:
+      "Un local pequeño de ropa de diario —jeans, camisetas, chaquetas— que llevaba trece años en el mismo local del centro. Lo llevaban entre dos hermanas, con clientes de toda la vida.",
+    estado: {
+      local: "grave",
+      mercancia: "grave",
+      equipos: "grave",
+      detalle:
+        "Parte del techo cayó sobre las estanterías y la fachada quedó agrietada. Buena parte de la ropa sigue colgada, pero cubierta de escombros y polvo: no está claro cuánta se puede seguir vendiendo.",
+    },
+    operando: true,
+    dondeEstaAhora:
+      "Sigue vendiendo por catálogo de fotos que manda por WhatsApp, con entrega a domicilio en la ciudad.",
+    necesita: [
+      "Estanterías y perchas nuevas",
+      "Revisión técnica de la estructura antes de poder reabrir",
+      "Pedidos por catálogo mientras el local no abre",
+      "Bolsas y empaques para los envíos",
+    ],
+    contacto: {
+      whatsapp: "https://wa.me/573000000000",
+      instagram: "https://instagram.com/tiendaderopadelcentro.ejemplo",
+      correo: "mailto:tiendaderopa@ejemplo.co",
+    },
+    cobro: [
+      { metodo: "Nequi", detalle: "300 000 0000" },
+      { metodo: "Daviplata", detalle: "300 000 0000" },
+    ],
+    fotos: {
+      antes: {
+        src: ropaAntes,
+        alt: "La tienda de ropa del centro antes del terremoto, con la ropa colgada y ordenada en el local.",
+      },
+      despues: {
+        src: ropaAhora,
+        alt: "La tienda de ropa del centro tras el terremoto, con el techo caído sobre la ropa y la fachada agrietada.",
+      },
+    },
+    revisadaEl: "2026-08-20",
     consentimiento: true,
   },
 ];
