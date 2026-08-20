@@ -1,12 +1,8 @@
 ---
 /*
- * Cuentas que están contando lo que pasa.
- *
- * Los vídeos se incrustan con carga al clic. Los reproductores de Instagram y
- * TikTok traen JavaScript de Meta y ByteDance con rastreo y cookies de
- * terceros, y este sitio promete en su política que no rastrea: cargarlos de
- * entrada la volvería falsa y obligaría a poner banner de cookies. Así, quien
- * no pulsa no recibe nada.
+ * Cuentas que están contando lo que pasa: solo la grilla de perfiles, sin
+ * publicaciones incrustadas. El componente Incrustado y el campo `destacados`
+ * de Cuenta siguen en el código por si se vuelven a mostrar más adelante.
  */
 import { Image } from "astro:assets";
 import Base from "../../../layouts/Base.astro";
@@ -14,7 +10,6 @@ import CompartirWhatsApp from "../../../components/CompartirWhatsApp.astro";
 import { todosLosEventos } from "../../../data/paises";
 import type { Evento, Pais, Red } from "../../../data/tipos";
 import { enlaceWhatsApp } from "../../../data/contacto";
-import Incrustado from "../../../components/Incrustado.astro";
 
 /*
  * Sin la foto de perfil de cada persona (no la tenemos con permiso, ver
@@ -50,16 +45,6 @@ const URL_RED: Record<Red, (h: string) => string> = {
   youtube: (h) => `https://youtube.com/@${h}`,
   x: (h) => `https://x.com/${h}`,
 };
-const ETIQUETA_RED: Record<Red, string> = {
-  instagram: "Instagram",
-  tiktok: "TikTok",
-  youtube: "YouTube",
-  x: "X",
-};
-
-const destacados = evento.cuentas.flatMap((c) =>
-  (c.destacados ?? []).map((d) => ({ ...d, cuenta: c })),
-);
 ---
 
 <Base
@@ -94,23 +79,6 @@ const destacados = evento.cuentas.flatMap((c) =>
     </p>
   </div>
 
-  {
-    destacados.length > 0 && (
-      <>
-        <h2>Publicaciones que merecen difusión</h2>
-        {destacados.map((d) => (
-          <Incrustado
-            url={d.url}
-            descripcion={d.descripcion}
-            handle={d.cuenta.handle}
-            red={d.cuenta.red}
-          />
-        ))}
-      </>
-    )
-  }
-
-  <h2>Perfiles</h2>
   <ul class="cuentas">
     {
       evento.cuentas.map((c) => (
@@ -127,7 +95,7 @@ const destacados = evento.cuentas.flatMap((c) =>
               </span>
             )}
             <strong>@{c.handle}</strong>
-            <span class="depto">{c.nota ?? ETIQUETA_RED[c.red]}</span>
+            {c.nota && <span class="depto">{c.nota}</span>}
           </a>
         </li>
       ))
@@ -163,41 +131,6 @@ const destacados = evento.cuentas.flatMap((c) =>
       </a>
     </p>
   </div>
-
-  {destacados.length > 0 && (
-    <script>
-      {/* Carga al clic: hasta que alguien pulsa, no se pide nada a Meta ni a
-          ByteDance. Vanilla, sin dependencias, ~1 KB. */}
-      document.querySelectorAll(".incrustado").forEach((fig) => {
-        const boton = fig.querySelector(".incrustado-boton");
-        if (!boton) return;
-        boton.addEventListener("click", () => {
-          const url = fig.dataset.url;
-          const red = fig.dataset.red;
-          const hueco = fig.querySelector(".incrustado-hueco");
-          if (!url || !hueco) return;
-          hueco.innerHTML = "<p class='incrustado-aviso'>Cargando…</p>";
-          if (red === "instagram") {
-            hueco.innerHTML =
-              '<blockquote class="instagram-media" data-instgrm-permalink="' +
-              url +
-              '" data-instgrm-version="14"></blockquote>';
-            const s = document.createElement("script");
-            s.src = "https://www.instagram.com/embed.js";
-            s.async = true;
-            document.body.appendChild(s);
-          } else {
-            hueco.innerHTML =
-              '<blockquote class="tiktok-embed" cite="' + url + '"></blockquote>';
-            const s = document.createElement("script");
-            s.src = "https://www.tiktok.com/embed.v2.js";
-            s.async = true;
-            document.body.appendChild(s);
-          }
-        });
-      });
-    </script>
-  )}
 
   <CompartirWhatsApp
     ruta={`${base}/cuentas`}

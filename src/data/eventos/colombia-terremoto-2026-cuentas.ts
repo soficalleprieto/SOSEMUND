@@ -51,7 +51,7 @@ export const cuentasColombia2026: Cuenta[] = [
   {
     handle: "wckitchen",
     red: "instagram",
-    nota: "World Central Kitchen. Las fotos libres que ilustran este sitio son suyas.",
+    nota: "World Central Kitchen.",
     logo: logoWck,
     destacados: [
       {
