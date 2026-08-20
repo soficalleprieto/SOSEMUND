@@ -876,25 +876,25 @@ main {
   height: 100%;
 }
 .lista-negocios .texto-tarjeta {
-  padding: 0.75rem 0.85rem;
+  padding: 1rem 1.15rem 1.15rem;
 }
 .lista-negocios .texto-tarjeta strong {
   display: block;
   font-family: var(--serif);
-  font-size: 1.12rem;
+  font-size: 1.35rem;
   line-height: 1.25;
 }
 .lista-negocios .depto {
   display: block;
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   color: var(--texto-suave);
-  margin-top: 0.15rem;
+  margin-top: 0.2rem;
 }
 .lista-negocios .redes-mini {
   display: block;
-  font-size: 0.8rem;
+  font-size: 0.88rem;
   color: var(--arcilla);
-  margin-top: 0.15rem;
+  margin-top: 0.2rem;
 }
 
 /* Etiquetas de color: mismo semáforo que el resto del sitio (rojo/ámbar/verde). */
@@ -906,9 +906,9 @@ main {
 }
 .etiqueta {
   display: inline-block;
-  font-size: 0.7rem;
+  font-size: 0.78rem;
   font-weight: 600;
-  padding: 0.18rem 0.55rem;
+  padding: 0.22rem 0.65rem;
   border-radius: 999px;
   white-space: nowrap;
 }
@@ -935,10 +935,10 @@ main {
 
 .lista-negocios .revisado {
   display: block;
-  font-size: 0.76rem;
+  font-size: 0.84rem;
   color: var(--texto-suave);
-  margin-top: 0.5rem;
-  padding-top: 0.5rem;
+  margin-top: 0.6rem;
+  padding-top: 0.6rem;
   border-top: 1px solid var(--borde);
 }
 

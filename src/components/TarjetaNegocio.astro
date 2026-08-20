@@ -59,6 +59,9 @@ const CLASE_DANO: Record<string, string> = {
         <span class={`etiqueta ${CLASE_DANO[n.estado.local]}`}>
           Local: {ETIQUETA_DANO[n.estado.local]}
         </span>
+        {n.dondeEstaAhora && (
+          <span class="etiqueta etiqueta-neutra">Cambio temporal de ubicación</span>
+        )}
         {n.operando && <span class="etiqueta etiqueta-buena">Sigue vendiendo</span>}
         {n.apadrinado && <span class="etiqueta etiqueta-acento">Apadrinado</span>}
       </div>
