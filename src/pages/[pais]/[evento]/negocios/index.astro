@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import Base from "../../../../layouts/Base.astro";
 import CompartirWhatsApp from "../../../../components/CompartirWhatsApp.astro";
 import { todosLosEventos } from "../../../../data/paises";
@@ -72,11 +73,19 @@ const ejemplos = evento.negocios.filter((n) => n.esEjemplo);
           return (
             <li>
               <a href={`${base}/negocios/${n.slug}`}>
-                <strong>{n.nombre}</strong>
-                <span class="depto">
-                  {n.actividad}
-                  {loc && ` · ${loc.nombre}`}
-                </span>
+                {n.fotos?.antes && n.fotos?.despues && (
+                  <div class="comparacion-mini">
+                    <Image src={n.fotos.antes.src} alt="" width={300} loading="lazy" />
+                    <Image src={n.fotos.despues.src} alt="" width={300} loading="lazy" />
+                  </div>
+                )}
+                <div class="texto-tarjeta">
+                  <strong>{n.nombre}</strong>
+                  <span class="depto">
+                    {n.actividad}
+                    {loc && ` · ${loc.nombre}`}
+                  </span>
+                </div>
               </a>
             </li>
           );
@@ -93,8 +102,16 @@ const ejemplos = evento.negocios.filter((n) => n.esEjemplo);
           {ejemplos.map((n) => (
             <li>
               <a href={`${base}/negocios/${n.slug}`}>
-                <strong>{n.nombre}</strong>
-                <span class="depto">Ficha de ejemplo · este negocio no existe</span>
+                {n.fotos?.antes && n.fotos?.despues && (
+                  <div class="comparacion-mini">
+                    <Image src={n.fotos.antes.src} alt="" width={300} loading="lazy" />
+                    <Image src={n.fotos.despues.src} alt="" width={300} loading="lazy" />
+                  </div>
+                )}
+                <div class="texto-tarjeta">
+                  <strong>{n.nombre}</strong>
+                  <span class="depto">Ficha de ejemplo · este negocio no existe</span>
+                </div>
               </a>
             </li>
           ))}

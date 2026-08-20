@@ -184,8 +184,16 @@ export type Negocio = {
    * una ruta de texto: así Astro las sirve responsive y en el formato óptimo
    * sin añadir JavaScript. Antes de importarlas, pasarlas por
    * `scripts/comprimir-fotos.mjs` para no meter al repo un original de varios MB.
+   *
+   * `antes` y `despues` van aparte del resto porque se muestran juntas, en
+   * pareja, tanto en la ficha como en la previsualización del listado: es el
+   * contraste que vende la historia. `otras` es cualquier otra foto suelta.
    */
-  fotos?: { src: ImageMetadata; alt: string }[];
+  fotos?: {
+    antes?: { src: ImageMetadata; alt: string };
+    despues?: { src: ImageMetadata; alt: string };
+    otras?: { src: ImageMetadata; alt: string }[];
+  };
   /** Enlace al vídeo, no alojado por nosotros: pesa demasiado para 3G. */
   video?: { url: string; descripcion: string };
 

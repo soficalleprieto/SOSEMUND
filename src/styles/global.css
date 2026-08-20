@@ -856,16 +856,58 @@ main {
   display: block;
   border: 1px solid var(--borde-fuerte);
   border-radius: var(--radio);
-  padding: 0.9rem 1rem;
+  overflow: hidden;
   text-decoration: none;
   color: var(--texto);
   background: var(--fondo);
+}
+.lista-negocios .texto-tarjeta {
+  padding: 0.9rem 1rem;
 }
 .lista-negocios .depto {
   display: block;
   font-size: 0.85rem;
   color: var(--texto-suave);
   margin-top: 0.15rem;
+}
+
+/* Miniaturas antes/después juntas, en las tarjetas del listado. */
+.comparacion-mini {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--borde-fuerte);
+}
+.comparacion-mini img {
+  width: 100%;
+  height: 6.5rem;
+  object-fit: cover;
+  display: block;
+}
+
+/* Comparación antes/después grande, en la propia ficha. */
+.comparacion {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+.comparacion figure {
+  margin: 0;
+}
+.comparacion img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radio);
+  display: block;
+}
+.comparacion figcaption {
+  margin-top: 0.35rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--texto-suave);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
 }
 
 /* --- Retrato de la página Sobre --- */
