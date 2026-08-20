@@ -21,6 +21,19 @@ const base = `/${pais.slug}/${evento.slug}`;
 
 const reales = evento.negocios.filter((n) => !n.esEjemplo);
 const ejemplos = evento.negocios.filter((n) => n.esEjemplo);
+
+/*
+ * Opciones de los filtros: solo las localidades y actividades que de verdad
+ * tienen algún negocio publicado, no todas las localidades del evento. Un
+ * filtro con opciones que siempre dan cero resultados es peor que no tener
+ * filtro.
+ */
+const localidadesConNegocio = evento.localidades.filter((l) =>
+  evento.negocios.some((n) => n.localidad === l.slug),
+);
+const actividades = [...new Set(evento.negocios.map((n) => n.actividad))].sort((a, b) =>
+  a.localeCompare(b, "es"),
+);
 ---
 
 <Base
@@ -56,13 +69,13 @@ const ejemplos = evento.negocios.filter((n) => n.esEjemplo);
     </a>
     <a class="accion accion-secundaria" href={`${base}/negocios/adopta`}>
       <span class="accion-icono" aria-hidden="true">📣</span>
-      <span class="accion-titulo">Quiero apadrinar uno</span>
+      <span class="accion-titulo">Quiero apadrinar un negocio</span>
       <span class="accion-texto">Visibilidad gratis a un negocio concreto</span>
     </a>
     <div class="acciones-fila">
       <a href={`${base}/negocios/proponer`}>
         <span class="accion-icono" aria-hidden="true">👀</span>
-        Conozco uno que no es mío
+        Conozco un negocio afectado
       </a>
       <a href="#negocios-publicados">
         <span class="accion-icono" aria-hidden="true">🧾</span>
@@ -72,6 +85,35 @@ const ejemplos = evento.negocios.filter((n) => n.esEjemplo);
   </div>
 
   <div id="negocios-publicados">
+    {
+      (localidadesConNegocio.length > 1 || actividades.length > 1) && (
+        <div class="filtros-negocios">
+          <label>
+            Localidad
+            <select id="filtro-localidad">
+              <option value="">Todas</option>
+              {localidadesConNegocio.map((l) => (
+                <option value={l.slug}>{l.nombre}</option>
+              ))}
+            </select>
+          </label>
+          <label>
+            Tipo de negocio
+            <select id="filtro-actividad">
+              <option value="">Todos</option>
+              {actividades.map((a) => (
+                <option value={a}>{a}</option>
+              ))}
+            </select>
+          </label>
+        </div>
+      )
+    }
+
+    <p id="filtro-sin-resultados" class="caja-pendiente" hidden>
+      Ningún negocio publicado coincide con ese filtro todavía.
+    </p>
+
     {
       reales.length === 0 && (
         <div class="caja caja-pendiente">
@@ -140,4 +182,37 @@ const ejemplos = evento.negocios.filter((n) => n.esEjemplo);
     ruta={`${base}/negocios`}
     texto="Si tu negocio resultó afectado por el terremoto, aquí puedes publicarlo gratis para que la gente sepa qué necesitas:"
   />
+
+  {
+    (localidadesConNegocio.length > 1 || actividades.length > 1) && (
+      <script>
+        {/* Filtra en el cliente, sin recargar página. Nada de terceros, nada
+            de cookies: solo esconde o muestra las tarjetas que ya están en
+            el HTML según lo que se elija en los dos <select>. */}
+        const selLoc = document.getElementById("filtro-localidad");
+        const selAct = document.getElementById("filtro-actividad");
+        const aviso = document.getElementById("filtro-sin-resultados");
+        const tarjetas = document.querySelectorAll("#negocios-publicados .lista-negocios li");
+
+        function aplicarFiltros() {
+          const loc = selLoc ? selLoc.value : "";
+          const act = selAct ? selAct.value : "";
+          let visibles = 0;
+
+          tarjetas.forEach((tarjeta) => {
+            const coincideLoc = !loc || tarjeta.dataset.localidad === loc;
+            const coincideAct = !act || tarjeta.dataset.actividad === act;
+            const visible = coincideLoc && coincideAct;
+            tarjeta.hidden = !visible;
+            if (visible) visibles++;
+          });
+
+          if (aviso) aviso.hidden = visibles > 0;
+        }
+
+        if (selLoc) selLoc.addEventListener("change", aplicarFiltros);
+        if (selAct) selAct.addEventListener("change", aplicarFiltros);
+      </script>
+    )
+  }
 </Base>

@@ -942,6 +942,33 @@ main {
   border-top: 1px solid var(--borde);
 }
 
+/* --- Filtros del listado de negocios --- */
+
+.filtros-negocios {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin: 1.25rem 0;
+}
+.filtros-negocios label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--texto-suave);
+}
+.filtros-negocios select {
+  font: inherit;
+  font-size: 0.95rem;
+  color: var(--texto);
+  background: var(--fondo);
+  border: 1px solid var(--borde-fuerte);
+  border-radius: var(--radio);
+  padding: 0.5rem 0.7rem;
+  min-width: 12rem;
+}
+
 /* --- Accesos rápidos arriba de /negocios --- */
 
 .acciones-negocios {

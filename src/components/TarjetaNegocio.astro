@@ -38,7 +38,7 @@ const CLASE_DANO: Record<string, string> = {
 };
 ---
 
-<li>
+<li data-localidad={n.localidad} data-actividad={n.actividad}>
   <a href={`${base}/negocios/${n.slug}`}>
     {
       n.fotos?.antes && n.fotos?.despues && (
