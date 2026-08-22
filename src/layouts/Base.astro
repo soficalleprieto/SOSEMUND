@@ -189,9 +189,25 @@ const menusConSubmenu = MENU.filter(
                  se abriría solo en /cuentas, /negocios... */
               const abierto = m.id === "menu-ayudas" ? esActual(m.href) : estaDentro(m.href);
               return (
-                <details id={m.id} class="menu-desplegable" open={abierto}>
-                  <summary class:list={[{ actual: abierto }]}>{m.texto}</summary>
-                </details>
+                /*
+                 * El texto es un <a> normal que navega; la flechita es un
+                 * <details> aparte solo para desplegar. Antes todo era un
+                 * único <summary>, que nunca navega (solo alterna abierto/
+                 * cerrado): al convertir "Ayudas" y "Ayuda humanitaria" en
+                 * desplegables, sus páginas dejaron de tener enlace directo.
+                 * El id va en el contenedor, no en el <details>, para que el
+                 * :hover de CSS cubra el texto Y la flechita sin hueco.
+                 */
+                <div id={m.id} class:list={["menu-item-desplegable", { actual: abierto }]}>
+                  <a href={m.href} aria-current={esActual(m.href) ? "page" : undefined}>
+                    {m.texto}
+                  </a>
+                  <details open={abierto}>
+                    <summary aria-label={`Ver ${m.texto}`}>
+                      <span aria-hidden="true">▾</span>
+                    </summary>
+                  </details>
+                </div>
               );
             })
           }

@@ -300,43 +300,91 @@ main .pilares h3 {
   gap: 0.5rem;
   padding-block: 0.55rem;
 }
-.menu a,
-.menu summary {
+.menu > .contenedor > a,
+.menu-item-desplegable {
   display: inline-flex;
   align-items: center;
-  gap: 0.3rem;
   min-height: 44px;
-  padding: 0.4rem 1rem;
   border-radius: 999px;
   font-size: 1.02rem;
   font-weight: 700;
+  white-space: nowrap;
+}
+.menu > .contenedor > a {
+  padding: 0.4rem 1rem;
   text-decoration: none;
   color: var(--texto);
-  white-space: nowrap;
   cursor: pointer;
-  list-style: none;
 }
-.menu summary::-webkit-details-marker {
-  display: none;
-}
-.menu summary::after {
-  content: "▾";
-  font-size: 0.75em;
-  color: var(--texto-suave);
-}
-.menu a.actual,
-.menu summary.actual {
+.menu > .contenedor > a.actual {
   background: var(--acento);
   color: #fff;
 }
 @media (hover: hover) and (pointer: fine) {
-  .menu a:hover,
-  .menu summary:hover {
+  .menu > .contenedor > a:hover {
     color: var(--acento);
     background: var(--fondo);
   }
-  .menu a.actual:hover,
-  .menu summary.actual:hover {
+  .menu > .contenedor > a.actual:hover {
+    color: #fff;
+    background: var(--acento);
+  }
+}
+
+/*
+ * Los desplegables van en dos piezas dentro de la misma píldora: el texto
+ * (<a>, navega a la página) y la flechita (<details><summary>, solo abre el
+ * panel). Antes era un único <summary> que nunca navegaba -al convertir
+ * "Ayudas" y "Ayuda humanitaria" en desplegables perdieron su enlace-, y el
+ * área con la que se mantenía el :hover era solo la píldora, más pequeña que
+ * el resto de la fila del menú: bajar el cursor hacia el panel lo perdía a
+ * mitad de camino. Con el id en este contenedor, el hover cubre el texto Y
+ * la flechita sin hueco entre medias.
+ */
+.menu-item-desplegable {
+  position: relative;
+  color: var(--texto);
+}
+/* Puente invisible: sin esto, el hueco de padding + borde entre la píldora y
+   el panel (unos 15px) rompe el :hover a mitad de camino al bajar el cursor. */
+.menu-item-desplegable::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 16px;
+}
+.menu-item-desplegable a {
+  padding: 0.4rem 0.3rem 0.4rem 1rem;
+  text-decoration: none;
+  color: inherit;
+}
+.menu-item-desplegable details summary {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 0.9rem 0 0.3rem;
+  cursor: pointer;
+  list-style: none;
+  color: var(--texto-suave);
+}
+.menu-item-desplegable details summary::-webkit-details-marker {
+  display: none;
+}
+.menu-item-desplegable.actual {
+  background: var(--acento);
+  color: #fff;
+}
+.menu-item-desplegable.actual details summary {
+  color: rgba(255, 255, 255, 0.75);
+}
+@media (hover: hover) and (pointer: fine) {
+  .menu-item-desplegable:hover {
+    color: var(--acento);
+    background: var(--fondo);
+  }
+  .menu-item-desplegable.actual:hover {
     color: #fff;
     background: var(--acento);
   }
@@ -364,9 +412,9 @@ main .pilares h3 {
   border-bottom: 1px solid var(--borde-fuerte);
   box-shadow: var(--sombra);
 }
-.cabecera:has(#menu-ayudas[open]) .menu-panel[data-para="menu-ayudas"],
-.cabecera:has(#menu-negocios[open]) .menu-panel[data-para="menu-negocios"],
-.cabecera:has(#menu-humanitaria[open]) .menu-panel[data-para="menu-humanitaria"] {
+.cabecera:has(#menu-ayudas details[open]) .menu-panel[data-para="menu-ayudas"],
+.cabecera:has(#menu-negocios details[open]) .menu-panel[data-para="menu-negocios"],
+.cabecera:has(#menu-humanitaria details[open]) .menu-panel[data-para="menu-humanitaria"] {
   display: block;
 }
 @media (hover: hover) and (pointer: fine) {
