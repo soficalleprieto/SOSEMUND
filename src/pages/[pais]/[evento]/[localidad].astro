@@ -78,6 +78,7 @@ const foto = IMAGEN_POR_LOCALIDAD[c.slug];
         <strong>Ver el paso a paso completo del censo →</strong>
       </a>
     </p>
+    {c.censo.fuente && <Fuentes fuentes={[c.censo.fuente]} />}
   </section>
 
   <h2>Qué puedes pedir</h2>

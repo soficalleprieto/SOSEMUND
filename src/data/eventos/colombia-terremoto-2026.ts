@@ -38,6 +38,43 @@ const BANCOLOMBIA_2026: Fuente = {
   fecha: "2026-08-13",
 };
 
+const BANCOLOMBIA_5B_2026: Fuente = {
+  medio: "La República",
+  titulo:
+    "Bancolombia anunció opciones de financiación por $5 billones para afectados por el sismo",
+  url: "https://www.larepublica.co/finanzas/bancolombia-anuncio-opciones-de-financiacion-por-5-billones-para-afectados-por-el-sismo-4463115",
+  fecha: "2026-08-20",
+};
+
+const MANIZALES_CENSO_2026: Fuente = {
+  medio: "BC Noticias",
+  titulo: "Cámara de Comercio activa ruta de apoyo para empresarios afectados por el sismo en Caldas",
+  url: "https://www.bcnoticias.com.co/camara-de-comercio-activa-ruta-de-apoyo-para-empresarios-afectados-por-el-sismo-en-caldas/",
+  fecha: "2026-08-14",
+};
+
+const ARMENIA_CENSO_2026: Fuente = {
+  medio: "Cámara de Comercio de Armenia y del Quindío",
+  titulo: "Reactivar para resistir: una hoja de ruta para el Quindío",
+  url: "https://camaraarmenia.org.co/reactivar-para-resistir-una-hoja-de-ruta-para-el-quindio/",
+  fecha: "2026-08-20",
+};
+
+const FEDEMUNICIPIOS_2026: Fuente = {
+  medio: "Pulzo",
+  titulo: "Emergencia por terremoto en Colombia: Fedemunicipios pide flexibilizar recursos y alivios tributarios",
+  url: "https://www.pulzo.com/nacion/emergencia-por-terremoto-en-colombia-fedemunicipios-pide-flexibilizar-recursos-y-alivios-tributarios-PP5274333A",
+  fecha: "2026-08-13",
+};
+
+const NU_2026: Fuente = {
+  medio: "Infobae",
+  titulo:
+    "Nu Colombia anunció alivios y nuevas medidas para sus clientes en las zonas afectadas por el terremoto",
+  url: "https://www.infobae.com/colombia/2026/08/20/nu-colombia-anuncio-alivios-y-nuevas-medidas-para-sus-clientes-en-las-zonas-afectadas-por-el-terremoto-de-que-trata/",
+  fecha: "2026-08-20",
+};
+
 const BANCO_AGRARIO_2026: Fuente = {
   medio: "Tintiando",
   titulo:
@@ -188,6 +225,7 @@ export const colombiaTerremoto2026: Evento = {
         detalle:
           "La Cámara de Comercio de Cali activó una herramienta digital para recoger datos de daños en establecimientos, infraestructura, inventarios, equipos y operación. Según su presidenta, María del Mar Palau, el censo empresarial incluye a todos los negocios, estén o no registrados en la cámara.",
         telefonos: ["602 886 1300", "300 913 1811"],
+        fuente: CCC,
       },
     },
     {
@@ -215,6 +253,7 @@ export const colombiaTerremoto2026: Evento = {
         detalle:
           "La Cámara de Comercio de Manizales por Caldas activó una ruta de apoyo para empresarios afectados por el sismo, que cubre Manizales y el resto de municipios de su jurisdicción (18 en total). Escríbeles por WhatsApp para resolver dudas y reportar tu situación.",
         telefonos: ["323 942 1880"],
+        fuente: MANIZALES_CENSO_2026,
       },
     },
     {
@@ -224,9 +263,11 @@ export const colombiaTerremoto2026: Evento = {
       division: "Quindío",
       alertaMaxima: true,
       censo: {
-        verificado: false,
+        verificado: true,
         detalle:
-          "Armenia cuenta con un Puesto de Mando Unificado (PMU) regional, además de los módulos de registro en la alcaldía y el coliseo municipal. Estamos verificando el canal específico para negocios.",
+          "La Cámara de Comercio de Armenia y del Quindío hizo visitas negocio por negocio (cerca de 2.000 encuestadas) y atiende dudas y reportes de comerciantes afectados por WhatsApp y correo.",
+        telefonos: ["318 349 9804"],
+        fuente: ARMENIA_CENSO_2026,
       },
     },
     {
@@ -321,7 +362,13 @@ export const colombiaTerremoto2026: Evento = {
         url: "https://es.wikipedia.org/wiki/Terremoto_de_Colombia_de_2026",
         fecha: "2026-08-13",
       },
-      censo: { verificado: false, detalle: PENDIENTE },
+      censo: {
+        verificado: true,
+        detalle:
+          "Lo cubre la Cámara de Comercio de Armenia y del Quindío, que por su propio nombre atiende a todo el departamento, no solo a la capital. Mismo WhatsApp que Armenia.",
+        telefonos: ["318 349 9804"],
+        fuente: ARMENIA_CENSO_2026,
+      },
     },
     {
       slug: "buenaventura",
@@ -345,9 +392,9 @@ export const colombiaTerremoto2026: Evento = {
       resumen:
         "Los bancos anunciaron períodos de gracia, cambios en las condiciones de los créditos y suspensión temporal de los cobros.",
       detalle:
-        "El sector bancario anunció un paquete de alivios para personas y empresas de las zonas afectadas que podría beneficiar a cerca de 2,8 millones de usuarios: períodos de gracia de hasta un año, cambios en las condiciones de los créditos y suspensión temporal de los cobros. No suele ser automático: hay que pedirlo al banco.\n\nLo que ya está concretado banco por banco:\n\nBancolombia suspendió los cobros a sus clientes afectados y su presidente, Juan Carlos Mora, anunció períodos de gracia y créditos adicionales para reconstrucción en algunas regiones, pero todavía sin tasas, montos ni plazos publicados: dijo que se irán anunciando según avance la evaluación de cada caso.\n\nBanco Agrario devuelve las comisiones cobradas por retiros, depósitos y pago de cheques a los clientes cuya oficina habitual sigue cerrada por la emergencia, con efecto retroactivo desde el 10 de agosto; la devolución empezó el 18 de agosto.\n\nBanco de Bogotá, BBVA Colombia y Davivienda cerraron oficinas presenciales en las zonas más golpeadas y mantienen atención por teléfono, WhatsApp y banca virtual, pero no hemos encontrado un anuncio propio de alivios de crédito más allá del marco general del gremio.",
+        "El sector bancario anunció un paquete de alivios para personas y empresas de las zonas afectadas que podría beneficiar a cerca de 2,8 millones de usuarios: períodos de gracia de hasta un año, cambios en las condiciones de los créditos y suspensión temporal de los cobros. No suele ser automático: hay que pedirlo al banco.\n\nLo que ya está concretado banco por banco:\n\nBancolombia pasó de la promesa genérica de mediados de agosto a cifras concretas: dispuso más de $5 billones en financiación para personas, empresas y entidades territoriales de Chocó, Risaralda, Caldas, Quindío, Valle del Cauca, suroeste antioqueño, Cauca y Tolima. Créditos de vivienda al 8% efectivo anual (unas 7.000 familias) y de consumo o microcrédito al 10%, para desembolsos desde el 25 de agosto; una línea aparte para hasta 13.500 empresas y entidades territoriales.\n\nNu Colombia anunció retiros ilimitados sin comisión en cajeros y avances de tarjeta de crédito sin comisión para clientes en zonas afectadas, más una refinanciación (hasta 48 meses, tasas reducidas) que a fecha 20/08/2026 seguía en desarrollo.\n\nBanco Agrario devuelve las comisiones cobradas por retiros, depósitos y pago de cheques a los clientes cuya oficina habitual sigue cerrada por la emergencia, con efecto retroactivo desde el 10 de agosto; la devolución empezó el 18 de agosto.\n\nBanco de Bogotá y Davivienda cerraron oficinas presenciales en las zonas más golpeadas y mantienen atención por teléfono, WhatsApp y banca virtual, pero no hemos encontrado un anuncio propio de alivios de crédito más allá del marco general del gremio. BBVA, a fecha 20/08/2026, seguía «analizando» bajar tasas para damnificados, sin nada confirmado todavía.",
       pendiente:
-        "No hemos encontrado el canal exacto de solicitud (línea, formulario, requisitos) en Bancolombia, Banco de Bogotá, BBVA, Davivienda, Banco Popular, Banco de Occidente, AV Villas ni Scotiabank Colpatria. La instrucción que dan todos, por ahora, es «contacta a tu banco por los canales habituales y pide que evalúen tu caso».",
+        "No hemos encontrado el canal exacto de solicitud (línea, formulario, requisitos) en Banco de Bogotá, BBVA, Davivienda, Banco Popular, Banco de Occidente, AV Villas ni Scotiabank Colpatria. La instrucción que dan, por ahora, es «contacta a tu banco por los canales habituales y pide que evalúen tu caso».",
       fuentes: [
         {
           medio: "Semana",
@@ -364,6 +411,8 @@ export const colombiaTerremoto2026: Evento = {
           fecha: "2026-08-12",
         },
         BANCOLOMBIA_2026,
+        BANCOLOMBIA_5B_2026,
+        NU_2026,
         BANCO_AGRARIO_2026,
       ],
     },
@@ -375,7 +424,7 @@ export const colombiaTerremoto2026: Evento = {
       detalle:
         "La DIAN confirmó aplazamientos de plazos —no condonación del impuesto— para personas y agentes con domicilio fiscal en las seccionales de Cali, Palmira, Tuluá, Buenaventura, Pereira, Armenia, Manizales, Quibdó y Popayán: la declaración de renta 2025 de personas naturales se corre a la ventana del 27 de octubre al 13 de noviembre de 2026 (según los dos últimos dígitos del NIT); la retención en la fuente de julio se puede presentar y pagar con los plazos de agosto, sin sanción ni interés moratorio; y los trámites aduaneros quedan suspendidos entre el 10 de agosto y el 10 de septiembre de 2026 en esas seccionales. Excluye a los grandes contribuyentes. Conserva toda la documentación de tus pérdidas: es lo que te van a pedir para acreditar la condición de afectado.",
       pendiente:
-        "No hemos encontrado ningún decreto de alcaldía que exonere o aplace el ICA o el predial en Cali, Pereira, Manizales, Armenia o Quibdó por este terremoto. Hay peticiones de gremios pidiendo ese alivio, pero no confirmamos que se haya aprobado. Lo seguimos verificando.",
+        "No hemos encontrado ningún decreto de alcaldía que exonere o aplace el ICA o el predial en Cali, Pereira, Manizales, Armenia o Quibdó por este terremoto. Lo que hay, a fecha 20/08/2026, es una petición de Fedemunicipios (la federación de municipios) para que las alcaldías puedan dar ese alivio de ICA y predial hasta por dos períodos fiscales, con el Gobierno nacional compensando a los municipios el dinero que dejarían de recibir. Es una propuesta, no una medida aprobada. Lo seguimos verificando.",
       fuentes: [
         {
           medio: "El Colombiano",
@@ -385,6 +434,7 @@ export const colombiaTerremoto2026: Evento = {
           fecha: "2026-08-13",
         },
         DIAN_2026,
+        FEDEMUNICIPIOS_2026,
       ],
     },
     {

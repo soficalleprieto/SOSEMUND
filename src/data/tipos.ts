@@ -40,6 +40,8 @@ export type Localidad = {
     verificado: boolean;
     detalle: string;
     telefonos?: string[];
+    /** De dónde sale este canal. Sin fuente no se puede marcar `verificado: true`. */
+    fuente?: Fuente;
   };
   contexto?: string;
   /** Fuente de lo que afirmamos en `contexto`. Sin fuente no se afirma nada. */
