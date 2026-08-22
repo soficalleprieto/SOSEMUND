@@ -51,10 +51,10 @@
   --positivo: #0f7038;
   --positivo-fondo: #eaf6ee;
 
-  /* Medida de lectura del texto corrido: unos 68 caracteres por línea. */
-  --ancho-texto: 40rem;
+  /* Medida de lectura del texto corrido: unos 78 caracteres por línea. */
+  --ancho-texto: 46rem;
   /* Ancho de la página. Todo comparte este borde izquierdo. */
-  --ancho-amplio: 60rem;
+  --ancho-amplio: 72rem;
 
   --serif: "Source Serif 4 Variable", Georgia, "Times New Roman", serif;
   --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
@@ -222,6 +222,7 @@ main .pilares h3 {
 }
 
 .cabecera {
+  position: relative;
   border-bottom: 1px solid var(--borde);
   background: var(--fondo);
 }
@@ -283,6 +284,7 @@ main .pilares h3 {
 
 .menu {
   border-top: 1px solid var(--borde);
+  border-bottom: 3px solid var(--acento);
   background: var(--fondo-hundido);
   /* En móvil se desliza en horizontal en vez de apilarse o esconderse tras un
      botón: sin JavaScript, y todo el menú sigue estando a un dedo. */
@@ -294,38 +296,117 @@ main .pilares h3 {
 }
 .menu .contenedor {
   display: flex;
-  gap: 0.35rem;
-  padding-block: 0.4rem;
+  align-items: center;
+  gap: 0.5rem;
+  padding-block: 0.55rem;
 }
-.menu a {
+.menu a,
+.menu summary {
   display: inline-flex;
   align-items: center;
-  min-height: 40px;
-  padding: 0.3rem 0.8rem;
+  gap: 0.3rem;
+  min-height: 44px;
+  padding: 0.4rem 1rem;
   border-radius: 999px;
-  font-size: 0.92rem;
-  font-weight: 600;
+  font-size: 1.02rem;
+  font-weight: 700;
   text-decoration: none;
-  color: var(--texto-suave);
+  color: var(--texto);
   white-space: nowrap;
+  cursor: pointer;
+  list-style: none;
 }
-.menu a.actual {
-  background: var(--fondo);
-  color: var(--acento);
-  box-shadow: inset 0 0 0 1px var(--borde-fuerte);
+.menu summary::-webkit-details-marker {
+  display: none;
 }
-.menu a.destacado {
-  color: var(--arcilla);
+.menu summary::after {
+  content: "▾";
+  font-size: 0.75em;
+  color: var(--texto-suave);
 }
-.menu a.destacado.actual {
-  color: var(--arcilla);
-  box-shadow: inset 0 0 0 1px var(--arcilla-viva);
+.menu a.actual,
+.menu summary.actual {
+  background: var(--acento);
+  color: #fff;
 }
 @media (hover: hover) and (pointer: fine) {
-  .menu a:hover {
+  .menu a:hover,
+  .menu summary:hover {
     color: var(--acento);
     background: var(--fondo);
   }
+  .menu a.actual:hover,
+  .menu summary.actual:hover {
+    color: #fff;
+    background: var(--acento);
+  }
+}
+
+/* --- Mega-menú de "Negocios que te necesitan" --- */
+
+/*
+ * El panel cuelga de <header>, no de <nav class="menu"> (que tiene scroll
+ * horizontal: overflow-x: auto fuerza a overflow-y a recortar, y un panel
+ * absoluto ahí dentro quedaba cortado). :has() lo muestra cuando el
+ * <details id="menu-negocios"> está abierto; sin JavaScript.
+ */
+.menu-panel {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  background: var(--fondo);
+  border-bottom: 1px solid var(--borde-fuerte);
+  box-shadow: var(--sombra);
+}
+.cabecera:has(#menu-negocios[open]) .menu-panel {
+  display: block;
+}
+.menu-panel .contenedor {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+  padding-block: 1rem;
+}
+@media (min-width: 36rem) {
+  .menu-panel .contenedor {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.menu-panel a {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  min-height: 0;
+  padding: 0.6rem 0.7rem;
+  border-radius: var(--radio);
+  white-space: normal;
+  font-weight: 400;
+}
+.menu-panel-icono {
+  font-size: 1.3rem;
+  line-height: 1.3;
+}
+.menu-panel-titulo {
+  display: block;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--texto);
+}
+.menu-panel-descripcion {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--texto-suave);
+  margin-top: 0.1rem;
+}
+.menu-panel a.actual {
+  background: var(--acento-claro);
+}
+.menu-panel a.actual .menu-panel-titulo {
+  color: var(--acento);
 }
 
 .pie-lema {
@@ -942,6 +1023,12 @@ main {
   border-top: 1px solid var(--borde);
 }
 
+/* En /negocios, la entradilla va justo encima de los filtros: se ensancha
+   para alinear con ellos en vez de quedarse en la medida de lectura. */
+main .entradilla-ancha {
+  max-width: none;
+}
+
 /* --- Filtros del listado de negocios --- */
 
 .filtros-negocios {
@@ -1258,39 +1345,3 @@ main {
   margin-top: 0.5rem;
 }
 
-/* --- Submenú contextual --- */
-
-.submenu {
-  border-top: 1px solid var(--borde);
-  background: var(--fondo);
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-.submenu::-webkit-scrollbar {
-  display: none;
-}
-.submenu .contenedor {
-  display: flex;
-  gap: 1.1rem;
-  padding-block: 0.5rem;
-}
-.submenu a {
-  display: inline-flex;
-  align-items: center;
-  min-height: 36px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  text-decoration: none;
-  color: var(--texto-suave);
-  white-space: nowrap;
-  border-bottom: 2px solid transparent;
-}
-.submenu a.actual {
-  color: var(--arcilla);
-  border-bottom-color: var(--arcilla-viva);
-}
-@media (hover: hover) and (pointer: fine) {
-  .submenu a:hover {
-    color: var(--acento);
-  }
-}

@@ -36,31 +36,44 @@ const MENU = activa
         texto: "Negocios que te necesitan",
         href: `${base}/negocios`,
         /*
-         * Submenú contextual: solo aparece cuando ya estás dentro de la
-         * sección. Sin JavaScript y sin desplegables por hover, que en una
-         * pantalla táctil no existen.
+         * Mega-menú con <details>/<summary> nativos: se abre al pulsar (no al
+         * pasar el ratón, que en una pantalla táctil no existe) y no necesita
+         * ni una línea de JavaScript. Siempre disponible en el menú, no solo
+         * cuando ya estás dentro de la sección.
          */
         submenu: [
-          { texto: "Publica tu negocio", href: `${base}/negocios/anadir` },
-          { texto: "Quiero apadrinar un negocio", href: `${base}/negocios/adopta` },
-          { texto: "Conozco un negocio afectado", href: `${base}/negocios/proponer` },
+          {
+            texto: "Publica tu negocio",
+            href: `${base}/negocios/anadir`,
+            icono: "🏚️",
+            descripcion: "Gratis, en cinco minutos por WhatsApp.",
+          },
+          {
+            texto: "Quiero apadrinar un negocio",
+            href: `${base}/negocios/adopta`,
+            icono: "📣",
+            descripcion: "Visibilidad gratis a un negocio concreto.",
+          },
+          {
+            texto: "Conozco un negocio afectado",
+            href: `${base}/negocios/proponer`,
+            icono: "👀",
+            descripcion: "Aunque no sea el tuyo, cuéntanoslo.",
+          },
         ],
       },
-      { texto: "Dónde hay ayuda", href: `${base}/iniciativas` },
+      { texto: "Ayuda humanitaria", href: `${base}/iniciativas` },
       { texto: "Quién lo cuenta", href: `${base}/cuentas` },
-      { texto: "Sobre", href: "/sobre" },
+      { texto: "Sobre S.O.S.EMUND", href: "/sobre" },
     ]
-  : [{ texto: "Sobre", href: "/sobre" }];
+  : [{ texto: "Sobre S.O.S.EMUND", href: "/sobre" }];
 
 const aqui = Astro.url.pathname.replace(/(.)\/$/, "$1");
 const limpia = (href: string) => href.replace(/(.)\/$/, "$1");
 const esActual = (href: string) => aqui === limpia(href);
 const estaDentro = (href: string) => aqui.startsWith(limpia(href));
 
-/* El submenú se despliega solo dentro de su sección. */
-const submenuAbierto = MENU.find(
-  (m) => "submenu" in m && m.submenu && estaDentro(m.href),
-);
+const menuNegocios = MENU.find((m) => "submenu" in m && m.submenu);
 ---
 
 <!doctype html>
@@ -108,37 +121,56 @@ const submenuAbierto = MENU.find(
       <nav class="menu" aria-label="Secciones">
         <div class="contenedor">
           {
-            MENU.map((m) => (
-              <a
-                href={m.href}
-                class:list={[
-                  { destacado: m.destacado },
-                  { actual: esActual(m.href) },
-                ]}
-                aria-current={esActual(m.href) ? "page" : undefined}
-              >
-                {m.texto}
-              </a>
-            ))
+            MENU.map((m) =>
+              "submenu" in m && m.submenu ? (
+                <details id="menu-negocios" class="menu-desplegable" open={estaDentro(m.href)}>
+                  <summary class:list={[{ actual: estaDentro(m.href) }]}>
+                    {m.texto}
+                  </summary>
+                </details>
+              ) : (
+                <a
+                  href={m.href}
+                  class:list={[{ actual: esActual(m.href) }]}
+                  aria-current={esActual(m.href) ? "page" : undefined}
+                >
+                  {m.texto}
+                </a>
+              ),
+            )
           }
         </div>
       </nav>
 
       {
-        submenuAbierto?.submenu && (
-          <nav class="submenu" aria-label={submenuAbierto.texto}>
+        /*
+         * El panel vive fuera de <nav class="menu">, que tiene scroll
+         * horizontal (overflow-x: auto): en CSS eso fuerza también
+         * overflow-y a recortar, así que un panel absoluto ahí dentro
+         * quedaba cortado. Aquí, colgado de <header>, no lo recorta nada, y
+         * :has() en el CSS lo muestra u oculta según si el <details> con id
+         * "menu-negocios" está abierto.
+         */
+        menuNegocios?.submenu && (
+          <div class="menu-panel">
             <div class="contenedor">
-              {submenuAbierto.submenu.map((s) => (
+              {menuNegocios.submenu.map((s) => (
                 <a
                   href={s.href}
                   class:list={[{ actual: esActual(s.href) }]}
                   aria-current={esActual(s.href) ? "page" : undefined}
                 >
-                  {s.texto}
+                  <span class="menu-panel-icono" aria-hidden="true">
+                    {s.icono}
+                  </span>
+                  <span>
+                    <span class="menu-panel-titulo">{s.texto}</span>
+                    <span class="menu-panel-descripcion">{s.descripcion}</span>
+                  </span>
                 </a>
               ))}
             </div>
-          </nav>
+          </div>
         )
       }
     </header>
