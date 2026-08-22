@@ -103,6 +103,15 @@ const base = `/${pais.slug}/${evento.slug}`;
       <textarea id="f-quedo" rows="4" required></textarea>
     </div>
 
+    <div class="campo caja caja-pendiente">
+      <p>
+        <strong>No olvides tus fotos.</strong> Cuando mandes el mensaje, adjunta
+        en el mismo chat una foto de antes (aunque sea del celular, de una
+        publicación vieja o de Google Maps) y una de ahora: se ve mucho mejor
+        el contraste. Un formulario no puede adjuntarlas por ti.
+      </p>
+    </div>
+
     <div class="campo">
       <label for="f-necesita">Qué necesitas exactamente</label>
       <p class="campo-ayuda">
@@ -137,12 +146,14 @@ const base = `/${pais.slug}/${evento.slug}`;
     </div>
 
     <div class="campo">
-      <label>Si quieres recibir pagos directos</label>
-      <div class="campo-fila">
-        <input type="text" id="f-nequi" placeholder="Nequi" />
-        <input type="text" id="f-daviplata" placeholder="Daviplata" />
-        <input type="text" id="f-brebe" placeholder="Bre-B" />
-      </div>
+      <label for="f-ayuda">¿Cómo puede ayudarte quien lea esto?</label>
+      <p class="campo-ayuda">
+        Comprarte, recomendarte, hacer pedidos, seguirte en redes... Si quieres
+        recibir pagos directos (Nequi, Daviplata, Bre-B), cuéntanoslo aquí y lo
+        hablamos por WhatsApp: esa cuenta la confirmamos contigo antes de
+        publicarla, nunca la ponemos solo porque alguien la escribió.
+      </p>
+      <textarea id="f-ayuda" rows="3"></textarea>
     </div>
 
     <button type="submit" class="cta">
@@ -165,9 +176,11 @@ const base = `/${pais.slug}/${evento.slug}`;
       dirección.
     </p>
     <p>
-      <strong>No tocamos tu dinero.</strong> Si quieres recibir pagos, publicamos
-      tu Nequi, tu Daviplata o tu Bre-B y el dinero te llega directo. No
-      recaudamos ni cobramos comisión.
+      <strong>No tocamos tu dinero.</strong> Si quieres recibir pagos,
+      publicamos tu Nequi, tu Daviplata o tu Bre-B y el dinero te llega
+      directo. No recaudamos ni cobramos comisión, y confirmamos esa cuenta
+      contigo antes de publicarla: nunca publicamos una solo porque alguien la
+      escribió.
     </p>
     <p>
       <strong>Es tuyo y puedes retirarlo.</strong> Escribes al mismo WhatsApp y
@@ -253,18 +266,10 @@ const base = `/${pais.slug}/${evento.slug}`;
         msg += "\n";
       }
 
-      const cobros = [
-        ["Nequi", val("f-nequi")],
-        ["Daviplata", val("f-daviplata")],
-        ["Bre-B", val("f-brebe")],
-      ].filter(([, valor]) => valor);
-      if (cobros.length > 0) {
-        msg += "\nPara pagos directos:\n";
-        msg += cobros.map(([etiqueta, valor]) => `${etiqueta}: ${valor}`).join("\n");
-        msg += "\n";
-      }
+      const comoAyudar = val("f-ayuda");
+      if (comoAyudar) msg += `\nCómo me pueden ayudar:\n${comoAyudar}\n`;
 
-      msg += "\n(Voy a mandar fotos o vídeos en este chat.)";
+      msg += "\n(Voy a mandar la foto de antes y de ahora en este chat.)";
       return msg;
     }
 
