@@ -652,6 +652,66 @@ main {
   margin: 0;
 }
 
+/* --- Formulario de alta de negocio --- */
+
+.form-negocio {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  margin: 1.75rem 0;
+  max-width: 44rem;
+}
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.campo label {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+.campo-ayuda {
+  font-size: 0.86rem;
+  color: var(--texto-suave);
+  margin: 0;
+}
+.campo input[type="text"],
+.campo select,
+.campo textarea {
+  font: inherit;
+  font-size: 1rem;
+  color: var(--texto);
+  background: var(--fondo);
+  border: 1px solid var(--borde-fuerte);
+  border-radius: var(--radio);
+  padding: 0.65rem 0.8rem;
+  width: 100%;
+}
+.campo textarea {
+  resize: vertical;
+}
+.campo-fila {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.6rem;
+}
+@media (min-width: 30rem) {
+  .campo-fila {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+/* El botón de enviar reusa el estilo .cta (pensado para <a>): sin este
+   reset, el navegador le mete su propio borde, fuente y fondo de <button>. */
+button.cta {
+  border: none;
+  width: 100%;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  appearance: none;
+}
+
 /* --- Localidades --- */
 
 .localidades {

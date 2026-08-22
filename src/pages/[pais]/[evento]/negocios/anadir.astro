@@ -2,12 +2,7 @@
 import Base from "../../../../layouts/Base.astro";
 import { todosLosEventos } from "../../../../data/paises";
 import type { Evento, Pais } from "../../../../data/tipos";
-import {
-  WHATSAPP,
-  QUE_MANDAR,
-  POR_QUE_ESPANA,
-  enlaceWhatsApp,
-} from "../../../../data/contacto";
+import { WHATSAPP, QUE_MANDAR, TIPOS_NEGOCIO_BASE, POR_QUE_ESPANA } from "../../../../data/contacto";
 
 export function getStaticPaths() {
   return todosLosEventos().map(({ pais, evento }) => ({
@@ -22,17 +17,11 @@ interface Props {
 }
 const { pais, evento } = Astro.props;
 const base = `/${pais.slug}/${evento.slug}`;
-
-const mensaje = `Hola. Mi negocio resultó afectado por el terremoto y quiero publicar su ficha en S.O.S.EMUND.
-
-Se llama:
-A qué se dedica:
-En qué localidad está:`;
 ---
 
 <Base
   titulo="Publica tu negocio, es gratis"
-  descripcion="Si tu negocio resultó afectado, publicamos su ficha gratis: qué era, cómo quedó, qué necesita y por dónde contactarte. Nos lo mandas por WhatsApp y nosotros lo montamos."
+  descripcion="Si tu negocio resultó afectado, publicamos su ficha gratis: qué era, cómo quedó, qué necesita y por dónde contactarte. Rellena el formulario y lo mandas por WhatsApp."
   ruta={`${base}/negocios/anadir`}
 >
   <nav class="migas">
@@ -50,16 +39,10 @@ En qué localidad está:`;
   </p>
 
   <p>
-    No hay formulario. Nos escribes por WhatsApp con lo que tengas —aunque sean
-    cuatro fotos mal hechas y un audio— y nosotros lo montamos. Si acabas de
-    perder tu local, lo último que necesitas es pelearte con un formulario.
+    Rellena esto y al final se abre WhatsApp con el mensaje ya escrito para que
+    lo mandes. Ahí mismo, en el chat, adjuntas tus fotos o vídeos: eso un
+    formulario no lo puede hacer por ti.
   </p>
-
-  <a class="cta" href={enlaceWhatsApp(mensaje)} target="_blank" rel="noopener">
-    <span class="cta-eyebrow">Escríbenos</span>
-    <span class="cta-titulo">Mandar mi negocio por WhatsApp →</span>
-    <span class="cta-texto">{WHATSAPP.visible}</span>
-  </a>
 
   <div class="caja caja-gris">
     <p>{POR_QUE_ESPANA}</p>
@@ -79,6 +62,95 @@ En qué localidad está:`;
       ))
     }
   </ol>
+
+  <form id="form-negocio" class="form-negocio">
+    <div class="campo">
+      <label for="f-nombre">Cómo se llama tu negocio</label>
+      <input type="text" id="f-nombre" required />
+    </div>
+
+    <div class="campo">
+      <label for="f-localidad">Localidad</label>
+      <select id="f-localidad" required>
+        <option value="">Elige tu localidad</option>
+        {evento.localidades.map((l) => <option value={l.nombre}>{l.nombre}</option>)}
+        <option value="otra">No está en la lista</option>
+      </select>
+      <input
+        type="text"
+        id="f-localidad-otra"
+        placeholder="¿Cuál es tu localidad?"
+        hidden
+      />
+    </div>
+
+    <div class="campo">
+      <label for="f-tipo">Tipo de negocio</label>
+      <select id="f-tipo" required>
+        <option value="">Elige el que más se parezca</option>
+        {TIPOS_NEGOCIO_BASE.map((t) => <option value={t}>{t}</option>)}
+        <option value="otro">No encaja en ninguno</option>
+      </select>
+      <input type="text" id="f-tipo-otro" placeholder="¿A qué se dedica?" hidden />
+    </div>
+
+    <div class="campo">
+      <label for="f-quedo">Cómo quedó</label>
+      <p class="campo-ayuda">
+        El local, la mercancía y los equipos. Si eras un puesto callejero o algo
+        que ya no existe para fotografiar, cuéntalo aquí.
+      </p>
+      <textarea id="f-quedo" rows="4" required></textarea>
+    </div>
+
+    <div class="campo">
+      <label for="f-necesita">Qué necesitas exactamente</label>
+      <p class="campo-ayuda">
+        Concreto: «una vitrina refrigerada», «clientes para pedidos a
+        domicilio». «Ayuda» a secas no le sirve a nadie para ayudarte.
+      </p>
+      <textarea id="f-necesita" rows="3" required></textarea>
+    </div>
+
+    <div class="campo">
+      <label for="f-donde">Dónde te encuentran hoy</label>
+      <p class="campo-ayuda">
+        Si sigues vendiendo en otro sitio, a domicilio o por encargo. No hace
+        falta si tu local sigue en pie.
+      </p>
+      <textarea id="f-donde" rows="2"></textarea>
+    </div>
+
+    <div class="campo">
+      <label>Por dónde te pueden escribir</label>
+      <p class="campo-ayuda">Lo que tengas, no hace falta rellenarlo todo.</p>
+      <div class="campo-fila">
+        <input type="text" id="f-whatsapp" placeholder="WhatsApp" />
+        <input type="text" id="f-instagram" placeholder="Instagram" />
+        <input type="text" id="f-facebook" placeholder="Facebook" />
+      </div>
+      <div class="campo-fila">
+        <input type="text" id="f-tiktok" placeholder="TikTok" />
+        <input type="text" id="f-web" placeholder="Página web" />
+        <input type="text" id="f-telefono" placeholder="Teléfono" />
+      </div>
+    </div>
+
+    <div class="campo">
+      <label>Si quieres recibir pagos directos</label>
+      <div class="campo-fila">
+        <input type="text" id="f-nequi" placeholder="Nequi" />
+        <input type="text" id="f-daviplata" placeholder="Daviplata" />
+        <input type="text" id="f-brebe" placeholder="Bre-B" />
+      </div>
+    </div>
+
+    <button type="submit" class="cta">
+      <span class="cta-eyebrow">Último paso</span>
+      <span class="cta-titulo">Mandar mi negocio por WhatsApp →</span>
+      <span class="cta-texto">{WHATSAPP.visible}</span>
+    </button>
+  </form>
 
   <h2>Cómo lo tratamos</h2>
   <div class="caja caja-acento">
@@ -109,9 +181,9 @@ En qué localidad está:`;
 
   <h2>¿Y si no tengo fotos?</h2>
   <p>
-    Da igual. Mándanos lo que puedas y montamos la ficha con eso. Una ficha sin
-    fotos sirve más que ninguna ficha. Y si luego consigues fotos, nos las mandas
-    y las añadimos.
+    Da igual. Manda el formulario igual y en el chat de WhatsApp cuenta lo que
+    puedas: montamos la ficha con eso. Una ficha sin fotos sirve más que
+    ninguna ficha. Y si luego consigues fotos, nos las mandas y las añadimos.
   </p>
 
   <p>
@@ -119,4 +191,87 @@ En qué localidad está:`;
       <strong>Mira antes cómo queda una ficha →</strong>
     </a>
   </p>
+
+  <script define:vars={{ numero: WHATSAPP.numero }}>
+    {
+      /*
+       * Sin servidor: el formulario no manda nada a ningún sitio nuestro, solo
+       * arma el texto y abre WhatsApp con él ya escrito, igual que hacían antes
+       * los enlaces de "mándanos un mensaje". Las fotos las adjunta la persona
+       * a mano en el chat: eso ningún enlace lo puede hacer por ella.
+       */
+    }
+    const form = document.getElementById("form-negocio");
+
+    function alternarOtro(selectId, otroId, valorOtro) {
+      const select = document.getElementById(selectId);
+      const otro = document.getElementById(otroId);
+      select.addEventListener("change", () => {
+        const esOtro = select.value === valorOtro;
+        otro.hidden = !esOtro;
+        otro.required = esOtro;
+        if (esOtro) otro.focus();
+      });
+    }
+    alternarOtro("f-localidad", "f-localidad-otra", "otra");
+    alternarOtro("f-tipo", "f-tipo-otro", "otro");
+
+    function val(id) {
+      return document.getElementById(id).value.trim();
+    }
+
+    function construirMensaje() {
+      const selLocalidad = document.getElementById("f-localidad");
+      const localidad =
+        selLocalidad.value === "otra" ? val("f-localidad-otra") : selLocalidad.value;
+
+      const selTipo = document.getElementById("f-tipo");
+      const tipo = selTipo.value === "otro" ? val("f-tipo-otro") : selTipo.value;
+
+      let msg =
+        "Hola. Mi negocio resultó afectado por el terremoto y quiero publicar su ficha en S.O.S.EMUND.\n\n";
+      msg += `Nombre: ${val("f-nombre")}\n`;
+      msg += `Localidad: ${localidad}\n`;
+      msg += `Tipo de negocio: ${tipo}\n\n`;
+      msg += `Cómo quedó:\n${val("f-quedo")}\n\n`;
+      msg += `Qué necesita:\n${val("f-necesita")}\n`;
+
+      const donde = val("f-donde");
+      if (donde) msg += `\nDónde lo encuentran hoy:\n${donde}\n`;
+
+      const contactos = [
+        ["WhatsApp", val("f-whatsapp")],
+        ["Instagram", val("f-instagram")],
+        ["Facebook", val("f-facebook")],
+        ["TikTok", val("f-tiktok")],
+        ["Web", val("f-web")],
+        ["Teléfono", val("f-telefono")],
+      ].filter(([, valor]) => valor);
+      if (contactos.length > 0) {
+        msg += "\nPor dónde me pueden escribir:\n";
+        msg += contactos.map(([etiqueta, valor]) => `${etiqueta}: ${valor}`).join("\n");
+        msg += "\n";
+      }
+
+      const cobros = [
+        ["Nequi", val("f-nequi")],
+        ["Daviplata", val("f-daviplata")],
+        ["Bre-B", val("f-brebe")],
+      ].filter(([, valor]) => valor);
+      if (cobros.length > 0) {
+        msg += "\nPara pagos directos:\n";
+        msg += cobros.map(([etiqueta, valor]) => `${etiqueta}: ${valor}`).join("\n");
+        msg += "\n";
+      }
+
+      msg += "\n(Voy a mandar fotos o vídeos en este chat.)";
+      return msg;
+    }
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const mensaje = construirMensaje();
+      window.open(`https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`, "_blank");
+    });
+  </script>
 </Base>

@@ -1,12 +1,14 @@
 /**
  * Canal por el que los negocios mandan su ficha.
  *
- * WhatsApp y no un formulario web a propósito: quien acaba de perder su local
- * no rellena un formulario con subida de archivos en una conexión mala, pero sí
- * manda cinco fotos por WhatsApp. Es además por donde circula de verdad la
- * información entre comerciantes en Colombia.
+ * El envío final sigue siendo WhatsApp, no un servidor propio: no hay forma de
+ * adjuntar fotos desde un enlace, así que quien rellena el formulario de
+ * /negocios/anadir igual termina en su WhatsApp para mandarlas. Lo que cambió
+ * (decisión de Sofía, 20/08/2026) es que ya no escribe el mensaje a mano desde
+ * cero: un formulario estructurado (nombre, localidad, tipo de negocio con
+ * listas desplegables) arma el texto por él.
  *
- * Para cambiarlo, solo esta constante.
+ * Para cambiar el número, solo esta constante.
  */
 export const WHATSAPP = {
   /** En formato internacional, sin signos: es lo que espera wa.me. */
@@ -29,12 +31,40 @@ export const enlaceWhatsApp = (mensaje: string) =>
 export const POR_QUE_ESPANA =
   "Verás que el número es español, con prefijo +34. Soy colombiana y vivo en España, pero mis papás y mi hermano están en Colombia: por eso este proyecto empezó por el terremoto y no por otra cosa. El teléfono es de trabajo, no personal.";
 
+/**
+ * Tipos de negocio de partida para el desplegable del formulario. No es una
+ * taxonomía cerrada: el propio formulario deja escribir el suyo a quien no
+ * encaje aquí, y esa parte no se pierde, va igual en el mensaje de WhatsApp.
+ */
+export const TIPOS_NEGOCIO_BASE = [
+  "Panadería y repostería",
+  "Restaurante o comida rápida",
+  "Tienda de ropa",
+  "Miscelánea o tienda de barrio",
+  "Peluquería o barbería",
+  "Ferretería",
+  "Farmacia o droguería",
+  "Papelería",
+  "Taller de motos o carros",
+  "Zapatería",
+  "Cafetería",
+  "Salón de belleza",
+];
+
 /** Lo que le pedimos a un negocio que nos mande. */
 export const QUE_MANDAR = [
   {
-    titulo: "Cómo se llama y qué vendías",
+    titulo: "Cómo se llama tu negocio",
+    texto: "El nombre. Nada más por ahora, la actividad y la localidad van aparte.",
+  },
+  {
+    titulo: "Localidad",
+    texto: "Elige la tuya de la lista. Si no está, escríbenos cuál es y la añadimos.",
+  },
+  {
+    titulo: "Tipo de negocio",
     texto:
-      "El nombre del negocio, a qué se dedica y en qué localidad está. Nada más de momento.",
+      "Elige el que más se parezca (panadería, tienda de ropa, restaurante…). Si no encaja en ninguno, escribe el tuyo.",
   },
   {
     titulo: "Cómo quedó",
