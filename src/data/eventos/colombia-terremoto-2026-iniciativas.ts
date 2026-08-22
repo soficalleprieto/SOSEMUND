@@ -82,6 +82,22 @@ export const iniciativasColombia2026: Iniciativa[] = [
     nota: "El dominio redirige a terremotovenezuela.com: es un dominio reciclado de una emergencia anterior y agrega datos de los dos países. El contenido sirve, pero tenlo en cuenta.",
   },
   {
+    nombre: "Mapa del Terremoto de Colombia",
+    url: "https://www.mapadelterremoto.com",
+    categoria: "danos",
+    que: "Registro abierto de más de 3.400 puntos de daños, albergues y centros de acopio, construido a partir de fuentes públicas y con cada punto citando su fuente y nivel de verificación. Se puede consultar por municipio: Cali, Pereira, Manizales, Armenia, Quibdó, Buenaventura y decenas más.",
+    para: "Afectados, voluntarios y rescatistas",
+    nota: "El propio sitio aclara que no es fuente oficial y que ningún dato de aquí sustituye el parte de la autoridad competente.",
+  },
+  {
+    nombre: "Asistente de WhatsApp @colombiapalante",
+    url: "https://wa.me/573332385264",
+    categoria: "urgente",
+    que: "Asistente conversacional gratuito por WhatsApp, hecho por la empresa JumpCube con apoyo de Amazon Web Services, que orienta según tu ubicación y necesidad: centros de acopio y qué donar, alojamiento temporal, seguros, subsidios estatales, asesoría legal, voluntariado y canales oficiales de búsqueda de personas.",
+    para: "Afectados y voluntarios",
+    nota: "Es el desarrollo de una empresa privada, no una plataforma oficial. Según describe, contrasta con al menos dos fuentes la información de mayor riesgo (líneas de emergencia, cuentas para donar) antes de entregarla.",
+  },
+  {
     nombre: "Qrarte Pets",
     url: "https://qrartepets.com",
     categoria: "mascotas",
@@ -112,5 +128,9 @@ export const verificadoresColombia2026: Verificador[] = [
   {
     nombre: "Ecuador Chequea",
     url: "https://ecuadorchequea.com/virales-terremoto-10-de-agosto-colombia-verificados/",
+  },
+  {
+    nombre: "Verificado (México)",
+    url: "https://verificado.com.mx/desinformaciones-terremoto-10-agosto-colombia",
   },
 ];
