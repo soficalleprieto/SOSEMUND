@@ -947,26 +947,32 @@ main {
 .filtros-negocios {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.9rem;
-  margin: 1.25rem 0;
+  align-items: flex-end;
+  gap: 1.25rem;
+  margin: 1.5rem 0;
+  padding: 1.25rem 1.5rem;
+  background: var(--acento-claro);
+  border: 1px solid var(--acento);
+  border-radius: var(--radio);
 }
 .filtros-negocios label {
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--texto-suave);
+  gap: 0.35rem;
+  flex: 1 1 16rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--acento);
 }
 .filtros-negocios select {
   font: inherit;
-  font-size: 0.95rem;
+  font-size: 1.1rem;
   color: var(--texto);
   background: var(--fondo);
   border: 1px solid var(--borde-fuerte);
   border-radius: var(--radio);
-  padding: 0.5rem 0.7rem;
-  min-width: 12rem;
+  padding: 0.75rem 0.9rem;
+  width: 100%;
 }
 
 /* --- Accesos rápidos arriba de /negocios --- */

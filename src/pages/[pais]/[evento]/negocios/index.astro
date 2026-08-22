@@ -49,9 +49,34 @@ const actividades = [...new Set(evento.negocios.map((n) => n.actividad))].sort((
   <h1>Negocios que siguen adelante</h1>
 
   <p class="entradilla">
-    Cada uno con su cara, su historia y lo que necesita en concreto. Porque la
-    mejor manera de ayudar a un negocio es ser su cliente.
+    Cada uno con su historia, cómo quedó y lo que necesita en concreto. Porque
+    la mejor manera de ayudar a un negocio es ser su cliente.
   </p>
+
+  {
+    (localidadesConNegocio.length > 1 || actividades.length > 1) && (
+      <div class="filtros-negocios">
+        <label>
+          Localidad
+          <select id="filtro-localidad">
+            <option value="">Todas</option>
+            {localidadesConNegocio.map((l) => (
+              <option value={l.slug}>{l.nombre}</option>
+            ))}
+          </select>
+        </label>
+        <label>
+          Tipo de negocio
+          <select id="filtro-actividad">
+            <option value="">Todos</option>
+            {actividades.map((a) => (
+              <option value={a}>{a}</option>
+            ))}
+          </select>
+        </label>
+      </div>
+    )
+  }
 
   <!--
     Por ahora son accesos directos a las páginas que ya existen, no filtros
@@ -85,31 +110,6 @@ const actividades = [...new Set(evento.negocios.map((n) => n.actividad))].sort((
   </div>
 
   <div id="negocios-publicados">
-    {
-      (localidadesConNegocio.length > 1 || actividades.length > 1) && (
-        <div class="filtros-negocios">
-          <label>
-            Localidad
-            <select id="filtro-localidad">
-              <option value="">Todas</option>
-              {localidadesConNegocio.map((l) => (
-                <option value={l.slug}>{l.nombre}</option>
-              ))}
-            </select>
-          </label>
-          <label>
-            Tipo de negocio
-            <select id="filtro-actividad">
-              <option value="">Todos</option>
-              {actividades.map((a) => (
-                <option value={a}>{a}</option>
-              ))}
-            </select>
-          </label>
-        </div>
-      )
-    }
-
     <p id="filtro-sin-resultados" class="caja-pendiente" hidden>
       Ningún negocio publicado coincide con ese filtro todavía.
     </p>
