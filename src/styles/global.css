@@ -51,8 +51,13 @@
   --positivo: #0f7038;
   --positivo-fondo: #eaf6ee;
 
-  /* Medida de lectura del texto corrido: unos 78 caracteres por línea. */
-  --ancho-texto: 46rem;
+  /*
+   * El texto corrido ocupa el mismo ancho que el contenedor general: Sofía
+   * prefirió que la página se sienta llena en pantallas anchas antes que
+   * ceñirse a la medida de lectura clásica (~68-78 caracteres por línea).
+   * Las líneas quedan largas en escritorio a propósito.
+   */
+  --ancho-texto: 72rem;
   /* Ancho de la página. Todo comparte este borde izquierdo. */
   --ancho-amplio: 72rem;
 

@@ -87,7 +87,7 @@ export type Iniciativa = {
   nota?: string;
 };
 
-/** Medio de verificación que ha desmentido bulos de esta emergencia. */
+/** Medio de verificación que ha desmentido noticias falsas de esta emergencia. */
 export type Verificador = { nombre: string; url: string };
 
 export type Red = "instagram" | "tiktok" | "youtube" | "x";
@@ -257,7 +257,7 @@ export type Evento = {
   ayudas: Ayuda[];
   /** Otras iniciativas ciudadanas a las que derivamos. */
   iniciativas: Iniciativa[];
-  /** Verificadores que han desmentido bulos de esta emergencia. */
+  /** Verificadores que han desmentido noticias falsas de esta emergencia. */
   verificadores: Verificador[];
   /** Cuentas que están contando lo que pasa. */
   cuentas: Cuenta[];

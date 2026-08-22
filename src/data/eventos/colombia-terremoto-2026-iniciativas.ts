@@ -92,8 +92,9 @@ export const iniciativasColombia2026: Iniciativa[] = [
 ];
 
 /**
- * Verificadores que han desmentido bulos de este terremoto. No opinamos sobre
- * quién informa bien: remitimos a quien verifica con método publicado.
+ * Verificadores que han desmentido noticias falsas de este terremoto. No
+ * opinamos sobre quién informa bien: remitimos a quien verifica con método
+ * publicado.
  */
 export const verificadoresColombia2026: Verificador[] = [
   {

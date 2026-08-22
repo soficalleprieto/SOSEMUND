@@ -186,8 +186,8 @@ const menusConSubmenu = MENU.filter(
               }
               /* "Ayudas para negocios" cuelga de `base`, que es prefijo de
                  TODAS las rutas del evento: usa esActual, no estaDentro, o
-                 se abriría solo en /cuentas, /negocios... */
-              const abierto = m.id === "menu-ayudas" ? esActual(m.href) : estaDentro(m.href);
+                 se resaltaría en /cuentas, /negocios... */
+              const enSeccion = m.id === "menu-ayudas" ? esActual(m.href) : estaDentro(m.href);
               return (
                 /*
                  * El texto es un <a> normal que navega; la flechita es un
@@ -197,12 +197,17 @@ const menusConSubmenu = MENU.filter(
                  * desplegables, sus páginas dejaron de tener enlace directo.
                  * El id va en el contenedor, no en el <details>, para que el
                  * :hover de CSS cubra el texto Y la flechita sin hueco.
+                 *
+                 * El <details> arranca SIEMPRE cerrado, incluso dentro de su
+                 * propia sección: abrirlo por defecto tapaba el contenido de
+                 * la página con el panel superpuesto. `enSeccion` solo pinta
+                 * la píldora activa, no despliega nada.
                  */
-                <div id={m.id} class:list={["menu-item-desplegable", { actual: abierto }]}>
+                <div id={m.id} class:list={["menu-item-desplegable", { actual: enSeccion }]}>
                   <a href={m.href} aria-current={esActual(m.href) ? "page" : undefined}>
                     {m.texto}
                   </a>
-                  <details open={abierto}>
+                  <details>
                     <summary aria-label={`Ver ${m.texto}`}>
                       <span aria-hidden="true">▾</span>
                     </summary>
@@ -250,6 +255,18 @@ const menusConSubmenu = MENU.filter(
         ))
       }
     </header>
+
+    <script>
+      {/* Cerrar los mega-menús al pulsar fuera. Los <details> nativos no se
+          cierran solos al hacer clic en otro sitio: una vez abiertos a
+          golpe de clic (no de hover), se quedaban tapando el contenido de
+          la página hasta que alguien volvía a pulsar la flechita. */}
+      document.addEventListener("click", (e) => {
+        document.querySelectorAll(".menu-item-desplegable details[open]").forEach((d) => {
+          if (!d.parentElement?.contains(e.target)) d.removeAttribute("open");
+        });
+      });
+    </script>
 
     <main id="contenido">
       <div class="contenedor">
