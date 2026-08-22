@@ -79,13 +79,27 @@ const SECCIONES: {
     que se les encontrara.
   </p>
 
+  <div class="filtros-negocios">
+    <label>
+      Tipo de ayuda
+      <select id="filtro-tipo-ayuda">
+        <option value="">Todas</option>
+        {
+          SECCIONES.filter(
+            (s) => evento.iniciativas.some((i) => i.categoria === s.categoria),
+          ).map((s) => <option value={s.categoria}>{s.titulo}</option>)
+        }
+      </select>
+    </label>
+  </div>
+
   {
     SECCIONES.map((seccion) => {
       const grupo = evento.iniciativas.filter(
         (i) => i.categoria === seccion.categoria,
       );
       return grupo.length > 0 ? (
-        <section>
+        <section id={seccion.categoria} data-categoria={seccion.categoria}>
           <h2>{seccion.titulo}</h2>
           {seccion.entradilla && <p>{seccion.entradilla}</p>}
           {grupo.map((i) => (
@@ -174,4 +188,20 @@ const SECCIONES: {
     ruta={`${base}/iniciativas`}
     texto="Dónde encontrar ayuda tras el terremoto: centros de acopio, búsqueda de personas y ayuda urgente, todo en un sitio."
   />
+
+  <script>
+    {/* Filtra en el cliente, sin recargar página: mismo patrón que en
+        /negocios. Solo esconde o muestra secciones que ya están en el HTML. */}
+    const sel = document.getElementById("filtro-tipo-ayuda");
+    const secciones = document.querySelectorAll("[data-categoria]");
+
+    function aplicarFiltro() {
+      const tipo = sel ? sel.value : "";
+      secciones.forEach((seccion) => {
+        seccion.hidden = Boolean(tipo) && seccion.dataset.categoria !== tipo;
+      });
+    }
+
+    if (sel) sel.addEventListener("change", aplicarFiltro);
+  </script>
 </Base>

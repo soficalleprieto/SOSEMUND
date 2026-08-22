@@ -140,15 +140,15 @@ export const colombiaTerremoto2026: Evento = {
     { etiqueta: "Profundidad", valor: "103 km" },
   ],
   cifras: {
-    fecha: "2026-08-12",
-    fuente: "Declaración presidencial con datos de la UNGRD",
+    fecha: "2026-08-20",
+    fuente: "Balance oficial de la UNGRD, corte 6:30 a.m. del 20 de agosto",
     fuenteUrl:
-      "https://www.diariolibre.com/mundo/america-latina/2026/08/12/aumenta-la-cantidad-de-muertos-en-colombia-tras-terremoto/3627378",
+      "https://www.larepublica.co/especiales/catastrofe-nacional/terremoto-ha-dejado-319-muertos-4-506-heridos-y-31-416-viviendas-danadas-4462815",
     lineas: [
-      { etiqueta: "fallecidos", valor: 265 },
-      { etiqueta: "heridos", valor: 3494 },
-      { etiqueta: "desaparecidos", valor: 496 },
-      { etiqueta: "familias afectadas", valor: 25872 },
+      { etiqueta: "fallecidos", valor: 319 },
+      { etiqueta: "heridos", valor: 4506 },
+      { etiqueta: "desaparecidos", valor: 260 },
+      { etiqueta: "familias afectadas", valor: 153336 },
     ],
     aviso:
       "Las cifras cambian a diario; verifica siempre el parte vigente de la UNGRD.",

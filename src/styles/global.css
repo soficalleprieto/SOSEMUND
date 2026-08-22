@@ -342,13 +342,16 @@ main .pilares h3 {
   }
 }
 
-/* --- Mega-menú de "Negocios que te necesitan" --- */
+/* --- Mega-menús de la cabecera --- */
 
 /*
- * El panel cuelga de <header>, no de <nav class="menu"> (que tiene scroll
+ * Cada panel cuelga de <header>, no de <nav class="menu"> (que tiene scroll
  * horizontal: overflow-x: auto fuerza a overflow-y a recortar, y un panel
- * absoluto ahí dentro quedaba cortado). :has() lo muestra cuando el
- * <details id="menu-negocios"> está abierto; sin JavaScript.
+ * absoluto ahí dentro quedaba cortado). :has() lo muestra cuando su
+ * <details> (enganchado por id vía [data-para]) está abierto, y en
+ * escritorio también al pasar el cursor por encima del botón o del propio
+ * panel (si no, el panel se cierra antes de poder mover el ratón hasta él).
+ * Todo sin una línea de JavaScript.
  */
 .menu-panel {
   display: none;
@@ -361,8 +364,20 @@ main .pilares h3 {
   border-bottom: 1px solid var(--borde-fuerte);
   box-shadow: var(--sombra);
 }
-.cabecera:has(#menu-negocios[open]) .menu-panel {
+.cabecera:has(#menu-ayudas[open]) .menu-panel[data-para="menu-ayudas"],
+.cabecera:has(#menu-negocios[open]) .menu-panel[data-para="menu-negocios"],
+.cabecera:has(#menu-humanitaria[open]) .menu-panel[data-para="menu-humanitaria"] {
   display: block;
+}
+@media (hover: hover) and (pointer: fine) {
+  .cabecera:has(#menu-ayudas:hover, .menu-panel[data-para="menu-ayudas"]:hover)
+    .menu-panel[data-para="menu-ayudas"],
+  .cabecera:has(#menu-negocios:hover, .menu-panel[data-para="menu-negocios"]:hover)
+    .menu-panel[data-para="menu-negocios"],
+  .cabecera:has(#menu-humanitaria:hover, .menu-panel[data-para="menu-humanitaria"]:hover)
+    .menu-panel[data-para="menu-humanitaria"] {
+    display: block;
+  }
 }
 .menu-panel .contenedor {
   display: grid;
@@ -373,6 +388,14 @@ main .pilares h3 {
 @media (min-width: 36rem) {
   .menu-panel .contenedor {
     grid-template-columns: repeat(3, 1fr);
+  }
+}
+.menu-panel[data-para="menu-ayudas"] .contenedor {
+  gap: 0.15rem;
+}
+@media (min-width: 36rem) {
+  .menu-panel[data-para="menu-ayudas"] .contenedor {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 .menu-panel a {
