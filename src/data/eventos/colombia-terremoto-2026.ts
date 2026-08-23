@@ -163,6 +163,38 @@ const CALI_FONDO_REACTIVACION_2026: Fuente = {
   fecha: "2026-08-21",
 };
 
+const CENSO_UNICO_2026: Fuente = {
+  medio: "El Tiempo",
+  titulo:
+    "48 % de las empresas afectadas por el terremoto no puede operar, según primer censo de emergencia",
+  url: "https://www.eltiempo.com/economia/empresas/48-de-las-empresas-afectadas-por-el-terremoto-no-puede-operar-segun-primer-censo-de-emergencia-3579678",
+  fecha: "2026-08-19",
+};
+
+const TASAS_VIVIENDA_BANCOS_2026: Fuente = {
+  medio: "Infobae",
+  titulo:
+    "Los bancos en Colombia le hacen caso a De la Espriella y empezaron a bajar la tasa para compra de vivienda ante el terremoto: así están",
+  url: "https://www.infobae.com/colombia/2026/08/20/los-bancos-en-colombia-le-hacen-caso-a-de-la-espriella-y-empezaron-a-bajar-la-tasa-para-compra-de-vivienda-ante-el-terremoto-asi-estan/",
+  fecha: "2026-08-20",
+};
+
+const DE_LA_ESPRIELLA_TASAS_2026: Fuente = {
+  medio: "Infobae",
+  titulo:
+    "Abelardo de la Espriella celebró reducción de tasas de interés para vivienda en zonas afectadas y pidió extender la medida a todo el sector",
+  url: "https://www.infobae.com/colombia/2026/08/22/abelardo-de-la-espriella-celebro-reduccion-de-tasas-de-interes-para-vivienda-en-zonas-afectadas-y-pidio-extender-la-medida-a-todo-el-sector/",
+  fecha: "2026-08-22",
+};
+
+const ARMENIA_TRIBUTARIO_2026: Fuente = {
+  medio: "Quindío 24 Horas",
+  titulo:
+    "Alcalde radicará en el Concejo paquete de alivios tributarios con reducción del 90 % en mora por impuestos",
+  url: "https://www.quindio24horas.com/2026/08/21/alcalde-radicara-en-el-concejo-paquete-de-alivios-tributarios-con-reduccion-del-90-en-mora-por-impuestos/",
+  fecha: "2026-08-21",
+};
+
 /** Texto compartido por las ciudades cuyo canal para negocios aún no verificamos. */
 const PENDIENTE =
   "Hay módulos de registro habilitados en la alcaldía y el coliseo municipal. Estamos verificando el canal específico para negocios.";
@@ -277,9 +309,11 @@ export const colombiaTerremoto2026: Evento = {
       contexto:
         "La Cámara de Comercio censó 1.552 unidades comerciales solo en la zona del Parque de la Libertad.",
       censo: {
-        verificado: false,
+        verificado: true,
         detalle:
-          "Hay módulos de registro habilitados en la alcaldía y el coliseo municipal. La Cámara de Comercio de Pereira ya realizó un censo en la zona del Parque de la Libertad. Estamos verificando el canal abierto para el resto de la ciudad.",
+          "Además del censo propio que la Cámara de Comercio de Pereira ya hizo en la zona del Parque de la Libertad, tu negocio puede reportarse al Censo Único de Emergencia que coordina Confecámaras junto con el Ministerio de Comercio, 16 cámaras de comercio de las zonas afectadas, Acopi, Fenalco, Asocapitales y la Federación Nacional de Departamentos. Llama o escribe por WhatsApp para pedir el cuestionario, diligenciarlo o dejar un mensaje de voz; si no tienes señal ni cobertura, hay formularios impresos en los puntos de atención.",
+        telefonos: ["300 913 1811"],
+        fuente: CENSO_UNICO_2026,
       },
     },
     {
@@ -432,9 +466,9 @@ export const colombiaTerremoto2026: Evento = {
       resumen:
         "Los bancos anunciaron períodos de gracia, cambios en las condiciones de los créditos y suspensión temporal de los cobros.",
       detalle:
-        "El sector bancario anunció un paquete de alivios para personas y empresas de las zonas afectadas que podría beneficiar a cerca de 2,8 millones de usuarios: períodos de gracia de hasta un año, cambios en las condiciones de los créditos y suspensión temporal de los cobros. No suele ser automático: hay que pedirlo al banco.\n\nEl 19 de agosto de 2026, el Gobierno y Asobancaria (el gremio de los bancos) formalizaron ese paquete en cerca de $1,1 billones para los mismos afectados de Caldas, Chocó, Quindío, Risaralda y Valle del Cauca. Incluye periodos de gracia de hasta 12 meses sin cobro de intereses durante ese lapso, suspensión de los cobros jurídicos, protección del historial crediticio (no te reportan negativamente por esta causa) y aplicación de los seguros asociados al crédito, para quien los tenga contratados.\n\nLo que ya está concretado banco por banco:\n\nBancolombia pasó de la promesa genérica de mediados de agosto a cifras concretas: dispuso más de $5 billones en financiación para personas, empresas y entidades territoriales de Chocó, Risaralda, Caldas, Quindío, Valle del Cauca, suroeste antioqueño, Cauca y Tolima. Créditos de vivienda al 8% efectivo anual (unas 7.000 familias) y de consumo o microcrédito al 10%, para desembolsos desde el 25 de agosto; una línea aparte para hasta 13.500 empresas y entidades territoriales.\n\nNu Colombia anunció retiros ilimitados sin comisión en cajeros y avances de tarjeta de crédito sin comisión para clientes en zonas afectadas, más una refinanciación (hasta 48 meses, tasas reducidas) que a fecha 20/08/2026 seguía en desarrollo.\n\nBanco Agrario devuelve las comisiones cobradas por retiros, depósitos y pago de cheques a los clientes cuya oficina habitual sigue cerrada por la emergencia, con efecto retroactivo desde el 10 de agosto; la devolución empezó el 18 de agosto.\n\nBanco de Bogotá y Davivienda cerraron oficinas presenciales en las zonas más golpeadas y mantienen atención por teléfono, WhatsApp y banca virtual, pero no hemos encontrado un anuncio propio de alivios de crédito más allá del marco general del gremio. BBVA, a fecha 20/08/2026, seguía «analizando» bajar tasas para damnificados, sin nada confirmado todavía.",
+        "El sector bancario anunció un paquete de alivios para personas y empresas de las zonas afectadas que podría beneficiar a cerca de 2,8 millones de usuarios: períodos de gracia de hasta un año, cambios en las condiciones de los créditos y suspensión temporal de los cobros. No suele ser automático: hay que pedirlo al banco.\n\nEl 19 de agosto de 2026, el Gobierno y Asobancaria (el gremio de los bancos) formalizaron ese paquete en cerca de $1,1 billones para los mismos afectados de Caldas, Chocó, Quindío, Risaralda y Valle del Cauca. Incluye periodos de gracia de hasta 12 meses sin cobro de intereses durante ese lapso, suspensión de los cobros jurídicos, protección del historial crediticio (no te reportan negativamente por esta causa) y aplicación de los seguros asociados al crédito, para quien los tenga contratados.\n\nLo que ya está concretado banco por banco:\n\nBancolombia pasó de la promesa genérica de mediados de agosto a cifras concretas: dispuso más de $5 billones en financiación para personas, empresas y entidades territoriales de Chocó, Risaralda, Caldas, Quindío, Valle del Cauca, suroeste antioqueño, Cauca y Tolima. Créditos de vivienda al 8% efectivo anual (unas 7.000 familias) y de consumo o microcrédito al 10%, para desembolsos desde el 25 de agosto; una línea aparte para hasta 13.500 empresas y entidades territoriales.\n\nNu Colombia anunció retiros ilimitados sin comisión en cajeros y avances de tarjeta de crédito sin comisión para clientes en zonas afectadas, más una refinanciación (hasta 48 meses, tasas reducidas) que a fecha 20/08/2026 seguía en desarrollo.\n\nBanco Agrario devuelve las comisiones cobradas por retiros, depósitos y pago de cheques a los clientes cuya oficina habitual sigue cerrada por la emergencia, con efecto retroactivo desde el 10 de agosto; la devolución empezó el 18 de agosto.\n\nBanco de Bogotá y Davivienda cerraron oficinas presenciales en las zonas más golpeadas y mantienen atención por teléfono, WhatsApp y banca virtual. El 20 de agosto sí confirmaron una medida propia, aunque acotada a crédito de vivienda nueva en las zonas afectadas y no al resto de alivios del gremio: BBVA bajó su tasa desde 11,9% efectivo anual, Davivienda desde 14,4% y Banco de Bogotá hasta 16,55%. El presidente De la Espriella celebró la medida el 22 de agosto y pidió extenderla al resto del sector financiero y a otro tipo de créditos, no solo vivienda.",
       pendiente:
-        "No hemos encontrado el canal exacto de solicitud (línea, formulario, requisitos) en Banco de Bogotá, BBVA, Davivienda, Banco Popular, Banco de Occidente, AV Villas ni Scotiabank Colpatria. La instrucción que dan, por ahora, es «contacta a tu banco por los canales habituales y pide que evalúen tu caso».",
+        "No hemos encontrado el canal exacto de solicitud (línea, formulario, requisitos) del paquete general de alivios —períodos de gracia, suspensión de cobros— en Banco de Bogotá, BBVA, Davivienda, Banco Popular, Banco de Occidente, AV Villas ni Scotiabank Colpatria, más allá de la baja de tasa hipotecaria ya confirmada en los tres primeros. La instrucción que dan, por ahora, es «contacta a tu banco por los canales habituales y pide que evalúen tu caso».",
       fuentes: [
         {
           medio: "Semana",
@@ -455,6 +489,8 @@ export const colombiaTerremoto2026: Evento = {
         NU_2026,
         BANCO_AGRARIO_2026,
         ASOBANCARIA_2026,
+        TASAS_VIVIENDA_BANCOS_2026,
+        DE_LA_ESPRIELLA_TASAS_2026,
       ],
     },
     {
@@ -463,9 +499,9 @@ export const colombiaTerremoto2026: Evento = {
       resumen:
         "El Gobierno activó medidas tributarias para los afectados por el terremoto.",
       detalle:
-        "La DIAN confirmó aplazamientos de plazos —no condonación del impuesto— para personas y agentes con domicilio fiscal en las seccionales de Cali, Palmira, Tuluá, Buenaventura, Pereira, Armenia, Manizales, Quibdó y Popayán: la declaración de renta 2025 de personas naturales se corre a la ventana del 27 de octubre al 13 de noviembre de 2026 (según los dos últimos dígitos del NIT); la retención en la fuente de julio se puede presentar y pagar con los plazos de agosto, sin sanción ni interés moratorio; y los trámites aduaneros quedan suspendidos entre el 10 de agosto y el 10 de septiembre de 2026 en esas seccionales. Excluye a los grandes contribuyentes. Conserva toda la documentación de tus pérdidas: es lo que te van a pedir para acreditar la condición de afectado.\n\nA nivel municipal, Manizales sí tiene una medida propia, aunque no es una exoneración: la Alcaldía amplió un mes el calendario tributario y suspendió temporalmente el envío de cobros persuasivos del predial y de otras obligaciones pendientes con el Municipio. Ojo al matiz: eso no frena los embargos ni las medidas cautelares que ya estuvieran en curso antes del sismo.",
+        "La DIAN confirmó aplazamientos de plazos —no condonación del impuesto— para personas y agentes con domicilio fiscal en las seccionales de Cali, Palmira, Tuluá, Buenaventura, Pereira, Armenia, Manizales, Quibdó y Popayán: la declaración de renta 2025 de personas naturales se corre a la ventana del 27 de octubre al 13 de noviembre de 2026 (según los dos últimos dígitos del NIT); la retención en la fuente de julio se puede presentar y pagar con los plazos de agosto, sin sanción ni interés moratorio; y los trámites aduaneros quedan suspendidos entre el 10 de agosto y el 10 de septiembre de 2026 en esas seccionales. Excluye a los grandes contribuyentes. Conserva toda la documentación de tus pérdidas: es lo que te van a pedir para acreditar la condición de afectado.\n\nA nivel municipal, Manizales sí tiene una medida propia, aunque no es una exoneración: la Alcaldía amplió un mes el calendario tributario y suspendió temporalmente el envío de cobros persuasivos del predial y de otras obligaciones pendientes con el Municipio. Ojo al matiz: eso no frena los embargos ni las medidas cautelares que ya estuvieran en curso antes del sismo.\n\nArmenia va por el mismo camino, pero un paso atrás: el alcalde James Padilla García radicó el 21 de agosto un proyecto en el Concejo para reducir un 90% los intereses de mora del impuesto predial unificado (vigencias 2025 y anteriores), del alumbrado público, del impuesto de teléfonos, de la sobretasa a la gasolina y de la contribución de valorización, si pagas antes del 28 de diciembre de 2026. Mientras el Concejo no lo apruebe, es un proyecto, no un alivio vigente.",
       pendiente:
-        "En Cali, Pereira, Armenia y Quibdó seguimos sin encontrar ningún decreto de alcaldía que exonere o aplace el ICA o el predial por este terremoto. Cali tiene en estudio —no aprobado todavía— un alivio tributario para negocios dentro de su plan municipal de reactivación económica. A nivel nacional sigue sin aprobarse la petición de Fedemunicipios de extender ese alivio hasta por dos períodos fiscales con compensación del Gobierno. Lo seguimos verificando.",
+        "En Cali, Pereira y Quibdó seguimos sin encontrar ningún decreto de alcaldía que exonere o aplace el ICA o el predial por este terremoto. Cali tiene en estudio —no aprobado todavía— un alivio tributario para negocios dentro de su plan municipal de reactivación económica, y Armenia tiene un proyecto radicado en el Concejo (ver arriba) que tampoco está aprobado todavía. A nivel nacional sigue sin aprobarse la petición de Fedemunicipios de extender ese alivio hasta por dos períodos fiscales con compensación del Gobierno. Lo seguimos verificando.",
       fuentes: [
         {
           medio: "El Colombiano",
@@ -477,6 +513,7 @@ export const colombiaTerremoto2026: Evento = {
         DIAN_2026,
         FEDEMUNICIPIOS_2026,
         MANIZALES_TRIBUTARIO_2026,
+        ARMENIA_TRIBUTARIO_2026,
       ],
     },
     {
