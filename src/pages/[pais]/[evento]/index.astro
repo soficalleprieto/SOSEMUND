@@ -1,6 +1,7 @@
 ---
 import Base from "../../../layouts/Base.astro";
 import CompartirWhatsApp from "../../../components/CompartirWhatsApp.astro";
+import Fuentes from "../../../components/Fuentes.astro";
 import Imagen from "../../../components/Imagen.astro";
 import { todosLosEventos } from "../../../data/paises";
 import { IMG_MAPA } from "../../../data/imagenes";
@@ -69,6 +70,27 @@ const n = (x: number) => x.toLocaleString("es-CO");
       Centros de acopio, búsqueda de personas y ayuda urgente, en un solo sitio →
     </span>
   </a>
+
+  {/* Alivios bancarios, tributarios, crédito y beneficios privados: son
+      generales, no de una ciudad en particular, así que van aquí en el hub
+      del evento. Cada página de localidad los repite igual, por si alguien
+      entra directo a la suya sin pasar por aquí. */}
+  <h2>Qué puedes pedir</h2>
+  {
+    evento.ayudas.map((a) => (
+      <section class="caja">
+        <h3>{a.titulo}</h3>
+        <p><strong>{a.resumen}</strong></p>
+        {a.detalle.split("\n\n").map((parrafo) => <p>{parrafo}</p>)}
+        {a.pendiente && (
+          <p class="caja-pendiente">
+            <strong>En verificación.</strong> {a.pendiente}
+          </p>
+        )}
+        <Fuentes fuentes={a.fuentes} />
+      </section>
+    ))
+  }
 
   <h2>Qué pasó</h2>
   <p>{evento.resumen}</p>

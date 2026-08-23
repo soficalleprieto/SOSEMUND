@@ -11,18 +11,14 @@ const TELEGRAM_API = "https://api.telegram.org";
 const GITHUB_API = "https://api.github.com";
 const SITIO = "https://sosemund.org";
 
-/**
- * A qué página pública corresponde cada archivo de datos. Los cambios del
- * cron caen casi siempre en estos dos archivos; si el PR toca otra cosa
- * (negocios, cuentas), también se cubre. Cali es la localidad de referencia
- * para enlazar cambios de ayudas: `evento.ayudas` sale igual en las 11
- * localidades, no hay una sola página "hub" que las liste todas.
- */
+/** El único archivo con datos de las 11 localidades y de las ayudas generales. */
+const ARCHIVO_PRINCIPAL = "src/data/eventos/colombia-terremoto-2026.ts";
+
+/** A qué página pública corresponde cada uno de los otros archivos de datos. */
 const PAGINA_POR_ARCHIVO: { prefijo: string; ruta: string }[] = [
   { prefijo: "src/data/eventos/colombia-terremoto-2026-iniciativas.ts", ruta: "/colombia/terremoto-2026/iniciativas" },
   { prefijo: "src/data/eventos/colombia-terremoto-2026-negocios.ts", ruta: "/colombia/terremoto-2026/negocios" },
   { prefijo: "src/data/eventos/colombia-terremoto-2026-cuentas.ts", ruta: "/colombia/terremoto-2026/cuentas" },
-  { prefijo: "src/data/eventos/colombia-terremoto-2026.ts", ruta: "/colombia/terremoto-2026/cali" },
 ];
 
 async function archivosDelPR(githubToken: string, repo: string, numero: string) {
@@ -30,17 +26,85 @@ async function archivosDelPR(githubToken: string, repo: string, numero: string) 
     headers: cabecerasGitHub(githubToken),
   });
   if (!resp.ok) return [];
-  const archivos = (await resp.json()) as { filename: string }[];
-  return archivos.map((a) => a.filename);
+  return (await resp.json()) as { filename: string; patch?: string }[];
 }
 
-function enlacesPublicados(archivos: string[]): string[] {
-  const rutas = new Set<string>();
-  for (const archivo of archivos) {
-    const match = PAGINA_POR_ARCHIVO.find((p) => archivo === p.prefijo);
-    if (match) rutas.add(match.ruta);
+/** Línea de inicio (en el archivo ya modificado) de cada bloque `@@` de un diff. */
+function lineasNuevasDelPatch(patch: string): number[] {
+  return [...patch.matchAll(/^@@ -\d+(?:,\d+)? \+(\d+)(?:,\d+)? @@/gm)].map((m) => Number(m[1]));
+}
+
+async function contenidoArchivo(githubToken: string, repo: string, ruta: string, ref: string) {
+  const resp = await fetch(`${GITHUB_API}/repos/${repo}/contents/${encodeURIComponent(ruta)}?ref=${ref}`, {
+    headers: { ...cabecerasGitHub(githubToken), Accept: "application/vnd.github.raw" },
+  });
+  if (!resp.ok) return null;
+  return resp.text();
+}
+
+/**
+ * `colombia-terremoto-2026.ts` mezcla dos cosas muy distintas: `localidades`
+ * (11 ciudades, cada una con su propia página) y `ayudas` (bancarios,
+ * tributarios…, un solo texto que sale igual en las 11 páginas de ciudad).
+ * Enlazar siempre a la misma ciudad (p. ej. Cali) es engañoso cuando el
+ * cambio real fue el censo de otra ciudad — o cuando el cambio es general y
+ * no pertenece a ninguna ciudad en particular. Esto ubica cada línea tocada
+ * comparando su número contra dónde empieza cada sección del archivo, y si
+ * cae dentro de `localidades`, busca el `slug` de esa ciudad hacia atrás.
+ */
+function ubicarCambios(contenido: string, lineasNuevas: number[]) {
+  const lineas = contenido.split("\n");
+  const idxLocalidades = lineas.findIndex((l) => /^\s*localidades:\s*\[/.test(l));
+  const idxAyudas = lineas.findIndex((l) => /^\s*ayudas:\s*\[/.test(l));
+
+  const localidades = new Set<string>();
+  let ayudasGenerales = false;
+
+  for (const lineaUno of lineasNuevas) {
+    const i = lineaUno - 1;
+    if (idxLocalidades >= 0 && i > idxLocalidades && (idxAyudas < 0 || i < idxAyudas)) {
+      for (let j = i; j > idxLocalidades; j--) {
+        const m = lineas[j].match(/^\s*slug:\s*"([^"]+)"/);
+        if (m) {
+          localidades.add(m[1]);
+          break;
+        }
+      }
+    } else if (idxAyudas >= 0 && i > idxAyudas) {
+      ayudasGenerales = true;
+    }
   }
-  return [...rutas].map((ruta) => `${SITIO}${ruta}`);
+
+  return { localidades: [...localidades], ayudasGenerales };
+}
+
+/** Arma el bloque "verlo publicado" a partir de los archivos que tocó el PR. */
+async function resumenPublicacion(
+  githubToken: string,
+  repo: string,
+  numero: string,
+  mergeSha: string,
+) {
+  const archivos = await archivosDelPR(githubToken, repo, numero);
+  const lineas: string[] = [];
+
+  for (const p of PAGINA_POR_ARCHIVO) {
+    if (archivos.some((a) => a.filename === p.prefijo)) lineas.push(`${SITIO}${p.ruta}`);
+  }
+
+  const principal = archivos.find((a) => a.filename === ARCHIVO_PRINCIPAL && a.patch);
+  if (principal?.patch) {
+    const contenido = await contenidoArchivo(githubToken, repo, ARCHIVO_PRINCIPAL, mergeSha);
+    if (contenido) {
+      const { localidades, ayudasGenerales } = ubicarCambios(contenido, lineasNuevasDelPatch(principal.patch));
+      for (const slug of localidades) lineas.push(`${SITIO}/colombia/terremoto-2026/${slug}`);
+      if (ayudasGenerales) {
+        lineas.push(`${SITIO}/colombia/terremoto-2026`);
+      }
+    }
+  }
+
+  return [...new Set(lineas)];
 }
 
 async function enviarMensaje(token: string, chatId: number, texto: string) {
@@ -108,7 +172,7 @@ async function resolverPR(
   repo: string,
   numero: string,
   accion: "merge" | "close",
-) {
+): Promise<{ ok: boolean; mergeSha?: string; detalle?: string }> {
   if (accion === "merge") {
     const pr = await fetch(`${GITHUB_API}/repos/${repo}/pulls/${numero}`, {
       headers: cabecerasGitHub(githubToken),
@@ -118,17 +182,23 @@ async function resolverPR(
       await marcarListoParaRevisar(githubToken, pr.node_id);
     }
 
-    return fetch(`${GITHUB_API}/repos/${repo}/pulls/${numero}/merge`, {
+    const resp = await fetch(`${GITHUB_API}/repos/${repo}/pulls/${numero}/merge`, {
       method: "PUT",
       headers: cabecerasGitHub(githubToken),
       body: JSON.stringify({ merge_method: "squash" }),
     });
+    if (!resp.ok) return { ok: false, detalle: await resp.text() };
+    const resultado = (await resp.json()) as { sha: string };
+    return { ok: true, mergeSha: resultado.sha };
   }
-  return fetch(`${GITHUB_API}/repos/${repo}/pulls/${numero}`, {
+
+  const resp = await fetch(`${GITHUB_API}/repos/${repo}/pulls/${numero}`, {
     method: "PATCH",
     headers: cabecerasGitHub(githubToken),
     body: JSON.stringify({ state: "closed" }),
   });
+  if (!resp.ok) return { ok: false, detalle: await resp.text() };
+  return { ok: true };
 }
 
 export const POST: APIRoute = async ({ request }) => {
@@ -176,17 +246,16 @@ export const POST: APIRoute = async ({ request }) => {
     ];
 
     if (accion === "merge" || accion === "close") {
-      const resp = await resolverPR(githubToken, repo, numero, accion);
+      const resultado = await resolverPR(githubToken, repo, numero, accion);
       const textoOriginal = callback.message.text as string;
 
-      if (resp.ok) {
+      if (resultado.ok) {
         const etiqueta = accion === "merge" ? "✅ Fusionado" : "❌ Descartado";
         await responderCallback(token, callback.id, etiqueta);
 
         let extra = "";
-        if (accion === "merge") {
-          const archivos = await archivosDelPR(githubToken, repo, numero);
-          const enlaces = enlacesPublicados(archivos);
+        if (accion === "merge" && resultado.mergeSha) {
+          const enlaces = await resumenPublicacion(githubToken, repo, numero, resultado.mergeSha);
           if (enlaces.length > 0) {
             extra =
               `\n\nVerlo publicado (puede tardar 1-2 min en desplegarse):\n` +
@@ -201,12 +270,11 @@ export const POST: APIRoute = async ({ request }) => {
           `${textoOriginal}\n\n${etiqueta}.${extra}`,
         );
       } else {
-        const detalle = await resp.text();
         await responderCallback(token, callback.id, "No se pudo. Revísalo en GitHub.");
         await enviarMensaje(
           token,
           chatId,
-          `No pude ${accion === "merge" ? "fusionar" : "cerrar"} el PR #${numero}: ${detalle.slice(0, 300)}`,
+          `No pude ${accion === "merge" ? "fusionar" : "cerrar"} el PR #${numero}: ${(resultado.detalle ?? "").slice(0, 300)}`,
         );
       }
     }

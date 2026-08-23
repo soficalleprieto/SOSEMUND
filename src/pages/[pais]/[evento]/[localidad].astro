@@ -81,22 +81,26 @@ const foto = IMAGEN_POR_LOCALIDAD[c.slug];
     {c.censo.fuente && <Fuentes fuentes={[c.censo.fuente]} />}
   </section>
 
+  {/* Solo el resumen: son ayudas generales, iguales en las 11 localidades.
+      El detalle completo, con fuentes, vive en el hub del evento para no
+      repetir el mismo texto largo 11 veces. */}
   <h2>Qué puedes pedir</h2>
+  <p class="meta">
+    Esto no es solo de {c.nombre}: aplica igual en todas las localidades.
+  </p>
   {
     evento.ayudas.map((a) => (
       <section class="caja">
         <h3>{a.titulo}</h3>
-        <p><strong>{a.resumen}</strong></p>
-        {a.detalle.split("\n\n").map((parrafo) => <p>{parrafo}</p>)}
-        {a.pendiente && (
-          <p class="caja-pendiente">
-            <strong>En verificación.</strong> {a.pendiente}
-          </p>
-        )}
-        <Fuentes fuentes={a.fuentes} />
+        <p>{a.resumen}</p>
       </section>
     ))
   }
+  <p>
+    <a href={base}>
+      <strong>Ver el detalle completo de cada ayuda, con fuentes →</strong>
+    </a>
+  </p>
 
   <h2>Otras localidades</h2>
   <ul class="enlaces-localidades">
