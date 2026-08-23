@@ -25,11 +25,29 @@ function firmaValida(cuerpoBruto: string, firmaCabecera: string | null, secreto:
   return a.length === b.length && crypto.timingSafeEqual(a, b);
 }
 
-async function avisarTelegram(token: string, chatId: string, texto: string) {
+async function avisarTelegram(
+  token: string,
+  chatId: string,
+  texto: string,
+  botones?: { texto: string; datos?: string; url?: string }[][],
+) {
   await fetch(`${TELEGRAM_API}/bot${token}/sendMessage`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ chat_id: Number(chatId), text: texto }),
+    body: JSON.stringify({
+      chat_id: Number(chatId),
+      text: texto,
+      ...(botones && {
+        reply_markup: {
+          inline_keyboard: botones.map((fila) =>
+            fila.map((b) => ({
+              text: b.texto,
+              ...(b.datos ? { callback_data: b.datos } : { url: b.url }),
+            })),
+          ),
+        },
+      }),
+    }),
   });
 }
 
@@ -65,10 +83,17 @@ export const POST: APIRoute = async ({ request }) => {
     const payload = JSON.parse(cuerpoBruto);
     if (payload.action === "opened" || payload.action === "reopened") {
       const pr = payload.pull_request;
+      const repo = payload.repository.full_name; // "owner/repo"
       const texto =
         `📋 PR nuevo en S.O.S.EMUND\n\n${pr.title}\n\n${pr.html_url}\n\n` +
         `Revísalo antes de fusionarlo: nada se publica solo.`;
-      await avisarTelegram(token, chatId, texto);
+      await avisarTelegram(token, chatId, texto, [
+        [
+          { texto: "✅ Fusionar", datos: `merge:${repo}:${pr.number}` },
+          { texto: "❌ Descartar", datos: `close:${repo}:${pr.number}` },
+        ],
+        [{ texto: "Ver PR en GitHub →", url: pr.html_url }],
+      ]);
     }
   }
 
