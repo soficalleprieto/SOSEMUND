@@ -44,14 +44,16 @@ const n = (x: number) => x.toLocaleString("es-CO");
   <h2>Busca por tu localidad</h2>
   <ul class="localidades">
     {
-      evento.localidades.map((c) => (
-        <li>
-          <a href={`${base}/${c.slug}`}>
-            {c.nombre}
-            <span class="depto">{c.division}</span>
-          </a>
-        </li>
-      ))
+      [...evento.localidades]
+        .sort((a, b) => a.nombre.localeCompare(b.nombre, "es"))
+        .map((c) => (
+          <li>
+            <a href={`${base}/${c.slug}`}>
+              {c.nombre}
+              <span class="depto">{c.division}</span>
+            </a>
+          </li>
+        ))
     }
   </ul>
 

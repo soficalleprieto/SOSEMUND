@@ -22,7 +22,9 @@ interface Props {
 }
 const { pais, evento, localidad: c } = Astro.props;
 const base = `/${pais.slug}/${evento.slug}`;
-const otras = evento.localidades.filter((o) => o.slug !== c.slug);
+const otras = evento.localidades
+  .filter((o) => o.slug !== c.slug)
+  .sort((a, b) => a.nombre.localeCompare(b.nombre, "es"));
 // Solo si existe una foto libre DE ESTA localidad. Nunca una genérica.
 const foto = IMAGEN_POR_LOCALIDAD[c.slug];
 ---
