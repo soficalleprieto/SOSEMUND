@@ -278,17 +278,9 @@ export const colombiaTerremoto2026: Evento = {
       },
     ],
   },
-  alertas: [
-    {
-      titulo:
-        "Cuidado con las estafas: no existe un enlace para censarte como damnificado en Cali",
-      cuerpo:
-        "El alcalde de Cali, Alejandro Eder, anunció que el censo a las familias afectadas se hace en persona, casa por casa y en formatos físicos, con personal debidamente identificado de la Alcaldía y en jornadas anunciadas previamente. No hay códigos QR, ni líneas telefónicas, ni plataformas digitales para ese censo. Si te llega un enlace, un QR o una llamada pidiéndote datos para «registrarte como damnificado», desconfía.",
-      matiz:
-        "Ojo al matiz: eso aplica al censo de familias. Para los negocios, la Cámara de Comercio de Cali sí habilitó una herramienta digital y unas líneas telefónicas, que verás más abajo.",
-      fuentes: [CENSO_CALI, CCC],
-    },
-  ],
+  // Sin alertas de estafa activas: la única que hubo era sobre el censo de
+  // FAMILIAS en Cali, fuera del alcance de este sitio (que es de negocios).
+  alertas: [],
   puntosRegistro: {
     detalle:
       "Hay Puestos de Mando Unificado (PMU) regionales en Quibdó, Cali, Armenia y Bogotá, y módulos de registro habilitados en alcaldías y coliseos municipales, incluyendo Buenaventura, Pereira y Manizales.",

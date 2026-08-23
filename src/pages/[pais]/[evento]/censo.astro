@@ -4,6 +4,7 @@ import CompartirWhatsApp from "../../../components/CompartirWhatsApp.astro";
 import Fuentes from "../../../components/Fuentes.astro";
 import { todosLosEventos } from "../../../data/paises";
 import type { Evento, Pais } from "../../../data/tipos";
+import { enlaceWhatsApp } from "../../../data/contacto";
 
 export function getStaticPaths() {
   return todosLosEventos().map(({ pais, evento }) => ({
@@ -112,7 +113,17 @@ const { registro } = evento;
           Las ayudas generales (bancarias, tributarias, crédito) aplican a
           todos igual; lo que no tenemos verificado es el canal de censo
           propio de los que faltan. Si eres de uno de esos municipios y sabes
-          cuál es, escríbenos y lo publicamos citando la fuente.
+          cuál es,{" "}
+          <a
+            href={enlaceWhatsApp(
+              `Hola. Mi municipio no está en el listado de S.O.S.EMUND para ${evento.nombreCorto}, pero tengo información sobre cómo censar negocios afectados ahí. Esto es lo que sé:`,
+            )}
+            target="_blank"
+            rel="noopener"
+          >
+            escríbenos
+          </a>{" "}
+          y lo publicamos citando la fuente.
         </p>
       )
   }
