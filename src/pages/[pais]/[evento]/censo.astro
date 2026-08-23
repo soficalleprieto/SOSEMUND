@@ -54,8 +54,22 @@ const { registro } = evento;
     ))
   }
 
+  <h2>Consejo: documenta todo hoy</h2>
+  <p>
+    Antes de limpiar, reparar o mover nada, toma fotos y videos de cómo quedó el
+    local, el inventario y los equipos, con fecha visible si puedes. Guarda
+    facturas de compra, contratos de arriendo y extractos. Ese material es lo
+    que después sostiene tanto el censo como cualquier reclamación al seguro. Lo
+    que no documentes ahora, no lo vas a poder demostrar en dos meses.
+  </p>
+
   <h2>Paso a paso: el {registro.nombre} ({registro.siglas})</h2>
-  <p>Es el mecanismo nacional. Estos son los pasos según la guía publicada:</p>
+  <p>
+    Es el mecanismo nacional. Estos son los pasos según{" "}
+    <a href={registro.fuentes[0].url} target="_blank" rel="noopener">
+      la guía publicada
+    </a>:
+  </p>
   <ol class="pasos">
     {
       registro.pasos.map((paso, i) => (
@@ -74,12 +88,34 @@ const { registro } = evento;
     evento.puntosRegistro && (
       <div class="caja caja-gris">
         <p><strong>Dónde están los puntos de registro</strong></p>
-        <p>{evento.puntosRegistro}</p>
+        <p>{evento.puntosRegistro.detalle}</p>
+        <Fuentes fuentes={[evento.puntosRegistro.fuente]} />
       </div>
     )
   }
 
   <h2>Cómo censar tu negocio, localidad por localidad</h2>
+  <p>
+    El {registro.siglas} de arriba es la guía general del mecanismo nacional.
+    Aparte de eso, cada localidad se está organizando por su cuenta para
+    censar negocios: quién lo hace y por qué canal (teléfono, WhatsApp,
+    formulario) cambia de una ciudad a otra. Esto es lo que hemos verificado,
+    localidad por localidad:
+  </p>
+  {
+    evento.impacto.municipiosAfectados &&
+      evento.localidades.length < evento.impacto.municipiosAfectados && (
+        <p class="caja-pendiente">
+          <strong>
+            Solo cubrimos {evento.localidades.length} de los {evento.impacto.municipiosAfectados} municipios afectados.
+          </strong>{" "}
+          Las ayudas generales (bancarias, tributarias, crédito) aplican a
+          todos igual; lo que no tenemos verificado es el canal de censo
+          propio de los que faltan. Si eres de uno de esos municipios y sabes
+          cuál es, escríbenos y lo publicamos citando la fuente.
+        </p>
+      )
+  }
   {
     evento.localidades.map((c) => (
       <section class="caja">
@@ -118,15 +154,6 @@ const { registro } = evento;
       </section>
     ))
   }
-
-  <h2>Consejo: documenta todo hoy</h2>
-  <p>
-    Antes de limpiar, reparar o mover nada, toma fotos y videos de cómo quedó el
-    local, el inventario y los equipos, con fecha visible si puedes. Guarda
-    facturas de compra, contratos de arriendo y extractos. Ese material es lo
-    que después sostiene tanto el censo como cualquier reclamación al seguro. Lo
-    que no documentes ahora, no lo vas a poder demostrar en dos meses.
-  </p>
 
   <Fuentes
     fuentes={[...registro.fuentes, ...evento.alertas.flatMap((a) => a.fuentes)]}

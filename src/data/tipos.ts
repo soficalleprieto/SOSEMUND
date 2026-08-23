@@ -256,11 +256,13 @@ export type Evento = {
     microempresas: number;
     empleos: number;
     ambito: string;
+    /** Cuántos municipios/localidades afectó, si se sabe. Para comparar contra `localidades.length` y avisar de la cobertura que falta. */
+    municipiosAfectados?: number;
     fuente: Fuente;
   };
   registro: { nombre: string; siglas: string; pasos: Paso[]; fuentes: Fuente[] };
   alertas: { titulo: string; cuerpo: string; matiz?: string; fuentes: Fuente[] }[];
-  puntosRegistro?: string;
+  puntosRegistro?: { detalle: string; fuente: Fuente };
   localidades: Localidad[];
   ayudas: Ayuda[];
   /** Otras iniciativas ciudadanas a las que derivamos. */

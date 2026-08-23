@@ -56,6 +56,17 @@ const n = (x: number) => x.toLocaleString("es-CO");
         ))
     }
   </ul>
+  {
+    evento.impacto.municipiosAfectados &&
+      evento.localidades.length < evento.impacto.municipiosAfectados && (
+        <p class="meta">
+          Cubrimos {evento.localidades.length} de los{" "}
+          {evento.impacto.municipiosAfectados} municipios afectados — los que
+          tienen canal de censo verificado.{" "}
+          <a href={`${base}/censo`}>¿No está el tuyo?</a>
+        </p>
+      )
+  }
 
   <div class="dos-cta">
     <a class="cta" href={`${base}/censo`}>

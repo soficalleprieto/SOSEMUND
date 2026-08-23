@@ -238,6 +238,7 @@ export const colombiaTerremoto2026: Evento = {
     empleos: 1396020,
     ambito:
       "127 municipios de Chocó, Quindío, Valle del Cauca, Risaralda y Caldas",
+    municipiosAfectados: 127,
     fuente: {
       medio: "La FM",
       titulo: "Terremoto afectaría a 269.786 empresas: Cámara de Comercio",
@@ -288,8 +289,11 @@ export const colombiaTerremoto2026: Evento = {
       fuentes: [CENSO_CALI, CCC],
     },
   ],
-  puntosRegistro:
-    "Hay Puestos de Mando Unificado (PMU) regionales en Quibdó, Cali, Armenia y Bogotá, y módulos de registro habilitados en alcaldías y coliseos municipales, incluyendo Buenaventura, Pereira y Manizales.",
+  puntosRegistro: {
+    detalle:
+      "Hay Puestos de Mando Unificado (PMU) regionales en Quibdó, Cali, Armenia y Bogotá, y módulos de registro habilitados en alcaldías y coliseos municipales, incluyendo Buenaventura, Pereira y Manizales.",
+    fuente: GUIA_GOB,
+  },
   localidades: [
     {
       slug: "cali",
