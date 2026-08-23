@@ -859,6 +859,39 @@ button.cta {
   color: var(--texto-suave);
 }
 
+/* --- Cabecera de /sobre: foto junto al título, no apilada arriba --- */
+
+.sobre-cabecera {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+@media (min-width: 34rem) {
+  .sobre-cabecera {
+    grid-template-columns: 11rem 1fr;
+  }
+}
+.sobre-cabecera h1 {
+  margin-top: 0;
+}
+.sobre-cabecera .retrato {
+  margin: 0;
+  max-width: 11rem;
+}
+.sobre-cabecera .retrato img {
+  display: block;
+  width: 100%;
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+}
+.sobre-cabecera .retrato figcaption {
+  font-size: 0.82rem;
+  color: var(--texto-suave);
+  margin-top: 0.5rem;
+}
+
 /* --- Pilares --- */
 
 .pilares {

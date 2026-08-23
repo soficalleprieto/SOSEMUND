@@ -19,12 +19,20 @@ import retrato from "../assets/sofia-calle.jpg";
 >
   <nav class="migas"><a href="/">Inicio</a> › Sobre</nav>
 
-  <h1>Sobre mí</h1>
-
-  <figure class="retrato">
-    <Image src={retrato} alt="Sofía Calle" width={280} densities={[1, 2]} loading="eager" />
-    <figcaption>Sofía Calle, fundadora de S.O.S.EMUND</figcaption>
-  </figure>
+  <div class="sobre-cabecera">
+    <figure class="retrato">
+      <Image src={retrato} alt="Sofía Calle" width={320} densities={[1, 2]} loading="eager" />
+      <figcaption>Sofía Calle, fundadora de S.O.S.EMUND</figcaption>
+    </figure>
+    <div>
+      <h1>Sobre mí</h1>
+      <p class="entradilla">
+        Llevo más de 15 años trabajando con pequeños negocios. La pandemia y
+        la DANA de Valencia me enseñaron que, cuando llega una catástrofe,
+        encontrar ayuda no debería ser otro trabajo a tiempo completo.
+      </p>
+    </div>
+  </div>
 
   <h2>Llevo más de 15 años viendo de cerca lo que cuesta sacar adelante un negocio</h2>
 
