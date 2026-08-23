@@ -60,6 +60,15 @@ export const iniciativasColombia2026: Iniciativa[] = [
     nota: "No reemplaza a la Policía, la Fiscalía, Medicina Legal ni a los equipos de rescate; lo dice la propia plataforma.",
   },
   {
+    nombre: "Desaparecidos.co",
+    url: "https://desaparecidos.co",
+    categoria: "desaparecidos",
+    que: "Subes foto, datos y última ubicación conocida de la persona que buscas. Creada por el joven bogotano Santiago Clavijo en los primeros días tras el sismo.",
+    para: "Familias y allegados",
+    alcance: "Más de 4.800 reportes de personas por localizar, según cobertura de France 24 del 14 de agosto de 2026",
+    nota: "Cubre el mismo problema que Colombia Te Busca pero es una plataforma distinta, sin que hayamos confirmado que compartan datos entre ellas: cuantos más registros separados circulen, más difícil es para una familia saber en cuál buscar.",
+  },
+  {
     nombre: "Encontrados.co",
     url: "https://encontrados.co",
     categoria: "desaparecidos",
@@ -104,6 +113,14 @@ export const iniciativasColombia2026: Iniciativa[] = [
     que: "Red de búsqueda de mascotas perdidas, asociada a un servicio de placas QR de identificación.",
     para: "Dueños de mascotas",
     nota: "Es una empresa privada, no una iniciativa de emergencia, y su portada no menciona el terremoto.",
+  },
+  {
+    nombre: "Cuidar a Colombia",
+    url: "https://cuidarcolombia.vercel.app",
+    categoria: "acopio",
+    que: "Agrega y verifica información oficial dispersa sobre la emergencia: canales de donación, puntos de acopio, bancos de sangre, búsqueda de personas y mapa de zonas afectadas. Cada tarjeta cita la fuente y la fecha que la respalda.",
+    para: "Donantes y cualquiera que necesite orientarse en la emergencia",
+    nota: "Corre en un subdominio gratuito de Vercel, sin que hayamos podido confirmar quién está detrás. El criterio de citar fuente y fecha en cada dato es el mismo que seguimos nosotros.",
   },
 ];
 
