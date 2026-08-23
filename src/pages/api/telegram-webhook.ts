@@ -9,6 +9,39 @@ import type { APIRoute } from "astro";
 
 const TELEGRAM_API = "https://api.telegram.org";
 const GITHUB_API = "https://api.github.com";
+const SITIO = "https://sosemund.org";
+
+/**
+ * A qué página pública corresponde cada archivo de datos. Los cambios del
+ * cron caen casi siempre en estos dos archivos; si el PR toca otra cosa
+ * (negocios, cuentas), también se cubre. Cali es la localidad de referencia
+ * para enlazar cambios de ayudas: `evento.ayudas` sale igual en las 11
+ * localidades, no hay una sola página "hub" que las liste todas.
+ */
+const PAGINA_POR_ARCHIVO: { prefijo: string; ruta: string }[] = [
+  { prefijo: "src/data/eventos/colombia-terremoto-2026-iniciativas.ts", ruta: "/colombia/terremoto-2026/iniciativas" },
+  { prefijo: "src/data/eventos/colombia-terremoto-2026-negocios.ts", ruta: "/colombia/terremoto-2026/negocios" },
+  { prefijo: "src/data/eventos/colombia-terremoto-2026-cuentas.ts", ruta: "/colombia/terremoto-2026/cuentas" },
+  { prefijo: "src/data/eventos/colombia-terremoto-2026.ts", ruta: "/colombia/terremoto-2026/cali" },
+];
+
+async function archivosDelPR(githubToken: string, repo: string, numero: string) {
+  const resp = await fetch(`${GITHUB_API}/repos/${repo}/pulls/${numero}/files?per_page=100`, {
+    headers: cabecerasGitHub(githubToken),
+  });
+  if (!resp.ok) return [];
+  const archivos = (await resp.json()) as { filename: string }[];
+  return archivos.map((a) => a.filename);
+}
+
+function enlacesPublicados(archivos: string[]): string[] {
+  const rutas = new Set<string>();
+  for (const archivo of archivos) {
+    const match = PAGINA_POR_ARCHIVO.find((p) => archivo === p.prefijo);
+    if (match) rutas.add(match.ruta);
+  }
+  return [...rutas].map((ruta) => `${SITIO}${ruta}`);
+}
 
 async function enviarMensaje(token: string, chatId: number, texto: string) {
   await fetch(`${TELEGRAM_API}/bot${token}/sendMessage`, {
@@ -149,7 +182,24 @@ export const POST: APIRoute = async ({ request }) => {
       if (resp.ok) {
         const etiqueta = accion === "merge" ? "✅ Fusionado" : "❌ Descartado";
         await responderCallback(token, callback.id, etiqueta);
-        await editarMensaje(token, chatId, callback.message.message_id, `${textoOriginal}\n\n${etiqueta}.`);
+
+        let extra = "";
+        if (accion === "merge") {
+          const archivos = await archivosDelPR(githubToken, repo, numero);
+          const enlaces = enlacesPublicados(archivos);
+          if (enlaces.length > 0) {
+            extra =
+              `\n\nVerlo publicado (puede tardar 1-2 min en desplegarse):\n` +
+              enlaces.map((e) => `→ ${e}`).join("\n");
+          }
+        }
+
+        await editarMensaje(
+          token,
+          chatId,
+          callback.message.message_id,
+          `${textoOriginal}\n\n${etiqueta}.${extra}`,
+        );
       } else {
         const detalle = await resp.text();
         await responderCallback(token, callback.id, "No se pudo. Revísalo en GitHub.");
