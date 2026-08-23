@@ -48,120 +48,130 @@ const base = `/${pais.slug}/${evento.slug}`;
     <p>{POR_QUE_ESPANA}</p>
   </div>
 
-  <h2>Qué mandarnos</h2>
-  <ol class="pasos">
-    {
-      QUE_MANDAR.map((paso, i) => (
-        <li>
-          <span class="numero">{i + 1}</span>
-          <div>
-            <p class="paso-titulo">{paso.titulo}</p>
-            <p>{paso.texto}</p>
+  <div class="dos-columnas-negocio">
+    <div class="col-pasos">
+      <h2>Qué mandarnos</h2>
+      <ol class="pasos">
+        {
+          QUE_MANDAR.map((paso, i) => (
+            <li>
+              <span class="numero">{i + 1}</span>
+              <div>
+                <p class="paso-titulo">{paso.titulo}</p>
+                <p>{paso.texto}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+
+    <div class="col-formulario">
+      <div class="formulario-destacado">
+        <form id="form-negocio" class="form-negocio">
+          <div class="campo">
+            <label for="f-nombre">Cómo se llama tu negocio</label>
+            <input type="text" id="f-nombre" required />
           </div>
-        </li>
-      ))
-    }
-  </ol>
 
-  <form id="form-negocio" class="form-negocio">
-    <div class="campo">
-      <label for="f-nombre">Cómo se llama tu negocio</label>
-      <input type="text" id="f-nombre" required />
-    </div>
+          <div class="campo">
+            <label for="f-localidad">Localidad</label>
+            <select id="f-localidad" required>
+              <option value="">Elige tu localidad</option>
+              {evento.localidades.map((l) => <option value={l.nombre}>{l.nombre}</option>)}
+              <option value="otra">No está en la lista</option>
+            </select>
+            <input
+              type="text"
+              id="f-localidad-otra"
+              placeholder="¿Cuál es tu localidad?"
+              hidden
+            />
+          </div>
 
-    <div class="campo">
-      <label for="f-localidad">Localidad</label>
-      <select id="f-localidad" required>
-        <option value="">Elige tu localidad</option>
-        {evento.localidades.map((l) => <option value={l.nombre}>{l.nombre}</option>)}
-        <option value="otra">No está en la lista</option>
-      </select>
-      <input
-        type="text"
-        id="f-localidad-otra"
-        placeholder="¿Cuál es tu localidad?"
-        hidden
-      />
-    </div>
+          <div class="campo">
+            <label for="f-tipo">Tipo de negocio</label>
+            <select id="f-tipo" required>
+              <option value="">Elige el que más se parezca</option>
+              {TIPOS_NEGOCIO_BASE.map((t) => <option value={t}>{t}</option>)}
+              <option value="otro">No encaja en ninguno</option>
+            </select>
+            <input type="text" id="f-tipo-otro" placeholder="¿A qué se dedica?" hidden />
+          </div>
 
-    <div class="campo">
-      <label for="f-tipo">Tipo de negocio</label>
-      <select id="f-tipo" required>
-        <option value="">Elige el que más se parezca</option>
-        {TIPOS_NEGOCIO_BASE.map((t) => <option value={t}>{t}</option>)}
-        <option value="otro">No encaja en ninguno</option>
-      </select>
-      <input type="text" id="f-tipo-otro" placeholder="¿A qué se dedica?" hidden />
-    </div>
+          <div class="campo">
+            <label for="f-quedo">Cómo quedó</label>
+            <p class="campo-ayuda">
+              El local, la mercancía y los equipos. Si eras un puesto callejero
+              o algo que ya no existe para fotografiar, cuéntalo aquí.
+            </p>
+            <textarea id="f-quedo" rows="4" required></textarea>
+          </div>
 
-    <div class="campo">
-      <label for="f-quedo">Cómo quedó</label>
-      <p class="campo-ayuda">
-        El local, la mercancía y los equipos. Si eras un puesto callejero o algo
-        que ya no existe para fotografiar, cuéntalo aquí.
-      </p>
-      <textarea id="f-quedo" rows="4" required></textarea>
-    </div>
+          <div class="campo caja caja-pendiente">
+            <p>
+              <strong>No olvides tus fotos.</strong> Cuando mandes el mensaje,
+              adjunta en el mismo chat una foto de antes (aunque sea del
+              celular, de una publicación vieja o de Google Maps) y una de
+              ahora: se ve mucho mejor el contraste. Un formulario no puede
+              adjuntarlas por ti.
+            </p>
+          </div>
 
-    <div class="campo caja caja-pendiente">
-      <p>
-        <strong>No olvides tus fotos.</strong> Cuando mandes el mensaje, adjunta
-        en el mismo chat una foto de antes (aunque sea del celular, de una
-        publicación vieja o de Google Maps) y una de ahora: se ve mucho mejor
-        el contraste. Un formulario no puede adjuntarlas por ti.
-      </p>
-    </div>
+          <div class="campo">
+            <label for="f-necesita">Qué necesitas exactamente</label>
+            <p class="campo-ayuda">
+              Concreto: «una vitrina refrigerada», «clientes para pedidos a
+              domicilio». «Ayuda» a secas no le sirve a nadie para ayudarte.
+            </p>
+            <textarea id="f-necesita" rows="3" required></textarea>
+          </div>
 
-    <div class="campo">
-      <label for="f-necesita">Qué necesitas exactamente</label>
-      <p class="campo-ayuda">
-        Concreto: «una vitrina refrigerada», «clientes para pedidos a
-        domicilio». «Ayuda» a secas no le sirve a nadie para ayudarte.
-      </p>
-      <textarea id="f-necesita" rows="3" required></textarea>
-    </div>
+          <div class="campo">
+            <label for="f-donde">Dónde te encuentran hoy</label>
+            <p class="campo-ayuda">
+              Si sigues vendiendo en otro sitio, a domicilio o por encargo. No
+              hace falta si tu local sigue en pie.
+            </p>
+            <textarea id="f-donde" rows="2"></textarea>
+          </div>
 
-    <div class="campo">
-      <label for="f-donde">Dónde te encuentran hoy</label>
-      <p class="campo-ayuda">
-        Si sigues vendiendo en otro sitio, a domicilio o por encargo. No hace
-        falta si tu local sigue en pie.
-      </p>
-      <textarea id="f-donde" rows="2"></textarea>
-    </div>
+          <div class="campo">
+            <label>Por dónde te pueden escribir</label>
+            <p class="campo-ayuda">Lo que tengas, no hace falta rellenarlo todo.</p>
+            <div class="campo-fila">
+              <input type="text" id="f-whatsapp" placeholder="WhatsApp" />
+              <input type="text" id="f-instagram" placeholder="Instagram" />
+              <input type="text" id="f-facebook" placeholder="Facebook" />
+            </div>
+            <div class="campo-fila">
+              <input type="text" id="f-tiktok" placeholder="TikTok" />
+              <input type="text" id="f-web" placeholder="Página web" />
+              <input type="text" id="f-telefono" placeholder="Teléfono" />
+            </div>
+          </div>
 
-    <div class="campo">
-      <label>Por dónde te pueden escribir</label>
-      <p class="campo-ayuda">Lo que tengas, no hace falta rellenarlo todo.</p>
-      <div class="campo-fila">
-        <input type="text" id="f-whatsapp" placeholder="WhatsApp" />
-        <input type="text" id="f-instagram" placeholder="Instagram" />
-        <input type="text" id="f-facebook" placeholder="Facebook" />
+          <div class="campo">
+            <label for="f-ayuda">¿Cómo puede ayudarte quien lea esto?</label>
+            <p class="campo-ayuda">
+              Comprarte, recomendarte, hacer pedidos, seguirte en redes... Si
+              quieres recibir pagos directos (Nequi, Daviplata, Bre-B),
+              cuéntanoslo aquí y lo hablamos por WhatsApp: esa cuenta la
+              confirmamos contigo antes de publicarla, nunca la ponemos solo
+              porque alguien la escribió.
+            </p>
+            <textarea id="f-ayuda" rows="3"></textarea>
+          </div>
+
+          <button type="submit" class="cta">
+            <span class="cta-eyebrow">Último paso</span>
+            <span class="cta-titulo">Mandar mi negocio por WhatsApp →</span>
+            <span class="cta-texto">{WHATSAPP.visible}</span>
+          </button>
+        </form>
       </div>
-      <div class="campo-fila">
-        <input type="text" id="f-tiktok" placeholder="TikTok" />
-        <input type="text" id="f-web" placeholder="Página web" />
-        <input type="text" id="f-telefono" placeholder="Teléfono" />
-      </div>
     </div>
-
-    <div class="campo">
-      <label for="f-ayuda">¿Cómo puede ayudarte quien lea esto?</label>
-      <p class="campo-ayuda">
-        Comprarte, recomendarte, hacer pedidos, seguirte en redes... Si quieres
-        recibir pagos directos (Nequi, Daviplata, Bre-B), cuéntanoslo aquí y lo
-        hablamos por WhatsApp: esa cuenta la confirmamos contigo antes de
-        publicarla, nunca la ponemos solo porque alguien la escribió.
-      </p>
-      <textarea id="f-ayuda" rows="3"></textarea>
-    </div>
-
-    <button type="submit" class="cta">
-      <span class="cta-eyebrow">Último paso</span>
-      <span class="cta-titulo">Mandar mi negocio por WhatsApp →</span>
-      <span class="cta-texto">{WHATSAPP.visible}</span>
-    </button>
-  </form>
+  </div>
 
   <h2>Cómo lo tratamos</h2>
   <div class="caja caja-acento">

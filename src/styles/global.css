@@ -654,12 +654,37 @@ main {
 
 /* --- Formulario de alta de negocio --- */
 
+.dos-columnas-negocio {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: start;
+  margin: 1.75rem 0;
+}
+@media (min-width: 60rem) {
+  .dos-columnas-negocio {
+    grid-template-columns: 1fr 1.1fr;
+  }
+  .col-formulario {
+    position: sticky;
+    top: 1.5rem;
+  }
+}
+
+/* Tarjeta que envuelve el formulario para que destaque frente al texto de
+   "qué mandarnos": borde y fondo en acento, no una franja de color. */
+.formulario-destacado {
+  border: 2px solid var(--acento);
+  border-radius: var(--radio);
+  background: var(--fondo);
+  padding: 1.5rem;
+  box-shadow: var(--sombra);
+}
+
 .form-negocio {
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
-  margin: 1.75rem 0;
-  max-width: 44rem;
 }
 .campo {
   display: flex;
