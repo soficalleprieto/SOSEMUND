@@ -15,7 +15,7 @@ import Base from "../../../../layouts/Base.astro";
 import CompartirWhatsApp from "../../../../components/CompartirWhatsApp.astro";
 import { todosLosEventos } from "../../../../data/paises";
 import type { Evento, Pais } from "../../../../data/tipos";
-import { WHATSAPP, enlaceWhatsApp } from "../../../../data/contacto";
+import { WHATSAPP, TIPOS_NEGOCIO_BASE } from "../../../../data/contacto";
 
 export function getStaticPaths() {
   return todosLosEventos().map(({ pais, evento }) => ({
@@ -30,14 +30,6 @@ interface Props {
 }
 const { pais, evento } = Astro.props;
 const base = `/${pais.slug}/${evento.slug}`;
-
-const mensaje = `Hola. Quiero proponer un negocio afectado que no es mío.
-
-Se llama:
-A qué se dedica:
-En qué localidad está:
-Lo que sé de cómo quedó:
-Cómo contactarlo (si lo sé):`;
 ---
 
 <Base
@@ -67,64 +59,121 @@ Cómo contactarlo (si lo sé):`;
 
   <p>
     <strong>Cuéntanoslo tú.</strong> Con que sepas el nombre y dónde estaba nos
-    vale para empezar.
+    vale para empezar. No hace falta que lo demás lo sepas: deja en blanco lo
+    que no sepas.
   </p>
-
-  <a class="cta" href={enlaceWhatsApp(mensaje)} target="_blank" rel="noopener">
-    <span class="cta-eyebrow">Solo necesitas saber cómo se llama</span>
-    <span class="cta-titulo">Proponer un negocio →</span>
-    <span class="cta-texto">{WHATSAPP.visible}</span>
-  </a>
-
-  <h2>Qué pasa después</h2>
 
   <div class="caja caja-acento">
     <p>
-      <strong>Proponer no es publicar.</strong> Nosotros buscamos a quien
-      regenta ese negocio y le preguntamos si quiere. Si dice que sí, le
-      montamos la ficha gratis. Si dice que no, o si no conseguimos hablar con
-      esa persona, <strong>no publicamos nada</strong>.
-    </p>
-    <p>
-      Nunca vamos a poner la historia de alguien en internet sin que lo sepa y
-      lo autorice. Bastante ha perdido ya como para enterarse por terceros de
-      que está en una web.
+      <strong>Proponer no es publicar.</strong> Esto que vas a mandar describe
+      un negocio que <strong>no es tuyo</strong>: nosotros buscamos a quien lo
+      regenta y le preguntamos si quiere su ficha. Si dice que sí, la
+      publicamos. Si dice que no, o si no conseguimos hablar con esa persona,
+      <strong>no publicamos nada</strong>. Nunca ponemos la historia de
+      alguien en internet sin que lo sepa y lo autorice.
     </p>
   </div>
 
-  <ol class="pasos">
-    <li>
-      <span class="numero">1</span>
-      <div>
-        <p class="paso-titulo">Nos escribes lo que sepas</p>
-        <p>
-          El nombre, a qué se dedicaba y en qué localidad. Si tienes su teléfono
-          o su Instagram, mejor. Si no, con el nombre y la calle solemos poder
-          encontrarlo.
-        </p>
+  <div class="dos-columnas-negocio">
+    <div class="col-pasos">
+      <h2>Qué pasa después</h2>
+      <ol class="pasos">
+        <li>
+          <span class="numero">1</span>
+          <div>
+            <p class="paso-titulo">Nos cuentas lo que sepas del negocio</p>
+            <p>
+              El nombre, a qué se dedicaba y en qué localidad. Si tienes su
+              teléfono o su Instagram, mejor. Si no, con el nombre y la calle
+              solemos poder encontrarlo.
+            </p>
+          </div>
+        </li>
+        <li>
+          <span class="numero">2</span>
+          <div>
+            <p class="paso-titulo">Le buscamos y le preguntamos</p>
+            <p>
+              Le explicamos qué es esto, que es gratis y que puede retirarse
+              cuando quiera.
+            </p>
+          </div>
+        </li>
+        <li>
+          <span class="numero">3</span>
+          <div>
+            <p class="paso-titulo">Decide esa persona, no tú ni nosotros</p>
+            <p>
+              Si acepta, publicamos su ficha y te avisamos para que puedas
+              compartirla. Si no, ahí se queda.
+            </p>
+          </div>
+        </li>
+      </ol>
+    </div>
+
+    <div class="col-formulario">
+      <div class="formulario-destacado">
+        <form id="form-proponer" class="form-negocio">
+          <div class="campo">
+            <label for="p-nombre">Cómo se llama el negocio</label>
+            <p class="campo-ayuda">No el tuyo: el de la persona que propones.</p>
+            <input type="text" id="p-nombre" required />
+          </div>
+
+          <div class="campo">
+            <label for="p-localidad">En qué localidad está</label>
+            <select id="p-localidad" required>
+              <option value="">Elige la localidad</option>
+              {evento.localidades.map((l) => <option value={l.nombre}>{l.nombre}</option>)}
+              <option value="otra">No está en la lista</option>
+            </select>
+            <input
+              type="text"
+              id="p-localidad-otra"
+              placeholder="¿Cuál es la localidad?"
+              hidden
+            />
+          </div>
+
+          <div class="campo">
+            <label for="p-tipo">A qué se dedica</label>
+            <p class="campo-ayuda">Si lo sabes; si no, déjalo en blanco.</p>
+            <select id="p-tipo">
+              <option value="">Elige el que más se parezca</option>
+              {TIPOS_NEGOCIO_BASE.map((t) => <option value={t}>{t}</option>)}
+              <option value="otro">No encaja en ninguno / no lo sé</option>
+            </select>
+            <input type="text" id="p-tipo-otro" placeholder="¿A qué se dedica?" hidden />
+          </div>
+
+          <div class="campo">
+            <label for="p-quedo">Lo que sepas de cómo quedó</label>
+            <p class="campo-ayuda">
+              No hace falta que sea mucho: «perdió el local», «no ha vuelto a
+              abrir», «vi el local con el techo caído»...
+            </p>
+            <textarea id="p-quedo" rows="3"></textarea>
+          </div>
+
+          <div class="campo">
+            <label for="p-contacto">Cómo lo puedes contactar</label>
+            <p class="campo-ayuda">
+              Teléfono, Instagram, o solo dónde queda si no tienes más — lo
+              que tengas nos sirve para encontrarlo.
+            </p>
+            <textarea id="p-contacto" rows="2"></textarea>
+          </div>
+
+          <button type="submit" class="cta">
+            <span class="cta-eyebrow">Último paso</span>
+            <span class="cta-titulo">Proponer este negocio →</span>
+            <span class="cta-texto">{WHATSAPP.visible}</span>
+          </button>
+        </form>
       </div>
-    </li>
-    <li>
-      <span class="numero">2</span>
-      <div>
-        <p class="paso-titulo">Le buscamos y le preguntamos</p>
-        <p>
-          Le explicamos qué es esto, que es gratis y que puede retirarse cuando
-          quiera.
-        </p>
-      </div>
-    </li>
-    <li>
-      <span class="numero">3</span>
-      <div>
-        <p class="paso-titulo">Decide esa persona, no tú ni nosotros</p>
-        <p>
-          Si acepta, publicamos su ficha y te avisamos para que puedas
-          compartirla. Si no, ahí se queda.
-        </p>
-      </div>
-    </li>
-  </ol>
+    </div>
+  </div>
 
   <h2>Si puedes, avísale tú antes</h2>
   <p>
@@ -149,4 +198,56 @@ Cómo contactarlo (si lo sé):`;
     ruta={`${base}/negocios/proponer`}
     texto="Si conoces un negocio que lo perdió todo con el terremoto y no está en internet, puedes proponerlo aquí para que le hagan su ficha gratis:"
   />
+
+  <script define:vars={{ numero: WHATSAPP.numero }}>
+    {
+      /* Mismo patrón que /negocios/anadir: sin servidor, el formulario solo
+         arma el texto y abre WhatsApp con él ya escrito. */
+    }
+    const form = document.getElementById("form-proponer");
+
+    function alternarOtro(selectId, otroId, valorOtro) {
+      const select = document.getElementById(selectId);
+      const otro = document.getElementById(otroId);
+      select.addEventListener("change", () => {
+        const esOtro = select.value === valorOtro;
+        otro.hidden = !esOtro;
+        if (esOtro) otro.focus();
+      });
+    }
+    alternarOtro("p-localidad", "p-localidad-otra", "otra");
+    alternarOtro("p-tipo", "p-tipo-otro", "otro");
+
+    function val(id) {
+      return document.getElementById(id).value.trim();
+    }
+
+    function construirMensaje() {
+      const selLocalidad = document.getElementById("p-localidad");
+      const localidad =
+        selLocalidad.value === "otra" ? val("p-localidad-otra") : selLocalidad.value;
+
+      const selTipo = document.getElementById("p-tipo");
+      const tipo = selTipo.value === "otro" ? val("p-tipo-otro") : selTipo.value;
+
+      let msg = "Hola. Quiero proponer un negocio afectado que no es mío.\n\n";
+      msg += `Se llama: ${val("p-nombre")}\n`;
+      msg += `En qué localidad está: ${localidad}\n`;
+      if (tipo) msg += `A qué se dedica: ${tipo}\n`;
+
+      const quedo = val("p-quedo");
+      if (quedo) msg += `\nLo que sé de cómo quedó:\n${quedo}\n`;
+
+      const contacto = val("p-contacto");
+      if (contacto) msg += `\nCómo contactarlo:\n${contacto}\n`;
+
+      return msg;
+    }
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const mensaje = construirMensaje();
+      window.open(`https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`, "_blank");
+    });
+  </script>
 </Base>
