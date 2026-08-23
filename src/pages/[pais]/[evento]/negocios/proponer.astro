@@ -157,12 +157,21 @@ const base = `/${pais.slug}/${evento.slug}`;
           </div>
 
           <div class="campo">
-            <label for="p-contacto">Cómo lo puedes contactar</label>
+            <label for="p-contacto">Cómo lo pueden contactar</label>
             <p class="campo-ayuda">
               Teléfono, Instagram, o solo dónde queda si no tienes más — lo
               que tengas nos sirve para encontrarlo.
             </p>
             <textarea id="p-contacto" rows="2"></textarea>
+          </div>
+
+          <div class="campo">
+            <label for="p-relacion">De qué conoces el negocio</label>
+            <p class="campo-ayuda">
+              Para que quien lo llame sepa por dónde presentarse: «soy
+              cliente», «es mi vecino», «pasaba por ahí y vi el local»...
+            </p>
+            <textarea id="p-relacion" rows="2"></textarea>
           </div>
 
           <button type="submit" class="cta">
@@ -240,6 +249,9 @@ const base = `/${pais.slug}/${evento.slug}`;
 
       const contacto = val("p-contacto");
       if (contacto) msg += `\nCómo contactarlo:\n${contacto}\n`;
+
+      const relacion = val("p-relacion");
+      if (relacion) msg += `\nDe qué conozco el negocio:\n${relacion}\n`;
 
       return msg;
     }
