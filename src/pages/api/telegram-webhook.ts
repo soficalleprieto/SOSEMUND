@@ -39,6 +39,32 @@ async function responderCallback(token: string, callbackId: string, texto: strin
   });
 }
 
+function cabecerasGitHub(githubToken: string) {
+  return {
+    Authorization: `Bearer ${githubToken}`,
+    Accept: "application/vnd.github+json",
+    "Content-Type": "application/json",
+  };
+}
+
+/**
+ * El agente que abre los PR automáticos los deja en borrador ("draft"), y
+ * GitHub no deja fusionar un borrador aunque el token tenga permiso. Antes de
+ * fusionar, si el PR sigue en borrador, lo pasa a "listo para revisar" (solo
+ * la API GraphQL de GitHub soporta esto, no hay endpoint REST).
+ */
+async function marcarListoParaRevisar(githubToken: string, nodeId: string) {
+  await fetch("https://api.github.com/graphql", {
+    method: "POST",
+    headers: cabecerasGitHub(githubToken),
+    body: JSON.stringify({
+      query:
+        "mutation($id: ID!) { markPullRequestReadyForReview(input: { pullRequestId: $id }) { pullRequest { id } } }",
+      variables: { id: nodeId },
+    }),
+  });
+}
+
 /**
  * Fusiona o descarta el PR en GitHub. Necesita GITHUB_TOKEN: un token de
  * acceso limitado solo a este repo (permisos Contents + Pull requests, en
@@ -51,24 +77,23 @@ async function resolverPR(
   accion: "merge" | "close",
 ) {
   if (accion === "merge") {
-    const resp = await fetch(`${GITHUB_API}/repos/${repo}/pulls/${numero}/merge`, {
+    const pr = await fetch(`${GITHUB_API}/repos/${repo}/pulls/${numero}`, {
+      headers: cabecerasGitHub(githubToken),
+    }).then((r) => r.json());
+
+    if (pr.draft) {
+      await marcarListoParaRevisar(githubToken, pr.node_id);
+    }
+
+    return fetch(`${GITHUB_API}/repos/${repo}/pulls/${numero}/merge`, {
       method: "PUT",
-      headers: {
-        Authorization: `Bearer ${githubToken}`,
-        Accept: "application/vnd.github+json",
-        "Content-Type": "application/json",
-      },
+      headers: cabecerasGitHub(githubToken),
       body: JSON.stringify({ merge_method: "squash" }),
     });
-    return resp;
   }
   return fetch(`${GITHUB_API}/repos/${repo}/pulls/${numero}`, {
     method: "PATCH",
-    headers: {
-      Authorization: `Bearer ${githubToken}`,
-      Accept: "application/vnd.github+json",
-      "Content-Type": "application/json",
-    },
+    headers: cabecerasGitHub(githubToken),
     body: JSON.stringify({ state: "closed" }),
   });
 }
