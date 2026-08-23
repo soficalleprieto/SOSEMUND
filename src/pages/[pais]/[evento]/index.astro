@@ -7,6 +7,7 @@ import { todosLosEventos } from "../../../data/paises";
 import { IMG_MAPA } from "../../../data/imagenes";
 import type { Evento, Pais } from "../../../data/tipos";
 import { formatearFecha } from "../../../utils/fecha";
+import { enlaceWhatsApp } from "../../../data/contacto";
 
 export function getStaticPaths() {
   return todosLosEventos().map(({ pais, evento }) => ({
@@ -63,7 +64,15 @@ const n = (x: number) => x.toLocaleString("es-CO");
           Cubrimos {evento.localidades.length} de los{" "}
           {evento.impacto.municipiosAfectados} municipios afectados — los que
           tienen canal de censo verificado.{" "}
-          <a href={`${base}/censo`}>¿No está el tuyo?</a>
+          <a
+            href={enlaceWhatsApp(
+              `Hola. Mi municipio no está en el listado de S.O.S.EMUND para ${evento.nombreCorto}, pero tengo información sobre cómo censar negocios afectados ahí. Esto es lo que sé:`,
+            )}
+            target="_blank"
+            rel="noopener"
+          >
+            ¿No está el tuyo, pero tienes información útil?
+          </a>
         </p>
       )
   }

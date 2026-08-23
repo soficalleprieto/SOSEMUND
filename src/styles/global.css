@@ -558,6 +558,23 @@ main {
 
 /* --- Llamadas a la acción --- */
 
+.dos-cta {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin: 1.75rem 0;
+  align-items: stretch;
+}
+.dos-cta .cta,
+.dos-cta .cta-secundaria {
+  margin: 0;
+}
+@media (min-width: 36rem) {
+  .dos-cta {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
 .cta {
   display: block;
   background: var(--acento);
