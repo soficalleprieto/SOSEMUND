@@ -110,6 +110,42 @@ const n = (x: number) => x.toLocaleString("es-CO");
     </li>
   </ol>
 
+  {
+    activo && (
+      <>
+        <h2>¿Tienes un negocio, o conoces uno?</h2>
+        <div class="acciones-negocios">
+          <a
+            class="accion accion-principal"
+            href={`/${activo.pais.slug}/${activo.evento.slug}/negocios/anadir`}
+          >
+            <span class="accion-icono" aria-hidden="true">🏚️</span>
+            <span class="accion-titulo">Publica tu negocio, es gratis</span>
+            <span class="accion-texto">Cuenta qué te pasó y qué necesitas</span>
+          </a>
+          <a
+            class="accion accion-secundaria"
+            href={`/${activo.pais.slug}/${activo.evento.slug}/negocios/adopta`}
+          >
+            <span class="accion-icono" aria-hidden="true">📣</span>
+            <span class="accion-titulo">Apadrina un negocio</span>
+            <span class="accion-texto">Dale visibilidad gratis a uno concreto</span>
+          </a>
+          <div class="acciones-fila">
+            <a href={`/${activo.pais.slug}/${activo.evento.slug}/negocios/proponer`}>
+              <span class="accion-icono" aria-hidden="true">👀</span>
+              Conozco un negocio afectado
+            </a>
+            <a href={`/${activo.pais.slug}/${activo.evento.slug}/negocios`}>
+              <span class="accion-icono" aria-hidden="true">🧾</span>
+              Negocios que te necesitan
+            </a>
+          </div>
+        </div>
+      </>
+    )
+  }
+
   <h2>Dónde estamos ahora</h2>
   {
     eventos.map(({ pais, evento }) => (
