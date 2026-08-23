@@ -202,6 +202,22 @@ const FASECOLDA_DIRECTORIO_2026: Fuente = {
   fecha: "2026-08-12",
 };
 
+const BAVARIA_2026: Fuente = {
+  medio: "El Heraldo",
+  titulo:
+    "Bavaria anuncia inversión de $12.000 millones para apoyar recuperación de 3.500 negocios afectados por el terremoto",
+  url: "https://www.elheraldo.co/colombia/2026/08/19/bavaria-anuncia-inversion-de-12000-millones-para-apoyar-recuperacion-de-3500-negocios-afectados-por-el-terremoto/",
+  fecha: "2026-08-19",
+};
+
+const BAVARIA_ELTIEMPO_2026: Fuente = {
+  medio: "El Tiempo",
+  titulo:
+    "Bavaria destina $12.000 millones para recuperar 3.500 pequeños negocios afectados por el terremoto",
+  url: "https://www.eltiempo.com/economia/empresas/bavaria-destina-12-000-millones-para-recuperar-3-500-pequenos-negocios-afectados-por-el-terremoto-3579241",
+  fecha: "2026-08-19",
+};
+
 /** Texto compartido por las ciudades cuyo canal para negocios aún no verificamos. */
 const PENDIENTE =
   "Hay módulos de registro habilitados en la alcaldía y el coliseo municipal. Estamos verificando el canal específico para negocios.";
@@ -578,18 +594,21 @@ export const colombiaTerremoto2026: Evento = {
     },
     {
       slug: "beneficios-privados",
-      titulo: "Internet, datos móviles y seguros: lo que ofrecen las empresas privadas",
+      titulo:
+        "Internet, datos móviles, seguros y ayuda a comerciantes: lo que ofrecen las empresas privadas",
       resumen:
-        "Starlink, Claro, Tigo y las aseguradoras activaron beneficios propios para los afectados, algunos automáticos y otros que hay que pedir.",
+        "Starlink, Claro, Tigo, las aseguradoras y Bavaria activaron beneficios propios para los afectados: unos automáticos, otros que hay que pedir y uno que todavía no tiene canal público para solicitarlo.",
       detalle:
-        "Starlink ofrece el servicio gratis hasta el 12 de septiembre de 2026 en Chocó, Valle del Cauca, Risaralda, Caldas y Quindío. Si ya tenías el servicio activo el día del sismo, el crédito se aplica solo, sin trámite. Si lo habías cancelado, contacta al soporte de Starlink para reactivarlo. Si eres nuevo, compra el kit (antena y router) en la web oficial o en un distribuidor autorizado, contrata un plan y luego contacta al soporte para pedir la activación gratuita antes de esa fecha. Si el sismo te dañó el equipo, también puedes pedir el reemplazo gratis por soporte técnico.\n\nClaro dio 2 GB de datos y minutos y SMS ilimitados durante 7 días a sus clientes prepago en Chocó, Valle del Cauca, Risaralda, Quindío y Caldas, activado automáticamente desde el 11 de agosto. Tigo dio 2 GB gratis durante 3 días a sus clientes prepago en las mismas cinco zonas, también automático, sin trámite. WOM, en esas mismas zonas, dio a sus clientes prepago 2 GB de datos y minutos ilimitados entre el 10 y el 12 de agosto, y otros 2 GB con minutos ilimitados entre el 12 y el 17 de agosto; a sus clientes pospago les dio datos y voz ilimitados durante 15 días, hasta el 24 de agosto, más una extensión del plazo de pago de la factura. Igual que Claro y Tigo, se activó solo, sin trámite.\n\nSi tienes seguro y tu negocio o vivienda sufrió daños, puedes reportarlo directamente: Seguros Bolívar por WhatsApp 322 332 2322 o la línea #322 (opción 0); Sura por WhatsApp 315 275 7888, la línea #888 o la emergencia 01 8000 415 215. Sura aclaró que los damnificados tienen dos años para reclamar, no 72 horas como se ha dicho por ahí.\n\nFasecolda, el gremio de las aseguradoras, publicó un directorio con las líneas de las demás compañías activas en la zona: Allianz por el código #265, el teléfono (601) 594 1133 o la emergencia 01 8000 513 500; Axa Colpatria por WhatsApp 1357 2433, la línea #247 o la emergencia 01 8000 512 620; Mapfre por el código #624 o la emergencia 601 794 8494; Chubb por el teléfono 601 319 0402 o la emergencia 01 8000 917 500; HDI por WhatsApp 316 482 1802, la línea 601 307 7050 (opción 8) o la emergencia 01 8000 113 390 (opción 8); Colmena Seguros por WhatsApp 315 700 3033, la línea #833, el teléfono (601) 401 0447 o la emergencia 01 8000 9 19667; La Previsora por WhatsApp 324 201 5491, la línea #345 (opciones 3 y 6), el teléfono 601 348 5757 o la emergencia 01 8000 910 554; Aseguradora Solidaria por WhatsApp 314 203 4106 o la línea 323 264 1770; Zurich por WhatsApp 315 768 6083, la línea #723, el teléfono 601 319 0730 o la emergencia 01 8000 112 723; y La Equidad por WhatsApp 318 588 4515, la línea #324 o la emergencia 01 8000 919 538.",
+        "Starlink ofrece el servicio gratis hasta el 12 de septiembre de 2026 en Chocó, Valle del Cauca, Risaralda, Caldas y Quindío. Si ya tenías el servicio activo el día del sismo, el crédito se aplica solo, sin trámite. Si lo habías cancelado, contacta al soporte de Starlink para reactivarlo. Si eres nuevo, compra el kit (antena y router) en la web oficial o en un distribuidor autorizado, contrata un plan y luego contacta al soporte para pedir la activación gratuita antes de esa fecha. Si el sismo te dañó el equipo, también puedes pedir el reemplazo gratis por soporte técnico.\n\nClaro dio 2 GB de datos y minutos y SMS ilimitados durante 7 días a sus clientes prepago en Chocó, Valle del Cauca, Risaralda, Quindío y Caldas, activado automáticamente desde el 11 de agosto. Tigo dio 2 GB gratis durante 3 días a sus clientes prepago en las mismas cinco zonas, también automático, sin trámite. WOM, en esas mismas zonas, dio a sus clientes prepago 2 GB de datos y minutos ilimitados entre el 10 y el 12 de agosto, y otros 2 GB con minutos ilimitados entre el 12 y el 17 de agosto; a sus clientes pospago les dio datos y voz ilimitados durante 15 días, hasta el 24 de agosto, más una extensión del plazo de pago de la factura. Igual que Claro y Tigo, se activó solo, sin trámite.\n\nSi tienes seguro y tu negocio o vivienda sufrió daños, puedes reportarlo directamente: Seguros Bolívar por WhatsApp 322 332 2322 o la línea #322 (opción 0); Sura por WhatsApp 315 275 7888, la línea #888 o la emergencia 01 8000 415 215. Sura aclaró que los damnificados tienen dos años para reclamar, no 72 horas como se ha dicho por ahí.\n\nFasecolda, el gremio de las aseguradoras, publicó un directorio con las líneas de las demás compañías activas en la zona: Allianz por el código #265, el teléfono (601) 594 1133 o la emergencia 01 8000 513 500; Axa Colpatria por WhatsApp 1357 2433, la línea #247 o la emergencia 01 8000 512 620; Mapfre por el código #624 o la emergencia 601 794 8494; Chubb por el teléfono 601 319 0402 o la emergencia 01 8000 917 500; HDI por WhatsApp 316 482 1802, la línea 601 307 7050 (opción 8) o la emergencia 01 8000 113 390 (opción 8); Colmena Seguros por WhatsApp 315 700 3033, la línea #833, el teléfono (601) 401 0447 o la emergencia 01 8000 9 19667; La Previsora por WhatsApp 324 201 5491, la línea #345 (opciones 3 y 6), el teléfono 601 348 5757 o la emergencia 01 8000 910 554; Aseguradora Solidaria por WhatsApp 314 203 4106 o la línea 323 264 1770; Zurich por WhatsApp 315 768 6083, la línea #723, el teléfono 601 319 0730 o la emergencia 01 8000 112 723; y La Equidad por WhatsApp 318 588 4515, la línea #324 o la emergencia 01 8000 919 538.\n\nBavaria anunció una inversión de $12.000 millones para apoyar la reconstrucción y reapertura de 3.500 negocios afectados por el terremoto —tiendas de barrio, pequeños comercios y emprendimientos de Chocó, Quindío, Valle del Cauca, Risaralda y Caldas—, en articulación con el Plan de Reconstrucción para Comerciantes y Microempresarios que lidera el Gobierno Nacional. El objetivo declarado es que quienes reciban el apoyo puedan reabrir su establecimiento y retomar su actividad económica lo antes posible.",
       pendiente:
-        "No hemos confirmado el canal exacto de contacto de BBVA Seguros ni de Seguros del Estado.",
+        "No hemos confirmado el canal exacto de contacto de BBVA Seguros ni de Seguros del Estado. Tampoco hemos encontrado el canal para que un comerciante se postule al fondo de Bavaria: ni la empresa ni el Gobierno han publicado todavía un formulario, línea o requisitos para acceder a él.",
       fuentes: [
         STARLINK_2026,
         CLARO_TIGO_2026,
         ASEGURADORAS_2026,
         FASECOLDA_DIRECTORIO_2026,
+        BAVARIA_2026,
+        BAVARIA_ELTIEMPO_2026,
       ],
     },
   ],
