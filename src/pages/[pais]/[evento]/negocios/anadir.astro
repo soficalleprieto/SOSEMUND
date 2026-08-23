@@ -64,6 +64,14 @@ const base = `/${pais.slug}/${evento.slug}`;
           ))
         }
       </ol>
+
+      <h2>¿Y si no tengo fotos?</h2>
+      <p>
+        Da igual. Manda el formulario igual y en el chat de WhatsApp cuenta lo
+        que puedas: montamos la ficha con eso. Una ficha sin fotos sirve más
+        que ninguna ficha. Y si luego consigues fotos, nos las mandas y las
+        añadimos.
+      </p>
     </div>
 
     <div class="col-formulario">
@@ -106,16 +114,6 @@ const base = `/${pais.slug}/${evento.slug}`;
               o algo que ya no existe para fotografiar, cuéntalo aquí.
             </p>
             <textarea id="f-quedo" rows="4" required></textarea>
-          </div>
-
-          <div class="campo caja caja-pendiente">
-            <p>
-              <strong>No olvides tus fotos.</strong> Cuando mandes el mensaje,
-              adjunta en el mismo chat una foto de antes (aunque sea del
-              celular, de una publicación vieja o de Google Maps) y una de
-              ahora: se ve mucho mejor el contraste. Un formulario no puede
-              adjuntarlas por ti.
-            </p>
           </div>
 
           <div class="campo">
@@ -163,6 +161,16 @@ const base = `/${pais.slug}/${evento.slug}`;
             <textarea id="f-ayuda" rows="3"></textarea>
           </div>
 
+          <div class="campo caja caja-pendiente">
+            <p>
+              <strong>No olvides tus fotos.</strong> Cuando mandes el mensaje,
+              adjunta en el mismo chat una foto de antes (aunque sea del
+              celular, de una publicación vieja o de Google Maps) y una de
+              ahora: se ve mucho mejor el contraste. Un formulario no puede
+              adjuntarlas por ti.
+            </p>
+          </div>
+
           <button type="submit" class="cta">
             <span class="cta-eyebrow">Último paso</span>
             <span class="cta-titulo">Mandar mi negocio por WhatsApp →</span>
@@ -201,13 +209,6 @@ const base = `/${pais.slug}/${evento.slug}`;
       <a href="/privacidad">política de privacidad</a>.
     </p>
   </div>
-
-  <h2>¿Y si no tengo fotos?</h2>
-  <p>
-    Da igual. Manda el formulario igual y en el chat de WhatsApp cuenta lo que
-    puedas: montamos la ficha con eso. Una ficha sin fotos sirve más que
-    ninguna ficha. Y si luego consigues fotos, nos las mandas y las añadimos.
-  </p>
 
   <p>
     <a href={`${base}/negocios/ejemplo`}>
