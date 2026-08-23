@@ -55,30 +55,32 @@ const n = (x: number) => x.toLocaleString("es-CO");
     }
   </ul>
 
-  <a class="cta" href={`${base}/censo`}>
-    <span class="cta-eyebrow">Empieza por aquí</span>
-    <span class="cta-titulo">Censa tu negocio →</span>
-    <span class="cta-texto">
-      Si no apareces en el censo, quedas fuera de todas las ayudas que vengan
-      después. Es lo más urgente.
-    </span>
-  </a>
+  <div class="dos-cta">
+    <a class="cta" href={`${base}/censo`}>
+      <span class="cta-eyebrow">Empieza por aquí</span>
+      <span class="cta-titulo">Censa tu negocio →</span>
+      <span class="cta-texto">
+        Si no apareces en el censo, quedas fuera de todas las ayudas que
+        vengan después. Es lo más urgente.
+      </span>
+    </a>
 
-  <a class="cta-secundaria" href={`${base}/iniciativas`}>
-    <strong>¿Necesitas ayuda humanitaria, no información de negocios?</strong>
-    <span>
-      Centros de acopio, búsqueda de personas y ayuda urgente, en un solo sitio →
-    </span>
-  </a>
+    <a class="cta-secundaria" href={`${base}/iniciativas`}>
+      <strong>¿Necesitas ayuda humanitaria, no información de negocios?</strong>
+      <span>
+        Centros de acopio, búsqueda de personas y ayuda urgente, en un solo sitio →
+      </span>
+    </a>
+  </div>
 
   {/* Alivios bancarios, tributarios, crédito y beneficios privados: son
       generales, no de una ciudad en particular, así que van aquí en el hub
-      del evento. Cada página de localidad los repite igual, por si alguien
-      entra directo a la suya sin pasar por aquí. */}
-  <h2>Qué puedes pedir</h2>
+      del evento. Cada página de localidad muestra solo el resumen, con un
+      enlace por ayuda a su ancla (#slug) aquí abajo. */}
+  <h2>Ayudas generales para negocios</h2>
   {
     evento.ayudas.map((a) => (
-      <section class="caja">
+      <section class="caja" id={a.slug}>
         <h3>{a.titulo}</h3>
         <p><strong>{a.resumen}</strong></p>
         {a.detalle.split("\n\n").map((parrafo) => <p>{parrafo}</p>)}

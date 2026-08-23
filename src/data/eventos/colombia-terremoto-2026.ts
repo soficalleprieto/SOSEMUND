@@ -306,6 +306,19 @@ export const colombiaTerremoto2026: Evento = {
         telefonos: ["602 886 1300", "300 913 1811"],
         fuente: CCC,
       },
+      ayudasPropias: [
+        {
+          slug: "cali-fondo-reactivacion",
+          titulo: "Fondo municipal de reactivación (proyecto, sin aprobar)",
+          resumen:
+            "La Alcaldía prepara un fondo de $5.000 millones en aportes no reembolsables, más microcrédito y un alivio tributario, todavía sin aprobar.",
+          detalle:
+            "La Alcaldía de Cali prepara su propio paquete municipal: un fondo proyectado en $5.000 millones para unidades productivas afectadas, pensado como aportes no reembolsables en especie (herramientas, maquinaria, equipos, insumos), más líneas de microcrédito con tasas diferenciales. La Alcaldía, junto con la Cámara de Comercio de Cali, ya caracterizó 1.493 unidades productivas en las zonas afectadas: el 89,2 % son microempresas. El alivio tributario que también contempla ese plan (ICA, predial) sigue en estudio, no aprobado.",
+          pendiente:
+            "Ni el fondo ni el alivio tributario están aprobados todavía: siguen en fase de proyecto. En cuanto se apruebe alguno con monto, requisitos y forma de pedirlo, lo actualizamos.",
+          fuentes: [CALI_FONDO_REACTIVACION_2026],
+        },
+      ],
     },
     {
       slug: "pereira",
@@ -336,6 +349,17 @@ export const colombiaTerremoto2026: Evento = {
         telefonos: ["323 942 1880"],
         fuente: MANIZALES_CENSO_2026,
       },
+      ayudasPropias: [
+        {
+          slug: "manizales-calendario-tributario",
+          titulo: "Calendario tributario ampliado",
+          resumen:
+            "La Alcaldía amplió un mes el calendario tributario y suspendió el envío de cobros persuasivos del predial, aunque no es una exoneración.",
+          detalle:
+            "Manizales tiene una medida propia, aunque no es una exoneración: la Alcaldía amplió un mes el calendario tributario y suspendió temporalmente el envío de cobros persuasivos del predial y de otras obligaciones pendientes con el Municipio. Ojo al matiz: eso no frena los embargos ni las medidas cautelares que ya estuvieran en curso antes del sismo.",
+          fuentes: [MANIZALES_TRIBUTARIO_2026],
+        },
+      ],
     },
     {
       slug: "armenia",
@@ -350,6 +374,19 @@ export const colombiaTerremoto2026: Evento = {
         telefonos: ["318 349 9804"],
         fuente: ARMENIA_CENSO_2026,
       },
+      ayudasPropias: [
+        {
+          slug: "armenia-proyecto-tributario",
+          titulo: "Proyecto de alivio tributario (radicado, sin aprobar)",
+          resumen:
+            "El alcalde radicó un proyecto para reducir 90% los intereses de mora de predial, alumbrado, teléfonos y otros impuestos si pagas antes del 28 de diciembre.",
+          detalle:
+            "El alcalde James Padilla García radicó el 21 de agosto un proyecto en el Concejo para reducir un 90% los intereses de mora del impuesto predial unificado (vigencias 2025 y anteriores), del alumbrado público, del impuesto de teléfonos, de la sobretasa a la gasolina y de la contribución de valorización, si pagas antes del 28 de diciembre de 2026.",
+          pendiente:
+            "Mientras el Concejo no lo apruebe, es un proyecto, no un alivio vigente.",
+          fuentes: [ARMENIA_TRIBUTARIO_2026],
+        },
+      ],
     },
     {
       slug: "quibdo",
@@ -506,9 +543,9 @@ export const colombiaTerremoto2026: Evento = {
       resumen:
         "El Gobierno activó medidas tributarias para los afectados por el terremoto.",
       detalle:
-        "La DIAN confirmó aplazamientos de plazos —no condonación del impuesto— para personas y agentes con domicilio fiscal en las seccionales de Cali, Palmira, Tuluá, Buenaventura, Pereira, Armenia, Manizales, Quibdó y Popayán: la declaración de renta 2025 de personas naturales se corre a la ventana del 27 de octubre al 13 de noviembre de 2026 (según los dos últimos dígitos del NIT); la retención en la fuente de julio se puede presentar y pagar con los plazos de agosto, sin sanción ni interés moratorio; y los trámites aduaneros quedan suspendidos entre el 10 de agosto y el 10 de septiembre de 2026 en esas seccionales. Excluye a los grandes contribuyentes. Conserva toda la documentación de tus pérdidas: es lo que te van a pedir para acreditar la condición de afectado.\n\nA nivel municipal, Manizales sí tiene una medida propia, aunque no es una exoneración: la Alcaldía amplió un mes el calendario tributario y suspendió temporalmente el envío de cobros persuasivos del predial y de otras obligaciones pendientes con el Municipio. Ojo al matiz: eso no frena los embargos ni las medidas cautelares que ya estuvieran en curso antes del sismo.\n\nArmenia va por el mismo camino, pero un paso atrás: el alcalde James Padilla García radicó el 21 de agosto un proyecto en el Concejo para reducir un 90% los intereses de mora del impuesto predial unificado (vigencias 2025 y anteriores), del alumbrado público, del impuesto de teléfonos, de la sobretasa a la gasolina y de la contribución de valorización, si pagas antes del 28 de diciembre de 2026. Mientras el Concejo no lo apruebe, es un proyecto, no un alivio vigente.",
+        "La DIAN confirmó aplazamientos de plazos —no condonación del impuesto— para personas y agentes con domicilio fiscal en las seccionales de Cali, Palmira, Tuluá, Buenaventura, Pereira, Armenia, Manizales, Quibdó y Popayán: la declaración de renta 2025 de personas naturales se corre a la ventana del 27 de octubre al 13 de noviembre de 2026 (según los dos últimos dígitos del NIT); la retención en la fuente de julio se puede presentar y pagar con los plazos de agosto, sin sanción ni interés moratorio; y los trámites aduaneros quedan suspendidos entre el 10 de agosto y el 10 de septiembre de 2026 en esas seccionales. Excluye a los grandes contribuyentes. Conserva toda la documentación de tus pérdidas: es lo que te van a pedir para acreditar la condición de afectado.\n\nA nivel municipal, algunas alcaldías ya tienen medidas tributarias propias: revisa la página de tu localidad para ver si la tuya es una de ellas.",
       pendiente:
-        "En Cali, Pereira y Quibdó seguimos sin encontrar ningún decreto de alcaldía que exonere o aplace el ICA o el predial por este terremoto. Cali tiene en estudio —no aprobado todavía— un alivio tributario para negocios dentro de su plan municipal de reactivación económica, y Armenia tiene un proyecto radicado en el Concejo (ver arriba) que tampoco está aprobado todavía. A nivel nacional sigue sin aprobarse la petición de Fedemunicipios de extender ese alivio hasta por dos períodos fiscales con compensación del Gobierno. Lo seguimos verificando.",
+        "En Cali, Pereira y Quibdó seguimos sin encontrar ningún decreto de alcaldía que exonere o aplace el ICA o el predial por este terremoto. A nivel nacional sigue sin aprobarse la petición de Fedemunicipios de extender ese alivio hasta por dos períodos fiscales con compensación del Gobierno. Lo seguimos verificando.",
       fuentes: [
         {
           medio: "El Colombiano",
@@ -519,8 +556,6 @@ export const colombiaTerremoto2026: Evento = {
         },
         DIAN_2026,
         FEDEMUNICIPIOS_2026,
-        MANIZALES_TRIBUTARIO_2026,
-        ARMENIA_TRIBUTARIO_2026,
       ],
     },
     {
@@ -529,9 +564,9 @@ export const colombiaTerremoto2026: Evento = {
       resumen:
         "Fenalco, MinComercio y Bancóldex trabajan en un paquete para evitar el cierre definitivo de establecimientos.",
       detalle:
-        "Fenalco presentó al Gobierno una propuesta integral con medidas de atención inmediata, alivio financiero y reactivación económica, con el objetivo declarado de evitar el cierre definitivo de establecimientos, proteger los empleos y recuperar la actividad productiva. En la reunión participaron el presidente de Bancóldex, Manuel Fernández Ariza, el Fondo Nacional de Garantías e INNpulsa. El Banco Mundial ya desembolsó US$200 millones de una línea de crédito escalable que podría ampliarse hasta US$450 millones, destinada a la respuesta de emergencia y a sentar las bases de la reconstrucción.\n\nEl 19 de agosto el Gobierno declaró el Estado de Emergencia Económica, Social y Ecológica (Decreto 1261 de 2026) en 15 departamentos, incluidos los cinco de esta zona. La declaratoria en sí misma no es una ayuda: es un mecanismo del artículo 215 de la Constitución que habilita al Gobierno a expedir, durante 30 días calendario, decretos con fuerza de ley sin pasar primero por el Congreso. Entre lo que el propio decreto anuncia que vendrá por esa vía: líneas de crédito de emergencia para micro y pequeñas empresas con tasas subsidiadas y períodos de gracia extraordinarios, y apoyo para cubrir parte de la nómina y los aportes a seguridad social de sus trabajadores. Son objetivos declarados, no créditos ya abiertos: cada beneficio concreto depende de los decretos legislativos que el Gobierno vaya expidiendo dentro de esos 30 días.\n\nEn paralelo, la Alcaldía de Cali prepara su propio paquete municipal: un fondo proyectado en $5.000 millones para unidades productivas afectadas, pensado como aportes no reembolsables en especie (herramientas, maquinaria, equipos, insumos), más líneas de microcrédito con tasas diferenciales. La Alcaldía, junto con la Cámara de Comercio de Cali, ya caracterizó 1.493 unidades productivas en las zonas afectadas: el 89,2 % son microempresas. El alivio tributario que también contempla ese plan (ICA, predial) sigue en estudio, no aprobado.",
+        "Fenalco presentó al Gobierno una propuesta integral con medidas de atención inmediata, alivio financiero y reactivación económica, con el objetivo declarado de evitar el cierre definitivo de establecimientos, proteger los empleos y recuperar la actividad productiva. En la reunión participaron el presidente de Bancóldex, Manuel Fernández Ariza, el Fondo Nacional de Garantías e INNpulsa. El Banco Mundial ya desembolsó US$200 millones de una línea de crédito escalable que podría ampliarse hasta US$450 millones, destinada a la respuesta de emergencia y a sentar las bases de la reconstrucción.\n\nEl 19 de agosto el Gobierno declaró el Estado de Emergencia Económica, Social y Ecológica (Decreto 1261 de 2026) en 15 departamentos, incluidos los cinco de esta zona. La declaratoria en sí misma no es una ayuda: es un mecanismo del artículo 215 de la Constitución que habilita al Gobierno a expedir, durante 30 días calendario, decretos con fuerza de ley sin pasar primero por el Congreso. Entre lo que el propio decreto anuncia que vendrá por esa vía: líneas de crédito de emergencia para micro y pequeñas empresas con tasas subsidiadas y períodos de gracia extraordinarios, y apoyo para cubrir parte de la nómina y los aportes a seguridad social de sus trabajadores. Son objetivos declarados, no créditos ya abiertos: cada beneficio concreto depende de los decretos legislativos que el Gobierno vaya expidiendo dentro de esos 30 días.\n\nEn paralelo, algunas alcaldías ya preparan su propio paquete municipal: revisa la página de tu localidad para ver si la tuya tiene uno.",
       pendiente:
-        "Todavía no hay líneas de crédito específicas con tasa, monto y requisitos publicados por Bancóldex, Finagro o el Fondo Nacional de Garantías, ni el «Plan de Reconstrucción y Reactivación Económica» que anunció el Ministerio de Comercio. Los decretos legislativos que desarrollen la Emergencia Económica todavía no se publican uno por uno con montos y requisitos: en cuanto salga alguno con crédito, monto o plazo concretos para negocios, lo añadimos aquí. Tampoco está aprobado el fondo ni el alivio tributario que prepara Cali: siguen en fase de proyecto.",
+        "Todavía no hay líneas de crédito específicas con tasa, monto y requisitos publicados por Bancóldex, Finagro o el Fondo Nacional de Garantías, ni el «Plan de Reconstrucción y Reactivación Económica» que anunció el Ministerio de Comercio. Los decretos legislativos que desarrollen la Emergencia Económica todavía no se publican uno por uno con montos y requisitos: en cuanto salga alguno con crédito, monto o plazo concretos para negocios, lo añadimos aquí.",
       fuentes: [
         {
           medio: "El Heraldo",
@@ -543,7 +578,6 @@ export const colombiaTerremoto2026: Evento = {
         BANCO_MUNDIAL_2026,
         DECRETO_EMERGENCIA_2026,
         PRESIDENCIA_EMERGENCIA_2026,
-        CALI_FONDO_REACTIVACION_2026,
       ],
     },
     {

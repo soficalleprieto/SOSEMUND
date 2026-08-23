@@ -46,6 +46,14 @@ export type Localidad = {
   contexto?: string;
   /** Fuente de lo que afirmamos en `contexto`. Sin fuente no se afirma nada. */
   fuente?: Fuente;
+  /**
+   * Medidas de ESTA localidad en concreto (un fondo municipal, un proyecto
+   * tributario propio…), distintas de `evento.ayudas` que son generales y
+   * salen igual en las 11. Mismo tipo `Ayuda` para reusar el mismo bloque de
+   * pintado; casi ninguna localidad va a tener esto, la mayoría solo depende
+   * de las ayudas generales.
+   */
+  ayudasPropias?: Ayuda[];
 };
 
 export type Ayuda = {
