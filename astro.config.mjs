@@ -5,6 +5,11 @@ import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
   site: "https://sosemund.org",
+  // Sin barra final: así ya estaban construidas todas las `ruta` canónicas
+  // en Base.astro (ej. `ruta={base}`, nunca `ruta={`${base}/`}`). Antes,
+  // con barra y sin barra devolvían 200 los dos, contenido duplicado sin
+  // que uno redirigiera al otro.
+  trailingSlash: "never",
   // Sitio completamente estático por defecto: sin JavaScript de cliente.
   // El adaptador de Vercel solo se usa para las rutas que exportan
   // `prerender = false` (los webhooks de los bots, en src/pages/api/).
