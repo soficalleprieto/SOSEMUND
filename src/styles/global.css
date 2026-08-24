@@ -1324,6 +1324,11 @@ main .entradilla-ancha {
   color: var(--texto);
   border: 1px solid var(--borde);
 }
+.accion-terciaria {
+  background: var(--fondo-hundido);
+  color: var(--texto);
+  border: 1px solid var(--borde);
+}
 /* Más presencia que las otras dos: más grande, con sombra y un remate de
    color de marca, no solo el mismo tono repetido más ancho. */
 .accion-destacada {
