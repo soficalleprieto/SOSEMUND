@@ -26,9 +26,13 @@ const tituloCompleto = ruta === "/" ? titulo : `${titulo} | ${MARCA.nombre}`;
  * Fecha del propio build, no una constante que hay que acordarse de tocar a
  * mano: el sitio se despliega en cada fusión de PR (el cron corre 2x/día),
  * así que la fecha de build ES la fecha real en que se verificó el contenido
- * por última vez.
+ * por última vez. En hora de Colombia, no UTC: el build puede correr ya
+ * entrada la noche en Bogotá pero seguir siendo "hoy" en UTC, y todas las
+ * demás fechas del sitio (la del sismo, las de cada fuente) son de allá.
  */
-const fechaVerificacion = new Date().toISOString().slice(0, 10);
+const fechaVerificacion = new Intl.DateTimeFormat("en-CA", {
+  timeZone: "America/Bogota",
+}).format(new Date());
 
 /*
  * Organization en JSON-LD, una vez para todo el sitio: le da a Google una

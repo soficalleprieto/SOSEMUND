@@ -1019,6 +1019,22 @@ button.cta {
   flex: none;
 }
 
+/* Menos separación entre los dos CTA del hero, y el secundario en el tono
+   naranja de la marca para que se note que es una acción distinta de la
+   principal (nunca una franja lateral, borde+fondo completos como el resto
+   de avisos del sitio). */
+.emergencia-activa .cta {
+  margin-bottom: 0.75rem;
+}
+.emergencia-activa .cta-secundaria {
+  margin-top: 0;
+  border-color: var(--arcilla);
+  background: var(--arcilla-claro);
+}
+.emergencia-activa .cta-secundaria strong {
+  color: var(--arcilla);
+}
+
 @media (min-width: 46rem) {
   .emergencia-activa {
     display: grid;
