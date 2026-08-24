@@ -1346,11 +1346,10 @@ main .entradilla-ancha {
   box-shadow: var(--sombra);
 }
 .accion-destacada .accion-icono {
-  font-size: 1.3rem;
+  font-size: 1.5rem;
 }
 .accion-destacada .accion-titulo {
-  font-size: 1.25rem;
-  font-family: var(--serif);
+  font-size: 1.6rem;
 }
 .accion-icono {
   font-size: 1.3rem;
@@ -1360,11 +1359,13 @@ main .entradilla-ancha {
 .accion-titulo {
   font-family: var(--serif);
   font-weight: 600;
-  font-size: 1.1rem;
+  font-size: 1.4rem;
+}
+.accion-texto {
+  font-size: 0.94rem;
 }
 .accion-principal .accion-texto {
   color: rgba(255, 255, 255, 0.82);
-  font-size: 0.9rem;
 }
 .accion-secundaria .accion-texto {
   color: var(--texto-suave);
