@@ -43,6 +43,24 @@ const mensajeApadrinar = `Hola. Quiero apadrinar este negocio: ${n.nombre} (${ur
 Dónde publico (Instagram, TikTok, YouTube…):
 Cuánta gente me sigue, más o menos:
 Qué tipo de contenido hago:`;
+
+/*
+ * LocalBusiness en JSON-LD, solo para fichas reales: nunca para la de
+ * ejemplo (sería fabricar un registro sobre un negocio que no existe) y sin
+ * `address`/`geo`, porque nunca publicamos la ubicación exacta de un negocio
+ * (regla del sitio: no dar la dirección de un local que pudo quedar vacío).
+ */
+const schemaNegocio = !n.esEjemplo && {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  name: n.nombre,
+  description: n.historia,
+  url: urlFicha,
+  areaServed: localidad?.nombre,
+  sameAs: Object.values(n.contacto).filter(
+    (v): v is string => typeof v === "string" && v.startsWith("http"),
+  ),
+};
 ---
 
 <Base
@@ -55,6 +73,8 @@ Qué tipo de contenido hago:`;
   ruta={`${base}/negocios/${n.slug}`}
   noIndexar={n.esEjemplo}
 >
+  {schemaNegocio && <script type="application/ld+json" set:html={JSON.stringify(schemaNegocio)} />}
+
   <nav class="migas">
     <a href="/">Inicio</a> › <a href={`/${pais.slug}`}>{pais.nombre}</a> ›{" "}
     <a href={base}>{evento.nombreCorto}</a> ›{" "}

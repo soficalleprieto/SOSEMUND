@@ -23,6 +23,22 @@ const social = new URL(imagen ?? "/social.jpg", Astro.site).href;
 const tituloCompleto = ruta === "/" ? titulo : `${titulo} | ${MARCA.nombre}`;
 
 /*
+ * Organization en JSON-LD, una vez para todo el sitio: le da a Google una
+ * entidad clara de quién publica esto, sin inventar datos que no tenemos
+ * (nada de dirección física ni teléfono público de empresa).
+ */
+const schemaOrganizacion = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: MARCA.nombre,
+  alternateName: MARCA.descriptor,
+  url: new URL("/", Astro.site).href,
+  logo: new URL(isotipo.src, Astro.site).href,
+  description:
+    "Iniciativa ciudadana que ayuda a negocios afectados por catástrofes a encontrar qué ayudas existen y cómo pedirlas.",
+};
+
+/*
  * El menú se construye desde la emergencia activa: mientras solo haya una, lo
  * útil es llevar directo a lo que se busca y no obligar a navegar país a país.
  * Cuando haya varias, aquí es donde habrá que replantearlo.
@@ -147,6 +163,7 @@ const menusConSubmenu = MENU.filter(
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json" set:html={JSON.stringify(schemaOrganizacion)} />
   </head>
 
   <body>

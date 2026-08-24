@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from "astro/config";
 import vercel from "@astrojs/vercel";
+import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
   site: "https://sosemund.org",
@@ -11,4 +12,11 @@ export default defineConfig({
   // Si alguna página llega a necesitar JS de cliente, se añade solo en esa página.
   build: { inlineStylesheets: "always" },
   adapter: vercel(),
+  // Excluye la ficha de negocio de ejemplo (noindex) y las rutas de API/webhooks:
+  // el sitemap debe listar solo lo que de verdad queremos que Google indexe.
+  integrations: [
+    sitemap({
+      filter: (page) => !page.includes("/negocios/ejemplo") && !page.includes("/api/"),
+    }),
+  ],
 });

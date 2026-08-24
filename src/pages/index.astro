@@ -33,13 +33,19 @@ const n = (x: number) => x.toLocaleString("es-CO");
         <h2 class="titulo-activo">{activo.evento.nombreCorto}</h2>
         <p>{activo.evento.resumen}</p>
         <Imagen credito={IMG_COLOMBIA} prioritaria={true} />
-        <a class="cta" href={`/${activo.pais.slug}/${activo.evento.slug}`}>
+        <a
+          class="cta"
+          href={`/${activo.pais.slug}/${activo.evento.slug}/negocios/anadir`}
+        >
           <span class="cta-eyebrow">Si tu negocio resultó afectado</span>
-          <span class="cta-titulo">Mira qué puedes pedir →</span>
+          <span class="cta-titulo">Da de alta tu negocio, es gratis →</span>
           <span class="cta-texto">
-            Cómo censarte —que es lo más urgente—, qué alivios existen y cómo
-            solicitarlos, localidad por localidad.
+            Cuéntanos qué pasó y qué necesitas. Cinco minutos, por WhatsApp.
           </span>
+        </a>
+        <a class="cta-secundaria" href={`/${activo.pais.slug}/${activo.evento.slug}`}>
+          <strong>¿Todavía no sabes qué puedes pedir?</strong>
+          <span>Qué ayudas existen y cómo pedirlas, localidad por localidad →</span>
         </a>
       </section>
     )

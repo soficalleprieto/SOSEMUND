@@ -1030,15 +1030,16 @@ button.cta {
   .emergencia-activa .etiqueta-viva,
   .emergencia-activa .titulo-activo,
   .emergencia-activa > p,
-  .emergencia-activa .cta {
+  .emergencia-activa .cta,
+  .emergencia-activa .cta-secundaria {
     grid-column: 1;
   }
   .emergencia-activa .figura {
     grid-column: 2;
-    grid-row: 1 / span 4;
+    grid-row: 1 / span 5;
     margin: 0;
   }
-  .emergencia-activa .cta {
+  .emergencia-activa .cta-secundaria {
     align-self: end;
     margin-bottom: 0;
   }

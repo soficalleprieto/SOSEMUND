@@ -1,0 +1,11 @@
+# S.O.S.EMUND es un sitio de información pública para negocios afectados por
+# catástrofes: cuanto más se rastree e indexe, mejor cumple su propósito.
+# No hay ninguna sección que valga la pena bloquear, ni siquiera a los
+# crawlers de entrenamiento de IA (GPTBot, ClaudeBot, PerplexityBot...): que
+# citen la información verificada de aquí es preferible a que la saquen de
+# otro sitio peor sourceado.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://sosemund.org/sitemap-index.xml
