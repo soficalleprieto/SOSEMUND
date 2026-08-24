@@ -1302,7 +1302,8 @@ main .entradilla-ancha {
   .acciones-negocios {
     grid-template-columns: 1fr 1fr;
   }
-  .acciones-fila {
+  .acciones-fila,
+  .accion-destacada {
     grid-column: 1 / -1;
   }
 }
@@ -1322,6 +1323,22 @@ main .entradilla-ancha {
   background: var(--arcilla-claro);
   color: var(--texto);
   border: 1px solid var(--borde);
+}
+/* Más presencia que las otras dos: más grande, con sombra y un remate de
+   color de marca, no solo el mismo tono repetido más ancho. */
+.accion-destacada {
+  background: var(--acento);
+  color: #fff;
+  border-bottom: 4px solid var(--arcilla-viva);
+  padding: 1.5rem 1.75rem;
+  box-shadow: var(--sombra);
+}
+.accion-destacada .accion-icono {
+  font-size: 1.3rem;
+}
+.accion-destacada .accion-titulo {
+  font-size: 1.25rem;
+  font-family: var(--serif);
 }
 .accion-icono {
   font-size: 1.3rem;
