@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import "../styles/global.css";
-import { ACTUALIZADO, todosLosEventos } from "../data/paises";
+import { todosLosEventos } from "../data/paises";
 import { formatearFecha } from "../utils/fecha";
 import isotipo from "../assets/sosemund-isotipo.png";
 import { MARCA } from "../data/marca";
@@ -21,6 +21,14 @@ const { titulo, descripcion, ruta, noIndexar, imagen } = Astro.props;
 const canonica = new URL(ruta, Astro.site).href;
 const social = new URL(imagen ?? "/social.jpg", Astro.site).href;
 const tituloCompleto = ruta === "/" ? titulo : `${titulo} | ${MARCA.nombre}`;
+
+/*
+ * Fecha del propio build, no una constante que hay que acordarse de tocar a
+ * mano: el sitio se despliega en cada fusión de PR (el cron corre 2x/día),
+ * así que la fecha de build ES la fecha real en que se verificó el contenido
+ * por última vez.
+ */
+const fechaVerificacion = new Date().toISOString().slice(0, 10);
 
 /*
  * Organization en JSON-LD, una vez para todo el sitio: le da a Google una
@@ -305,7 +313,9 @@ const menusConSubmenu = MENU.filter(
           <a href="/sobre">Quién está detrás de esto</a> ·{" "}
           <a href="/privacidad">Privacidad</a>
         </p>
-        <p>Última actualización: {formatearFecha(ACTUALIZADO)}.</p>
+        <p>
+          Información de esta página verificada por última vez el {formatearFecha(fechaVerificacion)}.
+        </p>
       </div>
     </footer>
   </body>

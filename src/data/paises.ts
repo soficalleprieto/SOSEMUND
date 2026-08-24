@@ -1,8 +1,6 @@
 import type { Pais } from "./tipos";
 import { colombiaTerremoto2026 } from "./eventos/colombia-terremoto-2026";
 
-export const ACTUALIZADO = "2026-08-13";
-
 export const PAISES: Pais[] = [
   {
     slug: "colombia",

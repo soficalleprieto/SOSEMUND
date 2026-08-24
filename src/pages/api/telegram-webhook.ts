@@ -11,6 +11,35 @@ const TELEGRAM_API = "https://api.telegram.org";
 const GITHUB_API = "https://api.github.com";
 const SITIO = "https://sosemund.org";
 
+/**
+ * Clave de verificación de IndexNow: el archivo público
+ * `/${INDEXNOW_KEY}.txt` (con la misma clave dentro) es lo que prueba que
+ * quien avisa de una URL nueva es el dueño del sitio. Bing, Yandex y Naver
+ * la usan para indexar rápido sin esperar a rastrear por su cuenta; Google
+ * no participa en este protocolo, así que esto es un extra sobre el
+ * sitemap, no un sustituto.
+ */
+const INDEXNOW_KEY = "b2470eec49f7710d1136df2c51acfca1";
+
+/** No bloquea el aviso de Telegram si falla: es un extra, no algo crítico. */
+async function avisarIndexNow(urls: string[]) {
+  if (urls.length === 0) return;
+  try {
+    await fetch("https://api.indexnow.org/indexnow", {
+      method: "POST",
+      headers: { "Content-Type": "application/json; charset=utf-8" },
+      body: JSON.stringify({
+        host: "sosemund.org",
+        key: INDEXNOW_KEY,
+        keyLocation: `${SITIO}/${INDEXNOW_KEY}.txt`,
+        urlList: urls,
+      }),
+    });
+  } catch {
+    // Silencioso a propósito: no es razón para que falle la fusión del PR.
+  }
+}
+
 /** El único archivo con datos de las 11 localidades y de las ayudas generales. */
 const ARCHIVO_PRINCIPAL = "src/data/eventos/colombia-terremoto-2026.ts";
 
@@ -260,6 +289,7 @@ export const POST: APIRoute = async ({ request }) => {
             extra =
               `\n\nVerlo publicado (puede tardar 1-2 min en desplegarse):\n` +
               enlaces.map((e) => `→ ${e}`).join("\n");
+            await avisarIndexNow(enlaces);
           }
         }
 
