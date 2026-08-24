@@ -195,7 +195,7 @@ const base = `/${pais.slug}/${evento.slug}`;
     pásale este enlace y que decida con calma, sin intermediarios:
   </p>
   <p>
-    <a href={`${base}/negocios/anadir`}>
+    <a href={`${base}/negocios/alta`}>
       <strong>Publica tu negocio, es gratis →</strong>
     </a>
   </p>
@@ -215,7 +215,7 @@ const base = `/${pais.slug}/${evento.slug}`;
 
   <script define:vars={{ numero: WHATSAPP.numero }}>
     {
-      /* Mismo patrón que /negocios/anadir: sin servidor, el formulario solo
+      /* Mismo patrón que /negocios/alta: sin servidor, el formulario solo
          arma el texto y abre WhatsApp con él ya escrito. */
     }
     const form = document.getElementById("form-proponer");

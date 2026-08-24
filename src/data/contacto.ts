@@ -3,7 +3,7 @@
  *
  * El envío final sigue siendo WhatsApp, no un servidor propio: no hay forma de
  * adjuntar fotos desde un enlace, así que quien rellena el formulario de
- * /negocios/anadir igual termina en su WhatsApp para mandarlas. Lo que cambió
+ * /negocios/alta igual termina en su WhatsApp para mandarlas. Lo que cambió
  * (decisión de Sofía, 20/08/2026) es que ya no escribe el mensaje a mano desde
  * cero: un formulario estructurado (nombre, localidad, tipo de negocio con
  * listas desplegables) arma el texto por él.

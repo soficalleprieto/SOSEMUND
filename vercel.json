@@ -3,7 +3,8 @@
   "redirects": [
     { "source": "/censo", "destination": "/colombia/terremoto-2026/censo", "permanent": true },
     { "source": "/ayudas", "destination": "/colombia/terremoto-2026", "permanent": true },
-    { "source": "/ayudas/:ciudad", "destination": "/colombia/terremoto-2026/:ciudad", "permanent": true }
+    { "source": "/ayudas/:ciudad", "destination": "/colombia/terremoto-2026/:ciudad", "permanent": true },
+    { "source": "/:pais/:evento/negocios/anadir", "destination": "/:pais/:evento/negocios/alta", "permanent": true }
   ],
   "headers": [
     {
