@@ -77,12 +77,14 @@ const n = (x: number) => x.toLocaleString("es-CO");
             <span class="accion-titulo">Conozco un negocio afectado</span>
             <span class="accion-texto">Aunque no sea el tuyo, cuéntanoslo</span>
           </a>
-          <div class="acciones-fila">
-            <a href={`/${activo.pais.slug}/${activo.evento.slug}/negocios`}>
-              <span class="accion-icono" aria-hidden="true">🧾</span>
-              Negocios que te necesitan
-            </a>
-          </div>
+          <a
+            class="accion accion-principal"
+            href={`/${activo.pais.slug}/${activo.evento.slug}/negocios`}
+          >
+            <span class="accion-icono" aria-hidden="true">🧾</span>
+            <span class="accion-titulo">Negocios que te necesitan</span>
+            <span class="accion-texto">Cómprales, síguelos, cuéntalo</span>
+          </a>
         </div>
       </>
     )
