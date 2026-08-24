@@ -1,5 +1,6 @@
 ---
 import Base from "../../../layouts/Base.astro";
+import Breadcrumbs from "../../../components/Breadcrumbs.astro";
 import CompartirWhatsApp from "../../../components/CompartirWhatsApp.astro";
 import Fuentes from "../../../components/Fuentes.astro";
 import Imagen from "../../../components/Imagen.astro";
@@ -34,10 +35,14 @@ const foto = IMAGEN_POR_LOCALIDAD[c.slug];
   descripcion={`Qué puede pedir un comerciante de ${c.nombre} tras ${evento.nombre}: cómo censarse, alivios bancarios, alivios tributarios y líneas de crédito. Con fuente y fecha.`}
   ruta={`${base}/${c.slug}`}
 >
-  <nav class="migas">
-    <a href="/">Inicio</a> › <a href={`/${pais.slug}`}>{pais.nombre}</a> ›{" "}
-    <a href={base}>{evento.nombreCorto}</a> › {c.nombre}
-  </nav>
+  <Breadcrumbs
+    items={[
+      { nombre: "Inicio", href: "/" },
+      { nombre: pais.nombre, href: `/${pais.slug}` },
+      { nombre: evento.nombreCorto, href: base },
+      { nombre: c.nombre },
+    ]}
+  />
 
   <h1>Ayudas para negocios en {c.nombre}</h1>
   <p class="meta">

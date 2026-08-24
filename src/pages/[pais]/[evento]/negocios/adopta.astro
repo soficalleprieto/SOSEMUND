@@ -9,6 +9,7 @@
  * cambio, es verificable: o lo has hecho o no.
  */
 import Base from "../../../../layouts/Base.astro";
+import Breadcrumbs from "../../../../components/Breadcrumbs.astro";
 import CompartirWhatsApp from "../../../../components/CompartirWhatsApp.astro";
 import { todosLosEventos } from "../../../../data/paises";
 import type { Evento, Pais } from "../../../../data/tipos";
@@ -40,11 +41,15 @@ Qué tipo de contenido hago:`;
   descripcion="Si creas contenido, adopta un negocio afectado por el terremoto: lo enseñas a tu audiencia y le devuelves clientes. Como «Adopta un Comercio» tras la DANA de Valencia."
   ruta={`${base}/negocios/adopta`}
 >
-  <nav class="migas">
-    <a href="/">Inicio</a> › <a href={`/${pais.slug}`}>{pais.nombre}</a> ›{" "}
-    <a href={base}>{evento.nombreCorto}</a> ›{" "}
-    <a href={`${base}/negocios`}>Negocios</a> › Adoptar uno
-  </nav>
+  <Breadcrumbs
+    items={[
+      { nombre: "Inicio", href: "/" },
+      { nombre: pais.nombre, href: `/${pais.slug}` },
+      { nombre: evento.nombreCorto, href: base },
+      { nombre: "Negocios", href: `${base}/negocios` },
+      { nombre: "Adoptar uno" },
+    ]}
+  />
 
   <h1>Adopta un comercio</h1>
 

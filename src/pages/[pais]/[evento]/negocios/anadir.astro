@@ -1,5 +1,6 @@
 ---
 import Base from "../../../../layouts/Base.astro";
+import Breadcrumbs from "../../../../components/Breadcrumbs.astro";
 import { todosLosEventos } from "../../../../data/paises";
 import type { Evento, Pais } from "../../../../data/tipos";
 import { WHATSAPP, QUE_MANDAR, TIPOS_NEGOCIO_BASE, POR_QUE_ESPANA } from "../../../../data/contacto";
@@ -24,11 +25,15 @@ const base = `/${pais.slug}/${evento.slug}`;
   descripcion="Si tu negocio resultó afectado, publicamos su ficha gratis: qué era, cómo quedó, qué necesita y por dónde contactarte. Rellena el formulario y lo mandas por WhatsApp."
   ruta={`${base}/negocios/anadir`}
 >
-  <nav class="migas">
-    <a href="/">Inicio</a> › <a href={`/${pais.slug}`}>{pais.nombre}</a> ›{" "}
-    <a href={base}>{evento.nombreCorto}</a> ›{" "}
-    <a href={`${base}/negocios`}>Negocios</a> › Publicar el mío
-  </nav>
+  <Breadcrumbs
+    items={[
+      { nombre: "Inicio", href: "/" },
+      { nombre: pais.nombre, href: `/${pais.slug}` },
+      { nombre: evento.nombreCorto, href: base },
+      { nombre: "Negocios", href: `${base}/negocios` },
+      { nombre: "Publicar el mío" },
+    ]}
+  />
 
   <h1>Publica tu negocio, es gratis</h1>
 

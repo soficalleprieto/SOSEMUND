@@ -1,5 +1,6 @@
 ---
 import Base from "../../../layouts/Base.astro";
+import Breadcrumbs from "../../../components/Breadcrumbs.astro";
 import CompartirWhatsApp from "../../../components/CompartirWhatsApp.astro";
 import Fuentes from "../../../components/Fuentes.astro";
 import Imagen from "../../../components/Imagen.astro";
@@ -30,10 +31,13 @@ const n = (x: number) => x.toLocaleString("es-CO");
   descripcion={`Guía para comerciantes afectados por ${evento.nombre} en ${pais.nombre}: cómo censar tu negocio, qué alivios existen y cómo pedirlos.`}
   ruta={base}
 >
-  <nav class="migas">
-    <a href="/">Inicio</a> › <a href={`/${pais.slug}`}>{pais.nombre}</a> ›{" "}
-    {evento.nombreCorto}
-  </nav>
+  <Breadcrumbs
+    items={[
+      { nombre: "Inicio", href: "/" },
+      { nombre: pais.nombre, href: `/${pais.slug}` },
+      { nombre: evento.nombreCorto },
+    ]}
+  />
 
   <h1>Tu negocio no tiene que cerrar</h1>
   <p class="entradilla">

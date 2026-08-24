@@ -1,5 +1,6 @@
 ---
 import Base from "../../../../layouts/Base.astro";
+import Breadcrumbs from "../../../../components/Breadcrumbs.astro";
 import CompartirWhatsApp from "../../../../components/CompartirWhatsApp.astro";
 import TarjetaNegocio from "../../../../components/TarjetaNegocio.astro";
 import { todosLosEventos } from "../../../../data/paises";
@@ -41,10 +42,14 @@ const actividades = [...new Set(evento.negocios.map((n) => n.actividad))].sort((
   descripcion={`Negocios afectados por ${evento.nombre}: qué eran, cómo quedaron, qué necesitan y cómo apoyarlos. Publicar el tuyo es gratis.`}
   ruta={`${base}/negocios`}
 >
-  <nav class="migas">
-    <a href="/">Inicio</a> › <a href={`/${pais.slug}`}>{pais.nombre}</a> ›{" "}
-    <a href={base}>{evento.nombreCorto}</a> › Negocios
-  </nav>
+  <Breadcrumbs
+    items={[
+      { nombre: "Inicio", href: "/" },
+      { nombre: pais.nombre, href: `/${pais.slug}` },
+      { nombre: evento.nombreCorto, href: base },
+      { nombre: "Negocios" },
+    ]}
+  />
 
   <h1>Negocios que siguen adelante</h1>
 

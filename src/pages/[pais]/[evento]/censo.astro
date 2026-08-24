@@ -1,5 +1,6 @@
 ---
 import Base from "../../../layouts/Base.astro";
+import Breadcrumbs from "../../../components/Breadcrumbs.astro";
 import CompartirWhatsApp from "../../../components/CompartirWhatsApp.astro";
 import Fuentes from "../../../components/Fuentes.astro";
 import { todosLosEventos } from "../../../data/paises";
@@ -27,10 +28,14 @@ const { registro } = evento;
   descripcion={`Si tu negocio resultó afectado por ${evento.nombre} y no te censas, quedas fuera de las ayudas que vengan después. Paso a paso y localidad por localidad.`}
   ruta={`${base}/censo`}
 >
-  <nav class="migas">
-    <a href="/">Inicio</a> › <a href={`/${pais.slug}`}>{pais.nombre}</a> ›{" "}
-    <a href={base}>{evento.nombreCorto}</a> › Censo
-  </nav>
+  <Breadcrumbs
+    items={[
+      { nombre: "Inicio", href: "/" },
+      { nombre: pais.nombre, href: `/${pais.slug}` },
+      { nombre: evento.nombreCorto, href: base },
+      { nombre: "Censo" },
+    ]}
+  />
 
   <h1>Cómo censar tu negocio afectado</h1>
 

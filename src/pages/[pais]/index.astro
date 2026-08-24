@@ -1,5 +1,6 @@
 ---
 import Base from "../../layouts/Base.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import { PAISES } from "../../data/paises";
 import type { Pais } from "../../data/tipos";
 import { formatearFecha } from "../../utils/fecha";
@@ -20,7 +21,7 @@ const n = (x: number) => x.toLocaleString("es-CO");
   descripcion={`Emergencias cubiertas en ${pais.nombre}: qué ayudas existen para los negocios afectados, cómo censarse y cómo pedirlas.`}
   ruta={`/${pais.slug}`}
 >
-  <nav class="migas"><a href="/">Inicio</a> › {pais.nombre}</nav>
+  <Breadcrumbs items={[{ nombre: "Inicio", href: "/" }, { nombre: pais.nombre }]} />
 
   <h1>{pais.nombre}</h1>
   <p class="entradilla">

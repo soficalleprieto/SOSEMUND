@@ -1,0 +1,46 @@
+---
+/*
+ * Migas de pan, en un solo sitio: pinta la nav visible (igual que antes,
+ * carácter por carácter) Y su BreadcrumbList en JSON-LD, para que las dos
+ * nunca se puedan desincronizar. El último elemento no lleva `href`: es la
+ * página actual, ni enlaza a sí misma ni lleva `item` en el schema (así lo
+ * pide la propia guía de Google para BreadcrumbList).
+ */
+interface Miga {
+  nombre: string;
+  href?: string;
+}
+
+interface Props {
+  items: Miga[];
+}
+
+const { items } = Astro.props;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: items.map((item, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    name: item.nombre,
+    ...(item.href ? { item: new URL(item.href, Astro.site).href } : {}),
+  })),
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+<nav class="migas" aria-label="Ruta de navegación">
+  {
+    items.map((item, i) => (
+      <>
+        {item.href ? (
+          <a href={item.href}>{item.nombre}</a>
+        ) : (
+          <span aria-current="page">{item.nombre}</span>
+        )}
+        {i < items.length - 1 && " › "}
+      </>
+    ))
+  }
+</nav>

@@ -1,5 +1,6 @@
 ---
 import Base from "../../../layouts/Base.astro";
+import Breadcrumbs from "../../../components/Breadcrumbs.astro";
 import CompartirWhatsApp from "../../../components/CompartirWhatsApp.astro";
 import { todosLosEventos } from "../../../data/paises";
 import type { CategoriaIniciativa, Evento, Pais } from "../../../data/tipos";
@@ -58,10 +59,14 @@ const SECCIONES: {
   descripcion={`Centros de acopio, búsqueda de personas y ayuda urgente tras ${evento.nombre}: las iniciativas ciudadanas que funcionan, revisadas una por una.`}
   ruta={`${base}/iniciativas`}
 >
-  <nav class="migas">
-    <a href="/">Inicio</a> › <a href={`/${pais.slug}`}>{pais.nombre}</a> ›{" "}
-    <a href={base}>{evento.nombreCorto}</a> › Dónde encontrar ayuda
-  </nav>
+  <Breadcrumbs
+    items={[
+      { nombre: "Inicio", href: "/" },
+      { nombre: pais.nombre, href: `/${pais.slug}` },
+      { nombre: evento.nombreCorto, href: base },
+      { nombre: "Dónde encontrar ayuda" },
+    ]}
+  />
 
   <h1>Dónde encontrar ayuda ahora mismo</h1>
 

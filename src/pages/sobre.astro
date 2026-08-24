@@ -7,6 +7,7 @@
  */
 import { Image } from "astro:assets";
 import Base from "../layouts/Base.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
 import CompartirWhatsApp from "../components/CompartirWhatsApp.astro";
 import { WHATSAPP, enlaceWhatsApp } from "../data/contacto";
 import retrato from "../assets/sofia-calle.jpg";
@@ -17,7 +18,7 @@ import retrato from "../assets/sofia-calle.jpg";
   descripcion="Sofía Calle lleva más de 15 años trabajando con pequeños negocios. La pandemia y la DANA de Valencia le enseñaron que, cuando llega una catástrofe, encontrar ayuda no debería ser otro trabajo a tiempo completo."
   ruta="/sobre"
 >
-  <nav class="migas"><a href="/">Inicio</a> › Sobre</nav>
+  <Breadcrumbs items={[{ nombre: "Inicio", href: "/" }, { nombre: "Sobre" }]} />
 
   <div class="sobre-cabecera">
     <figure class="retrato">

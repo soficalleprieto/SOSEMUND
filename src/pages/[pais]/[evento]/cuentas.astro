@@ -6,6 +6,7 @@
  */
 import { Image } from "astro:assets";
 import Base from "../../../layouts/Base.astro";
+import Breadcrumbs from "../../../components/Breadcrumbs.astro";
 import CompartirWhatsApp from "../../../components/CompartirWhatsApp.astro";
 import { todosLosEventos } from "../../../data/paises";
 import type { Evento, Pais, Red } from "../../../data/tipos";
@@ -52,10 +53,14 @@ const URL_RED: Record<Red, (h: string) => string> = {
   descripcion={`Creadores, medios y organizaciones que están informando y moviendo ayuda tras ${evento.nombre}. Enlazamos sus perfiles para que puedas seguirlos y compartir su trabajo.`}
   ruta={`${base}/cuentas`}
 >
-  <nav class="migas">
-    <a href="/">Inicio</a> › <a href={`/${pais.slug}`}>{pais.nombre}</a> ›{" "}
-    <a href={base}>{evento.nombreCorto}</a> › Cuentas
-  </nav>
+  <Breadcrumbs
+    items={[
+      { nombre: "Inicio", href: "/" },
+      { nombre: pais.nombre, href: `/${pais.slug}` },
+      { nombre: evento.nombreCorto, href: base },
+      { nombre: "Cuentas" },
+    ]}
+  />
 
   <h1>Cuentas que están contando lo que pasa</h1>
 

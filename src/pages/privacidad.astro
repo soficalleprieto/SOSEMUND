@@ -9,6 +9,7 @@
  * la propia página.
  */
 import Base from "../layouts/Base.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
 import { WHATSAPP, enlaceWhatsApp } from "../data/contacto";
 ---
 
@@ -17,7 +18,7 @@ import { WHATSAPP, enlaceWhatsApp } from "../data/contacto";
   descripcion="Qué datos tratamos, para qué, durante cuánto tiempo y cómo pedir que los corrijamos o los borremos."
   ruta="/privacidad"
 >
-  <nav class="migas"><a href="/">Inicio</a> › Privacidad</nav>
+  <Breadcrumbs items={[{ nombre: "Inicio", href: "/" }, { nombre: "Privacidad" }]} />
 
   <h1>Política de privacidad</h1>
 

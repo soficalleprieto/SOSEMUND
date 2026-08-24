@@ -12,6 +12,7 @@
  * persona vulnerable sin que se haya enterado.
  */
 import Base from "../../../../layouts/Base.astro";
+import Breadcrumbs from "../../../../components/Breadcrumbs.astro";
 import CompartirWhatsApp from "../../../../components/CompartirWhatsApp.astro";
 import { todosLosEventos } from "../../../../data/paises";
 import type { Evento, Pais } from "../../../../data/tipos";
@@ -37,11 +38,15 @@ const base = `/${pais.slug}/${evento.slug}`;
   descripcion="¿Conoces un negocio que lo perdió todo y no está en internet? Cuéntanoslo. Nosotros contactamos con quien lo regenta y, si acepta, le montamos su ficha gratis."
   ruta={`${base}/negocios/proponer`}
 >
-  <nav class="migas">
-    <a href="/">Inicio</a> › <a href={`/${pais.slug}`}>{pais.nombre}</a> ›{" "}
-    <a href={base}>{evento.nombreCorto}</a> ›{" "}
-    <a href={`${base}/negocios`}>Negocios</a> › Proponer uno
-  </nav>
+  <Breadcrumbs
+    items={[
+      { nombre: "Inicio", href: "/" },
+      { nombre: pais.nombre, href: `/${pais.slug}` },
+      { nombre: evento.nombreCorto, href: base },
+      { nombre: "Negocios", href: `${base}/negocios` },
+      { nombre: "Proponer uno" },
+    ]}
+  />
 
   <h1>¿Conoces un negocio que lo perdió todo?</h1>
 
