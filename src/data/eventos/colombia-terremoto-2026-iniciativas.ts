@@ -122,6 +122,30 @@ export const iniciativasColombia2026: Iniciativa[] = [
     para: "Donantes y cualquiera que necesite orientarse en la emergencia",
     nota: "Corre en un subdominio gratuito de Vercel, sin que hayamos podido confirmar quién está detrás. El criterio de citar fuente y fecha en cada dato es el mismo que seguimos nosotros.",
   },
+  {
+    nombre: "Buscando Huellas",
+    url: "https://buscandohuellascol.app",
+    categoria: "mascotas",
+    que: "Plataforma gratuita para reportar mascotas perdidas o encontradas durante la emergencia, con un directorio aparte de fundaciones que reciben donaciones en las zonas afectadas.",
+    para: "Dueños de mascotas del Eje Cafetero",
+    nota: "Creada por Daniela Oviedo, periodista de Armenia (Quindío). Nació enfocada en Quindío y Risaralda, aunque es de acceso abierto.",
+  },
+  {
+    nombre: "Mascotas Perdidas Cali",
+    url: "https://emergencia-cali.web.app",
+    categoria: "mascotas",
+    que: "Mapa interactivo para reportar y buscar mascotas perdidas en Cali tras el terremoto, con reportes comunitarios y contacto directo entre quien la encuentra y quien la busca.",
+    para: "Dueños de mascotas en Cali",
+  },
+  {
+    nombre: "HOTOSM: respuesta al terremoto de Colombia",
+    url: "https://www.hotosm.org/en/projects/2026-colombia-earthquake-response/",
+    categoria: "danos",
+    que: "Mapeo colaborativo internacional de edificios y vías dañadas: la comunidad de OpenStreetMap Colombia recoge fotos y ubicaciones por WhatsApp a través de su ChatMap, y voluntarios de todo el mundo las usan para actualizar el mapa base de edificaciones en las zonas afectadas.",
+    para: "Voluntarios mapeadores y equipos de respuesta",
+    alcance: "Más de 800 voluntarios registrados y más de 450 reportes solo en el ChatMap, según la coordinación del propio proyecto.",
+    nota: "Es un proyecto internacional del Humanitarian OpenStreetMap Team, no una iniciativa colombiana, pero cubre el mismo hueco de daños en edificaciones que Mapa de daños y Mapa del Terremoto de Colombia.",
+  },
 ];
 
 /**
@@ -149,5 +173,29 @@ export const verificadoresColombia2026: Verificador[] = [
   {
     nombre: "Verificado (México)",
     url: "https://verificado.com.mx/desinformaciones-terremoto-10-agosto-colombia",
+  },
+  {
+    nombre: "ColombiaCheck",
+    url: "https://colombiacheck.com/chequeos/este-video-del-interior-de-un-edificio-que-se-tambalea-no-corresponde-al-terremoto-de",
+  },
+  {
+    nombre: "La Silla Vacía — Detector de Mentiras",
+    url: "https://www.lasillavacia.com/detector-de-mentiras/falso/detector-haarp-no-provoco-el-terremoto-del-10-de-agosto/",
+  },
+  {
+    nombre: "Chequeado (Argentina)",
+    url: "https://chequeado.com/ultimas-noticias/es-falso-que-haarp-haya-provocado-el-terremoto-de-magnitud-7-4-en-colombia/",
+  },
+  {
+    nombre: "Lupa Media (Ecuador)",
+    url: "https://lupa.com.ec/verificaciones/sismo-colombia/",
+  },
+  {
+    nombre: "la diaria Verifica (Uruguay)",
+    url: "https://ladiaria.com.uy/verifica/articulo/2026/8/las-desinformaciones-que-circularon-tras-el-terremoto-en-colombia-videos-de-otros-paises-imagenes-de-ia-y-teorias-conspirativas/",
+  },
+  {
+    nombre: "Grupo Animal (México)",
+    url: "https://grupoanimal.mx/verificacion-de-hechos/desinformacion-sismo-colombia",
   },
 ];
