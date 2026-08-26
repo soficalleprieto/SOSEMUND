@@ -311,11 +311,13 @@ function normalizarRed(valor: string, dominio: string, prefijoRuta = "") {
   if (/^https?:\/\//i.test(limpio)) return limpio;
   const handle = limpio.replace(/^@/, "");
   if (!handle) return null;
-  // "calzado la gran economia" es el NOMBRE de una página, no un usuario:
-  // no hay URL directa fiable para eso, así que se manda a buscarla dentro
-  // de la propia red en vez de armar un enlace que seguro no funciona.
+  // "calzado la gran economia" es el NOMBRE de una página, no un usuario: no
+  // hay URL directa fiable para eso. El buscador propio de Facebook exige
+  // sesión iniciada y da "Not Found" a quien no la tiene, así que en vez de
+  // eso se manda a Google restringido a ese dominio, que sí resuelve sin
+  // necesitar cuenta.
   if (/\s/.test(handle)) {
-    return `https://www.${dominio}/search?q=${encodeURIComponent(handle)}`;
+    return `https://www.google.com/search?q=${encodeURIComponent(`${handle} site:${dominio}`)}`;
   }
   return `https://${dominio}/${prefijoRuta}${handle}`;
 }
