@@ -146,6 +146,39 @@ export const iniciativasColombia2026: Iniciativa[] = [
     alcance: "Más de 800 voluntarios registrados y más de 450 reportes solo en el ChatMap, según la coordinación del propio proyecto.",
     nota: "Es un proyecto internacional del Humanitarian OpenStreetMap Team, no una iniciativa colombiana, pero cubre el mismo hueco de daños en edificaciones que Mapa de daños y Mapa del Terremoto de Colombia.",
   },
+  {
+    nombre: "Asocapitales: mapa de necesidades y desaparecidos",
+    url: "https://www.asocapitales.co/terremoto-colombia.html",
+    categoria: "desaparecidos",
+    que: "Herramienta digital de la Asociación Colombiana de Ciudades Capitales con un formulario para reportar desaparecidos ante el Puesto de Mando Unificado, que agrega también los reportes de Colombia Te Busca filtrables por ciudad, y un mapa de necesidades y centros de acopio oficiales por ciudad capital. Tiene una línea de urgencia: 300 761 6647.",
+    para: "Familias que buscan a alguien y ciudadanos que quieren donar en una ciudad capital",
+    nota: "A diferencia de la mayoría de esta lista, la impulsa una entidad gremial de municipios, no una persona ni una empresa.",
+  },
+  {
+    nombre: "SismoAyuda Colombia",
+    url: "https://sismoayudaco.com",
+    categoria: "danos",
+    que: "Evaluación estructural remota y voluntaria de edificaciones dañadas: subes fotos y la dirección del inmueble, y un ingeniero civil voluntario las revisa según las normas ATC-20 y EMS-98 y devuelve por correo una clasificación de habitabilidad (verde, amarillo o rojo) con recomendaciones.",
+    para: "Propietarios y comerciantes que necesitan una primera valoración mientras esperan la evaluación oficial",
+    nota: "Es la versión colombiana de un proyecto homónimo nacido en Venezuela. No sustituye la evaluación oficial de la UNGRD: es un complemento informal, no un dictamen legal sobre si un local es habitable.",
+  },
+  {
+    nombre: "Ayúdame Colombia",
+    url: "https://ayúdamecolombia.space",
+    categoria: "acopio",
+    que: "Mapa interactivo en tiempo real que cruza qué zonas necesitan ayuda, qué recursos ya están cubiertos y dónde hay excedentes para redistribuir, para evitar que las donaciones se acumulen en un solo punto mientras otros quedan desatendidos. Funciona desde el navegador del móvil, sin instalar nada.",
+    para: "Voluntarios y donantes",
+    alcance: "Nació centrada en Bogotá; no confirmamos cobertura nacional completa.",
+    nota: "Iniciativa personal de una joven bogotana, Sofía Garcés, no de una organización.",
+  },
+  {
+    nombre: "Webapp humanitaria offline (El Errante Coding Labs)",
+    url: "https://ayuda-humanitaria-89e72.web.app",
+    categoria: "acopio",
+    que: "Coordina la entrega de ayuda humanitaria y sigue funcionando parcialmente sin conexión a internet: guarda en el dispositivo la última información recibida y cualquier reporte que hagas sin señal, y lo sincroniza en cuanto recuperas cobertura.",
+    para: "Voluntarios y entidades que coordinan ayuda en zonas rurales con conectividad dañada",
+    nota: "Desarrollada de forma altruista y sin ánimo de lucro por Mateo CM (El Errante Coding Labs), con apoyo de Publicis Colombia en su gestión y difusión. No tiene un nombre de marca propio más allá del de su creador.",
+  },
 ];
 
 /**
@@ -197,5 +230,9 @@ export const verificadoresColombia2026: Verificador[] = [
   {
     nombre: "Grupo Animal (México)",
     url: "https://grupoanimal.mx/verificacion-de-hechos/desinformacion-sismo-colombia",
+  },
+  {
+    nombre: "Cotejo.info (Venezuela)",
+    url: "https://cotejo.info/2026/08/falso-que-exista-un-patron-entre-los-terremotos-de-venezuela-y-colombia/",
   },
 ];

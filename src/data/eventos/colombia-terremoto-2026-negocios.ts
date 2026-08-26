@@ -26,6 +26,34 @@ import ropaAhora from "../../assets/negocios/ejemplo-ropa/ahora.jpg";
  */
 export const negociosColombia2026: Negocio[] = [
   {
+    slug: "calzado-la-gran-economia-de-bucaramanga",
+    nombre: "Calzado la gran economía de Bucaramanga",
+    actividad: "Zapatería",
+    localidad: "pereira",
+    historia:
+      "[PENDIENTE: falta contar qué era este negocio antes del terremoto — pregúntaselo y complétalo antes de publicar]",
+    estado: {
+      local: "sin-datos",
+      mercancia: "sin-datos",
+      equipos: "sin-datos",
+      detalle: "Nuestro local estaba ubicado en la Carrera 8 #21-63, en la ciudad de Pereira, durante los últimos 9 años, este lugar fue nuestro punto físico y parte importante de nuestra historia.\nLamentablemente, debido a la situación presentada, el edificio se encuentra actualmente en riesgo de colapso, por lo que el inmueble no es habitable y, por el momento, no podemos atender de manera presencial.\nGracias a Dios, pudimos rescatar nuestra mercancía y continuar con nuestro trabajo. Actualmente estamos buscando un nuevo punto físico. \nMientras encontramos nuestro nuevo espacio, seguimos activos únicamente a través de nuestras redes sociales.",
+    },
+    operando: true,
+    dondeEstaAhora: "Actualmente estamos vendiendo desde nuestro hogar y a través de internet, realizando envíos a domicilio y también atendiendo a los clientes que desean acercarse hasta nuestra casa para realizar sus compras.",
+    necesita: [
+      "En este momento, la ayuda que más necesitamos es apoyo para crecer en nuestras redes sociales. Queremos aprender, recibir herramientas y orientación que nos permitan fortalecer nuestra presencia digital y, sobre todo, poder vender a través de este medio mientras conseguimos nuevamente un punto físico.",
+      "Después de tantos años atendiendo desde nuestro local, este es un nuevo reto para nosotros. Por eso, cualquier conocimiento, estrategia, consejo o herramienta que nos ayude a crecer en redes sociales y llegar a más personas significaría muchísimo para nosotros y para nuestro negocio.",
+    ],
+    contacto: {
+      whatsapp: "3205231254",
+      instagram: "calzadolagraneconomia",
+      facebook: "calzado la gran economia",
+      tiktok: "calzado.lagran.economia",
+    },
+    revisadaEl: "2026-08-26",
+    consentimiento: true,
+  },
+  {
     slug: "ejemplo",
     esEjemplo: true,
     nombre: "La panadería de la esquina",
