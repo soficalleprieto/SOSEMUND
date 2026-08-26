@@ -151,11 +151,26 @@ const schemaNegocio = !n.esEjemplo && {
   <p class="entradilla">{n.historia}</p>
 
   <h2>Cómo quedó</h2>
-  <ul class="danos">
-    <li><span>Local</span> <strong>{ETIQUETA_DANO[n.estado.local]}</strong></li>
-    <li><span>Mercancía</span> <strong>{ETIQUETA_DANO[n.estado.mercancia]}</strong></li>
-    <li><span>Equipos</span> <strong>{ETIQUETA_DANO[n.estado.equipos]}</strong></li>
-  </ul>
+  {
+    /*
+     * Si las tres vienen "sin-datos" no es que el negocio esté intacto: es
+     * que quien la dio de alta contó todo junto, en un solo texto, sin
+     * desglosar local/mercancía/equipos (así llega, por ejemplo, desde el
+     * mensaje de WhatsApp). Tres etiquetas "Sin datos" seguidas no informan
+     * nada y parecen un error; mejor dejar que hable el detalle de abajo.
+     */
+  }
+  {
+    (n.estado.local !== "sin-datos" ||
+      n.estado.mercancia !== "sin-datos" ||
+      n.estado.equipos !== "sin-datos") && (
+      <ul class="danos">
+        <li><span>Local</span> <strong>{ETIQUETA_DANO[n.estado.local]}</strong></li>
+        <li><span>Mercancía</span> <strong>{ETIQUETA_DANO[n.estado.mercancia]}</strong></li>
+        <li><span>Equipos</span> <strong>{ETIQUETA_DANO[n.estado.equipos]}</strong></li>
+      </ul>
+    )
+  }
   {n.estado.detalle && <p>{n.estado.detalle}</p>}
 
   {
