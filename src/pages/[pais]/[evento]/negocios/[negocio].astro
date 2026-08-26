@@ -38,6 +38,14 @@ const REDES: [keyof typeof n.contacto, string][] = [
 ];
 const enlaces = REDES.filter(([k]) => n.contacto[k]);
 
+/** Mismo mensaje ya escrito que en los enlaces de apadrinar y compartir: que a quien escriba no le toque redactar desde cero. */
+const MENSAJE_WHATSAPP_NEGOCIO = "Hola. Vi tus datos en la web de S.O.S.EMUND y quiero apoyarte.";
+const enlaceContacto = (clave: (typeof REDES)[number][0], url: string) => {
+  if (clave !== "whatsapp") return url;
+  const separador = url.includes("?") ? "&" : "?";
+  return `${url}${separador}text=${encodeURIComponent(MENSAJE_WHATSAPP_NEGOCIO)}`;
+};
+
 const urlFicha = new URL(`${base}/negocios/${n.slug}`, Astro.site).href;
 
 /** Si no hay `historia` (el alta por WhatsApp todavía no la pide), un resumen genérico pero honesto. */
@@ -221,7 +229,7 @@ const schemaNegocio = !n.esEjemplo && {
       <ul class="enlaces-localidades">
         {enlaces.map(([k, etiqueta]) => (
           <li>
-            <a href={n.contacto[k]} target="_blank" rel="noopener">
+            <a href={enlaceContacto(k, n.contacto[k]!)} target="_blank" rel="noopener">
               {etiqueta}
             </a>
           </li>
