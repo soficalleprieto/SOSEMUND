@@ -250,9 +250,44 @@ const BAVARIA_ELTIEMPO_2026: Fuente = {
   fecha: "2026-08-19",
 };
 
-/** Texto compartido por las ciudades cuyo canal para negocios aún no verificamos. */
-const PENDIENTE =
-  "Hay módulos de registro habilitados en la alcaldía y el coliseo municipal. Estamos verificando el canal específico para negocios.";
+const SUPERFINANCIERA_CIRCULAR_2026: Fuente = {
+  medio: "Infobae",
+  titulo:
+    "La Superfinanciera activó las 'Quejas exprés' para priorizar reclamos tras el sismo y anunció alivios temporales de crédito para los afectados",
+  url: "https://www.infobae.com/colombia/2026/08/13/la-superfinanciera-activo-las-quejas-expres-para-priorizar-reclamos-tras-el-sismo-y-anuncio-alivios-temporales-de-credito-para-los-afectados/",
+  fecha: "2026-08-13",
+};
+
+const FASECOLDA_PLAZOS_2026: Fuente = {
+  medio: "Portafolio",
+  titulo:
+    "¿Su casa tiene seguro contra terremoto? Fasecolda aclara quién está protegido",
+  url: "https://www.portafolio.co/economia/regiones/su-casa-tiene-seguro-contra-terremoto-fasecolda-aclara-quien-esta-protegido-500266",
+  fecha: "2026-08-19",
+};
+
+const RECLAMACIONES_SEGUROS_2026: Fuente = {
+  medio: "El País",
+  titulo: "Empresas de seguros han recibido 36.415 reclamaciones tras el terremoto",
+  url: "https://www.elpais.com.co/economia/empresas-de-seguros-han-recibido-36415-reclamaciones-tras-el-terremoto-cerca-de-la-mitad-son-del-valle-del-cauca-2401.html",
+  fecha: "2026-08-21",
+};
+
+const CALI_PROYECTO_ACUERDO_100_2026: Fuente = {
+  medio: "El País (Cali)",
+  titulo:
+    "Concejo de Cali instala sesiones extraordinarias y radica proyectos tras el terremoto: estas son las medidas para atender la emergencia",
+  url: "https://www.elpais.com.co/cali/concejo-de-cali-instala-sesiones-extraordinarias-y-radica-proyectos-tras-el-terremoto-estas-son-las-medidas-para-atender-la-emergencia-2452.html",
+  fecha: "2026-08-24",
+};
+
+const CALI_ALCALDIA_PROYECTOS_2026: Fuente = {
+  medio: "Alcaldía de Santiago de Cali",
+  titulo:
+    "Alcaldía de Cali radicó ante el Concejo dos proyectos de acuerdo para avanzar en la reconstrucción de la ciudad tras el terremoto",
+  url: "https://www.cali.gov.co/boletines/publicaciones/193927/alcaldia-de-cali-radico-ante-el-concejo-dos-proyectos-de-acuerdo-para-avanzar-en-la-reconstruccion-de-la-ciudad-tras-el-terremoto/",
+  fecha: "2026-08-24",
+};
 
 export const colombiaTerremoto2026: Evento = {
   slug: "terremoto-2026",
@@ -353,14 +388,18 @@ export const colombiaTerremoto2026: Evento = {
       ayudasPropias: [
         {
           slug: "cali-fondo-reactivacion",
-          titulo: "Fondo municipal de reactivación (proyecto, sin aprobar)",
+          titulo: "Fondo municipal de reactivación y alivio tributario (radicados, sin aprobar)",
           resumen:
-            "La Alcaldía prepara un fondo de $5.000 millones en aportes no reembolsables, más microcrédito y un alivio tributario, todavía sin aprobar.",
+            "La Alcaldía prepara un fondo de $5.000 millones en aportes no reembolsables, más microcrédito, y ya radicó ante el Concejo un proyecto de acuerdo con exención de ICA y predial, todavía sin aprobar.",
           detalle:
-            "La Alcaldía de Cali prepara su propio paquete municipal: un fondo proyectado en $5.000 millones para unidades productivas afectadas, pensado como aportes no reembolsables en especie (herramientas, maquinaria, equipos, insumos), más líneas de microcrédito con tasas diferenciales. La Alcaldía, junto con la Cámara de Comercio de Cali, ya caracterizó 1.493 unidades productivas en las zonas afectadas: el 89,2 % son microempresas. El alivio tributario que también contempla ese plan (ICA, predial) sigue en estudio, no aprobado.",
+            "La Alcaldía de Cali prepara su propio paquete municipal: un fondo proyectado en $5.000 millones para unidades productivas afectadas, pensado como aportes no reembolsables en especie (herramientas, maquinaria, equipos, insumos), más líneas de microcrédito con tasas diferenciales. La Alcaldía, junto con la Cámara de Comercio de Cali, ya caracterizó 1.493 unidades productivas en las zonas afectadas: el 89,2 % son microempresas.\n\nEl alivio tributario dio un paso concreto: el alcalde Alejandro Eder radicó el 24 de agosto de 2026 ante el Concejo, en sesiones extraordinarias, el Proyecto de Acuerdo 100, que plantea exención temporal de ICA y del impuesto de Avisos y Tableros para establecimientos comerciales afectados, con el beneficio proporcional al daño: hasta el 100 % para pérdida total o cierre obligatorio, y reducciones para daño parcial. También contempla alivio de predial —hasta el 100 % de exención por una vigencia fiscal— para los inmuebles con colapso total o demolición. Junto a este, radicó el Proyecto de Acuerdo 099, que pide facultades temporales para que el alcalde pueda ajustar el presupuesto distrital y atender la emergencia. El estudio en la Comisión de Presupuesto del Concejo arrancó el 25 de agosto.",
           pendiente:
-            "Ni el fondo ni el alivio tributario están aprobados todavía: siguen en fase de proyecto. En cuanto se apruebe alguno con monto, requisitos y forma de pedirlo, lo actualizamos.",
-          fuentes: [CALI_FONDO_REACTIVACION_2026],
+            "Ni el fondo de reactivación ni el Proyecto de Acuerdo 100 están aprobados todavía: el segundo está en trámite de comisión en el Concejo. En cuanto el Concejo vote alguno de los dos, con monto, requisitos y forma de pedirlo, lo actualizamos.",
+          fuentes: [
+            CALI_FONDO_REACTIVACION_2026,
+            CALI_PROYECTO_ACUERDO_100_2026,
+            CALI_ALCALDIA_PROYECTOS_2026,
+          ],
         },
       ],
     },
@@ -440,9 +479,11 @@ export const colombiaTerremoto2026: Evento = {
       alertaMaxima: true,
       contexto: "Es la capital más cercana al epicentro del sismo.",
       censo: {
-        verificado: false,
+        verificado: true,
         detalle:
-          "Quibdó cuenta con un Puesto de Mando Unificado (PMU) regional, además de los módulos de registro en la alcaldía y el coliseo municipal. Estamos verificando el canal específico para negocios.",
+          "Quibdó cuenta con un Puesto de Mando Unificado (PMU) regional y con módulos de registro en la alcaldía y el coliseo municipal, aunque seguimos sin encontrar un canal propio de la Cámara de Comercio del Chocó para negocios. Mientras tanto, tu negocio puede reportarse al Censo Único de Emergencia que coordina Confecámaras junto con el Ministerio de Comercio, 16 cámaras de comercio de las zonas afectadas, Acopi, Fenalco, Asocapitales y la Federación Nacional de Departamentos —el mismo censo ya reporta cifras propias de empresas afectadas en Chocó—. Llama o escribe por WhatsApp para pedir el cuestionario, diligenciarlo o dejar un mensaje de voz; si no tienes señal ni cobertura, hay formularios impresos en los puntos de atención.",
+        telefonos: ["300 913 1811"],
+        fuente: CENSO_UNICO_2026,
       },
     },
 
@@ -464,7 +505,13 @@ export const colombiaTerremoto2026: Evento = {
         url: "https://www.infobae.com/colombia/2026/08/13/este-es-san-jose-del-palmar-el-aislado-pueblo-del-choco-que-fue-el-epicentro-del-terremoto-de-74-en-colombia/",
         fecha: "2026-08-13",
       },
-      censo: { verificado: false, detalle: PENDIENTE },
+      censo: {
+        verificado: true,
+        detalle:
+          "No hemos encontrado un canal de negocios propio para este municipio, tan aislado que es la mayor incógnita del censo. Mientras tanto, puedes reportar tu negocio al Censo Único de Emergencia que coordina Confecámaras junto con el Ministerio de Comercio, 16 cámaras de comercio de las zonas afectadas, Acopi, Fenalco, Asocapitales y la Federación Nacional de Departamentos. Llama o escribe por WhatsApp para pedir el cuestionario, diligenciarlo o dejar un mensaje de voz; si no tienes señal ni cobertura —como es el caso aquí—, hay formularios impresos en los puntos de atención.",
+        telefonos: ["300 913 1811"],
+        fuente: CENSO_UNICO_2026,
+      },
     },
     {
       slug: "sipi",
@@ -479,7 +526,13 @@ export const colombiaTerremoto2026: Evento = {
         url: "https://es.wikipedia.org/wiki/Terremoto_de_Colombia_de_2026",
         fecha: "2026-08-13",
       },
-      censo: { verificado: false, detalle: PENDIENTE },
+      censo: {
+        verificado: true,
+        detalle:
+          "No hemos encontrado un canal de negocios propio para este municipio. Mientras tanto, puedes reportar tu negocio al Censo Único de Emergencia que coordina Confecámaras junto con el Ministerio de Comercio, 16 cámaras de comercio de las zonas afectadas, Acopi, Fenalco, Asocapitales y la Federación Nacional de Departamentos. Llama o escribe por WhatsApp para pedir el cuestionario, diligenciarlo o dejar un mensaje de voz; si no tienes señal ni cobertura, hay formularios impresos en los puntos de atención.",
+        telefonos: ["300 913 1811"],
+        fuente: CENSO_UNICO_2026,
+      },
     },
     {
       slug: "dosquebradas",
@@ -494,7 +547,13 @@ export const colombiaTerremoto2026: Evento = {
         url: "https://www.eldiario.com.co/actualidad/755331/",
         fecha: "2026-08-13",
       },
-      censo: { verificado: false, detalle: PENDIENTE },
+      censo: {
+        verificado: true,
+        detalle:
+          "Dosquebradas tiene su propia Cámara de Comercio, distinta de la de Pereira, pero no hemos encontrado que haya abierto un canal propio para el terremoto. Mientras tanto, puedes reportar tu negocio al Censo Único de Emergencia que coordina Confecámaras junto con el Ministerio de Comercio, 16 cámaras de comercio de las zonas afectadas, Acopi, Fenalco, Asocapitales y la Federación Nacional de Departamentos. Llama o escribe por WhatsApp para pedir el cuestionario, diligenciarlo o dejar un mensaje de voz; si no tienes señal ni cobertura, hay formularios impresos en los puntos de atención.",
+        telefonos: ["300 913 1811"],
+        fuente: CENSO_UNICO_2026,
+      },
     },
     {
       slug: "santa-rosa-de-cabal",
@@ -509,7 +568,13 @@ export const colombiaTerremoto2026: Evento = {
         url: "https://es.wikipedia.org/wiki/Terremoto_de_Colombia_de_2026",
         fecha: "2026-08-13",
       },
-      censo: { verificado: false, detalle: PENDIENTE },
+      censo: {
+        verificado: true,
+        detalle:
+          "Santa Rosa de Cabal tiene su propia Cámara de Comercio, distinta de la de Pereira, pero no hemos encontrado que haya abierto un canal propio para el terremoto. Mientras tanto, puedes reportar tu negocio al Censo Único de Emergencia que coordina Confecámaras junto con el Ministerio de Comercio, 16 cámaras de comercio de las zonas afectadas, Acopi, Fenalco, Asocapitales y la Federación Nacional de Departamentos. Llama o escribe por WhatsApp para pedir el cuestionario, diligenciarlo o dejar un mensaje de voz; si no tienes señal ni cobertura, hay formularios impresos en los puntos de atención.",
+        telefonos: ["300 913 1811"],
+        fuente: CENSO_UNICO_2026,
+      },
     },
     {
       slug: "quimbaya",
@@ -538,9 +603,15 @@ export const colombiaTerremoto2026: Evento = {
       nombre: "Buenaventura",
       division: "Valle del Cauca",
       contexto:
-        "Tiene módulos de registro de damnificados habilitados, según la guía oficial para afectados.",
+        "Tiene módulos de registro de damnificados habilitados, según la guía oficial para afectados. El censo empresarial la ubica como el segundo municipio con más negocios afectados del Valle del Cauca, después de Cali.",
       fuente: GUIA_GOB,
-      censo: { verificado: false, detalle: PENDIENTE },
+      censo: {
+        verificado: true,
+        detalle:
+          "Buenaventura tiene su propia Cámara de Comercio, distinta de la de Cali, pero no hemos encontrado que haya abierto un canal propio para el terremoto. La Gobernación del Valle del Cauca remite explícitamente a los emprendedores afectados de todo el departamento —Buenaventura incluida— al Censo Único de Emergencia que coordina Confecámaras junto con el Ministerio de Comercio, 16 cámaras de comercio de las zonas afectadas, Acopi, Fenalco, Asocapitales y la Federación Nacional de Departamentos. Llama o escribe por WhatsApp para pedir el cuestionario, diligenciarlo o dejar un mensaje de voz; si no tienes señal ni cobertura, hay formularios impresos en los puntos de atención.",
+        telefonos: ["300 913 1811"],
+        fuente: CENSO_UNICO_2026,
+      },
     },
   ],
   iniciativas: iniciativasColombia2026,
@@ -554,9 +625,9 @@ export const colombiaTerremoto2026: Evento = {
       resumen:
         "Los bancos anunciaron períodos de gracia, cambios en las condiciones de los créditos y suspensión temporal de los cobros.",
       detalle:
-        "El sector bancario anunció un paquete de alivios para personas y empresas de las zonas afectadas que podría beneficiar a cerca de 2,8 millones de usuarios: períodos de gracia de hasta un año, cambios en las condiciones de los créditos y suspensión temporal de los cobros. No suele ser automático: hay que pedirlo al banco.\n\nEl 19 de agosto de 2026, el Gobierno y Asobancaria (el gremio de los bancos) formalizaron ese paquete en cerca de $1,1 billones para los mismos afectados de Caldas, Chocó, Quindío, Risaralda y Valle del Cauca. Incluye periodos de gracia de hasta 12 meses sin cobro de intereses durante ese lapso, suspensión de los cobros jurídicos, protección del historial crediticio (no te reportan negativamente por esta causa) y aplicación de los seguros asociados al crédito, para quien los tenga contratados.\n\nLo que ya está concretado banco por banco:\n\nBancolombia pasó de la promesa genérica de mediados de agosto a cifras concretas: dispuso más de $5 billones en financiación para personas, empresas y entidades territoriales de Chocó, Risaralda, Caldas, Quindío, Valle del Cauca, suroeste antioqueño, Cauca y Tolima. Créditos de vivienda al 8% efectivo anual (unas 7.000 familias) y de consumo o microcrédito al 10%, para desembolsos desde el 25 de agosto; una línea aparte para hasta 13.500 empresas y entidades territoriales.\n\nNu Colombia anunció retiros ilimitados sin comisión en cajeros y avances de tarjeta de crédito sin comisión para clientes en zonas afectadas, más una refinanciación (hasta 48 meses, tasas reducidas) que a fecha 20/08/2026 seguía en desarrollo.\n\nBanco Agrario devuelve las comisiones cobradas por retiros, depósitos y pago de cheques a los clientes cuya oficina habitual sigue cerrada por la emergencia, con efecto retroactivo desde el 10 de agosto; la devolución empezó el 18 de agosto.\n\nBanco de Bogotá y Davivienda cerraron oficinas presenciales en las zonas más golpeadas y mantienen atención por teléfono, WhatsApp y banca virtual. El 20 de agosto sí confirmaron una medida propia, aunque acotada a crédito de vivienda nueva en las zonas afectadas y no al resto de alivios del gremio: BBVA bajó su tasa desde 11,9% efectivo anual, Davivienda desde 14,4% y Banco de Bogotá hasta 16,55%. El presidente De la Espriella celebró la medida el 22 de agosto y pidió extenderla al resto del sector financiero y a otro tipo de créditos, no solo vivienda.\n\nEl 22 de agosto lo consiguió: Grupo Aval (que agrupa a Banco de Bogotá, Banco Popular, Banco de Occidente y AV Villas), Davivienda y Banco GNB Sudameris se sumaron a Bancolombia con una tasa unificada del 8% efectivo anual para crédito de vivienda VIS y no VIS en las zonas afectadas, fija durante todo el plazo del crédito, para desembolsos hechos desde el 25 de agosto de 2026.\n\nGrupo Aval fue más allá de la vivienda: Banco de Bogotá, Banco de Occidente, Banco Popular y AV Villas abrieron líneas de crédito propias para negocios —tarjetas de crédito, libranzas y créditos de libre destino— dirigidas a personas naturales con negocio y a empresas con ingresos anuales de hasta $1.000 millones en las zonas afectadas, con plazos de hasta 36 meses, 6 meses de gracia a capital y 50% de descuento en la tasa de interés durante esos primeros 6 meses. Banco de Occidente sumó, además, un beneficio propio de consumo: 50% de descuento en los intereses de las compras con tarjeta de crédito en droguerías, clínicas, hospitales, supermercados, ferreterías, electrodomésticos y tiendas de mascotas de los municipios afectados, del 21 de agosto al 30 de septiembre de 2026, con financiación hasta a 12 meses; aplica tanto a clientes actuales como a quien saque tarjeta nueva durante la emergencia.",
+        "Hay un piso obligatorio para todos los bancos, no solo un gesto voluntario: mediante la Carta Circular 54 de 2026, la Superintendencia Financiera instruyó a las entidades vigiladas a reprogramar, para quien lo pida, las obligaciones de crédito contraídas antes del 10 de agosto de 2026 y cuyo pago venza desde esa fecha. El nuevo plazo no puede superar el doble del que quedaba pendiente ni los 20 años, y las condiciones no pueden ser más gravosas que las originales. Entre la declaratoria de desastre (Decreto 1171) y la formalización de esa reprogramación —máximo 90 días— no se cobran intereses ni moras. La misma circular activó las «Quejas exprés»: los bancos no pueden imponerte trámites extra ni requisitos adicionales para atender un reclamo ligado al terremoto si vives en Chocó, Risaralda, Valle del Cauca, Caldas o Quindío, sea cual sea el motivo de la queja.\n\nSobre ese piso obligatorio, el sector bancario anunció además un paquete voluntario para personas y empresas de las zonas afectadas que podría beneficiar a cerca de 2,8 millones de usuarios: períodos de gracia de hasta un año, cambios en las condiciones de los créditos y suspensión temporal de los cobros. No suele ser automático: hay que pedirlo al banco.\n\nEl 19 de agosto de 2026, el Gobierno y Asobancaria (el gremio de los bancos) formalizaron ese paquete en cerca de $1,1 billones para los mismos afectados de Caldas, Chocó, Quindío, Risaralda y Valle del Cauca. Incluye periodos de gracia de hasta 12 meses sin cobro de intereses durante ese lapso, suspensión de los cobros jurídicos, protección del historial crediticio (no te reportan negativamente por esta causa) y aplicación de los seguros asociados al crédito, para quien los tenga contratados.\n\nLo que ya está concretado banco por banco:\n\nBancolombia pasó de la promesa genérica de mediados de agosto a cifras concretas: dispuso más de $5 billones en financiación para personas, empresas y entidades territoriales de Chocó, Risaralda, Caldas, Quindío, Valle del Cauca, suroeste antioqueño, Cauca y Tolima. Créditos de vivienda al 8% efectivo anual (unas 7.000 familias) y de consumo o microcrédito al 10%, para desembolsos desde el 25 de agosto; una línea aparte para hasta 13.500 empresas y entidades territoriales.\n\nNu Colombia anunció retiros ilimitados sin comisión en cajeros y avances de tarjeta de crédito sin comisión para clientes en zonas afectadas, más una refinanciación (hasta 48 meses, tasas reducidas) que a fecha 20/08/2026 seguía en desarrollo.\n\nBanco Agrario devuelve las comisiones cobradas por retiros, depósitos y pago de cheques a los clientes cuya oficina habitual sigue cerrada por la emergencia, con efecto retroactivo desde el 10 de agosto; la devolución empezó el 18 de agosto.\n\nBanco de Bogotá y Davivienda cerraron oficinas presenciales en las zonas más golpeadas y mantienen atención por teléfono, WhatsApp y banca virtual. El 20 de agosto sí confirmaron una medida propia, aunque acotada a crédito de vivienda nueva en las zonas afectadas y no al resto de alivios del gremio: BBVA bajó su tasa desde 11,9% efectivo anual, Davivienda desde 14,4% y Banco de Bogotá hasta 16,55%. El presidente De la Espriella celebró la medida el 22 de agosto y pidió extenderla al resto del sector financiero y a otro tipo de créditos, no solo vivienda.\n\nEl 22 de agosto lo consiguió: Grupo Aval (que agrupa a Banco de Bogotá, Banco Popular, Banco de Occidente y AV Villas), Davivienda y Banco GNB Sudameris se sumaron a Bancolombia con una tasa unificada del 8% efectivo anual para crédito de vivienda VIS y no VIS en las zonas afectadas, fija durante todo el plazo del crédito, para desembolsos hechos desde el 25 de agosto de 2026.\n\nGrupo Aval fue más allá de la vivienda: Banco de Bogotá, Banco de Occidente, Banco Popular y AV Villas abrieron líneas de crédito propias para negocios —tarjetas de crédito, libranzas y créditos de libre destino— dirigidas a personas naturales con negocio y a empresas con ingresos anuales de hasta $1.000 millones en las zonas afectadas, con plazos de hasta 36 meses, 6 meses de gracia a capital y 50% de descuento en la tasa de interés durante esos primeros 6 meses. Banco de Occidente sumó, además, un beneficio propio de consumo: 50% de descuento en los intereses de las compras con tarjeta de crédito en droguerías, clínicas, hospitales, supermercados, ferreterías, electrodomésticos y tiendas de mascotas de los municipios afectados, del 21 de agosto al 30 de septiembre de 2026, con financiación hasta a 12 meses; aplica tanto a clientes actuales como a quien saque tarjeta nueva durante la emergencia.",
       pendiente:
-        "No hemos encontrado el canal exacto de solicitud (línea, formulario, requisitos) del paquete general de alivios —períodos de gracia, suspensión de cobros— en ninguno de estos bancos, más allá de la baja de tasa hipotecaria al 8% ya confirmada en Bancolombia, Banco de Bogotá, Banco Popular, Banco de Occidente, AV Villas, Davivienda y Banco GNB Sudameris, y de la nueva línea de crédito para negocios que abrió Grupo Aval. BBVA sigue en su tasa propia (11,9%), sin sumarse a ese 8% unificado, y Scotiabank Colpatria sigue sin ninguna medida propia confirmada. La instrucción que dan, por ahora, es «contacta a tu banco por los canales habituales y pide que evalúen tu caso».",
+        "La reprogramación obligatoria de la Superfinanciera es un derecho, pero no automático: tienes que pedirla tú al banco, y seguimos sin encontrar un formulario único para hacerlo (cada entidad gestiona la solicitud por sus canales propios). Más allá de eso, seguimos sin el canal exacto de solicitud (línea, formulario, requisitos) del paquete voluntario adicional —períodos de gracia, suspensión de cobros— en ninguno de estos bancos, más allá de la baja de tasa hipotecaria al 8% ya confirmada en Bancolombia, Banco de Bogotá, Banco Popular, Banco de Occidente, AV Villas, Davivienda y Banco GNB Sudameris, y de la nueva línea de crédito para negocios que abrió Grupo Aval. BBVA sigue en su tasa propia (11,9%), sin sumarse a ese 8% unificado, y Scotiabank Colpatria sigue sin ninguna medida propia confirmada. La instrucción que dan, por ahora, es «contacta a tu banco por los canales habituales y pide que evalúen tu caso».",
       fuentes: [
         {
           medio: "Semana",
@@ -572,6 +643,7 @@ export const colombiaTerremoto2026: Evento = {
           url: "https://www.elpais.com.co/economia/bancos-en-colombia-ofrecen-alivios-a-los-damnificados-por-el-terremoto-como-solicitarlos-1344.html",
           fecha: "2026-08-12",
         },
+        SUPERFINANCIERA_CIRCULAR_2026,
         BANCOLOMBIA_2026,
         BANCOLOMBIA_5B_2026,
         NU_2026,
@@ -635,7 +707,7 @@ export const colombiaTerremoto2026: Evento = {
       resumen:
         "Starlink, Claro, Tigo, las aseguradoras y Bavaria activaron beneficios propios para los afectados: unos automáticos, otros que hay que pedir y uno que todavía no tiene canal público para solicitarlo.",
       detalle:
-        "Starlink ofrece el servicio gratis hasta el 12 de septiembre de 2026 en Chocó, Valle del Cauca, Risaralda, Caldas y Quindío. Si ya tenías el servicio activo el día del sismo, el crédito se aplica solo, sin trámite. Si lo habías cancelado, contacta al soporte de Starlink para reactivarlo. Si eres nuevo, compra el kit (antena y router) en la web oficial o en un distribuidor autorizado, contrata un plan y luego contacta al soporte para pedir la activación gratuita antes de esa fecha. Si el sismo te dañó el equipo, también puedes pedir el reemplazo gratis por soporte técnico.\n\nClaro dio 2 GB de datos y minutos y SMS ilimitados durante 7 días a sus clientes prepago en Chocó, Valle del Cauca, Risaralda, Quindío y Caldas, activado automáticamente desde el 11 de agosto. Tigo dio 2 GB gratis durante 3 días a sus clientes prepago en las mismas cinco zonas, también automático, sin trámite. WOM, en esas mismas zonas, dio a sus clientes prepago 2 GB de datos y minutos ilimitados entre el 10 y el 12 de agosto, y otros 2 GB con minutos ilimitados entre el 12 y el 17 de agosto; a sus clientes pospago les dio datos y voz ilimitados durante 15 días, hasta el 24 de agosto, más una extensión del plazo de pago de la factura. Igual que Claro y Tigo, se activó solo, sin trámite.\n\nSi tienes seguro y tu negocio o vivienda sufrió daños, puedes reportarlo directamente: Seguros Bolívar por WhatsApp 322 332 2322 o la línea #322 (opción 0); Sura por WhatsApp 315 275 7888, la línea #888 o la emergencia 01 8000 415 215. Sura aclaró que los damnificados tienen dos años para reclamar, no 72 horas como se ha dicho por ahí.\n\nFasecolda, el gremio de las aseguradoras, publicó un directorio con las líneas de las demás compañías activas en la zona: Allianz por el código #265, el teléfono (601) 594 1133 o la emergencia 01 8000 513 500; Axa Colpatria por WhatsApp 1357 2433, la línea #247 o la emergencia 01 8000 512 620; Mapfre por el código #624 o la emergencia 601 794 8494; Chubb por el teléfono 601 319 0402 o la emergencia 01 8000 917 500; HDI por WhatsApp 316 482 1802, la línea 601 307 7050 (opción 8) o la emergencia 01 8000 113 390 (opción 8); Colmena Seguros por WhatsApp 315 700 3033, la línea #833, el teléfono (601) 401 0447 o la emergencia 01 8000 9 19667; La Previsora por WhatsApp 324 201 5491, la línea #345 (opciones 3 y 6), el teléfono 601 348 5757 o la emergencia 01 8000 910 554; Aseguradora Solidaria por WhatsApp 314 203 4106 o la línea 323 264 1770; Zurich por WhatsApp 315 768 6083, la línea #723, el teléfono 601 319 0730 o la emergencia 01 8000 112 723; La Equidad por WhatsApp 318 588 4515, la línea #324 o la emergencia 01 8000 919 538; BBVA Seguros por la línea exclusiva de siniestros 601 307 7121 o la línea nacional gratuita 01 8000 934 020; y Seguros del Estado por el código #388, el teléfono 601 742 1075 o la emergencia 01 8000 123 010.\n\nBavaria anunció una inversión de $12.000 millones para apoyar la reconstrucción y reapertura de 3.500 negocios afectados por el terremoto —tiendas de barrio, pequeños comercios y emprendimientos de Chocó, Quindío, Valle del Cauca, Risaralda y Caldas—, en articulación con el Plan de Reconstrucción para Comerciantes y Microempresarios que lidera el Gobierno Nacional. El objetivo declarado es que quienes reciban el apoyo puedan reabrir su establecimiento y retomar su actividad económica lo antes posible.",
+        "Starlink ofrece el servicio gratis hasta el 12 de septiembre de 2026 en Chocó, Valle del Cauca, Risaralda, Caldas y Quindío. Si ya tenías el servicio activo el día del sismo, el crédito se aplica solo, sin trámite. Si lo habías cancelado, contacta al soporte de Starlink para reactivarlo. Si eres nuevo, compra el kit (antena y router) en la web oficial o en un distribuidor autorizado, contrata un plan y luego contacta al soporte para pedir la activación gratuita antes de esa fecha. Si el sismo te dañó el equipo, también puedes pedir el reemplazo gratis por soporte técnico.\n\nClaro dio 2 GB de datos y minutos y SMS ilimitados durante 7 días a sus clientes prepago en Chocó, Valle del Cauca, Risaralda, Quindío y Caldas, activado automáticamente desde el 11 de agosto. Tigo dio 2 GB gratis durante 3 días a sus clientes prepago en las mismas cinco zonas, también automático, sin trámite. WOM, en esas mismas zonas, dio a sus clientes prepago 2 GB de datos y minutos ilimitados entre el 10 y el 12 de agosto, y otros 2 GB con minutos ilimitados entre el 12 y el 17 de agosto; a sus clientes pospago les dio datos y voz ilimitados durante 15 días, hasta el 24 de agosto, más una extensión del plazo de pago de la factura. Igual que Claro y Tigo, se activó solo, sin trámite.\n\nSi tienes seguro y tu negocio o vivienda sufrió daños, puedes reportarlo directamente: Seguros Bolívar por WhatsApp 322 332 2322 o la línea #322 (opción 0); Sura por WhatsApp 315 275 7888, la línea #888 o la emergencia 01 8000 415 215. Sura aclaró que los damnificados tienen dos años para reclamar, no 72 horas como se ha dicho por ahí, y Fasecolda lo confirmó para todo el gremio: el plazo real para presentar el reclamo va de 2 a 5 años desde la fecha del sismo, según la póliza. No pierdes el derecho a reclamar por no haber avisado en los primeros días. A corte del 21 de agosto de 2026, las aseguradoras habían recibido 36.415 reclamaciones por cerca de $1,2 billones, de las cuales 29.736 corresponden solo a pólizas de incendio y terremoto.\n\nFasecolda, el gremio de las aseguradoras, publicó un directorio con las líneas de las demás compañías activas en la zona: Allianz por el código #265, el teléfono (601) 594 1133 o la emergencia 01 8000 513 500; Axa Colpatria por WhatsApp 1357 2433, la línea #247 o la emergencia 01 8000 512 620; Mapfre por el código #624 o la emergencia 601 794 8494; Chubb por el teléfono 601 319 0402 o la emergencia 01 8000 917 500; HDI por WhatsApp 316 482 1802, la línea 601 307 7050 (opción 8) o la emergencia 01 8000 113 390 (opción 8); Colmena Seguros por WhatsApp 315 700 3033, la línea #833, el teléfono (601) 401 0447 o la emergencia 01 8000 9 19667; La Previsora por WhatsApp 324 201 5491, la línea #345 (opciones 3 y 6), el teléfono 601 348 5757 o la emergencia 01 8000 910 554; Aseguradora Solidaria por WhatsApp 314 203 4106 o la línea 323 264 1770; Zurich por WhatsApp 315 768 6083, la línea #723, el teléfono 601 319 0730 o la emergencia 01 8000 112 723; La Equidad por WhatsApp 318 588 4515, la línea #324 o la emergencia 01 8000 919 538; BBVA Seguros por la línea exclusiva de siniestros 601 307 7121 o la línea nacional gratuita 01 8000 934 020; y Seguros del Estado por el código #388, el teléfono 601 742 1075 o la emergencia 01 8000 123 010.\n\nBavaria anunció una inversión de $12.000 millones para apoyar la reconstrucción y reapertura de 3.500 negocios afectados por el terremoto —tiendas de barrio, pequeños comercios y emprendimientos de Chocó, Quindío, Valle del Cauca, Risaralda y Caldas—, en articulación con el Plan de Reconstrucción para Comerciantes y Microempresarios que lidera el Gobierno Nacional. El objetivo declarado es que quienes reciban el apoyo puedan reabrir su establecimiento y retomar su actividad económica lo antes posible.",
       pendiente:
         "Todavía no hemos encontrado el canal para que un comerciante se postule al fondo de Bavaria: ni la empresa ni el Gobierno han publicado un formulario, línea o requisitos para acceder a él.",
       fuentes: [
@@ -643,6 +715,8 @@ export const colombiaTerremoto2026: Evento = {
         CLARO_TIGO_2026,
         ASEGURADORAS_2026,
         FASECOLDA_DIRECTORIO_2026,
+        FASECOLDA_PLAZOS_2026,
+        RECLAMACIONES_SEGUROS_2026,
         BAVARIA_2026,
         BAVARIA_ELTIEMPO_2026,
       ],
