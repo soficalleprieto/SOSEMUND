@@ -46,7 +46,7 @@ export const negociosColombia2026: Negocio[] = [
     contacto: {
       whatsapp: "https://wa.me/573205231254",
       instagram: "https://instagram.com/calzadolagraneconomia",
-      facebook: "https://www.google.com/search?q=calzado%20la%20gran%20economia%20site%3Afacebook.com",
+      facebook: "https://www.facebook.com/p/Calzado-la-Gran-Econom%C3%ADa-100071344058149/",
       tiktok: "https://tiktok.com/@calzado.lagran.economia",
     },
     revisadaEl: "2026-08-26",
