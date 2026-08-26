@@ -6,6 +6,7 @@
 export const prerender = false;
 
 import type { APIRoute } from "astro";
+import sharp from "sharp";
 import { colombiaTerremoto2026 } from "../../data/eventos/colombia-terremoto-2026";
 
 const TELEGRAM_API = "https://api.telegram.org";
@@ -539,6 +540,369 @@ async function crearPRNegocio(
   return { ok: true, prUrl: pr.html_url, prNumero: pr.number, slug };
 }
 
+/*
+ * Fotos por Telegram: en vez de adivinar a qué negocio pertenece una foto
+ * (arriesgado si hay más de una ficha "en vuelo" a la vez), el bot siempre
+ * pregunta con botones — primero el negocio, luego si es antes/después/otra
+ * — usando `reply_to_message` para volver a la foto original en cada paso,
+ * así no hace falta guardar el file_id de Telegram en ningún sitio.
+ */
+
+async function enviarConBotones(
+  token: string,
+  chatId: number,
+  texto: string,
+  botones: { texto: string; datos: string }[][],
+  replyToMessageId?: number,
+) {
+  await fetch(`${TELEGRAM_API}/bot${token}/sendMessage`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      chat_id: chatId,
+      text: texto,
+      ...(replyToMessageId ? { reply_to_message_id: replyToMessageId } : {}),
+      reply_markup: {
+        inline_keyboard: botones.map((fila) => fila.map((b) => ({ text: b.texto, callback_data: b.datos }))),
+      },
+    }),
+  });
+}
+
+async function editarConBotones(
+  token: string,
+  chatId: number,
+  messageId: number,
+  texto: string,
+  botones: { texto: string; datos: string }[][],
+) {
+  await fetch(`${TELEGRAM_API}/bot${token}/editMessageText`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      chat_id: chatId,
+      message_id: messageId,
+      text: texto,
+      reply_markup: {
+        inline_keyboard: botones.map((fila) => fila.map((b) => ({ text: b.texto, callback_data: b.datos }))),
+      },
+    }),
+  });
+}
+
+/** Negocios recientes a los que se le puede asignar una foto: los que tienen PR abierto y los ya publicados. */
+async function negociosCandidatos(githubToken: string): Promise<{ slug: string; nombre: string }[]> {
+  const abiertosResp = await fetch(`${GITHUB_API}/repos/${REPO}/pulls?state=open&per_page=20`, {
+    headers: cabecerasGitHub(githubToken),
+  });
+  const abiertos = abiertosResp.ok ? await abiertosResp.json() : [];
+  const candidatosAbiertos = (Array.isArray(abiertos) ? abiertos : [])
+    .filter((pr: { head?: { ref?: string } }) => typeof pr.head?.ref === "string" && pr.head.ref.startsWith("negocio-"))
+    .map((pr: { head: { ref: string }; title: string }) => ({
+      slug: pr.head.ref.replace(/^negocio-/, ""),
+      nombre: pr.title.replace(/^Ficha de negocio: /, ""),
+    }));
+
+  const publicados = [...colombiaTerremoto2026.negocios]
+    .filter((n) => !n.esEjemplo)
+    .sort((a, b) => b.revisadaEl.localeCompare(a.revisadaEl))
+    .slice(0, 6)
+    .map((n) => ({ slug: n.slug, nombre: n.nombre }));
+
+  const vistos = new Set<string>();
+  return [...candidatosAbiertos, ...publicados]
+    .filter((c) => {
+      if (vistos.has(c.slug)) return false;
+      vistos.add(c.slug);
+      return true;
+    })
+    .slice(0, 8);
+}
+
+/** El nombre puede venir de una ficha ya publicada o solo existir en el título de un PR todavía abierto. */
+async function nombreNegocioPorSlug(githubToken: string, slug: string): Promise<string> {
+  const publicado = colombiaTerremoto2026.negocios.find((n) => n.slug === slug);
+  if (publicado) return publicado.nombre;
+  const prs = await fetch(
+    `${GITHUB_API}/repos/${REPO}/pulls?head=${REPO.split("/")[0]}:negocio-${slug}&state=all&per_page=1`,
+    { headers: cabecerasGitHub(githubToken) },
+  ).then((r) => (r.ok ? r.json() : []));
+  const titulo = Array.isArray(prs) ? (prs[0]?.title as string | undefined) : undefined;
+  return titulo?.replace(/^Ficha de negocio: /, "") ?? slug;
+}
+
+async function obtenerArchivoTelegram(token: string, fileId: string): Promise<Buffer | null> {
+  const infoResp = await fetch(`${TELEGRAM_API}/bot${token}/getFile?file_id=${fileId}`);
+  if (!infoResp.ok) return null;
+  const info = (await infoResp.json()) as { ok: boolean; result?: { file_path: string } };
+  if (!info.ok || !info.result) return null;
+  const fileResp = await fetch(`${TELEGRAM_API}/file/bot${token}/${info.result.file_path}`);
+  if (!fileResp.ok) return null;
+  return Buffer.from(await fileResp.arrayBuffer());
+}
+
+/** Mismo tratamiento que scripts/comprimir-fotos.mjs (1800px, calidad 82, mozjpeg, respeta la rotación EXIF), aquí en vez de en la CLI porque esto corre en la función del bot, no en el build. */
+async function comprimirFoto(buffer: Buffer): Promise<Buffer> {
+  return sharp(buffer)
+    .rotate()
+    .resize({ width: 1800, withoutEnlargement: true })
+    .jpeg({ quality: 82, mozjpeg: true })
+    .toBuffer();
+}
+
+async function subirArchivoBinario(
+  githubToken: string,
+  ruta: string,
+  buffer: Buffer,
+  rama: string,
+  mensaje: string,
+): Promise<boolean> {
+  const existente = await fetch(`${GITHUB_API}/repos/${REPO}/contents/${encodeURIComponent(ruta)}?ref=${rama}`, {
+    headers: cabecerasGitHub(githubToken),
+  });
+  const shaActual = existente.ok ? ((await existente.json()) as { sha: string }).sha : undefined;
+  const resp = await fetch(`${GITHUB_API}/repos/${REPO}/contents/${encodeURIComponent(ruta)}`, {
+    method: "PUT",
+    headers: cabecerasGitHub(githubToken),
+    body: JSON.stringify({
+      message: mensaje,
+      content: buffer.toString("base64"),
+      branch: rama,
+      ...(shaActual ? { sha: shaActual } : {}),
+    }),
+  });
+  return resp.ok;
+}
+
+function nombreVariableImport(slug: string, sufijo: string) {
+  const camel = slug
+    .split("-")
+    .filter(Boolean)
+    .map((p, i) => (i === 0 ? p : p.charAt(0).toUpperCase() + p.slice(1)))
+    .join("");
+  return `${camel}${sufijo}`;
+}
+
+/** Añade líneas de import justo después del último import que ya hay en el archivo, sin importar qué venga después (JSDoc, comentarios...). */
+function insertarImportsFotos(contenido: string, lineas: string[]): string {
+  const regexImport = /^import .+;\r?\n/gm;
+  let ultimoFin = 0;
+  let m: RegExpExecArray | null;
+  while ((m = regexImport.exec(contenido))) {
+    ultimoFin = m.index + m[0].length;
+  }
+  if (ultimoFin === 0) return lineas.join("") + contenido;
+  return contenido.slice(0, ultimoFin) + lineas.join("") + contenido.slice(ultimoFin);
+}
+
+/** Texto exacto de UN objeto de negocio (de su "  {" a su "  },"), localizado por slug. */
+function extraerBloqueObjeto(contenido: string, slug: string): { texto: string; inicio: number; fin: number } | null {
+  const marcaSlug = `slug: ${JSON.stringify(slug)},`;
+  const idxSlug = contenido.indexOf(marcaSlug);
+  if (idxSlug < 0) return null;
+  const idxApertura = contenido.lastIndexOf("\n  {\n", idxSlug);
+  if (idxApertura < 0) return null;
+  const inicio = idxApertura + 1;
+  const cierre = contenido.slice(inicio).match(/\n {2}\},\n/);
+  if (!cierre || cierre.index === undefined) return null;
+  const fin = inicio + cierre.index + cierre[0].length;
+  return { texto: contenido.slice(inicio, fin), inicio, fin };
+}
+
+type FotoRef = { varName: string; alt: string };
+type EstadoFotos = { antes?: FotoRef; despues?: FotoRef; otras: FotoRef[] };
+
+/** El bloque `fotos: {...}` dentro de un bloqueObjeto, si ya existe (cierra a 4 espacios, distinto de los cierres internos de antes/despues/otras a 6). */
+function extraerBloqueFotos(bloqueObjeto: string): { texto: string; inicio: number; fin: number } | null {
+  const idxInicio = bloqueObjeto.indexOf("\n    fotos: {\n");
+  if (idxInicio < 0) return null;
+  const cierre = bloqueObjeto.slice(idxInicio).match(/\n {4}\},\n/);
+  if (!cierre || cierre.index === undefined) return null;
+  const fin = idxInicio + cierre.index + cierre[0].length;
+  return { texto: bloqueObjeto.slice(idxInicio, fin), inicio: idxInicio, fin };
+}
+
+function parsearFotoRef(bloque: string, clave: "antes" | "despues"): FotoRef | undefined {
+  const re = new RegExp(`${clave}: \\{\\s*\\n\\s*src: (\\w+),\\s*\\n\\s*alt: "((?:[^"\\\\]|\\\\.)*)",?\\s*\\n\\s*\\},`);
+  const m = bloque.match(re);
+  if (!m) return undefined;
+  return { varName: m[1], alt: m[2].replace(/\\"/g, '"') };
+}
+
+function parsearOtras(bloque: string): FotoRef[] {
+  const resultado: FotoRef[] = [];
+  const seccionOtras = bloque.match(/otras: \[([\s\S]*?)\n {6}\],/);
+  if (!seccionOtras) return resultado;
+  const re = /\{\s*\n\s*src: (\w+),\s*\n\s*alt: "((?:[^"\\]|\\.)*)",?\s*\n\s*\},/g;
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(seccionOtras[1]))) {
+    resultado.push({ varName: m[1], alt: m[2].replace(/\\"/g, '"') });
+  }
+  return resultado;
+}
+
+function generarBloqueFotos(estado: EstadoFotos): string {
+  const partes: string[] = [];
+  if (estado.antes) {
+    partes.push(
+      `      antes: {\n        src: ${estado.antes.varName},\n        alt: ${JSON.stringify(estado.antes.alt)},\n      },`,
+    );
+  }
+  if (estado.despues) {
+    partes.push(
+      `      despues: {\n        src: ${estado.despues.varName},\n        alt: ${JSON.stringify(estado.despues.alt)},\n      },`,
+    );
+  }
+  if (estado.otras.length > 0) {
+    const items = estado.otras
+      .map((o) => `        {\n          src: ${o.varName},\n          alt: ${JSON.stringify(o.alt)},\n        },`)
+      .join("\n");
+    partes.push(`      otras: [\n${items}\n      ],`);
+  }
+  return `    fotos: {\n${partes.join("\n")}\n    },\n`;
+}
+
+function extraerEstadoFotos(bloqueObjeto: string): EstadoFotos {
+  const actual = extraerBloqueFotos(bloqueObjeto);
+  if (!actual) return { otras: [] };
+  return {
+    antes: parsearFotoRef(actual.texto, "antes"),
+    despues: parsearFotoRef(actual.texto, "despues"),
+    otras: parsearOtras(actual.texto),
+  };
+}
+
+/** Inserta o sustituye una foto en el bloque de un negocio, fusionando con las que ya tuviera. */
+function actualizarBloqueObjetoConFoto(
+  bloqueObjeto: string,
+  nuevaFoto: FotoRef,
+  tipo: "antes" | "despues" | "otra",
+): string {
+  const actual = extraerBloqueFotos(bloqueObjeto);
+  const estado = actual
+    ? { antes: parsearFotoRef(actual.texto, "antes"), despues: parsearFotoRef(actual.texto, "despues"), otras: parsearOtras(actual.texto) }
+    : ({ otras: [] } as EstadoFotos);
+
+  if (tipo === "antes") estado.antes = nuevaFoto;
+  else if (tipo === "despues") estado.despues = nuevaFoto;
+  else estado.otras = [...estado.otras, nuevaFoto];
+
+  const bloqueNuevo = generarBloqueFotos(estado);
+
+  if (actual) {
+    return bloqueObjeto.slice(0, actual.inicio) + "\n" + bloqueNuevo + bloqueObjeto.slice(actual.fin);
+  }
+  const CIERRE_OBJETO = "  },\n";
+  if (!bloqueObjeto.endsWith("\n" + CIERRE_OBJETO)) {
+    throw new Error("El bloque del negocio no termina como se esperaba.");
+  }
+  return bloqueObjeto.slice(0, -CIERRE_OBJETO.length) + bloqueNuevo + CIERRE_OBJETO;
+}
+
+/**
+ * Todo el recorrido de una foto: rama (la del PR de texto si sigue abierto,
+ * o una propia "foto-{slug}" si el negocio ya se publicó), descarga desde
+ * Telegram, compresión, subida de la imagen y del dato actualizado, y PR si
+ * hacía falta uno nuevo.
+ */
+async function procesarFoto(
+  telegramToken: string,
+  githubToken: string,
+  slug: string,
+  nombreNegocio: string,
+  tipo: "antes" | "despues" | "otra",
+  fileId: string,
+): Promise<{ ok: true; mensaje: string } | { ok: false; detalle: string }> {
+  const ramaNegocioAbierta = await refSha(githubToken, `negocio-${slug}`);
+  const rama = ramaNegocioAbierta ? `negocio-${slug}` : `foto-${slug}`;
+
+  if (!ramaNegocioAbierta) {
+    const yaExiste = await refSha(githubToken, rama);
+    if (!yaExiste) {
+      const shaMain = await refSha(githubToken, RAMA_BASE);
+      if (!shaMain) return { ok: false, detalle: "No pude leer la rama main." };
+      const creaRama = await fetch(`${GITHUB_API}/repos/${REPO}/git/refs`, {
+        method: "POST",
+        headers: cabecerasGitHub(githubToken),
+        body: JSON.stringify({ ref: `refs/heads/${rama}`, sha: shaMain }),
+      });
+      if (!creaRama.ok) return { ok: false, detalle: `No pude crear la rama: ${await creaRama.text()}` };
+    }
+  }
+
+  const archivo = await contenidoYSha(githubToken, ARCHIVO_NEGOCIOS, rama);
+  if (!archivo) return { ok: false, detalle: "No pude leer el archivo de negocios." };
+
+  const bloque = extraerBloqueObjeto(archivo.contenido, slug);
+  if (!bloque) return { ok: false, detalle: `No encontré la ficha de "${slug}" en el archivo.` };
+
+  const otrasActuales = extraerEstadoFotos(bloque.texto).otras;
+
+  const original = await obtenerArchivoTelegram(telegramToken, fileId);
+  if (!original) return { ok: false, detalle: "No pude descargar la foto desde Telegram." };
+  const comprimida = await comprimirFoto(original);
+
+  const sufijo = tipo === "antes" ? "Antes" : tipo === "despues" ? "Despues" : `Otra${otrasActuales.length + 1}`;
+  const archivoNombre = tipo === "antes" ? "antes.jpg" : tipo === "despues" ? "despues.jpg" : `otra-${otrasActuales.length + 1}.jpg`;
+  const varName = nombreVariableImport(slug, sufijo);
+  const rutaImagen = `src/assets/negocios/${slug}/${archivoNombre}`;
+  const altPorDefecto =
+    tipo === "antes"
+      ? `${nombreNegocio} antes del terremoto.`
+      : tipo === "despues"
+        ? `${nombreNegocio} tras el terremoto.`
+        : `Otra foto de ${nombreNegocio}.`;
+
+  const mensajeCommit = `Añade foto (${tipo}) a: ${nombreNegocio}`;
+  const subioImagen = await subirArchivoBinario(githubToken, rutaImagen, comprimida, rama, mensajeCommit);
+  if (!subioImagen) return { ok: false, detalle: "No pude subir la imagen a GitHub." };
+
+  const bloqueActualizado = actualizarBloqueObjetoConFoto(bloque.texto, { varName, alt: altPorDefecto }, tipo);
+  let contenidoNuevo = archivo.contenido.slice(0, bloque.inicio) + bloqueActualizado + archivo.contenido.slice(bloque.fin);
+  contenidoNuevo = insertarImportsFotos(contenidoNuevo, [
+    `import ${varName} from "../../assets/negocios/${slug}/${archivoNombre}";\n`,
+  ]);
+
+  const subeDatos = await fetch(`${GITHUB_API}/repos/${REPO}/contents/${ARCHIVO_NEGOCIOS}`, {
+    method: "PUT",
+    headers: cabecerasGitHub(githubToken),
+    body: JSON.stringify({
+      message: mensajeCommit,
+      content: Buffer.from(contenidoNuevo, "utf-8").toString("base64"),
+      sha: archivo.sha,
+      branch: rama,
+    }),
+  });
+  if (!subeDatos.ok) return { ok: false, detalle: `No pude actualizar el archivo de datos: ${await subeDatos.text()}` };
+
+  if (ramaNegocioAbierta) {
+    return { ok: true, mensaje: "Foto añadida a la ficha que todavía tienes en revisión." };
+  }
+
+  const prs = await fetch(
+    `${GITHUB_API}/repos/${REPO}/pulls?head=${REPO.split("/")[0]}:${rama}&state=open`,
+    { headers: cabecerasGitHub(githubToken) },
+  ).then((r) => (r.ok ? r.json() : []));
+  if (Array.isArray(prs) && prs[0]) {
+    return { ok: true, mensaje: `Foto añadida a la ficha ya publicada. PR: ${prs[0].html_url}` };
+  }
+
+  const creaPR = await fetch(`${GITHUB_API}/repos/${REPO}/pulls`, {
+    method: "POST",
+    headers: cabecerasGitHub(githubToken),
+    body: JSON.stringify({
+      title: `Añade foto a: ${nombreNegocio}`,
+      head: rama,
+      base: RAMA_BASE,
+      draft: true,
+      body: "Foto añadida desde Telegram a una ficha ya publicada.",
+    }),
+  });
+  if (!creaPR.ok) return { ok: false, detalle: `No pude abrir el PR de la foto: ${await creaPR.text()}` };
+  const pr = (await creaPR.json()) as { html_url: string };
+  return { ok: true, mensaje: `Foto añadida a la ficha ya publicada. PR: ${pr.html_url}` };
+}
+
 export const POST: APIRoute = async ({ request }) => {
   const token = import.meta.env.TELEGRAM_BOT_TOKEN;
   if (!token) {
@@ -577,11 +941,49 @@ export const POST: APIRoute = async ({ request }) => {
       return new Response("ok", { status: 200 });
     }
 
-    const [accion, repo, numero] = (callback.data as string).split(":") as [
-      "merge" | "close",
-      string,
-      string,
-    ];
+    const datosCallback = callback.data as string;
+
+    if (datosCallback.startsWith("elegirneg:")) {
+      const slug = datosCallback.slice("elegirneg:".length);
+      await responderCallback(token, callback.id, "Negocio elegido.");
+      await editarConBotones(token, chatId, callback.message.message_id, "¿Antes, después u otra?", [
+        [
+          { texto: "Antes", datos: `tipofoto:${slug}:antes` },
+          { texto: "Después", datos: `tipofoto:${slug}:despues` },
+          { texto: "Otra", datos: `tipofoto:${slug}:otra` },
+        ],
+      ]);
+      return new Response("ok", { status: 200 });
+    }
+
+    if (datosCallback.startsWith("tipofoto:")) {
+      const [, slug, tipo] = datosCallback.split(":") as [string, string, "antes" | "despues" | "otra"];
+      const fotoOriginal = callback.message.reply_to_message?.photo as
+        | { file_id: string }[]
+        | undefined;
+
+      if (!fotoOriginal || fotoOriginal.length === 0) {
+        await responderCallback(token, callback.id, "No encontré la foto original.");
+        return new Response("ok", { status: 200 });
+      }
+
+      await responderCallback(token, callback.id, "Procesando...");
+      const fileId = fotoOriginal[fotoOriginal.length - 1].file_id;
+      const nombreNegocio = await nombreNegocioPorSlug(githubToken, slug);
+      const resultado = await procesarFoto(token, githubToken, slug, nombreNegocio, tipo, fileId);
+
+      await editarMensaje(
+        token,
+        chatId,
+        callback.message.message_id,
+        resultado.ok
+          ? `✅ ${resultado.mensaje}`
+          : `❌ No pude añadir la foto: ${resultado.detalle.slice(0, 300)}`,
+      );
+      return new Response("ok", { status: 200 });
+    }
+
+    const [accion, repo, numero] = datosCallback.split(":") as ["merge" | "close", string, string];
 
     if (accion === "merge" || accion === "close") {
       const resultado = await resolverPR(githubToken, repo, numero, accion);
@@ -622,6 +1024,40 @@ export const POST: APIRoute = async ({ request }) => {
   }
 
   const mensaje = actualizacion.message;
+
+  if (mensaje?.photo && mensaje?.chat?.id) {
+    const chatId = mensaje.chat.id as number;
+    const chatAutorizado = import.meta.env.TELEGRAM_CHAT_ID;
+    if (!chatAutorizado || String(chatId) !== String(chatAutorizado)) {
+      // Silencioso a propósito: no darle pistas a quien no tiene permiso.
+      return new Response("ok", { status: 200 });
+    }
+
+    const githubToken = import.meta.env.GITHUB_TOKEN;
+    if (!githubToken) {
+      await enviarMensaje(token, chatId, "Falta configurar GITHUB_TOKEN en el servidor.");
+      return new Response("ok", { status: 200 });
+    }
+
+    const candidatos = await negociosCandidatos(githubToken);
+    if (candidatos.length === 0) {
+      await enviarMensaje(
+        token,
+        chatId,
+        "No tengo ningún negocio reciente al que asignarle esta foto. Da de alta el negocio primero.",
+      );
+      return new Response("ok", { status: 200 });
+    }
+
+    await enviarConBotones(
+      token,
+      chatId,
+      "¿Para qué negocio es esta foto?",
+      candidatos.map((c) => [{ texto: c.nombre.slice(0, 60), datos: `elegirneg:${c.slug}` }]),
+      mensaje.message_id as number,
+    );
+    return new Response("ok", { status: 200 });
+  }
 
   if (mensaje?.text && mensaje?.chat?.id) {
     const chatId = mensaje.chat.id as number;
