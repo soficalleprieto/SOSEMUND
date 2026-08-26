@@ -30,8 +30,7 @@ export const negociosColombia2026: Negocio[] = [
     nombre: "Calzado la gran economía de Bucaramanga",
     actividad: "Zapatería",
     localidad: "pereira",
-    historia:
-      "[PENDIENTE: falta contar qué era este negocio antes del terremoto — pregúntaselo y complétalo antes de publicar]",
+    // Sin `historia`: el alta por WhatsApp no la pidió, no la inventamos.
     estado: {
       local: "sin-datos",
       mercancia: "sin-datos",

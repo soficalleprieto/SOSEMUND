@@ -39,6 +39,11 @@ const REDES: [keyof typeof n.contacto, string][] = [
 const enlaces = REDES.filter(([k]) => n.contacto[k]);
 
 const urlFicha = new URL(`${base}/negocios/${n.slug}`, Astro.site).href;
+
+/** Si no hay `historia` (el alta por WhatsApp todavía no la pide), un resumen genérico pero honesto. */
+const resumenNegocio =
+  n.historia ?? `${n.actividad} en ${localidad?.nombre}. Cómo quedó tras ${evento.nombre}, qué necesita y cómo apoyarlo.`;
+
 const mensajeApadrinar = `Hola. Quiero apadrinar este negocio: ${n.nombre} (${urlFicha}).
 
 Dónde publico (Instagram, TikTok, YouTube…):
@@ -55,7 +60,7 @@ const schemaNegocio = !n.esEjemplo && {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   name: n.nombre,
-  description: n.historia,
+  description: resumenNegocio,
   url: urlFicha,
   areaServed: localidad?.nombre,
   sameAs: Object.values(n.contacto).filter(
@@ -69,7 +74,7 @@ const schemaNegocio = !n.esEjemplo && {
   descripcion={
     n.esEjemplo
       ? "Ficha de ejemplo para que veas cómo se publica un negocio afectado: cómo quedó, qué necesita y por dónde contactarlo."
-      : `${n.actividad} en ${localidad?.nombre}. Cómo quedó tras ${evento.nombre}, qué necesita y cómo apoyarlo.`
+      : resumenNegocio
   }
   ruta={`${base}/negocios/${n.slug}`}
   noIndexar={n.esEjemplo}
@@ -148,7 +153,7 @@ const schemaNegocio = !n.esEjemplo && {
     {n.operando ? <> · <strong class="sigue-abierto">Sigue vendiendo</strong></> : null}
   </p>
 
-  <p class="entradilla">{n.historia}</p>
+  {n.historia && <p class="entradilla">{n.historia}</p>}
 
   <h2>Cómo quedó</h2>
   {

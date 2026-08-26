@@ -357,8 +357,9 @@ function generarObjetoNegocio(datos: {
     nombre: ${ts(datos.nombre)},
     actividad: ${ts(datos.actividad)},
     localidad: ${ts(datos.localidadSlug)},
-    historia:
-      "[PENDIENTE: falta contar qué era este negocio antes del terremoto — pregúntaselo y complétalo antes de publicar]",
+    // TODO: falta la historia (qué era este negocio antes) — el alta por
+    // WhatsApp no la pide todavía. Pregúntasela y añade el campo \`historia\`
+    // antes de fusionar si consigues la respuesta; si no, se publica sin ella.
     estado: {
       local: "sin-datos",
       mercancia: "sin-datos",

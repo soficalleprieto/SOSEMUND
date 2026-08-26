@@ -163,8 +163,13 @@ export type Negocio = {
   actividad: string;
   /** Slug de la localidad donde está. */
   localidad: string;
-  /** Qué era este negocio, en sus palabras. Es lo que hace que alguien empatice. */
-  historia: string;
+  /**
+   * Qué era este negocio, en sus palabras. Es lo que hace que alguien
+   * empatice. Opcional porque el alta por WhatsApp no la pide todavía (solo
+   * pide cómo quedó, no qué era antes): mejor publicar sin esta línea que
+   * inventarla o dejar un aviso de "pendiente" visible en la página.
+   */
+  historia?: string;
 
   estado: {
     local: Dano;
