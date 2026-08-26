@@ -290,13 +290,72 @@ const ETIQUETA_A_CLAVE_CONTACTO: Record<string, string> = {
   Teléfono: "telefono",
 };
 
+/**
+ * La ficha pinta cada contacto como `<a href={n.contacto[clave]}>`: espera
+ * una URL ya hecha (o mailto:/tel:), no lo que alguien escribe a mano en
+ * WhatsApp ("3205231254", "@mitienda", "mitienda.oficial"...). Sin esto, el
+ * enlace queda roto (apunta a una ruta relativa del propio sitio).
+ */
+function normalizarWhatsApp(valor: string) {
+  const digitos = valor.replace(/\D/g, "");
+  if (!digitos) return null;
+  // Colombia: los móviles se escriben con 10 dígitos, sin indicativo. Si ya
+  // trae uno (empieza por 57 y es más largo) se deja tal cual.
+  const numero = digitos.length === 10 ? `57${digitos}` : digitos;
+  return `https://wa.me/${numero}`;
+}
+
+/** `prefijoRuta` es lo que va delante del usuario en la URL del perfil: TikTok lo pide con "@", Instagram y Facebook sin él. */
+function normalizarRed(valor: string, dominio: string, prefijoRuta = "") {
+  const limpio = valor.trim();
+  if (/^https?:\/\//i.test(limpio)) return limpio;
+  const handle = limpio.replace(/^@/, "");
+  if (!handle) return null;
+  // "calzado la gran economia" es el NOMBRE de una página, no un usuario:
+  // no hay URL directa fiable para eso, así que se manda a buscarla dentro
+  // de la propia red en vez de armar un enlace que seguro no funciona.
+  if (/\s/.test(handle)) {
+    return `https://www.${dominio}/search?q=${encodeURIComponent(handle)}`;
+  }
+  return `https://${dominio}/${prefijoRuta}${handle}`;
+}
+
+function normalizarWeb(valor: string) {
+  const limpio = valor.trim();
+  return /^https?:\/\//i.test(limpio) ? limpio : `https://${limpio}`;
+}
+
+function normalizarTelefono(valor: string) {
+  const digitos = valor.replace(/[^\d+]/g, "");
+  return digitos ? `tel:${digitos}` : null;
+}
+
 function parsearContactos(bloque?: string): Record<string, string> {
   const contacto: Record<string, string> = {};
   if (!bloque) return contacto;
   for (const linea of bloque.split("\n")) {
     const m = linea.match(/^(WhatsApp|Instagram|Facebook|TikTok|Web|Teléfono):\s*(.+)$/);
-    const clave = m && ETIQUETA_A_CLAVE_CONTACTO[m[1]];
-    if (clave && m) contacto[clave] = m[2].trim();
+    if (!m) continue;
+    const clave = ETIQUETA_A_CLAVE_CONTACTO[m[1]];
+    const valor = m[2].trim();
+    if (!clave || !valor) continue;
+
+    const normalizado =
+      clave === "whatsapp"
+        ? normalizarWhatsApp(valor)
+        : clave === "instagram"
+          ? normalizarRed(valor, "instagram.com")
+          : clave === "facebook"
+            ? normalizarRed(valor, "facebook.com")
+            : clave === "tiktok"
+              ? normalizarRed(valor, "tiktok.com", "@")
+              : clave === "web"
+                ? normalizarWeb(valor)
+                : clave === "telefono"
+                  ? normalizarTelefono(valor)
+                  : valor;
+
+    if (normalizado) contacto[clave] = normalizado;
   }
   return contacto;
 }
