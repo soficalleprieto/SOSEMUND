@@ -6,6 +6,7 @@ import restauranteAhora from "../../assets/negocios/ejemplo-restaurante/ahora.jp
 import ropaAntes from "../../assets/negocios/ejemplo-ropa/antes.jpg";
 import ropaAhora from "../../assets/negocios/ejemplo-ropa/ahora.jpg";
 import calzadoLaGranEconomiaDeBucaramangaAntes from "../../assets/negocios/calzado-la-gran-economia-de-bucaramanga/antes.jpg";
+import calzadoLaGranEconomiaDeBucaramangaDespues from "../../assets/negocios/calzado-la-gran-economia-de-bucaramanga/despues.jpg";
 
 /**
  * Fichas de negocio publicadas.
@@ -57,6 +58,10 @@ export const negociosColombia2026: Negocio[] = [
       antes: {
         src: calzadoLaGranEconomiaDeBucaramangaAntes,
         alt: "Calzado la gran economía de Bucaramanga antes del terremoto.",
+      },
+      despues: {
+        src: calzadoLaGranEconomiaDeBucaramangaDespues,
+        alt: "Calzado la gran economía de Bucaramanga tras el terremoto.",
       },
     },
   },
