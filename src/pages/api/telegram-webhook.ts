@@ -818,12 +818,6 @@ function actualizarBloqueObjetoConFoto(
 }
 
 /**
- * Todo el recorrido de una foto: rama (la del PR de texto si sigue abierto,
- * o una propia "foto-{slug}" si el negocio ya se publicó), descarga desde
- * Telegram, compresión, subida de la imagen y del dato actualizado, y PR si
- * hacía falta uno nuevo.
- */
-/**
  * Elige la rama de trabajo: la del PR de texto si sigue abierto, la de una
  * foto anterior si esa sigue abierta, o una nueva si no hay ninguna. Nunca
  * reutiliza una rama por el simple hecho de que exista (ver `prAbiertoParaRama`).
@@ -848,6 +842,7 @@ async function ramaParaFoto(
   return { rama, abierta: false, prExistente: null };
 }
 
+/** Descarga la foto de Telegram, la comprime, la sube y actualiza el dato — abriendo PR si hacía falta uno. */
 async function procesarFoto(
   telegramToken: string,
   githubToken: string,
