@@ -486,6 +486,22 @@ async function ramaTieneCambiosSinFusionar(githubToken: string, rama: string): P
   return data.ahead_by > 0;
 }
 
+/**
+ * Si el último PR de esta rama se cerró SIN fusionar (descartado a
+ * propósito, o porque se le hizo un PR de recambio a mano), la rama no debe
+ * reutilizarse aunque siga teniendo commits que main no tiene: eso no es
+ * "trabajo en curso", es una rama abandonada.
+ */
+async function ultimoPRCerradoSinFusionar(githubToken: string, rama: string): Promise<boolean> {
+  const resp = await fetch(
+    `${GITHUB_API}/repos/${REPO}/pulls?head=${REPO.split("/")[0]}:${rama}&state=closed&sort=updated&direction=desc&per_page=1`,
+    { headers: cabecerasGitHub(githubToken) },
+  );
+  if (!resp.ok) return false;
+  const prs = (await resp.json()) as { merged_at: string | null }[];
+  return Array.isArray(prs) && prs.length > 0 && !prs[0].merged_at;
+}
+
 async function contenidoYSha(githubToken: string, ruta: string, ref: string) {
   const resp = await fetch(
     `${GITHUB_API}/repos/${REPO}/contents/${encodeURIComponent(ruta)}?ref=${ref}`,
@@ -862,8 +878,14 @@ async function ramaParaFoto(
   // en cambio ya está fusionada, se usa un nombre nuevo.
   const ramaBase = `foto-${slug}`;
   const existeRamaBase = await refSha(githubToken, ramaBase);
-  if (existeRamaBase && (await ramaTieneCambiosSinFusionar(githubToken, ramaBase))) {
-    return { rama: ramaBase, abierta: false, prExistente: null, ramaExiste: true };
+  if (existeRamaBase) {
+    const [activa, abandonada] = await Promise.all([
+      ramaTieneCambiosSinFusionar(githubToken, ramaBase),
+      ultimoPRCerradoSinFusionar(githubToken, ramaBase),
+    ]);
+    if (activa && !abandonada) {
+      return { rama: ramaBase, abierta: false, prExistente: null, ramaExiste: true };
+    }
   }
   const rama = existeRamaBase ? `${ramaBase}-${Date.now()}` : ramaBase;
   return { rama, abierta: false, prExistente: null, ramaExiste: false };
