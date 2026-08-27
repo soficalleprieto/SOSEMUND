@@ -468,6 +468,24 @@ async function prAbiertoParaRama(githubToken: string, rama: string): Promise<{ h
   return Array.isArray(prs) && prs[0] ? prs[0] : null;
 }
 
+/**
+ * Si una rama tiene commits que main todavía no tiene: distingue "recién
+ * creada por otra foto que está subiéndose en este mismo momento, su PR
+ * todavía no existe" de "fusionada hace rato, ya no sirve". `prAbiertoParaRama`
+ * sola no basta: cuando dos fotos llegan casi a la vez, la segunda puede
+ * consultar antes de que la primera termine de abrir su PR, y sin este
+ * chequeo se trataban como ramas distintas — hasta 3 PRs para una sola
+ * ficha, cada uno con solo una de las fotos.
+ */
+async function ramaTieneCambiosSinFusionar(githubToken: string, rama: string): Promise<boolean> {
+  const resp = await fetch(`${GITHUB_API}/repos/${REPO}/compare/${RAMA_BASE}...${rama}`, {
+    headers: cabecerasGitHub(githubToken),
+  });
+  if (!resp.ok) return false;
+  const data = (await resp.json()) as { ahead_by: number };
+  return data.ahead_by > 0;
+}
+
 async function contenidoYSha(githubToken: string, ruta: string, ref: string) {
   const resp = await fetch(
     `${GITHUB_API}/repos/${REPO}/contents/${encodeURIComponent(ruta)}?ref=${ref}`,
@@ -825,21 +843,30 @@ function actualizarBloqueObjetoConFoto(
 async function ramaParaFoto(
   githubToken: string,
   slug: string,
-): Promise<{ rama: string; abierta: boolean; prExistente: { html_url: string; number: number } | null }> {
+): Promise<{
+  rama: string;
+  abierta: boolean;
+  prExistente: { html_url: string; number: number } | null;
+  ramaExiste: boolean;
+}> {
   const prNegocio = await prAbiertoParaRama(githubToken, `negocio-${slug}`);
-  if (prNegocio) return { rama: `negocio-${slug}`, abierta: true, prExistente: prNegocio };
+  if (prNegocio) return { rama: `negocio-${slug}`, abierta: true, prExistente: prNegocio, ramaExiste: true };
 
   const prFoto = await prAbiertoParaRama(githubToken, `foto-${slug}`);
-  if (prFoto) return { rama: `foto-${slug}`, abierta: false, prExistente: prFoto };
+  if (prFoto) return { rama: `foto-${slug}`, abierta: false, prExistente: prFoto, ramaExiste: true };
 
-  // Ni "negocio-{slug}" ni "foto-{slug}" tienen PR abierto: hace falta una
-  // rama nueva. Si "foto-{slug}" ya existe pero está fusionada o cerrada, no
-  // se reutiliza (se repetiría el mismo fallo que dejó una foto subida sin
-  // ningún PR que la mostrara): se usa un nombre distinto.
+  // Ni "negocio-{slug}" ni "foto-{slug}" tienen PR abierto todavía. Si
+  // "foto-{slug}" ya existe pero SIGUE teniendo commits sin fusionar, es que
+  // otra foto la está subiendo ahora mismo (llegaron casi juntas y su PR
+  // todavía no se abrió): se reutiliza esa misma rama, no se crea otra. Si
+  // en cambio ya está fusionada, se usa un nombre nuevo.
   const ramaBase = `foto-${slug}`;
   const existeRamaBase = await refSha(githubToken, ramaBase);
+  if (existeRamaBase && (await ramaTieneCambiosSinFusionar(githubToken, ramaBase))) {
+    return { rama: ramaBase, abierta: false, prExistente: null, ramaExiste: true };
+  }
   const rama = existeRamaBase ? `${ramaBase}-${Date.now()}` : ramaBase;
-  return { rama, abierta: false, prExistente: null };
+  return { rama, abierta: false, prExistente: null, ramaExiste: false };
 }
 
 /** Descarga la foto de Telegram, la comprime, la sube y actualiza el dato — abriendo PR si hacía falta uno. */
@@ -851,9 +878,9 @@ async function procesarFoto(
   tipo: "antes" | "despues" | "otra",
   fileId: string,
 ): Promise<{ ok: true; mensaje: string } | { ok: false; detalle: string }> {
-  const { rama, abierta, prExistente } = await ramaParaFoto(githubToken, slug);
+  const { rama, abierta, prExistente, ramaExiste } = await ramaParaFoto(githubToken, slug);
 
-  if (!prExistente) {
+  if (!ramaExiste) {
     const shaMain = await refSha(githubToken, RAMA_BASE);
     if (!shaMain) return { ok: false, detalle: "No pude leer la rama main." };
     const creaRama = await fetch(`${GITHUB_API}/repos/${REPO}/git/refs`, {
@@ -928,7 +955,17 @@ async function procesarFoto(
       body: "Foto añadida desde Telegram a una ficha ya publicada.",
     }),
   });
-  if (!creaPR.ok) return { ok: false, detalle: `No pude abrir el PR de la foto: ${await creaPR.text()}` };
+  if (!creaPR.ok) {
+    // Si otra foto casi simultánea ya abrió el PR de esta misma rama entre
+    // que se comprobó y que se intentó crear, GitHub responde con "ya
+    // existe" en vez de fallar de verdad: se busca ese PR en vez de darlo
+    // por perdido.
+    const prTrasCarrera = await prAbiertoParaRama(githubToken, rama);
+    if (prTrasCarrera) {
+      return { ok: true, mensaje: `Foto añadida a la ficha ya publicada. PR: ${prTrasCarrera.html_url}` };
+    }
+    return { ok: false, detalle: `No pude abrir el PR de la foto: ${await creaPR.text()}` };
+  }
   const pr = (await creaPR.json()) as { html_url: string };
   return { ok: true, mensaje: `Foto añadida a la ficha ya publicada. PR: ${pr.html_url}` };
 }
