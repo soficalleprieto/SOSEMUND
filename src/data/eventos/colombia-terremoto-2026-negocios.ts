@@ -8,6 +8,7 @@ import ropaAhora from "../../assets/negocios/ejemplo-ropa/ahora.jpg";
 import calzadoLaGranEconomiaDeBucaramangaAntes from "../../assets/negocios/calzado-la-gran-economia-de-bucaramanga/antes.jpg";
 import calzadoLaGranEconomiaDeBucaramangaDespues from "../../assets/negocios/calzado-la-gran-economia-de-bucaramanga/despues.jpg";
 import calzadoLaGranEconomiaDeBucaramangaOtra1 from "../../assets/negocios/calzado-la-gran-economia-de-bucaramanga/otra-1.jpg";
+import calzadoLaGranEconomiaDeBucaramangaDespues from "../../assets/negocios/calzado-la-gran-economia-de-bucaramanga/calzado-la-gran-economia-de-bucaramanga-despues.jpg";
 
 /**
  * Fichas de negocio publicadas.
