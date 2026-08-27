@@ -926,7 +926,17 @@ async function procesarFoto(
   const comprimida = await comprimirFoto(original);
 
   const sufijo = tipo === "antes" ? "Antes" : tipo === "despues" ? "Despues" : `Otra${otrasActuales.length + 1}`;
-  const archivoNombre = tipo === "antes" ? "antes.jpg" : tipo === "despues" ? "despues.jpg" : `otra-${otrasActuales.length + 1}.jpg`;
+  // El nombre de archivo sobrevive a la optimización de Astro (el hash que
+  // le añade después es aparte): "antes.jpg" da una URL final tipo
+  // "antes.HASH.webp" IGUAL para cualquier negocio, y Google lee ese nombre
+  // como señal de qué es la imagen. Con el slug delante, cada negocio queda
+  // con su propio nombre descriptivo.
+  const archivoNombre =
+    tipo === "antes"
+      ? `${slug}-antes.jpg`
+      : tipo === "despues"
+        ? `${slug}-despues.jpg`
+        : `${slug}-otra-${otrasActuales.length + 1}.jpg`;
   const varName = nombreVariableImport(slug, sufijo);
   const rutaImagen = `src/assets/negocios/${slug}/${archivoNombre}`;
   const altPorDefecto =
