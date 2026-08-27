@@ -88,7 +88,15 @@ export const iniciativasColombia2026: Iniciativa[] = [
     categoria: "danos",
     que: "Mapa colaborativo de daños estructurales alimentado por reportes ciudadanos, con búsqueda por ubicación y herramientas de coordinación para equipos de rescate.",
     para: "Rescatistas y organizaciones",
-    nota: "El dominio redirige a terremotovenezuela.com: es un dominio reciclado de una emergencia anterior y agrega datos de los dos países. El contenido sirve, pero tenlo en cuenta.",
+    nota: "El dominio redirige a terremotovenezuela.com: es un dominio reciclado de una emergencia anterior y agrega datos de los dos países. El contenido sirve, pero tenlo en cuenta. No confundir con Terremoto Colombia (terremotocolombia.co, con .co), una iniciativa distinta que sí está hecha para este sismo.",
+  },
+  {
+    nombre: "Terremoto Colombia",
+    url: "https://terremotocolombia.co",
+    categoria: "acopio",
+    que: "Plataforma ciudadana, gratuita y de código abierto, que conecta reportes, recursos y equipos de respuesta durante la emergencia. Para ofrecerte como voluntario dejas tu nombre, teléfono, qué puedes aportar y en qué zona, y el equipo de coordinación se compromete a contactarte en las horas siguientes.",
+    para: "Voluntarios, donantes y equipos de respuesta",
+    nota: "Es una iniciativa de Mallanet.org, independiente y no gubernamental.",
   },
   {
     nombre: "Mapa del Terremoto de Colombia",
@@ -97,6 +105,14 @@ export const iniciativasColombia2026: Iniciativa[] = [
     que: "Registro abierto de más de 3.400 puntos de daños, albergues y centros de acopio, construido a partir de fuentes públicas y con cada punto citando su fuente y nivel de verificación. Se puede consultar por municipio: Cali, Pereira, Manizales, Armenia, Quibdó, Buenaventura y decenas más.",
     para: "Afectados, voluntarios y rescatistas",
     nota: "El propio sitio aclara que no es fuente oficial y que ningún dato de aquí sustituye el parte de la autoridad competente.",
+  },
+  {
+    nombre: "Gravitas",
+    url: "https://mapa.gravitasworld.com",
+    categoria: "danos",
+    que: "Mapeo ciudadano de emergencia que cruza reportes ciudadanos, redes sociales y observación satelital con inteligencia artificial para mostrar en tiempo real qué falta en cada zona: edificaciones colapsadas o dañadas, centros de acopio, logística (vehículos y rutas) y voluntarios disponibles.",
+    para: "Ciudadanos, voluntarios, municipios, gobernaciones y equipos de rescate",
+    nota: "La adaptó en 42 horas tras el sismo un equipo de cuatro personas liderado por Juan Camilo Garzón.",
   },
   {
     nombre: "Asistente de WhatsApp @colombiapalante",
