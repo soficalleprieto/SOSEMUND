@@ -5,8 +5,9 @@ import restauranteAntes from "../../assets/negocios/ejemplo-restaurante/antes.jp
 import restauranteAhora from "../../assets/negocios/ejemplo-restaurante/ahora.jpg";
 import ropaAntes from "../../assets/negocios/ejemplo-ropa/antes.jpg";
 import ropaAhora from "../../assets/negocios/ejemplo-ropa/ahora.jpg";
-import calzadoLaGranEconomiaDeBucaramangaOtra1 from "../../assets/negocios/calzado-la-gran-economia-de-bucaramanga/otra-1.jpg";
+import calzadoLaGranEconomiaDeBucaramangaOtra1 from "../../assets/negocios/calzado-la-gran-economia-de-bucaramanga/calzado-la-gran-economia-de-bucaramanga-otra-1.jpg";
 import calzadoLaGranEconomiaDeBucaramangaAntes from "../../assets/negocios/calzado-la-gran-economia-de-bucaramanga/calzado-la-gran-economia-de-bucaramanga-antes.jpg";
+import calzadoLaGranEconomiaDeBucaramangaDespues from "../../assets/negocios/calzado-la-gran-economia-de-bucaramanga/calzado-la-gran-economia-de-bucaramanga-despues.jpg";
 
 /**
  * Fichas de negocio publicadas.
@@ -57,6 +58,10 @@ export const negociosColombia2026: Negocio[] = [
       antes: {
         src: calzadoLaGranEconomiaDeBucaramangaAntes,
         alt: "Calzado la gran economía de Bucaramanga antes del terremoto.",
+      },
+      despues: {
+        src: calzadoLaGranEconomiaDeBucaramangaDespues,
+        alt: "Calzado la gran economía de Bucaramanga tras el terremoto.",
       },
       otras: [
         {
