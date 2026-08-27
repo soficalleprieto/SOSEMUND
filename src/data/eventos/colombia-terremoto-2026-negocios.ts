@@ -5,6 +5,7 @@ import restauranteAntes from "../../assets/negocios/ejemplo-restaurante/antes.jp
 import restauranteAhora from "../../assets/negocios/ejemplo-restaurante/ahora.jpg";
 import ropaAntes from "../../assets/negocios/ejemplo-ropa/antes.jpg";
 import ropaAhora from "../../assets/negocios/ejemplo-ropa/ahora.jpg";
+import calzadoLaGranEconomiaDeBucaramangaOtra1 from "../../assets/negocios/calzado-la-gran-economia-de-bucaramanga/otra-1.jpg";
 
 /**
  * Fichas de negocio publicadas.
@@ -51,6 +52,14 @@ export const negociosColombia2026: Negocio[] = [
     },
     revisadaEl: "2026-08-26",
     consentimiento: true,
+    fotos: {
+      otras: [
+        {
+          src: calzadoLaGranEconomiaDeBucaramangaOtra1,
+          alt: "Otra foto de Calzado la gran economía de Bucaramanga.",
+        },
+      ],
+    },
   },
   {
     slug: "ejemplo",
