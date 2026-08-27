@@ -7,6 +7,7 @@ import ropaAntes from "../../assets/negocios/ejemplo-ropa/antes.jpg";
 import ropaAhora from "../../assets/negocios/ejemplo-ropa/ahora.jpg";
 import calzadoLaGranEconomiaDeBucaramangaAntes from "../../assets/negocios/calzado-la-gran-economia-de-bucaramanga/antes.jpg";
 import calzadoLaGranEconomiaDeBucaramangaDespues from "../../assets/negocios/calzado-la-gran-economia-de-bucaramanga/despues.jpg";
+import calzadoLaGranEconomiaDeBucaramangaOtra1 from "../../assets/negocios/calzado-la-gran-economia-de-bucaramanga/otra-1.jpg";
 
 /**
  * Fichas de negocio publicadas.
@@ -63,6 +64,12 @@ export const negociosColombia2026: Negocio[] = [
         src: calzadoLaGranEconomiaDeBucaramangaDespues,
         alt: "Calzado la gran economía de Bucaramanga tras el terremoto.",
       },
+      otras: [
+        {
+          src: calzadoLaGranEconomiaDeBucaramangaOtra1,
+          alt: "Otra foto de Calzado la gran economía de Bucaramanga.",
+        },
+      ],
     },
   },
   {
