@@ -450,6 +450,24 @@ async function refSha(githubToken: string, rama: string) {
   return data.object.sha;
 }
 
+/**
+ * Si una rama de negocio sigue teniendo trabajo pendiente de fusionar: NO
+ * basta con que la rama exista (`refSha`), porque este repo no borra las
+ * ramas al fusionar un PR y una rama fusionada hace tiempo puede seguir ahí.
+ * Confiar solo en "existe" hizo que una foto se subiera una vez a una rama ya
+ * fusionada, sin PR que la mostrara: quedó invisible. Esto comprueba que de
+ * verdad hay un PR abierto.
+ */
+async function prAbiertoParaRama(githubToken: string, rama: string): Promise<{ html_url: string; number: number } | null> {
+  const resp = await fetch(
+    `${GITHUB_API}/repos/${REPO}/pulls?head=${REPO.split("/")[0]}:${rama}&state=open`,
+    { headers: cabecerasGitHub(githubToken) },
+  );
+  if (!resp.ok) return null;
+  const prs = (await resp.json()) as { html_url: string; number: number }[];
+  return Array.isArray(prs) && prs[0] ? prs[0] : null;
+}
+
 async function contenidoYSha(githubToken: string, ruta: string, ref: string) {
   const resp = await fetch(
     `${GITHUB_API}/repos/${REPO}/contents/${encodeURIComponent(ruta)}?ref=${ref}`,
@@ -805,6 +823,31 @@ function actualizarBloqueObjetoConFoto(
  * Telegram, compresión, subida de la imagen y del dato actualizado, y PR si
  * hacía falta uno nuevo.
  */
+/**
+ * Elige la rama de trabajo: la del PR de texto si sigue abierto, la de una
+ * foto anterior si esa sigue abierta, o una nueva si no hay ninguna. Nunca
+ * reutiliza una rama por el simple hecho de que exista (ver `prAbiertoParaRama`).
+ */
+async function ramaParaFoto(
+  githubToken: string,
+  slug: string,
+): Promise<{ rama: string; abierta: boolean; prExistente: { html_url: string; number: number } | null }> {
+  const prNegocio = await prAbiertoParaRama(githubToken, `negocio-${slug}`);
+  if (prNegocio) return { rama: `negocio-${slug}`, abierta: true, prExistente: prNegocio };
+
+  const prFoto = await prAbiertoParaRama(githubToken, `foto-${slug}`);
+  if (prFoto) return { rama: `foto-${slug}`, abierta: false, prExistente: prFoto };
+
+  // Ni "negocio-{slug}" ni "foto-{slug}" tienen PR abierto: hace falta una
+  // rama nueva. Si "foto-{slug}" ya existe pero está fusionada o cerrada, no
+  // se reutiliza (se repetiría el mismo fallo que dejó una foto subida sin
+  // ningún PR que la mostrara): se usa un nombre distinto.
+  const ramaBase = `foto-${slug}`;
+  const existeRamaBase = await refSha(githubToken, ramaBase);
+  const rama = existeRamaBase ? `${ramaBase}-${Date.now()}` : ramaBase;
+  return { rama, abierta: false, prExistente: null };
+}
+
 async function procesarFoto(
   telegramToken: string,
   githubToken: string,
@@ -813,21 +856,17 @@ async function procesarFoto(
   tipo: "antes" | "despues" | "otra",
   fileId: string,
 ): Promise<{ ok: true; mensaje: string } | { ok: false; detalle: string }> {
-  const ramaNegocioAbierta = await refSha(githubToken, `negocio-${slug}`);
-  const rama = ramaNegocioAbierta ? `negocio-${slug}` : `foto-${slug}`;
+  const { rama, abierta, prExistente } = await ramaParaFoto(githubToken, slug);
 
-  if (!ramaNegocioAbierta) {
-    const yaExiste = await refSha(githubToken, rama);
-    if (!yaExiste) {
-      const shaMain = await refSha(githubToken, RAMA_BASE);
-      if (!shaMain) return { ok: false, detalle: "No pude leer la rama main." };
-      const creaRama = await fetch(`${GITHUB_API}/repos/${REPO}/git/refs`, {
-        method: "POST",
-        headers: cabecerasGitHub(githubToken),
-        body: JSON.stringify({ ref: `refs/heads/${rama}`, sha: shaMain }),
-      });
-      if (!creaRama.ok) return { ok: false, detalle: `No pude crear la rama: ${await creaRama.text()}` };
-    }
+  if (!prExistente) {
+    const shaMain = await refSha(githubToken, RAMA_BASE);
+    if (!shaMain) return { ok: false, detalle: "No pude leer la rama main." };
+    const creaRama = await fetch(`${GITHUB_API}/repos/${REPO}/git/refs`, {
+      method: "POST",
+      headers: cabecerasGitHub(githubToken),
+      body: JSON.stringify({ ref: `refs/heads/${rama}`, sha: shaMain }),
+    });
+    if (!creaRama.ok) return { ok: false, detalle: `No pude crear la rama: ${await creaRama.text()}` };
   }
 
   const archivo = await contenidoYSha(githubToken, ARCHIVO_NEGOCIOS, rama);
@@ -875,16 +914,12 @@ async function procesarFoto(
   });
   if (!subeDatos.ok) return { ok: false, detalle: `No pude actualizar el archivo de datos: ${await subeDatos.text()}` };
 
-  if (ramaNegocioAbierta) {
+  if (abierta) {
     return { ok: true, mensaje: "Foto añadida a la ficha que todavía tienes en revisión." };
   }
 
-  const prs = await fetch(
-    `${GITHUB_API}/repos/${REPO}/pulls?head=${REPO.split("/")[0]}:${rama}&state=open`,
-    { headers: cabecerasGitHub(githubToken) },
-  ).then((r) => (r.ok ? r.json() : []));
-  if (Array.isArray(prs) && prs[0]) {
-    return { ok: true, mensaje: `Foto añadida a la ficha ya publicada. PR: ${prs[0].html_url}` };
+  if (prExistente) {
+    return { ok: true, mensaje: `Foto añadida a la ficha ya publicada. PR: ${prExistente.html_url}` };
   }
 
   const creaPR = await fetch(`${GITHUB_API}/repos/${REPO}/pulls`, {
