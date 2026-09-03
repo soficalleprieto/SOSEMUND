@@ -289,6 +289,70 @@ const CALI_ALCALDIA_PROYECTOS_2026: Fuente = {
   fecha: "2026-08-24",
 };
 
+const SUPERFINANCIERA_CIRCULAR_007_ELTIEMPO_2026: Fuente = {
+  medio: "El Tiempo",
+  titulo:
+    "Superfinanciera ordena alivios para afectados por el terremoto: así podrán refinanciar sus créditos",
+  url: "https://www.eltiempo.com/economia/sector-financiero/superfinanciera-ordena-alivios-para-afectados-por-el-terremoto-asi-podran-refinanciar-sus-creditos-3581364",
+  fecha: "2026-08-26",
+};
+
+const SUPERFINANCIERA_CIRCULAR_007_INFOBAE_2026: Fuente = {
+  medio: "Infobae",
+  titulo:
+    "Superfinanciera anuncia alivios para deudores afectados por el terremoto: estas son las medidas para créditos y seguros",
+  url: "https://www.infobae.com/colombia/2026/08/27/superfinanciera-anuncia-alivios-para-deudores-afectados-por-el-terremoto-estas-son-las-medidas-para-creditos-y-seguros/",
+  fecha: "2026-08-27",
+};
+
+const BBVA_PYME_AGRO_2026: Fuente = {
+  medio: "Pulzo",
+  titulo:
+    "BBVA Colombia lanza alivios financieros para afectados por terremoto en Chocó, Caldas y Eje Cafetero",
+  url: "https://www.pulzo.com/economia/bbva-colombia-lanza-alivios-financieros-para-afectados-por-terremoto-en-choco-caldas-y-eje-cafetero-PP5286200A",
+  fecha: "2026-08-27",
+};
+
+const SUBSIDIO_NOMINA_2026: Fuente = {
+  medio: "Infobae",
+  titulo:
+    "Gobierno subsidiará salarios para frenar despidos tras el terremoto: así funcionará la medida de emergencia",
+  url: "https://www.infobae.com/colombia/2026/08/21/gobierno-subsidiara-salarios-para-frenar-despidos-tras-el-terremoto-asi-funcionara-la-medida-de-emergencia/",
+  fecha: "2026-08-21",
+};
+
+const PEREIRA_VENDEDORES_PULZO_2026: Fuente = {
+  medio: "Pulzo",
+  titulo:
+    "Alcaldía de Pereira habilita registro y anuncia ayudas económicas para afectados por el terremoto del 10 de agosto",
+  url: "https://www.pulzo.com/nacion/ayudas-economicas-y-subsidios-en-pereira-como-registrarse-tras-el-terremoto-de-agosto-PP5276307A",
+  fecha: "2026-08-16",
+};
+
+const PEREIRA_VENDEDORES_ELDIARIO_2026: Fuente = {
+  medio: "El Diario",
+  titulo:
+    "Alcaldía dará subsidios de arriendo y $1 millón a vendedores afectados por terremoto en Pereira",
+  url: "https://www.eldiario.com.co/actualidad/alcaldia-dara-subsidios-de-arriendo-y-1-millon-a-vendedores-afectados-por-terremoto-en-pereira/",
+  fecha: "2026-08-16",
+};
+
+const PEREIRA_RESTAURANTES_PULZO_2026: Fuente = {
+  medio: "Pulzo",
+  titulo:
+    "Pereira anuncia fondo de apoyo y plan de reactivación económica para restaurantes y bares afectados por el terremoto",
+  url: "https://www.pulzo.com/economia/apoyo-economico-para-restaurantes-y-bares-de-pereira-tras-el-terremoto-requisitos-y-plan-de-reactivacion-PP5281538A",
+  fecha: "2026-08-22",
+};
+
+const PEREIRA_RESTAURANTES_ELDIARIO_2026: Fuente = {
+  medio: "El Diario",
+  titulo:
+    "Pereira destinará $500 millones para reactivar restaurantes, bares y entretenimiento tras el terremoto",
+  url: "https://www.eldiario.com.co/noticias/risaralda/pereira/pereira-destinara-500-millones-para-reactivar-restaurantes-bares-y-entretenimiento-tras-el-terremoto/",
+  fecha: "2026-08-22",
+};
+
 export const colombiaTerremoto2026: Evento = {
   slug: "terremoto-2026",
   nombre: "el terremoto del 10 de agosto de 2026",
@@ -418,6 +482,28 @@ export const colombiaTerremoto2026: Evento = {
         telefonos: ["300 913 1811"],
         fuente: CENSO_UNICO_2026,
       },
+      ayudasPropias: [
+        {
+          slug: "pereira-fondo-restaurantes-bares",
+          titulo: "Fondo para restaurantes, bares y entretenimiento",
+          resumen:
+            "La Alcaldía destinó $500 millones, coordinados con Asobares, para el sector gastronómico y de entretenimiento golpeado por el terremoto; todavía no se han publicado los requisitos para acceder.",
+          detalle:
+            "El alcalde Mauricio Salazar Peláez anunció una inyección de $500 millones destinada a restaurantes, bares y empresas de entretenimiento afectados por daños estructurales y por las restricciones que redujeron su actividad comercial tras el terremoto. La ejecución de estos recursos se coordinará con Asobares, el gremio que agrupa a los empresarios del sector gastronómico y de entretenimiento.",
+          pendiente:
+            "Todavía no se han publicado los requisitos para que un bar, restaurante o negocio de entretenimiento acceda a este fondo, ni cómo se van a distribuir los recursos, los criterios de selección o cuántos establecimientos se van a beneficiar.",
+          fuentes: [PEREIRA_RESTAURANTES_PULZO_2026, PEREIRA_RESTAURANTES_ELDIARIO_2026],
+        },
+        {
+          slug: "pereira-capital-semilla-vendedores",
+          titulo: "Capital semilla para vendedores informales",
+          resumen:
+            "Más de 3.000 vendedores informales ya censados por la Alcaldía recibirán $1 millón cada uno para reactivar su actividad, con recursos reasignados de las Fiestas de la Cosecha.",
+          detalle:
+            "Como parte de un primer paquete de ayudas económicas —financiado en parte con recursos que estaban destinados a las Fiestas de la Cosecha 2026, canceladas tras el sismo— la Alcaldía anunció que más de 3.000 vendedores informales ya censados recibirán un capital semilla de $1 millón cada uno para reactivar su actividad económica. El paso previo para acceder a esta y a las demás ayudas de la Alcaldía es registrarte en la plataforma SOS Pereira (sospereira.com), donde reportas tu situación para quedar en el censo oficial de afectados.",
+          fuentes: [PEREIRA_VENDEDORES_PULZO_2026, PEREIRA_VENDEDORES_ELDIARIO_2026],
+        },
+      ],
     },
     {
       slug: "manizales",
@@ -625,9 +711,9 @@ export const colombiaTerremoto2026: Evento = {
       resumen:
         "Los bancos anunciaron períodos de gracia, cambios en las condiciones de los créditos y suspensión temporal de los cobros.",
       detalle:
-        "Hay un piso obligatorio para todos los bancos, no solo un gesto voluntario: mediante la Carta Circular 54 de 2026, la Superintendencia Financiera instruyó a las entidades vigiladas a reprogramar, para quien lo pida, las obligaciones de crédito contraídas antes del 10 de agosto de 2026 y cuyo pago venza desde esa fecha. El nuevo plazo no puede superar el doble del que quedaba pendiente ni los 20 años, y las condiciones no pueden ser más gravosas que las originales. Entre la declaratoria de desastre (Decreto 1171) y la formalización de esa reprogramación —máximo 90 días— no se cobran intereses ni moras. La misma circular activó las «Quejas exprés»: los bancos no pueden imponerte trámites extra ni requisitos adicionales para atender un reclamo ligado al terremoto si vives en Chocó, Risaralda, Valle del Cauca, Caldas o Quindío, sea cual sea el motivo de la queja.\n\nSobre ese piso obligatorio, el sector bancario anunció además un paquete voluntario para personas y empresas de las zonas afectadas que podría beneficiar a cerca de 2,8 millones de usuarios: períodos de gracia de hasta un año, cambios en las condiciones de los créditos y suspensión temporal de los cobros. No suele ser automático: hay que pedirlo al banco.\n\nEl 19 de agosto de 2026, el Gobierno y Asobancaria (el gremio de los bancos) formalizaron ese paquete en cerca de $1,1 billones para los mismos afectados de Caldas, Chocó, Quindío, Risaralda y Valle del Cauca. Incluye periodos de gracia de hasta 12 meses sin cobro de intereses durante ese lapso, suspensión de los cobros jurídicos, protección del historial crediticio (no te reportan negativamente por esta causa) y aplicación de los seguros asociados al crédito, para quien los tenga contratados.\n\nLo que ya está concretado banco por banco:\n\nBancolombia pasó de la promesa genérica de mediados de agosto a cifras concretas: dispuso más de $5 billones en financiación para personas, empresas y entidades territoriales de Chocó, Risaralda, Caldas, Quindío, Valle del Cauca, suroeste antioqueño, Cauca y Tolima. Créditos de vivienda al 8% efectivo anual (unas 7.000 familias) y de consumo o microcrédito al 10%, para desembolsos desde el 25 de agosto; una línea aparte para hasta 13.500 empresas y entidades territoriales.\n\nNu Colombia anunció retiros ilimitados sin comisión en cajeros y avances de tarjeta de crédito sin comisión para clientes en zonas afectadas, más una refinanciación (hasta 48 meses, tasas reducidas) que a fecha 20/08/2026 seguía en desarrollo.\n\nBanco Agrario devuelve las comisiones cobradas por retiros, depósitos y pago de cheques a los clientes cuya oficina habitual sigue cerrada por la emergencia, con efecto retroactivo desde el 10 de agosto; la devolución empezó el 18 de agosto.\n\nBanco de Bogotá y Davivienda cerraron oficinas presenciales en las zonas más golpeadas y mantienen atención por teléfono, WhatsApp y banca virtual. El 20 de agosto sí confirmaron una medida propia, aunque acotada a crédito de vivienda nueva en las zonas afectadas y no al resto de alivios del gremio: BBVA bajó su tasa desde 11,9% efectivo anual, Davivienda desde 14,4% y Banco de Bogotá hasta 16,55%. El presidente De la Espriella celebró la medida el 22 de agosto y pidió extenderla al resto del sector financiero y a otro tipo de créditos, no solo vivienda.\n\nEl 22 de agosto lo consiguió: Grupo Aval (que agrupa a Banco de Bogotá, Banco Popular, Banco de Occidente y AV Villas), Davivienda y Banco GNB Sudameris se sumaron a Bancolombia con una tasa unificada del 8% efectivo anual para crédito de vivienda VIS y no VIS en las zonas afectadas, fija durante todo el plazo del crédito, para desembolsos hechos desde el 25 de agosto de 2026.\n\nGrupo Aval fue más allá de la vivienda: Banco de Bogotá, Banco de Occidente, Banco Popular y AV Villas abrieron líneas de crédito propias para negocios —tarjetas de crédito, libranzas y créditos de libre destino— dirigidas a personas naturales con negocio y a empresas con ingresos anuales de hasta $1.000 millones en las zonas afectadas, con plazos de hasta 36 meses, 6 meses de gracia a capital y 50% de descuento en la tasa de interés durante esos primeros 6 meses. Banco de Occidente sumó, además, un beneficio propio de consumo: 50% de descuento en los intereses de las compras con tarjeta de crédito en droguerías, clínicas, hospitales, supermercados, ferreterías, electrodomésticos y tiendas de mascotas de los municipios afectados, del 21 de agosto al 30 de septiembre de 2026, con financiación hasta a 12 meses; aplica tanto a clientes actuales como a quien saque tarjeta nueva durante la emergencia.",
+        "Hay un piso obligatorio para todos los bancos, no solo un gesto voluntario: mediante la Carta Circular 54 de 2026, la Superintendencia Financiera instruyó a las entidades vigiladas a reprogramar, para quien lo pida, las obligaciones de crédito contraídas antes del 10 de agosto de 2026 y cuyo pago venza desde esa fecha. El nuevo plazo no puede superar el doble del que quedaba pendiente ni los 20 años, y las condiciones no pueden ser más gravosas que las originales. Entre la declaratoria de desastre (Decreto 1171) y la formalización de esa reprogramación —máximo 90 días— no se cobran intereses ni moras. La misma circular activó las «Quejas exprés»: los bancos no pueden imponerte trámites extra ni requisitos adicionales para atender un reclamo ligado al terremoto si vives en Chocó, Risaralda, Valle del Cauca, Caldas o Quindío, sea cual sea el motivo de la queja.\n\nSobre ese piso obligatorio, el sector bancario anunció además un paquete voluntario para personas y empresas de las zonas afectadas que podría beneficiar a cerca de 2,8 millones de usuarios: períodos de gracia de hasta un año, cambios en las condiciones de los créditos y suspensión temporal de los cobros. No suele ser automático: hay que pedirlo al banco.\n\nEl 19 de agosto de 2026, el Gobierno y Asobancaria (el gremio de los bancos) formalizaron ese paquete en cerca de $1,1 billones para los mismos afectados de Caldas, Chocó, Quindío, Risaralda y Valle del Cauca. Incluye periodos de gracia de hasta 12 meses sin cobro de intereses durante ese lapso, suspensión de los cobros jurídicos, protección del historial crediticio (no te reportan negativamente por esta causa) y aplicación de los seguros asociados al crédito, para quien los tenga contratados.\n\nLo que ya está concretado banco por banco:\n\nBancolombia pasó de la promesa genérica de mediados de agosto a cifras concretas: dispuso más de $5 billones en financiación para personas, empresas y entidades territoriales de Chocó, Risaralda, Caldas, Quindío, Valle del Cauca, suroeste antioqueño, Cauca y Tolima. Créditos de vivienda al 8% efectivo anual (unas 7.000 familias) y de consumo o microcrédito al 10%, para desembolsos desde el 25 de agosto; una línea aparte para hasta 13.500 empresas y entidades territoriales.\n\nNu Colombia anunció retiros ilimitados sin comisión en cajeros y avances de tarjeta de crédito sin comisión para clientes en zonas afectadas, más una refinanciación (hasta 48 meses, tasas reducidas) que a fecha 20/08/2026 seguía en desarrollo.\n\nBanco Agrario devuelve las comisiones cobradas por retiros, depósitos y pago de cheques a los clientes cuya oficina habitual sigue cerrada por la emergencia, con efecto retroactivo desde el 10 de agosto; la devolución empezó el 18 de agosto.\n\nBanco de Bogotá y Davivienda cerraron oficinas presenciales en las zonas más golpeadas y mantienen atención por teléfono, WhatsApp y banca virtual. El 20 de agosto sí confirmaron una medida propia, aunque acotada a crédito de vivienda nueva en las zonas afectadas y no al resto de alivios del gremio: BBVA bajó su tasa desde 11,9% efectivo anual, Davivienda desde 14,4% y Banco de Bogotá hasta 16,55%. El presidente De la Espriella celebró la medida el 22 de agosto y pidió extenderla al resto del sector financiero y a otro tipo de créditos, no solo vivienda.\n\nEl 22 de agosto lo consiguió: Grupo Aval (que agrupa a Banco de Bogotá, Banco Popular, Banco de Occidente y AV Villas), Davivienda y Banco GNB Sudameris se sumaron a Bancolombia con una tasa unificada del 8% efectivo anual para crédito de vivienda VIS y no VIS en las zonas afectadas, fija durante todo el plazo del crédito, para desembolsos hechos desde el 25 de agosto de 2026.\n\nGrupo Aval fue más allá de la vivienda: Banco de Bogotá, Banco de Occidente, Banco Popular y AV Villas abrieron líneas de crédito propias para negocios —tarjetas de crédito, libranzas y créditos de libre destino— dirigidas a personas naturales con negocio y a empresas con ingresos anuales de hasta $1.000 millones en las zonas afectadas, con plazos de hasta 36 meses, 6 meses de gracia a capital y 50% de descuento en la tasa de interés durante esos primeros 6 meses. Banco de Occidente sumó, además, un beneficio propio de consumo: 50% de descuento en los intereses de las compras con tarjeta de crédito en droguerías, clínicas, hospitales, supermercados, ferreterías, electrodomésticos y tiendas de mascotas de los municipios afectados, del 21 de agosto al 30 de septiembre de 2026, con financiación hasta a 12 meses; aplica tanto a clientes actuales como a quien saque tarjeta nueva durante la emergencia.\n\nEl 26 de agosto de 2026 la Superfinanciera reforzó el piso obligatorio con la Circular Externa 007: mantiene la misma reprogramación (hasta el doble del plazo pendiente, tope de 20 años, sin intereses ni mora entre la declaratoria y el cierre de la renegociación, máximo 90 días), pero aclara que el beneficio no es automático ni igual para todos, sino que cada entidad debe evaluarlo según tu grado de afectación y tu capacidad real de pago. La misma circular obliga a las aseguradoras vigiladas a facilitar el pago de primas, agilizar los siniestros, informar con claridad el trámite de indemnización, acelerar la valoración de daños y habilitar puntos de atención prioritaria —preferiblemente presenciales— para quien reclama por el terremoto, y ordena a los administradores de cesantías tramitar con la mayor celeridad posible los retiros por vivienda dañada que pidan los afiliados de las zonas afectadas.\n\nBBVA, que hasta entonces solo había confirmado su tasa de vivienda al 8%, se sumó el 27 de agosto de 2026 con un paquete propio para negocios: para pequeñas y medianas empresas y para el sector agropecuario ofrece financiación desde IBR + 0%, a plazos de hasta 36 meses y con periodos de gracia de hasta seis meses, pensada para capital de trabajo, reposición de inventario y reemplazo de maquinaria o infraestructura dañada. Para que evalúen tu caso, sea un crédito nuevo o uno vigente, puedes llamar al 601 743 4371 o al 333 602 9911.",
       pendiente:
-        "La reprogramación obligatoria de la Superfinanciera es un derecho, pero no automático: tienes que pedirla tú al banco, y seguimos sin encontrar un formulario único para hacerlo (cada entidad gestiona la solicitud por sus canales propios). Más allá de eso, seguimos sin el canal exacto de solicitud (línea, formulario, requisitos) del paquete voluntario adicional —períodos de gracia, suspensión de cobros— en ninguno de estos bancos, más allá de la baja de tasa hipotecaria al 8% ya confirmada en Bancolombia, Banco de Bogotá, Banco Popular, Banco de Occidente, AV Villas, Davivienda y Banco GNB Sudameris, y de la nueva línea de crédito para negocios que abrió Grupo Aval. BBVA sigue en su tasa propia (11,9%), sin sumarse a ese 8% unificado, y Scotiabank Colpatria sigue sin ninguna medida propia confirmada. La instrucción que dan, por ahora, es «contacta a tu banco por los canales habituales y pide que evalúen tu caso».",
+        "La reprogramación obligatoria de la Superfinanciera es un derecho, pero no automático: tienes que pedirla tú al banco, y seguimos sin encontrar un formulario único para hacerlo (cada entidad gestiona la solicitud por sus canales propios). Más allá de eso, seguimos sin el canal exacto de solicitud (línea, formulario, requisitos) del paquete voluntario adicional —períodos de gracia, suspensión de cobros— en ninguno de estos bancos, más allá de la baja de tasa hipotecaria al 8% ya confirmada en Bancolombia, Banco de Bogotá, Banco Popular, Banco de Occidente, AV Villas, Davivienda y Banco GNB Sudameris, de la nueva línea de crédito para negocios que abrió Grupo Aval y de la línea para pymes y agro que sumó BBVA. Scotiabank Colpatria sigue sin ninguna medida propia confirmada. La instrucción que dan, por ahora, es «contacta a tu banco por los canales habituales y pide que evalúen tu caso».",
       fuentes: [
         {
           medio: "Semana",
@@ -655,6 +741,9 @@ export const colombiaTerremoto2026: Evento = {
         CAMACOL_TASA_2026,
         GRUPO_AVAL_NEGOCIOS_2026,
         BANCO_OCCIDENTE_DESCUENTO_2026,
+        SUPERFINANCIERA_CIRCULAR_007_ELTIEMPO_2026,
+        SUPERFINANCIERA_CIRCULAR_007_INFOBAE_2026,
+        BBVA_PYME_AGRO_2026,
       ],
     },
     {
@@ -684,9 +773,9 @@ export const colombiaTerremoto2026: Evento = {
       resumen:
         "Fenalco, MinComercio y Bancóldex trabajan en un paquete para evitar el cierre definitivo de establecimientos.",
       detalle:
-        "Fenalco presentó al Gobierno una propuesta integral con medidas de atención inmediata, alivio financiero y reactivación económica, con el objetivo declarado de evitar el cierre definitivo de establecimientos, proteger los empleos y recuperar la actividad productiva. En la reunión participaron el presidente de Bancóldex, Manuel Fernández Ariza, el Fondo Nacional de Garantías e INNpulsa. El Banco Mundial ya desembolsó US$200 millones de una línea de crédito escalable que podría ampliarse hasta US$450 millones, destinada a la respuesta de emergencia y a sentar las bases de la reconstrucción.\n\nEl 19 de agosto el Gobierno declaró el Estado de Emergencia Económica, Social y Ecológica (Decreto 1261 de 2026) en 15 departamentos, incluidos los cinco de esta zona. La declaratoria en sí misma no es una ayuda: es un mecanismo del artículo 215 de la Constitución que habilita al Gobierno a expedir, durante 30 días calendario, decretos con fuerza de ley sin pasar primero por el Congreso. Entre lo que el propio decreto anuncia que vendrá por esa vía: líneas de crédito de emergencia para micro y pequeñas empresas con tasas subsidiadas y períodos de gracia extraordinarios, y apoyo para cubrir parte de la nómina y los aportes a seguridad social de sus trabajadores. Son objetivos declarados, no créditos ya abiertos: cada beneficio concreto depende de los decretos legislativos que el Gobierno vaya expidiendo dentro de esos 30 días.\n\nEn paralelo, algunas alcaldías ya preparan su propio paquete municipal: revisa la página de tu localidad para ver si la tuya tiene uno.",
+        "Fenalco presentó al Gobierno una propuesta integral con medidas de atención inmediata, alivio financiero y reactivación económica, con el objetivo declarado de evitar el cierre definitivo de establecimientos, proteger los empleos y recuperar la actividad productiva. En la reunión participaron el presidente de Bancóldex, Manuel Fernández Ariza, el Fondo Nacional de Garantías e INNpulsa. El Banco Mundial ya desembolsó US$200 millones de una línea de crédito escalable que podría ampliarse hasta US$450 millones, destinada a la respuesta de emergencia y a sentar las bases de la reconstrucción.\n\nEl 19 de agosto el Gobierno declaró el Estado de Emergencia Económica, Social y Ecológica (Decreto 1261 de 2026) en 15 departamentos, incluidos los cinco de esta zona. La declaratoria en sí misma no es una ayuda: es un mecanismo del artículo 215 de la Constitución que habilita al Gobierno a expedir, durante 30 días calendario, decretos con fuerza de ley sin pasar primero por el Congreso. Entre lo que el propio decreto anuncia que vendrá por esa vía: líneas de crédito de emergencia para micro y pequeñas empresas con tasas subsidiadas y períodos de gracia extraordinarios, y apoyo para cubrir parte de la nómina y los aportes a seguridad social de sus trabajadores. Son objetivos declarados, no créditos ya abiertos: cada beneficio concreto depende de los decretos legislativos que el Gobierno vaya expidiendo dentro de esos 30 días.\n\nEl 21 de agosto de 2026 el Gobierno precisó cómo funcionará uno de esos mecanismos: un subsidio temporal para que el Estado asuma parte del costo laboral —salarios y algunos aportes a salud y pensión— de los empleadores en las zonas afectadas, con el objetivo declarado de frenar despidos. No se limita a micro y pequeñas empresas: busca proteger el empleo formal de forma más amplia en la zona golpeada.\n\nEn paralelo, algunas alcaldías ya preparan su propio paquete municipal: revisa la página de tu localidad para ver si la tuya tiene uno.",
       pendiente:
-        "Todavía no hay líneas de crédito específicas con tasa, monto y requisitos publicados por Bancóldex, Finagro o el Fondo Nacional de Garantías, ni el «Plan de Reconstrucción y Reactivación Económica» que anunció el Ministerio de Comercio. Los decretos legislativos que desarrollen la Emergencia Económica todavía no se publican uno por uno con montos y requisitos: en cuanto salga alguno con crédito, monto o plazo concretos para negocios, lo añadimos aquí.",
+        "Todavía no hay líneas de crédito específicas con tasa, monto y requisitos publicados por Bancóldex, Finagro o el Fondo Nacional de Garantías, ni el «Plan de Reconstrucción y Reactivación Económica» que anunció el Ministerio de Comercio. Tampoco el subsidio de nómina tiene todavía monto, duración ni requisitos de acceso publicados. Los decretos legislativos que desarrollen la Emergencia Económica todavía no se publican uno por uno con montos y requisitos: en cuanto salga alguno con crédito, monto o plazo concretos para negocios, lo añadimos aquí.",
       fuentes: [
         {
           medio: "El Heraldo",
@@ -698,6 +787,7 @@ export const colombiaTerremoto2026: Evento = {
         BANCO_MUNDIAL_2026,
         DECRETO_EMERGENCIA_2026,
         PRESIDENCIA_EMERGENCIA_2026,
+        SUBSIDIO_NOMINA_2026,
       ],
     },
     {
