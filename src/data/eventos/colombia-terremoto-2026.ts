@@ -219,6 +219,22 @@ const BANCO_OCCIDENTE_DESCUENTO_2026: Fuente = {
   fecha: "2026-08-24",
 };
 
+const CALI_PLAZOS_TRIBUTARIOS_90MIN_2026: Fuente = {
+  medio: "90 Minutos",
+  titulo:
+    "Cali amplía plazos para pagar impuestos tras el sismo del 10 de agosto: ojo a las fechas",
+  url: "https://90minutos.co/cali/cali-amplia-plazos-para-pagar-impuestos-27-08-2026/",
+  fecha: "2026-08-27",
+};
+
+const CALI_ALCALDIA_PLAZOS_2026: Fuente = {
+  medio: "Alcaldía de Santiago de Cali",
+  titulo:
+    "¡Buenas noticias para la ciudad! Ampliamos el plazo para el pago del Predial 2026, ICA y estampillas",
+  url: "https://intranet.cali.gov.co/2026/08/28/buenas-noticias-para-la-ciudad-ampliamos-el-plazo-para-el-pago-del-predial-2026-ica-y-estampillas/",
+  fecha: "2026-08-28",
+};
+
 const ARMENIA_TRIBUTARIO_2026: Fuente = {
   medio: "Quindío 24 Horas",
   titulo:
@@ -464,6 +480,17 @@ export const colombiaTerremoto2026: Evento = {
             CALI_PROYECTO_ACUERDO_100_2026,
             CALI_ALCALDIA_PROYECTOS_2026,
           ],
+        },
+        {
+          slug: "cali-ampliacion-plazos-predial-ica",
+          titulo: "Ampliación de plazos para pagar predial e ICA sin intereses de mora",
+          resumen:
+            "La Alcaldía amplió del 30 de septiembre al 31 de diciembre de 2026 el plazo para pagar el predial de este año sin que te cobren intereses de mora, y también movió los plazos del ICA. Es una prórroga, no una exoneración.",
+          detalle:
+            "El 27 y 28 de agosto de 2026 la Alcaldía de Cali anunció una ampliación del calendario tributario de este año como alivio para los contribuyentes tras el terremoto del 10 de agosto: el plazo para pagar el predial de la vigencia 2026 sin intereses de mora, que vencía el 30 de septiembre, se corrió hasta el 31 de diciembre de 2026. El mismo anuncio incluye cambios en los plazos del Impuesto de Industria y Comercio (ICA) y de las estampillas municipales.\n\nEsta es una medida distinta y ya vigente del Proyecto de Acuerdo 100 (que busca una exención de ICA y predial, todavía sin aprobar por el Concejo): aquí no se perdona el impuesto, solo se corre la fecha límite para pagarlo sin que te cobren mora.",
+          pendiente:
+            "No hemos podido confirmar con una fuente primaria (decreto o resolución de la Alcaldía) las fechas exactas y escalonadas por NIT que circularon en prensa para el nuevo calendario del ICA y las estampillas, solo la del predial. En cuanto lo verifiquemos, lo completamos.",
+          fuentes: [CALI_PLAZOS_TRIBUTARIOS_90MIN_2026, CALI_ALCALDIA_PLAZOS_2026],
         },
       ],
     },
@@ -754,7 +781,7 @@ export const colombiaTerremoto2026: Evento = {
       detalle:
         "La DIAN confirmó aplazamientos de plazos —no condonación del impuesto— para personas y agentes con domicilio fiscal en las seccionales de Cali, Palmira, Tuluá, Buenaventura, Pereira, Armenia, Manizales, Quibdó y Popayán: la declaración de renta 2025 de personas naturales se corre a la ventana del 27 de octubre al 13 de noviembre de 2026 (según los dos últimos dígitos del NIT); la retención en la fuente de julio se puede presentar y pagar con los plazos de agosto, sin sanción ni interés moratorio; y los trámites aduaneros quedan suspendidos entre el 10 de agosto y el 10 de septiembre de 2026 en esas seccionales. Excluye a los grandes contribuyentes. Conserva toda la documentación de tus pérdidas: es lo que te van a pedir para acreditar la condición de afectado.\n\nA nivel municipal, algunas alcaldías ya tienen medidas tributarias propias: revisa la página de tu localidad para ver si la tuya es una de ellas.",
       pendiente:
-        "En Cali, Pereira y Quibdó seguimos sin encontrar ningún decreto de alcaldía que exonere o aplace el ICA o el predial por este terremoto. A nivel nacional sigue sin aprobarse la petición de Fedemunicipios de extender ese alivio hasta por dos períodos fiscales con compensación del Gobierno. Lo seguimos verificando.",
+        "En Pereira y Quibdó seguimos sin encontrar ningún decreto de alcaldía que exonere o aplace el ICA o el predial por este terremoto. Cali sí amplió el plazo para pagar el predial de este año sin intereses de mora hasta el 31 de diciembre —revisa la página de Cali—, pero es una prórroga, no una exoneración: el Proyecto de Acuerdo 100, que sí busca exonerar, sigue sin aprobarse. A nivel nacional sigue sin aprobarse la petición de Fedemunicipios de extender ese alivio hasta por dos períodos fiscales con compensación del Gobierno. Lo seguimos verificando.",
       fuentes: [
         {
           medio: "El Colombiano",
