@@ -369,6 +369,35 @@ const PEREIRA_RESTAURANTES_ELDIARIO_2026: Fuente = {
   fecha: "2026-08-22",
 };
 
+const MANIZALES_ARRIENDO_COMERCIANTES_2026: Fuente = {
+  medio: "Alcaldía de Manizales",
+  titulo: "Comerciantes afectados por el sismo podrán acceder a auxilio de arrendamiento",
+  url: "https://centrodeinformacion.manizales.gov.co/comerciantes-afectados-por-el-sismo-podran-acceder-a-auxilio-de-arrendamiento/",
+  fecha: "2026-08-17",
+};
+
+const MANIZALES_ARRIENDO_COMERCIANTES_BC_2026: Fuente = {
+  medio: "BC Noticias",
+  titulo: "Comerciantes afectados por el sismo en Manizales podrán recibir auxilio de arrendamiento",
+  url: "https://www.bcnoticias.com.co/comerciantes-afectados-por-el-sismo-en-manizales-podran-recibir-auxilio-de-arrendamiento/",
+  fecha: "2026-08-17",
+};
+
+const ARMENIA_FONDO_EMPRESARIAL_CCC_2026: Fuente = {
+  medio: "Cámara de Comercio de Armenia y del Quindío",
+  titulo:
+    "Cámara de Comercio de Armenia y del Quindío, Comfenalco Quindío y Alcaldía de Armenia suman recursos y operación para empresas afectadas por el sismo",
+  url: "https://camaraarmenia.org.co/camara-de-comercio-de-armenia-y-del-quindio-comfenalco-quindio-y-alcaldia-de-armenia-suman-recursos-y-operacion-para-empresas-afectadas-por-el-sismo/",
+  fecha: "2026-09-01",
+};
+
+const ARMENIA_FONDO_EMPRESARIAL_Q24H_2026: Fuente = {
+  medio: "Quindío 24 Horas",
+  titulo: "Lanzan fondo de apoyo empresarial para reactivar negocios afectados por el sismo en el Quindío",
+  url: "https://www.quindio24horas.com/2026/09/01/lanzan-fondo-de-apoyo-empresarial-para-reactivar-negocios-afectados-por-el-sismo-en-el-quindio/",
+  fecha: "2026-09-01",
+};
+
 export const colombiaTerremoto2026: Evento = {
   slug: "terremoto-2026",
   nombre: "el terremoto del 10 de agosto de 2026",
@@ -555,6 +584,18 @@ export const colombiaTerremoto2026: Evento = {
             "Manizales tiene una medida propia, aunque no es una exoneración: la Alcaldía amplió un mes el calendario tributario y suspendió temporalmente el envío de cobros persuasivos del predial y de otras obligaciones pendientes con el Municipio. Ojo al matiz: eso no frena los embargos ni las medidas cautelares que ya estuvieran en curso antes del sismo.",
           fuentes: [MANIZALES_TRIBUTARIO_2026],
         },
+        {
+          slug: "manizales-auxilio-arrendamiento-comerciantes",
+          titulo: "Auxilio temporal de arrendamiento para comerciantes",
+          resumen:
+            "Si tuviste que abandonar tu local por el sismo, puedes pedir $357.000 mensuales para pagar arriendo: un mes si eres arrendatario, tres si eres propietario. Lo gestiona la Cruz Roja de Manizales.",
+          detalle:
+            "El Decreto 0276 del 14 de agosto de 2026 de la Alcaldía de Manizales creó un auxilio temporal de arrendamiento de $357.000 mensuales tanto para familias como para comerciantes que tuvieron que dejar su vivienda o su local por los daños del sismo, siempre que cuenten con una revisión técnica del predio que certifique la situación. Los comerciantes arrendatarios lo reciben durante un mes y los propietarios durante tres, con posibilidad de prórroga según el protocolo de entrega. Para pedirlo hay que presentar el Formato de revisión a predio (formulario azul, original y copia); la Cruz Roja en Manizales recibe las solicitudes y hace la verificación, caracterización y priorización de cada caso.\n\nEl auxilio no cubre los daños estructurales del local —esa es responsabilidad legal del propietario del inmueble—, no es acumulable ni retroactivo y no genera derecho a pagos futuros.",
+          fuentes: [
+            MANIZALES_ARRIENDO_COMERCIANTES_2026,
+            MANIZALES_ARRIENDO_COMERCIANTES_BC_2026,
+          ],
+        },
       ],
     },
     {
@@ -581,6 +622,17 @@ export const colombiaTerremoto2026: Evento = {
           pendiente:
             "Mientras el Concejo no lo apruebe, es un proyecto, no un alivio vigente.",
           fuentes: [ARMENIA_TRIBUTARIO_2026],
+        },
+        {
+          slug: "armenia-fondo-apoyo-empresarial",
+          titulo: "Fondo de apoyo empresarial para la reactivación económica del Quindío",
+          resumen:
+            "La Cámara de Comercio de Armenia y del Quindío, la Alcaldía de Armenia y Comfenalco Quindío juntaron cerca de $3.000 millones para comerciantes afectados. No entregan efectivo: dan una carta para comprar directamente lo que necesites a proveedores autorizados.",
+          detalle:
+            "La Cámara de Comercio de Armenia y del Quindío, la Alcaldía de Armenia y Comfenalco Quindío lanzaron el Fondo de apoyo empresarial para la reactivación económica del Quindío, con cerca de $3.000 millones: $1.000 millones los pone la Alcaldía de Armenia, $1.300 millones Comfenalco Quindío y $700 millones la propia Cámara de Comercio.\n\nParte del Censo Empresarial que la Cámara de Comercio viene haciendo desde el día del sismo, con más de 4.200 comerciantes ya encuestados (45 % puede operar con normalidad, 31,7 % tiene algún tipo de daño y 23,3 % no puede operar; los daños más comunes son en maquinaria o equipos y en infraestructura, con 20,7 % cada uno). El fondo no entrega dinero en efectivo: identifica tu necesidad concreta —materiales de construcción, tejas, elementos de reparación de instalaciones, maquinaria, equipos, computadores, utensilios, cristalería, inventario o materia prima— y, una vez validada, te dan una carta de autorización para adquirirlo con proveedores locales vinculados al proceso.\n\nPara acceder, acércate a la sede principal de la Cámara de Comercio en el centro de Armenia o a sus sedes en otros municipios del Quindío, o escribe por WhatsApp al 323 349 3710 para registrarte en el censo y reportar tu necesidad.",
+          pendiente:
+            "No hemos encontrado un tope de ayuda por negocio ni una fecha límite para inscribirse: seguimos sin esa información y la completamos en cuanto la encontremos con fuente.",
+          fuentes: [ARMENIA_FONDO_EMPRESARIAL_CCC_2026, ARMENIA_FONDO_EMPRESARIAL_Q24H_2026],
         },
       ],
     },
