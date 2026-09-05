@@ -26,6 +26,11 @@ difíciles de rastrear para un comerciante sin abogado ni contador. S.O.S.EMUND 
 traduce esa información en términos jurídicos — no cuenta con asesoría legal propia —: cita
 siempre la fuente oficial y su fecha, y remite al canal correspondiente.
 
+Pero reunir esa información no es el fin en sí mismo: es la puerta de entrada. Lo que S.O.S.EMUND
+más quiere conseguir es visibilidad para cada negocio — que quien entre buscando una ayuda salga
+también conociendo la panadería, el taller o la tienda de su ciudad, y que se convierta en cliente
+o en alguien dispuesto a compartirlo en sus propias redes sociales.
+
 ## Qué ofrece el sitio
 
 - **Buscador de ayudas por ciudad**, con hubs ya publicados para Cali, Pereira, Manizales, Armenia
