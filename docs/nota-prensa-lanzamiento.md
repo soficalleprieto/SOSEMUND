@@ -8,7 +8,7 @@
 **S.O.S.EMUND reúne en un solo sitio las ayudas dispersas para los comercios golpeados por el
 terremoto del 10 de agosto en Chocó, Quindío, Valle del Cauca, Risaralda y Caldas**
 
-*Una iniciativa ciudadana independiente traduce a lenguaje llano los alivios bancarios,
+*Una iniciativa ciudadana independiente unifica en un solo lugar los alivios bancarios,
 tributarios y subsidios que hoy viven repartidos en comunicados de prensa y noticias que caducan
 en dos días.*
 
@@ -20,9 +20,11 @@ costura, un local de ropa — que no cuentan con abogado ni contador que les ras
 pueden acceder. Tienen, en el mejor de los casos, un teléfono y Google.
 
 Para responder a ese vacío nace **S.O.S.EMUND — S.O.S. para Emprendedores del Mundo**, un sitio
-web gratuito que reúne, traduce a lenguaje sencillo y hace encontrables los alivios bancarios,
-alivios tributarios, líneas de crédito y subsidios que hoy existen pero viven dispersos en PDFs y
-comunicados oficiales difíciles de rastrear para un comerciante sin asesoría legal.
+web gratuito que unifica y hace encontrables los alivios bancarios, alivios tributarios, líneas de
+crédito y subsidios que hoy existen pero viven dispersos en PDFs y comunicados oficiales,
+difíciles de rastrear para un comerciante sin abogado ni contador. S.O.S.EMUND no interpreta ni
+traduce esa información en términos jurídicos — no cuenta con asesoría legal propia —: cita
+siempre la fuente oficial y su fecha, y remite al canal correspondiente.
 
 ## Qué ofrece el sitio
 
@@ -45,13 +47,22 @@ pensadas para no generar más daño en una población ya vulnerable:
 - No publica la ubicación de locales que quedaron abandonados tras el sismo, para no facilitar
   saqueos; solo dónde funciona un negocio *ahora*.
 - Cada dato de ayuda se publica con su fuente y su fecha, y lo que no está verificado se marca
-  como pendiente en vez de completarse a ojo.
+  como pendiente en vez de completarse a ojo. No se afirma nunca "tienes derecho a X": se cita la
+  fuente oficial, porque S.O.S.EMUND no tiene medios jurídicos para interpretar la normativa.
 - Es un sitio ligero y sin JavaScript innecesario, pensado para quienes están en zonas con mala
   conectividad y datos móviles limitados.
 
+## Quién está detrás
+
+S.O.S.EMUND es un proyecto de **Sofía Calle Prieto**, consultora de SEO y marketing online
+colombiana radicada en Alcalá de Henares (España). Sus padres y su hermano viven en las zonas
+afectadas por el terremoto, y esa cercanía familiar con la emergencia — junto con encontrar que
+ninguna de las iniciativas ciudadanas surgidas tras el sismo atendía a los comercios — la llevó a
+crear el proyecto.
+
 > "[Cita de Sofía Calle sobre por qué nace S.O.S.EMUND y qué espera de alcaldías, gobernaciones y
 > medios — completar y aprobar antes de enviar]"
-> — Sofía Calle, vocera de S.O.S.EMUND
+> — Sofía Calle, fundadora y vocera de S.O.S.EMUND
 
 ## Por qué ahora
 
