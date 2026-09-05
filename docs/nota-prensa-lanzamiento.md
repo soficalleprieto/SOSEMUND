@@ -59,11 +59,11 @@ pensadas para no generar más daño en una población ya vulnerable:
 
 ## Quién está detrás
 
-S.O.S.EMUND es un proyecto de **Sofía Calle Prieto**, consultora de SEO y marketing online
-colombiana radicada en Alcalá de Henares (España). Sus padres y su hermano viven en las zonas
-afectadas por el terremoto, y esa cercanía familiar con la emergencia — junto con encontrar que
-ninguna de las iniciativas ciudadanas surgidas tras el sismo atendía a los comercios — la llevó a
-crear el proyecto.
+S.O.S.EMUND es un proyecto de **Sofía Calle Prieto**, consultora de SEO y marketing online que se
+mudó a España muy joven para labrarse un futuro mejor. Una parte importante de su familia — sus
+padres y su hermano — son emprendedores, y eso hace que el golpe a los pequeños negocios tras el
+terremoto le toque de cerca. Esa cercanía, junto con encontrar que ninguna de las iniciativas
+ciudadanas surgidas tras el sismo atendía a los comercios, la llevó a crear el proyecto.
 
 > "[Cita de Sofía Calle sobre por qué nace S.O.S.EMUND y qué espera de alcaldías, gobernaciones y
 > medios — completar y aprobar antes de enviar]"
