@@ -63,8 +63,9 @@ pensadas para no generar más daño en una población ya vulnerable:
 
 S.O.S.EMUND nace de **Sofía Calle Prieto**, que se fue de Colombia muy joven en busca de un
 futuro mejor en España. Vive del marketing digital, pero lo que la conecta con este proyecto no
-es su oficio: es su familia. Sus padres y su hermano son emprendedores, y ver el golpe que un
-terremoto le da a negocios como los suyos no es algo que pudiera mirar de lejos. Buscó qué se
+es su oficio: es su familia. Sus padres y su hermano se quedaron en Colombia, y son
+emprendedores, así que ver el golpe que un terremoto le da a negocios como los suyos no es algo
+que pudiera mirar de lejos. Buscó qué se
 estaba haciendo por ellos y no encontró nada: todas las iniciativas ciudadanas nacidas tras el
 sismo atendían la emergencia, ninguna a los comercios. Decidió construirlo ella misma.
 
