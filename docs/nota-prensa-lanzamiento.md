@@ -15,11 +15,11 @@ campañas que les traigan clientes.*
 [CIUDAD], 4 de septiembre de 2026 — El terremoto de magnitud 7,4 que sacudió el occidente de
 Colombia el pasado 10 de agosto, con epicentro en San José del Palmar (Chocó), no solo dejó
 viviendas y vías destruidas: golpeó a unas 270.000 empresas en 127 municipios de Chocó, Quindío,
-Valle del Cauca, Risaralda y Caldas. El 93 % son microempresas — una panadería, un taller de
-costura, un local de ropa. Muchas de ellas, si logran reabrir, lo hacen sin la visibilidad que
-tenían antes: sin el cliente que pasaba a diario, sin el local que todos ubicaban de memoria.
-Además, tampoco cuentan con abogado ni contador que les rastree a qué ayudas pueden acceder.
-Tienen, en el mejor de los casos, un teléfono y Google.
+Valle del Cauca, Risaralda y Caldas. El 93 % son microempresas. Muchas de ellas, si logran
+reabrir, lo hacen sin la visibilidad que tenían antes: sin el cliente que pasaba a diario, sin el
+local que todos ubicaban de memoria. Además, muchos de ellos no cuentan con abogado ni contador
+que les rastree a qué ayudas pueden acceder, y llegan a esta etapa con, en el mejor de los casos,
+un teléfono y Google.
 
 Para responder a ese vacío nace **S.O.S.EMUND — S.O.S. para Emprendedores del Mundo**, un sitio
 web gratuito cuyo objetivo principal es devolverle visibilidad a cada negocio afectado: que quien
@@ -56,16 +56,17 @@ pensadas para no generar más daño en una población ya vulnerable:
 - Cada dato de ayuda se publica con su fuente y su fecha, y lo que no está verificado se marca
   como pendiente en vez de completarse a ojo. No se afirma nunca "tienes derecho a X": se cita la
   fuente oficial, porque S.O.S.EMUND no tiene medios jurídicos para interpretar la normativa.
-- Es un sitio ligero y sin JavaScript innecesario, pensado para quienes están en zonas con mala
+- Es un sitio ligero y rápido de cargar, pensado para quienes están en zonas con mala
   conectividad y datos móviles limitados.
 
 ## Quién está detrás
 
-S.O.S.EMUND es un proyecto de **Sofía Calle Prieto**, consultora de SEO y marketing online que se
-mudó a España muy joven para labrarse un futuro mejor. Una parte importante de su familia — sus
-padres y su hermano — son emprendedores, y eso hace que el golpe a los pequeños negocios tras el
-terremoto le toque de cerca. Esa cercanía, junto con encontrar que ninguna de las iniciativas
-ciudadanas surgidas tras el sismo atendía a los comercios, la llevó a crear el proyecto.
+S.O.S.EMUND nace de **Sofía Calle Prieto**, que se fue de Colombia muy joven en busca de un
+futuro mejor en España. Vive del marketing digital, pero lo que la conecta con este proyecto no
+es su oficio: es su familia. Sus padres y su hermano son emprendedores, y ver el golpe que un
+terremoto le da a negocios como los suyos no es algo que pudiera mirar de lejos. Buscó qué se
+estaba haciendo por ellos y no encontró nada: todas las iniciativas ciudadanas nacidas tras el
+sismo atendían la emergencia, ninguna a los comercios. Decidió construirlo ella misma.
 
 > "[Cita de Sofía Calle sobre por qué nace S.O.S.EMUND y qué espera de alcaldías, gobernaciones y
 > medios — completar y aprobar antes de enviar]"
